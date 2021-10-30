@@ -30,14 +30,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    viewBinding{enabled true}
 }
 
 dependencies {
 
     //FIREBASE
     implementation platform('com.google.firebase:firebase-bom:28.4.2')
-
-
     //AUTH
     implementation 'com.google.firebase:firebase-auth-ktx'
     //CLOUD FIRESTORE
