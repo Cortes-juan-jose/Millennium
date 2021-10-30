@@ -17,7 +17,7 @@
     <style name="MaterialTextViewRegister">
         <item name="android:fontFamily">@font/balsami_regular</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="android:textColor">@color/colorOnSecondary</item>
     </style>
 
     <style name="ViewBackground">
@@ -38,6 +38,10 @@
 
     <style name="TextInputLayoutEndIconTint.Password" parent="TextInputLayoutEndIconTint">
         <item name="passwordToggleTint">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="MaterialButtonEntrarBackground">
+        <item name="android:backgroundTint">@color/colorPrimaryDark</item>
     </style>
 
 </resources>

@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Millennium">
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.activities.register.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
