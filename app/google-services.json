@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "368336933703",
+    "firebase_url": "https://millennium-ae7c1-default-rtdb.firebaseio.com",
+    "project_id": "millennium-ae7c1",
+    "storage_bucket": "millennium-ae7c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368336933703:android:b4b6050377e6bd26b73262",
+        "android_client_info": {
+          "package_name": "com.app.millennium"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368336933703-ssr1n2kqiphgqqotrtdeh9ucnj4eqmpb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.millennium",
+            "certificate_hash": "23dd2749a30facc17bd5d00d675a324af43d7c59"
+          }
+        },
+        {
+          "client_id": "368336933703-u21q7gfurd5ivnhd6m339vj8l3ns682a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJR9pWJSTVkad3c5g-Qhb5GNmLHhHPaDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368336933703-u21q7gfurd5ivnhd6m339vj8l3ns682a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
