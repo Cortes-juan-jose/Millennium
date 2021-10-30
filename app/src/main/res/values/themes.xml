@@ -1,4 +1,5 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources
+    xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.Millennium" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -10,7 +11,34 @@
         <item name="colorSecondaryVariant">@color/colorSecondaryDark</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="MaterialTextViewRegister">
+        <item name="android:fontFamily">@font/balsami_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorOnSecondary</item>
+    </style>
+
+    <style name="ViewBackground">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="ImageViewIconEmailColor">
+        <item name="android:src">@drawable/ic_email</item>
+    </style>
+
+    <style name="ImageViewIconPasswordColor">
+        <item name="android:src">@drawable/ic_password</item>
+    </style>
+
+    <style name="TextInputLayoutEndIconTint" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="endIconTint">@color/colorPrimary</item>
+    </style>
+
+    <style name="TextInputLayoutEndIconTint.Password" parent="TextInputLayoutEndIconTint">
+        <item name="passwordToggleTint">@color/colorPrimary</item>
+    </style>
+
 </resources>

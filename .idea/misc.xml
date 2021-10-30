@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/drawable/ic_cancel.xml" value="0.28425925925925927" />
+        <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/drawable/ic_email.xml" value="0.28425925925925927" />
+        <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/drawable/ic_email_dark.xml" value="0.28425925925925927" />
+        <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/drawable/ic_password.xml" value="0.28425925925925927" />
+        <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/layout/activity_login.xml" value="0.25" />
       </map>
     </option>
   </component>

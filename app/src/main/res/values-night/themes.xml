@@ -13,4 +13,31 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="MaterialTextViewRegister">
+        <item name="android:fontFamily">@font/balsami_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+    </style>
+
+    <style name="ViewBackground">
+        <item name="android:background">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="ImageViewIconEmailColor">
+        <item name="android:src">@drawable/ic_email_dark</item>
+    </style>
+
+    <style name="ImageViewIconPasswordColor">
+        <item name="android:src">@drawable/ic_password_dark</item>
+    </style>
+
+    <style name="TextInputLayoutEndIconTint" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="endIconTint">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="TextInputLayoutEndIconTint.Password" parent="TextInputLayoutEndIconTint">
+        <item name="passwordToggleTint">@color/colorPrimaryDark</item>
+    </style>
+
 </resources>

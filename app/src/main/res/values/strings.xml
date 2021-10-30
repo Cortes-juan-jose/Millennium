@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Millennium</string>
+    <string name="mtv_no_tienes_cuenta">¿No tienes cuenta? Regístrate</string>
+    <string name="hint_correo_electronico">Correo electrónico*</string>
+    <string name="cd_ic_email">ic_email</string>
+    <string name="hint_contrasena">Contraseña*</string>
+    <string name="btn_entrar">Entrar</string>
+    <string name="mtv_o">O</string>
 </resources>
