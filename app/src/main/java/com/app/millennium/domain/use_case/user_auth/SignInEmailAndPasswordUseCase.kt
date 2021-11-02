@@ -23,6 +23,6 @@ class SignInEmailAndPasswordUseCase {
     suspend operator fun invoke(
         email: String,
         password: String
-    ) : Task<AuthResult> =
+    ) : Task<AuthResult>? =
         userAuthRepositoryImpl.signInWithEmailAndPassword(email, password)
 }
