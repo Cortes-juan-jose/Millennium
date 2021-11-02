@@ -8,4 +8,5 @@
     <dimen name="size_mtv_o">20sp</dimen>
     <dimen name="line_separator">1dp</dimen>
     <dimen name="max_padding_view">20dp</dimen>
+    <dimen name="size_logo">200dp</dimen>
 </resources>

@@ -26,10 +26,6 @@ class LoginActivity : AppCompatActivity() {
 
         initObservables()
 
-        //Comprobar (temporalmente) que el inicio de sesion es correct0
-        viewModel.getCurrentSession()
-
-
         binding.apply {
 
             /**
@@ -99,24 +95,6 @@ class LoginActivity : AppCompatActivity() {
                     //En el caso de que la tarea haya sido fallida entonces mostrará un mensaje
                     //de error indicando el problema
                     toast(exc.message.toString())
-                }
-            }
-        )
-
-
-        /**
-         * Observable para obtener el inicio
-         * de sesion del usuario que se haya
-         * logeado en la app y tenga una sesion
-         * iniciada. TEMPORAL
-         */
-        viewModel.getCurrentSessionLiveData.observe(
-            this,
-            {
-                it?.let {
-                    openActivity<HomeActivity> {
-                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    }
                 }
             }
         )
