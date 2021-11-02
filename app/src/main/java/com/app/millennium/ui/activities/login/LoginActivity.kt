@@ -113,7 +113,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.getCurrentSessionLiveData.observe(
             this,
             {
-                if (it!=null){
+                it?.let {
                     openActivity<HomeActivity> {
                         flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     }

@@ -7,6 +7,6 @@ interface FirebaseProvider {
     /**
      * Obtener el objeto de autenticacion de firebase
      */
-    fun getAuth(): FirebaseAuth
+    fun getAuth(): FirebaseAuth?
 
 }

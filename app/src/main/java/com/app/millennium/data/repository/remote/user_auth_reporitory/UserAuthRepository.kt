@@ -9,7 +9,7 @@ interface UserAuthRepository {
      * Metodo para iniciar sesion con email y contraseña
      * que devuelve la tarea a desempeñar
      */
-    suspend fun signInWithEmailAndPassword (email: String, password: String) : Task<AuthResult>
+    suspend fun signInWithEmailAndPassword (email: String, password: String) : Task<AuthResult>?
 
     /**
      * Metodo para obtener la sesion actual del usuario
