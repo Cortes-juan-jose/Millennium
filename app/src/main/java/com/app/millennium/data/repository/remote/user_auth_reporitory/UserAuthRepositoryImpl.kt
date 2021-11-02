@@ -27,8 +27,12 @@ class UserAuthRepositoryImpl : UserAuthRepository {
     /**
      * Metodo para obtener el usuario que ha inicado sesión
      */
-    override suspend fun getCurrentSession(): FirebaseUser =
+    override suspend fun getCurrentSession(): FirebaseUser? {
         //Esto devuelve la sesion iniciada si no es nula
         //si es nula devuelve un null
-        auth.currentUser!!
+        return if (auth.currentUser != null)
+            auth.currentUser
+        else
+            null
+    }
 }

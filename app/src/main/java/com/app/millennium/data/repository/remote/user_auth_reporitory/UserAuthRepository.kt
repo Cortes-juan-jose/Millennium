@@ -15,5 +15,5 @@ interface UserAuthRepository {
      * Metodo para obtener la sesion actual del usuario
      * que ha iniciado previamente sesion
      */
-    suspend fun getCurrentSession () : FirebaseUser
+    suspend fun getCurrentSession () : FirebaseUser?
 }

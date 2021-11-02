@@ -1,12 +1,13 @@
 package com.app.millennium.ui.activities.login
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.app.millennium.core.common.openActivity
 import com.app.millennium.core.common.toast
 import com.app.millennium.databinding.ActivityLoginBinding
+import com.app.millennium.ui.activities.home.HomeActivity
 import com.app.millennium.ui.activities.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -32,19 +33,6 @@ class LoginActivity : AppCompatActivity() {
         binding.apply {
 
             /**
-             * material text view para registrarse
-             */
-            mtvRegister.setOnClickListener {
-                Toast.makeText(this@LoginActivity, "pulsado", Toast.LENGTH_SHORT).show()
-            }
-
-            /**
-             * Boton para logearse con google
-             */
-            btnLoginGoogle.setOnClickListener {
-            }
-
-            /**
              * Boton para entrar en la aplicacion
              */
             mbtnSingup.setOnClickListener {
@@ -65,6 +53,19 @@ class LoginActivity : AppCompatActivity() {
                      */
                     toast("Campos vacíos")
                 }
+            }
+
+            /**
+             * Boton para logearse con google
+             */
+            btnLoginGoogle.setOnClickListener {
+            }
+
+            /**
+             * material text view para registrarse
+             */
+            mtvRegister.setOnClickListener {
+                openActivity<RegisterActivity> {  }
             }
         }
     }
@@ -89,13 +90,15 @@ class LoginActivity : AppCompatActivity() {
                         //Ahora esta de prueba con RegisterActivity
                         //openActivity es una funcion de extensio creada para
                         //navegar hacia activities con data y con flags
-                        openActivity<RegisterActivity> { }
+                        openActivity<HomeActivity> {
+                            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        }
                     }
                 }
                 task.addOnFailureListener { exc ->
                     //En el caso de que la tarea haya sido fallida entonces mostrará un mensaje
                     //de error indicando el problema
-                    toast("Sin conexion a internet o usuario inexistente -> ${exc.message}")
+                    toast(exc.message.toString())
                 }
             }
         )
@@ -110,9 +113,10 @@ class LoginActivity : AppCompatActivity() {
         viewModel.getCurrentSessionLiveData.observe(
             this,
             {
-                it?.let { user ->
-                    toast(user.uid)
-                    toast(user.email.toString())
+                if (it!=null){
+                    openActivity<HomeActivity> {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    }
                 }
             }
         )

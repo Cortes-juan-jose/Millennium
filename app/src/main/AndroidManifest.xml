@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Millennium">
         <activity
+            android:name=".ui.activities.home.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.register.RegisterActivity"
             android:exported="false" />
         <activity
