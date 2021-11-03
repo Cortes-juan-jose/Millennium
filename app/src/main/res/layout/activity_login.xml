@@ -82,7 +82,7 @@
                 android:layout_marginVertical="@dimen/min_padding_view"
                 app:layout_constraintTop_toBottomOf="@id/ll_email"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/mbtn_singup"
+                app:layout_constraintBottom_toTopOf="@id/mbtn_sing_in"
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <ImageView
@@ -112,7 +112,7 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/MaterialButtonEntrarBackground"
-                android:id="@+id/mbtn_singup"
+                android:id="@+id/mbtn_sing_in"
                 android:layout_width="@dimen/mathParent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/balsami_bold"
@@ -130,9 +130,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginVertical="@dimen/min_padding_view"
-                app:layout_constraintTop_toBottomOf="@id/mbtn_singup"
+                app:layout_constraintTop_toBottomOf="@id/mbtn_sing_in"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/btnLoginGoogle"
+                app:layout_constraintBottom_toTopOf="@+id/btn_sign_in_google"
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <View
@@ -159,7 +159,7 @@
             </LinearLayout>
 
             <com.google.android.gms.common.SignInButton
-                android:id="@+id/btnLoginGoogle"
+                android:id="@+id/btn_sign_in_google"
                 android:layout_width="@dimen/mathParent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/min_padding_view"

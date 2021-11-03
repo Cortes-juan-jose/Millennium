@@ -46,6 +46,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-database-ktx'
     //CLOUD STORAGE
     implementation 'com.google.firebase:firebase-storage-ktx'
+    //GOOGLE PLAY SERVICES
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
 
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:1.2.1"
