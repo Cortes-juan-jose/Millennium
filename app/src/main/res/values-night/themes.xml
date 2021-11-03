@@ -14,9 +14,21 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="MaterialTextViewRegister">
+    <style name="MaterialTextViewFontRegular">
         <item name="android:fontFamily">@font/balsami_regular</item>
+    </style>
+
+    <style name="MaterialTextViewFontBold">
+        <item name="android:fontFamily">@font/balsami_bold</item>
+    </style>
+
+    <style name="MaterialTextViewRegister" parent="MaterialTextViewFontRegular">
         <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorOnSecondary</item>
+    </style>
+
+    <style name="MaterialTextViewRegisterNow" parent="MaterialTextViewFontBold">
+        <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/colorOnSecondary</item>
     </style>
 

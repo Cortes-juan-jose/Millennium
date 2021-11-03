@@ -2,12 +2,10 @@ package com.app.millennium.ui.activities.login
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.app.millennium.R
-import com.app.millennium.core.common.isNull
 import com.app.millennium.core.common.openActivity
 import com.app.millennium.core.common.toast
 import com.app.millennium.databinding.ActivityLoginBinding
@@ -16,10 +14,6 @@ import com.app.millennium.ui.activities.register.RegisterActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthCredential
-import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
