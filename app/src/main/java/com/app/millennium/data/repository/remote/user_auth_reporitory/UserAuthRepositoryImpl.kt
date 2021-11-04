@@ -5,6 +5,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 
 class UserAuthRepositoryImpl : UserAuthRepository {
 
@@ -29,4 +30,16 @@ class UserAuthRepositoryImpl : UserAuthRepository {
      */
     override suspend fun getCurrentSession(): FirebaseUser? =
         auth?.currentUser
+
+    /**
+     * Metodo para iniciar sesion con las credenciales de google
+     */
+    override suspend fun signInGoogle(idToken: String?): Task<AuthResult>? {
+        if (!idToken.isNullOrEmpty()){
+            val credential = GoogleAuthProvider.getCredential(idToken, null)
+            return auth?.signInWithCredential(credential)
+        }
+
+        return null
+    }
 }

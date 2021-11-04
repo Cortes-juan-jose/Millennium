@@ -1,15 +1,11 @@
 package com.app.millennium.ui.activities.login
 
-import android.content.Context
-import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.app.millennium.R
 import com.app.millennium.domain.use_case.user_auth.SignInEmailAndPasswordUseCase
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.app.millennium.domain.use_case.user_auth.SignInGoogleUseCase
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.launch
@@ -20,12 +16,16 @@ class LoginViewModel : ViewModel() {
      * Casos de uso
      */
     private val signInEmailAndPasswordUseCase = SignInEmailAndPasswordUseCase()
+    private val signInGoogleUseCase = SignInGoogleUseCase()
 
     /**
      * LiveData (Observables)
      */
     private val _signInWithEmailAndPassword = MutableLiveData<Task<AuthResult>>()
     val signInWithEmailAndPassword: LiveData<Task<AuthResult>> get() = _signInWithEmailAndPassword
+
+    private val _signInGoogle = MutableLiveData<Task<AuthResult>>()
+    val signInGoogle: LiveData<Task<AuthResult>> get() = _signInGoogle
 
     /**
      * Funcion para iniciar sesion
@@ -39,4 +39,17 @@ class LoginViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Metodo para iniciar sesión con google
+     */
+    fun signInGoogle(idToken: String) {
+
+        if (idToken.isNotEmpty()){
+            viewModelScope.launch {
+                _signInGoogle.postValue(
+                    signInGoogleUseCase.invoke(idToken)
+                )
+            }
+        }
+    }
 }
