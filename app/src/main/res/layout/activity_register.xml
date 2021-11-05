@@ -14,7 +14,7 @@
         android:layout_height="@dimen/mathParent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/bottom_logo"
+        app:layout_constraintBottom_toBottomOf="@id/line_bottom_logo"
         app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.textview.MaterialTextView
@@ -31,23 +31,26 @@
 
         <ImageView
             android:id="@+id/iv_register_user"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/size_icon_user_register"
+            android:layout_height="@dimen/size_icon_user_register"
             android:src="@drawable/ic_register"
             app:layout_constraintTop_toBottomOf="@id/mtv_register_now"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/cd_ic_user_register" />
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/size_icon_back"
+            android:layout_height="@dimen/size_icon_back"
+            android:layout_marginStart="@dimen/min_padding_view"
             android:src="@drawable/ic_back"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.15"/>
+            app:layout_constraintVertical_bias="0.15"
+            android:contentDescription="@string/cd_ic_back" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -55,11 +58,18 @@
 
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottom_logo"
+        android:id="@+id/line_bottom_logo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/line_top_buttom_register"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

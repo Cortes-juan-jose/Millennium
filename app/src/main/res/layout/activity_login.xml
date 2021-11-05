@@ -14,7 +14,7 @@
         android:layout_height="@dimen/mathParent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/bottom_logo"
+        app:layout_constraintBottom_toBottomOf="@id/line_bottom_logo"
         app:layout_constraintEnd_toEndOf="parent">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -23,9 +23,9 @@
         android:id="@+id/campos_scroll"
         android:layout_width="match_parent"
         android:layout_height="@dimen/mathParent"
-        app:layout_constraintTop_toTopOf="@id/bottom_logo"
+        app:layout_constraintTop_toTopOf="@id/line_bottom_logo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/top_register"
+        app:layout_constraintBottom_toBottomOf="@id/line_top_register"
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,7 +91,7 @@
                     android:layout_height="@dimen/size_icon"
                     android:layout_marginTop="@dimen/margin_icon_login"
                     android:layout_marginEnd="@dimen/margin_icon_login"
-                    android:contentDescription="@string/cd_ic_email" />
+                    android:contentDescription="@string/cd_ic_password" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/TextInputLayoutEndIconTint.Password"
@@ -111,7 +111,7 @@
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
-                style="@style/MaterialButtonEntrarBackground"
+                style="@style/MaterialButtonBackground"
                 android:id="@+id/mbtn_sing_in"
                 android:layout_width="@dimen/mathParent"
                 android:layout_height="wrap_content"
@@ -178,7 +178,7 @@
         android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="@dimen/mathParent"
-        app:layout_constraintTop_toTopOf="@id/top_register"
+        app:layout_constraintTop_toTopOf="@id/line_top_register"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -198,14 +198,14 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/bottom_logo"
+        android:id="@+id/line_bottom_logo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/top_register"
+        android:id="@+id/line_top_register"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"

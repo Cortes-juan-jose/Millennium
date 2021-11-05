@@ -54,7 +54,7 @@
         <item name="passwordToggleTint">@color/colorPrimary</item>
     </style>
 
-    <style name="MaterialButtonEntrarBackground">
+    <style name="MaterialButtonBackground">
         <item name="android:backgroundTint">@color/colorPrimary</item>
     </style>
 
