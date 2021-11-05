@@ -55,6 +55,16 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    <com.google.android.material.button.MaterialButton
+        style="@style/MaterialButtonBackground"
+        android:id="@+id/mbtn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¡Registrarse!"
+        android:layout_marginHorizontal="@dimen/min_padding_view"
+        app:layout_constraintTop_toTopOf="@id/line_top_buttom_register"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 
     <androidx.constraintlayout.widget.Guideline

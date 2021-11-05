@@ -11,4 +11,5 @@
     <dimen name="size_logo">200dp</dimen>
     <dimen name="size_icon_user_register">100dp</dimen>
     <dimen name="size_icon_back">30dp</dimen>
+    <dimen name="corner_radius_buttom">20dp</dimen>
 </resources>

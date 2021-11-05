@@ -56,6 +56,9 @@
 
     <style name="MaterialButtonBackground">
         <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="cornerRadius">@dimen/corner_radius_buttom</item>
+        <item name="android:fontFamily">@font/balsami_bold</item>
+        <item name="android:textColor">@color/colorOnSecondary</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
