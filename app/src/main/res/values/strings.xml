@@ -12,6 +12,7 @@
     <string name="hint_contrasena">Contraseña</string>
 
     <string name="btn_entrar">Entrar</string>
+    <string name="btn_registrarse">¡Registrarse!</string>
 
     <string name="mtv_no_tienes_cuenta">¿No tienes cuenta? Regístrate</string>
     <string name="mtv_o">O</string>

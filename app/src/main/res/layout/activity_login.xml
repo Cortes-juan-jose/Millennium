@@ -19,19 +19,19 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:id="@+id/campos_scroll"
         android:layout_width="match_parent"
         android:layout_height="@dimen/mathParent"
-        app:layout_constraintTop_toTopOf="@id/line_bottom_logo"
+        app:layout_constraintTop_toBottomOf="@id/line_bottom_logo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/line_top_register"
+        app:layout_constraintBottom_toTopOf="@id/line_top_register"
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/campos"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="@dimen/max_padding_view"
             android:layout_gravity="center">
 
@@ -170,7 +170,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/ViewBackground"

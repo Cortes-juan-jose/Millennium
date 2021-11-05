@@ -55,12 +55,29 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mathParent"
+        app:layout_constraintTop_toBottomOf="@id/line_bottom_logo"
+        app:layout_constraintBottom_toTopOf="@id/line_top_buttom_register">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
     <com.google.android.material.button.MaterialButton
         style="@style/MaterialButtonBackground"
         android:id="@+id/mbtn_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="¡Registrarse!"
+        android:text="@string/btn_registrarse"
         android:layout_marginHorizontal="@dimen/min_padding_view"
         app:layout_constraintTop_toTopOf="@id/line_top_buttom_register"
         app:layout_constraintBottom_toBottomOf="parent"/>
