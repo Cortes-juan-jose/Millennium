@@ -27,6 +27,10 @@
         <item name="android:textColor">@color/colorOnSecondary</item>
     </style>
 
+    <style name="MaterialTextViewIntroducirDatos" parent="MaterialTextViewFontBold">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
     <style name="MaterialTextViewRegisterNow" parent="MaterialTextViewFontBold">
         <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/colorOnSecondary</item>
@@ -42,6 +46,14 @@
 
     <style name="ImageViewIconPasswordColor">
         <item name="android:src">@drawable/ic_password_dark</item>
+    </style>
+
+    <style name="ImageViewIconUserColor">
+        <item name="android:src">@drawable/ic_user_dark</item>
+    </style>
+
+    <style name="ImageViewIconPhoneColor">
+        <item name="android:src">@drawable/ic_phone_dark</item>
     </style>
 
     <style name="TextInputLayoutEndIconTint" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

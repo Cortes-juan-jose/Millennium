@@ -5,11 +5,15 @@
     <string name="cd_ic_user_register">ic_user_register</string>
     <string name="cd_ic_back">ic_back</string>
     <string name="cd_ic_password">ic_password</string>
+    <string name="cd_ic_phone">ic_phone</string>
 
     <string name="hint_correo_electronico_register">Correo electrónico*</string>
     <string name="hint_correo_electronico">Correo electrónico</string>
     <string name="hint_contrasena_register">Contraseña*</string>
     <string name="hint_contrasena">Contraseña</string>
+    <string name="hint_nombre_de_usuario">Nombre de usuario*</string>
+    <string name="hint_telefono">Teléfono</string>
+    <string name="hint_confirmar_contrasena_register">Confirmar contraseña*</string>
 
     <string name="btn_entrar">Entrar</string>
     <string name="btn_registrarse">¡Registrarse!</string>
@@ -17,5 +21,6 @@
     <string name="mtv_no_tienes_cuenta">¿No tienes cuenta? Regístrate</string>
     <string name="mtv_o">O</string>
     <string name="mtv_registrate_ahora">Regístrate ahora</string>
+    <string name="mtv_introduzca_sus_datos">Introduzca sus datos</string>
 
 </resources>

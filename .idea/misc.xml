@@ -18,7 +18,7 @@
         <entry key="app/src/main/res/drawable/splash_theme_day.xml" value="0.209375" />
         <entry key="app/src/main/res/drawable/splash_theme_night.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.14673913043478262" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
       </map>
     </option>

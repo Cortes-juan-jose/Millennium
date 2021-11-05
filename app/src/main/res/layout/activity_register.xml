@@ -17,6 +17,18 @@
         app:layout_constraintBottom_toBottomOf="@id/line_bottom_logo"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/size_icon_back"
+            android:layout_height="@dimen/size_icon_back"
+            android:layout_marginStart="@dimen/min_padding_view"
+            android:src="@drawable/ic_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.15"
+            android:contentDescription="@string/cd_ic_back" />
+
         <com.google.android.material.textview.MaterialTextView
             style="@style/MaterialTextViewRegisterNow"
             android:id="@+id/mtv_register_now"
@@ -40,32 +52,204 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:contentDescription="@string/cd_ic_user_register" />
 
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="@dimen/size_icon_back"
-            android:layout_height="@dimen/size_icon_back"
-            android:layout_marginStart="@dimen/min_padding_view"
-            android:src="@drawable/ic_back"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.15"
-            android:contentDescription="@string/cd_ic_back" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/MaterialTextViewIntroducirDatos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/size_mtv_introduzca_sus_datos"
+        android:text="@string/mtv_introduzca_sus_datos"
+        app:layout_constraintTop_toBottomOf="@id/line_bottom_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/line_top_form"/>
 
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="@dimen/mathParent"
-        app:layout_constraintTop_toBottomOf="@id/line_bottom_logo"
+        app:layout_constraintTop_toBottomOf="@id/line_top_form"
         app:layout_constraintBottom_toTopOf="@id/line_top_buttom_register">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/max_padding_view"
+            android:layout_gravity="center">
 
+            <!--Nombre de usuario-->
+            <LinearLayout
+                android:id="@+id/ll_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/ll_email">
 
+                <ImageView
+                    style="@style/ImageViewIconUserColor"
+                    android:layout_width="@dimen/size_icon"
+                    android:layout_height="@dimen/size_icon"
+                    android:layout_marginTop="@dimen/min_padding_view"
+                    android:layout_marginEnd="@dimen/min_padding_view"
+                    android:contentDescription="@string/cd_ic_user_register" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_usuario"
+                    style="@style/TextInputLayoutEndIconTint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_nombre_de_usuario"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="30"
+                    app:endIconMode="clear_text"
+                    app:endIconCheckable="true">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_usuario"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLength="30"
+                        android:inputType="text"
+                        android:fontFamily="@font/balsami_regular"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!--Correo electronico-->
+            <LinearLayout
+                android:id="@+id/ll_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/ll_user">
+
+                <ImageView
+                    style="@style/ImageViewIconEmailColor"
+                    android:layout_width="@dimen/size_icon"
+                    android:layout_height="@dimen/size_icon"
+                    android:layout_marginTop="@dimen/margin_icon_login"
+                    android:layout_marginEnd="@dimen/margin_icon_login"
+                    android:contentDescription="@string/cd_ic_email" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutEndIconTint"
+                    android:id="@+id/til_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_correo_electronico_register"
+                    app:endIconMode="clear_text"
+                    app:endIconDrawable="@drawable/ic_cancel">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/balsami_regular"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!--Telefono-->
+            <LinearLayout
+                android:id="@+id/ll_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/ll_email">
+
+                <ImageView
+                    style="@style/ImageViewIconPhoneColor"
+                    android:layout_width="@dimen/size_icon"
+                    android:layout_height="@dimen/size_icon"
+                    android:layout_marginTop="@dimen/min_padding_view"
+                    android:layout_marginEnd="@dimen/min_padding_view"
+                    android:contentDescription="@string/cd_ic_phone" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_phone"
+                    style="@style/TextInputLayoutEndIconTint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_telefono"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="9"
+                    app:endIconMode="clear_text"
+                    app:endIconCheckable="true">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLength="9"
+                        android:inputType="phone"
+                        android:fontFamily="@font/balsami_regular"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!--Password-->
+            <LinearLayout
+                android:id="@+id/ll_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/ll_phone">
+
+                <ImageView
+                    style="@style/ImageViewIconPasswordColor"
+                    android:layout_width="@dimen/size_icon"
+                    android:layout_height="@dimen/size_icon"
+                    android:layout_marginTop="@dimen/margin_icon_login"
+                    android:layout_marginEnd="@dimen/margin_icon_login"
+                    android:contentDescription="@string/cd_ic_password" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutEndIconTint.Password"
+                    android:id="@+id/til_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_contrasena_register"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/balsami_regular"
+                        android:inputType="textPassword"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!--Password Confirm-->
+            <LinearLayout
+                android:id="@+id/ll_confirmar_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/ll_password">
+
+                <ImageView
+                    style="@style/ImageViewIconPasswordColor"
+                    android:layout_width="@dimen/size_icon"
+                    android:layout_height="@dimen/size_icon"
+                    android:layout_marginTop="@dimen/margin_icon_login"
+                    android:layout_marginEnd="@dimen/margin_icon_login"
+                    android:contentDescription="@string/cd_ic_password" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutEndIconTint.Password"
+                    android:id="@+id/til_confirmar_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_confirmar_contrasena_register"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_confirmar_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/balsami_regular"
+                        android:inputType="textPassword"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -90,6 +274,13 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/line_top_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.31"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/line_top_buttom_register"

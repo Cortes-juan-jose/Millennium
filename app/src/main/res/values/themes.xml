@@ -23,10 +23,14 @@
     <style name="MaterialTextViewFontBold">
         <item name="android:fontFamily">@font/balsami_bold</item>
     </style>
-    <!--________________________________________________________________________-->
+
     <style name="MaterialTextViewRegister" parent="MaterialTextViewFontRegular">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorOnSecondary</item>
+    </style>
+
+    <style name="MaterialTextViewIntroducirDatos" parent="MaterialTextViewFontBold">
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
     <style name="MaterialTextViewRegisterNow" parent="MaterialTextViewFontBold">
@@ -44,6 +48,14 @@
 
     <style name="ImageViewIconPasswordColor">
         <item name="android:src">@drawable/ic_password</item>
+    </style>
+
+    <style name="ImageViewIconUserColor">
+        <item name="android:src">@drawable/ic_user</item>
+    </style>
+
+    <style name="ImageViewIconPhoneColor">
+        <item name="android:src">@drawable/ic_phone</item>
     </style>
 
     <style name="TextInputLayoutEndIconTint" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

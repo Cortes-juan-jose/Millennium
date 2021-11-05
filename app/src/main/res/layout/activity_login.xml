@@ -24,9 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/mathParent"
         app:layout_constraintTop_toBottomOf="@id/line_bottom_logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/line_top_register"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintBottom_toTopOf="@id/line_top_register">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/campos"
