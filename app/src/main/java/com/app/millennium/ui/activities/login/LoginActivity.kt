@@ -6,7 +6,6 @@ import androidx.activity.result.contract.ActivityResultContracts.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.app.millennium.R
-import com.app.millennium.core.common.isNull
 import com.app.millennium.core.common.openActivity
 import com.app.millennium.core.common.toast
 import com.app.millennium.databinding.ActivityLoginBinding
@@ -111,7 +110,9 @@ class LoginActivity : AppCompatActivity() {
      * Metodo para iniciar sesion con google
      */
     private fun signInGoogle(idToken: String) {
-        viewModel.signInGoogle(idToken)
+        if (idToken.isNotEmpty()){
+            viewModel.signInGoogle(idToken)
+        }
     }
 
     /**

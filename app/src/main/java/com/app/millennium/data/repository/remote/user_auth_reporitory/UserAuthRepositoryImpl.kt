@@ -12,7 +12,7 @@ class UserAuthRepositoryImpl : UserAuthRepository {
     /**
      * Se obtiene el objeto auth
      */
-    private val auth: FirebaseAuth? = FirebaseProviderImpl().getAuth()
+    private val auth: FirebaseAuth = FirebaseProviderImpl().getAuth()
 
     /**
      * Metodo para iniciar sesion
@@ -20,26 +20,22 @@ class UserAuthRepositoryImpl : UserAuthRepository {
     override suspend fun signInWithEmailAndPassword(
         email: String,
         password: String
-    ): Task<AuthResult>? =
+    ): Task<AuthResult> =
         //Este metodo es el de iniciar sesion con firebase (que
         //se llama igual que este mismo pero no del mismo paquete)
-        auth?.signInWithEmailAndPassword(email, password)
+        auth.signInWithEmailAndPassword(email, password)
 
     /**
      * Metodo para obtener el usuario que ha inicado sesión
      */
     override suspend fun getCurrentSession(): FirebaseUser? =
-        auth?.currentUser
+        auth.currentUser
 
     /**
      * Metodo para iniciar sesion con las credenciales de google
      */
-    override suspend fun signInGoogle(idToken: String?): Task<AuthResult>? {
-        if (!idToken.isNullOrEmpty()){
-            val credential = GoogleAuthProvider.getCredential(idToken, null)
-            return auth?.signInWithCredential(credential)
-        }
-
-        return null
+    override suspend fun signInGoogle(idToken: String): Task<AuthResult> {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        return auth.signInWithCredential(credential)
     }
 }

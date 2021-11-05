@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseUser
  * Caso de uso para obtener el inicio de sesion del usuario
  */
 class GetCurrentSessionUseCase {
+
     /**
      * Obtener el repositoprio user auth para verficiar
      * con el metodo getCurrentSession si se ha iniciado

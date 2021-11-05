@@ -20,5 +20,8 @@ inline fun <reified T : Activity> Context.openActivity(noinline extra: Intent.()
     startActivity(intent)
 }
 
-//Entension para verificar si un objeto es nulo
+//Extension para verificar si un objeto es nulo
 fun Any?.isNull() = this==null
+
+//Extension para verificar que un objeto no sea nulo
+fun Any?.isNotNull() = this!=null

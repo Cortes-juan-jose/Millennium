@@ -11,12 +11,7 @@ class SignInGoogleUseCase {
 
     private val userAuthRepositoryImpl = UserAuthRepositoryImpl()
 
-    suspend operator fun invoke(idToken: String?) : Task<AuthResult>?{
-
-        if (!idToken.isNullOrEmpty()){
-            return userAuthRepositoryImpl.signInGoogle(idToken)
-        }
-        return null
-    }
+    suspend operator fun invoke(idToken: String) : Task<AuthResult> =
+        userAuthRepositoryImpl.signInGoogle(idToken)
 
 }

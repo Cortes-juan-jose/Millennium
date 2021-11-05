@@ -1,8 +1,7 @@
 package com.app.millennium.ui.activities.register
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.app.millennium.R
+import androidx.appcompat.app.AppCompatActivity
 import com.app.millennium.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
