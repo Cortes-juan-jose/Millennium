@@ -6,6 +6,12 @@ import com.google.firebase.auth.FirebaseUser
 
 interface UserAuthRepository {
 
+
+    /**
+     * Metodo para crear una cuenta nueva
+     */
+    suspend fun createAccount (email: String, password: String) : Task<AuthResult>
+
     /**
      * Metodo para iniciar sesion con email y contraseña
      * que devuelve la tarea a desempeñar
@@ -22,6 +28,4 @@ interface UserAuthRepository {
      * que ha iniciado previamente sesion
      */
     suspend fun getCurrentSession () : FirebaseUser?
-
-
 }

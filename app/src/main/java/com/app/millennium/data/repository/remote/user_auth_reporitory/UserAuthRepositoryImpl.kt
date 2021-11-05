@@ -14,6 +14,9 @@ class UserAuthRepositoryImpl : UserAuthRepository {
      */
     private val auth: FirebaseAuth = FirebaseProviderImpl().getAuth()
 
+    override suspend fun createAccount(email: String, password: String): Task<AuthResult> =
+        auth.createUserWithEmailAndPassword(email, password)
+
     /**
      * Metodo para iniciar sesion
      */
@@ -26,16 +29,16 @@ class UserAuthRepositoryImpl : UserAuthRepository {
         auth.signInWithEmailAndPassword(email, password)
 
     /**
-     * Metodo para obtener el usuario que ha inicado sesión
-     */
-    override suspend fun getCurrentSession(): FirebaseUser? =
-        auth.currentUser
-
-    /**
      * Metodo para iniciar sesion con las credenciales de google
      */
     override suspend fun signInGoogle(idToken: String): Task<AuthResult> {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         return auth.signInWithCredential(credential)
     }
+
+    /**
+     * Metodo para obtener el usuario que ha inicado sesión
+     */
+    override suspend fun getCurrentSession(): FirebaseUser? =
+        auth.currentUser
 }
