@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -39,7 +40,6 @@
 
                         <com.google.android.material.textview.MaterialTextView
                             style="@style/MaterialTextViewRegisterNow"
-                            android:id="@+id/mtv_register_now"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/mtv_registrate_ahora"
@@ -47,7 +47,6 @@
                             android:layout_marginTop="@dimen/min_padding_view"/>
 
                         <ImageView
-                            android:id="@+id/iv_register_user"
                             android:layout_width="@dimen/size_icon_user_register"
                             android:layout_height="@dimen/size_icon_user_register"
                             android:src="@drawable/ic_register"
@@ -66,7 +65,6 @@
 
                     <com.google.android.material.textview.MaterialTextView
                         style="@style/MaterialTextViewIntroducirDatos"
-                        android:id="@+id/tv_introducir_datos"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/size_mtv_introduzca_sus_datos"
@@ -83,7 +81,6 @@
                     android:padding="@dimen/min_padding_view">
 
                     <LinearLayout
-                        android:id="@+id/ll_user"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -117,7 +114,6 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/ll_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -149,7 +145,6 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/ll_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -183,7 +178,6 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/ll_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -214,7 +208,6 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/ll_confirmar_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">

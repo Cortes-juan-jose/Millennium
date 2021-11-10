@@ -14,4 +14,5 @@
     <dimen name="corner_radius_buttom">20dp</dimen>
     <dimen name="size_mtv_introduzca_sus_datos">16sp</dimen>
     <dimen name="logo_register_now">200dp</dimen>
+    <dimen name="size_bottom_registrate">50dp</dimen>
 </resources>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,205 +7,177 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.login.LoginActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        style="@style/ViewBackground"
-        android:id="@+id/logo"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/mathParent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/line_bottom_logo"
-        app:layout_constraintEnd_toEndOf="parent">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <ScrollView
-        android:id="@+id/campos_scroll"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/mathParent"
-        app:layout_constraintTop_toBottomOf="@id/line_bottom_logo"
-        app:layout_constraintBottom_toTopOf="@id/line_top_register">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/campos"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/max_padding_view"
-            android:layout_gravity="center">
+            android:orientation="vertical">
 
-            <!--Correo electronico-->
+            <!--PARTE SUPERIOR-->
             <LinearLayout
-                android:id="@+id/ll_email"
-                android:layout_width="@dimen/mathParent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/min_padding_view"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/ll_password"
-                app:layout_constraintEnd_toEndOf="parent">
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/logo_register_now"
+                android:orientation="vertical">
 
-                <ImageView
-                    style="@style/ImageViewIconEmailColor"
-                    android:layout_width="@dimen/size_icon"
-                    android:layout_height="@dimen/size_icon"
-                    android:layout_marginTop="@dimen/margin_icon_login"
-                    android:layout_marginEnd="@dimen/margin_icon_login"
-                    android:contentDescription="@string/cd_ic_email" />
+                <FrameLayout
+                    style="@style/ViewBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/TextInputLayoutEndIconTint"
-                    android:id="@+id/til_email"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/mtv_register_now"
+                        style="@style/MaterialTextViewRegisterNow"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text="Bienvenido a MILLENNIUM"
+                        android:textAlignment="center" />
+
+                </FrameLayout>
+            </LinearLayout>
+
+
+            <!--CAMPOS LOGIN-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_correo_electronico"
-                    app:endIconMode="clear_text"
-                    app:endIconDrawable="@drawable/ic_cancel">
+                    android:orientation="horizontal">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tiet_email"
+                    <ImageView
+                        style="@style/ImageViewIconEmailColor"
+                        android:layout_width="@dimen/size_icon"
+                        android:layout_height="@dimen/size_icon"
+                        android:layout_marginTop="@dimen/margin_icon_login"
+                        android:layout_marginEnd="@dimen/margin_icon_login"
+                        android:contentDescription="@string/cd_ic_email" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/TextInputLayoutEndIconTint"
+                        android:id="@+id/til_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/balsami_regular"
-                        android:inputType="textEmailAddress" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
+                        android:hint="@string/hint_correo_electronico"
+                        app:endIconMode="clear_text"
+                        app:endIconDrawable="@drawable/ic_cancel">
 
-            <!--Password-->
-            <LinearLayout
-                android:id="@+id/ll_password"
-                android:layout_width="@dimen/mathParent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginVertical="@dimen/min_padding_view"
-                app:layout_constraintTop_toBottomOf="@id/ll_email"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/mbtn_sing_in"
-                app:layout_constraintEnd_toEndOf="parent">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tiet_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/balsami_regular"
+                            android:inputType="textEmailAddress" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
 
-                <ImageView
-                    style="@style/ImageViewIconPasswordColor"
-                    android:layout_width="@dimen/size_icon"
-                    android:layout_height="@dimen/size_icon"
-                    android:layout_marginTop="@dimen/margin_icon_login"
-                    android:layout_marginEnd="@dimen/margin_icon_login"
-                    android:contentDescription="@string/cd_ic_password" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/TextInputLayoutEndIconTint.Password"
-                    android:id="@+id/til_password"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_contrasena"
-                    app:passwordToggleEnabled="true">
+                    android:orientation="horizontal"
+                    android:layout_marginVertical="@dimen/min_padding_view">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tiet_password"
+                    <ImageView
+                        style="@style/ImageViewIconPasswordColor"
+                        android:layout_width="@dimen/size_icon"
+                        android:layout_height="@dimen/size_icon"
+                        android:layout_marginTop="@dimen/margin_icon_login"
+                        android:layout_marginEnd="@dimen/margin_icon_login"
+                        android:contentDescription="@string/cd_ic_password" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/TextInputLayoutEndIconTint.Password"
+                        android:id="@+id/til_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/balsami_regular"
-                        android:inputType="textPassword"/>
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
+                        android:hint="@string/hint_contrasena"
+                        app:passwordToggleEnabled="true">
 
-            <com.google.android.material.button.MaterialButton
-                style="@style/MaterialButtonBackground"
-                android:id="@+id/mbtn_sing_in"
-                android:layout_width="@dimen/mathParent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/balsami_bold"
-                android:text="@string/btn_entrar"
-                android:layout_marginVertical="@dimen/min_padding_view"
-                app:layout_constraintTop_toBottomOf="@id/ll_password"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/ll_separator"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tiet_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/balsami_regular"
+                            android:inputType="textPassword"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_separator"
-                android:layout_width="@dimen/mathParent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginVertical="@dimen/min_padding_view"
-                app:layout_constraintTop_toBottomOf="@id/mbtn_sing_in"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/btn_sign_in_google"
-                app:layout_constraintEnd_toEndOf="parent">
 
-                <View
-                    android:layout_marginTop="@dimen/margin_top_line_separator"
-                    android:layout_weight="1"
+                <com.google.android.material.button.MaterialButton
+                    style="@style/MaterialButtonBackground"
+                    android:id="@+id/mbtn_sing_in"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_separator"
-                    android:background="@color/grey"/>
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_marginHorizontal="@dimen/min_padding_view"
-                    android:layout_weight="0"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mtv_o"
-                    android:fontFamily="@font/balsami_regular"
-                    android:textSize="@dimen/size_mtv_o"/>
-                <View
-                    android:layout_marginTop="@dimen/margin_top_line_separator"
-                    android:layout_weight="1"
+                    android:fontFamily="@font/balsami_bold"
+                    android:text="@string/btn_entrar"
+                    android:layout_marginVertical="@dimen/min_padding_view"/>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_separator"
-                    android:background="@color/grey"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginVertical="@dimen/min_padding_view">
+
+                    <View
+                        android:layout_marginTop="@dimen/margin_top_line_separator"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_separator"
+                        android:background="@color/grey"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_marginHorizontal="@dimen/min_padding_view"
+                        android:layout_weight="0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mtv_o"
+                        android:fontFamily="@font/balsami_regular"
+                        android:textSize="@dimen/size_mtv_o"/>
+                    <View
+                        android:layout_marginTop="@dimen/margin_top_line_separator"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_separator"
+                        android:background="@color/grey"/>
+
+                </LinearLayout>
+
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/btn_sign_in_google"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/min_padding_view"/>
 
             </LinearLayout>
-
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/btn_sign_in_google"
-                android:layout_width="@dimen/mathParent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/min_padding_view"
-                app:layout_constraintTop_toBottomOf="@id/ll_separator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </ScrollView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         style="@style/ViewBackground"
-        android:id="@+id/register"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/mathParent"
-        app:layout_constraintTop_toTopOf="@id/line_top_register"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_height="@dimen/size_bottom_registrate"
+        android:layout_gravity="bottom">
 
         <com.google.android.material.textview.MaterialTextView
-            style="@style/MaterialTextViewRegister"
             android:id="@+id/mtv_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mtv_no_tienes_cuenta"
+            style="@style/MaterialTextViewRegister"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:fontFamily="@font/balsami_bold"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:gravity="center"
+            android:text="@string/mtv_no_tienes_cuenta" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/line_bottom_logo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/line_top_register"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.93"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
