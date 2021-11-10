@@ -3,8 +3,8 @@ package com.app.millennium.ui.activities.register
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.app.millennium.core.common.reload
-import com.app.millennium.core.common.toast
+import com.app.millennium.R
+import com.app.millennium.core.common.*
 import com.app.millennium.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
@@ -63,7 +63,24 @@ class RegisterActivity : AppCompatActivity() {
         password: String,
         confirmPassword: String
     ): Boolean {
-        return false
+        var usernameValid: Boolean = false
+        var emailValid: Boolean = false
+        var phoneValid: Boolean = false
+        var passwordValid: Boolean = false
+        var passwordConfirmValid: Boolean = false
+
+
+        binding.apply {
+
+        }
+
+
+
+        return usernameValid &&
+                emailValid &&
+                phoneValid &&
+                passwordValid &&
+                passwordConfirmValid
     }
 
     private fun initObservables(){

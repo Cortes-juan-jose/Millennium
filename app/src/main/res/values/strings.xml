@@ -23,9 +23,10 @@
     <string name="mtv_registrate_ahora">Regístrate ahora</string>
     <string name="mtv_introduzca_sus_datos">Introduzca sus datos</string>
 
-    <string name="msg_error_username">Ingrese un nombre de usuario.</string>
-    <string name="msg_error_email">Ingrese un email válido.</string>
-    <string name="msg_error_password">La contraseña debe tener al menos 8 caracteres.</string>
-    <string name="msg_error_password_confirm">La confirmación de la contraseña debe ser igual.</string>
+    <string name="msg_error_username">Mínimo 4 caracteres</string>
+    <string name="msg_error_email">Correo electrónico inválido</string>
+    <string name="msg_error_phone">El teléfono debe tener 9 dígitos</string>
+    <string name="msg_error_password">Mínimo 8 caracteres</string>
+    <string name="msg_error_password_confirm">La contraseña no coincide</string>
 
 </resources>
