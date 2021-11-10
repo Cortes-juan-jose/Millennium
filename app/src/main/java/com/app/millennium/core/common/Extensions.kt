@@ -33,19 +33,9 @@ fun Any?.isNull() = this==null
 //Extension para verificar que un objeto no sea nulo
 fun Any?.isNotNull() = this!=null
 
-//Extension para validar un email
-fun String?.validatePatternEmail(): Boolean {
-    if (this!=null){
-        val exp = "^[\\w.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
-        val pattern: Pattern = Pattern.compile(exp, Pattern.CASE_INSENSITIVE)
-        val matcher: Matcher = pattern.matcher(this)
-        return matcher.matches()
-    }
-    return false
-}
 
 //Extension para validar el nombre de usuario
-fun String?.validatePatternUsername(): Boolean {
+fun String?.isUsername(): Boolean {
     if (this!=null){
         val exp = "^[A-Za-z0-9_.-]{4,}$"
         val pattern: Pattern = Pattern.compile(exp, Pattern.CASE_INSENSITIVE)
@@ -55,10 +45,10 @@ fun String?.validatePatternUsername(): Boolean {
     return false
 }
 
-//Extension para validar la contraseña
-fun String?.validatePatternPassword(): Boolean {
+//Extension para validar un email
+fun String?.isEmail(): Boolean {
     if (this!=null){
-        val exp = "^[A-Za-z0-9!¡#~$%&()¿?*+Ç:;<>=_.-]{8,}$"
+        val exp = "^[\\w.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
         val pattern: Pattern = Pattern.compile(exp, Pattern.CASE_INSENSITIVE)
         val matcher: Matcher = pattern.matcher(this)
         return matcher.matches()
@@ -67,9 +57,20 @@ fun String?.validatePatternPassword(): Boolean {
 }
 
 //Extension para validar el telefono
-fun String?.validatePatternPhone(): Boolean {
+fun String?.isPhone(): Boolean {
     if (this!=null){
         val exp = "^[0-9]{9}$"
+        val pattern: Pattern = Pattern.compile(exp, Pattern.CASE_INSENSITIVE)
+        val matcher: Matcher = pattern.matcher(this)
+        return matcher.matches()
+    }
+    return false
+}
+
+//Extension para validar la contraseña
+fun String?.isPassword(): Boolean {
+    if (this!=null){
+        val exp = "^[A-Za-z0-9!¡#~$%&()¿?*+Ç:;<>=_.-]{8,}$"
         val pattern: Pattern = Pattern.compile(exp, Pattern.CASE_INSENSITIVE)
         val matcher: Matcher = pattern.matcher(this)
         return matcher.matches()
