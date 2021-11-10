@@ -34,7 +34,7 @@ fun Any?.isNull() = this==null
 fun Any?.isNotNull() = this!=null
 
 //Extension para validar un email
-fun String?.validEmail(): Boolean {
+fun String?.validatePatternEmail(): Boolean {
     if (this!=null){
         val exp = "^[\\w.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
         val pattern: Pattern = Pattern.compile(exp, Pattern.CASE_INSENSITIVE)
@@ -45,7 +45,7 @@ fun String?.validEmail(): Boolean {
 }
 
 //Extension para validar el nombre de usuario
-fun String?.validUsername(): Boolean {
+fun String?.validatePatternUsername(): Boolean {
     if (this!=null){
         val exp = "^[A-Za-z0-9_.-]{4,}$"
         val pattern: Pattern = Pattern.compile(exp, Pattern.CASE_INSENSITIVE)
@@ -56,9 +56,9 @@ fun String?.validUsername(): Boolean {
 }
 
 //Extension para validar la contraseña
-fun String?.validPassword(): Boolean {
+fun String?.validatePatternPassword(): Boolean {
     if (this!=null){
-        val exp = "^[A-Za-z0-9!¡#~$%&()¿?*+Ç:;<>=_.-]{6,}$"
+        val exp = "^[A-Za-z0-9!¡#~$%&()¿?*+Ç:;<>=_.-]{8,}$"
         val pattern: Pattern = Pattern.compile(exp, Pattern.CASE_INSENSITIVE)
         val matcher: Matcher = pattern.matcher(this)
         return matcher.matches()
@@ -67,7 +67,7 @@ fun String?.validPassword(): Boolean {
 }
 
 //Extension para validar el telefono
-fun String?.validPhone(): Boolean {
+fun String?.validatePatternPhone(): Boolean {
     if (this!=null){
         val exp = "^[0-9]{9}$"
         val pattern: Pattern = Pattern.compile(exp, Pattern.CASE_INSENSITIVE)

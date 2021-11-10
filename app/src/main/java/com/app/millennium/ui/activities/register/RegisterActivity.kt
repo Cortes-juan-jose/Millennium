@@ -72,6 +72,7 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.apply {
 
+
         }
 
 
