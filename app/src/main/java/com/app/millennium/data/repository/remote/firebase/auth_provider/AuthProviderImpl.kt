@@ -1,4 +1,4 @@
-package com.app.millennium.data.repository.remote.firebase.user_auth_reporitory
+package com.app.millennium.data.repository.remote.firebase.auth_provider
 
 import com.app.millennium.core.firebase.base.FirebaseProviderImpl
 import com.google.android.gms.tasks.Task
@@ -7,7 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 
-class UserAuthImpl : UserAuth {
+class AuthProviderImpl : AuthProvider {
 
     /**
      * Se obtiene el objeto auth
