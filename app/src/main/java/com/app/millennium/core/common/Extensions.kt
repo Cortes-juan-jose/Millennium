@@ -75,3 +75,45 @@ fun String?.validPhone(): Boolean {
     }
     return false
 }
+
+//Extension para aplicar propiedades de error a un text input layout
+fun TextInputLayout.applyError(msg: String){
+
+    this.let {
+        isHelperTextEnabled = true
+        helperText = msg
+        boxStrokeColor = Color.RED
+        hintTextColor = ColorStateList.valueOf(Color.RED)
+        setHelperTextColor(ColorStateList.valueOf(Color.RED))
+    }
+}
+
+//Extension para aplicar propiedades de error a un text input layout
+fun TextInputLayout.removeError(){
+
+    this.let {
+        isHelperTextEnabled = false
+        boxStrokeColor = Color.rgb(
+            Constant.PRIMARY_COLOR_RED,
+            Constant.PRIMARY_COLOR_GREEN,
+            Constant.PRIMARY_COLOR_BLUE
+        )
+        hintTextColor =
+            ColorStateList.valueOf(
+                Color.rgb(
+                    Constant.PRIMARY_COLOR_RED,
+                    Constant.PRIMARY_COLOR_GREEN,
+                    Constant.PRIMARY_COLOR_BLUE
+                )
+            )
+        setHelperTextColor(
+            ColorStateList.valueOf(
+                Color.rgb(
+                    Constant.PRIMARY_COLOR_RED,
+                    Constant.PRIMARY_COLOR_GREEN,
+                    Constant.PRIMARY_COLOR_BLUE
+                )
+            )
+        )
+    }
+}
