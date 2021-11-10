@@ -1,10 +1,10 @@
-package com.app.millennium.data.repository.remote.user_auth_reporitory
+package com.app.millennium.data.repository.remote.firebase.user_auth_reporitory
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
 
-interface UserAuthRepository {
+interface UserAuth {
 
 
     /**
