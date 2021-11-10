@@ -3,6 +3,7 @@ package com.app.millennium.ui.activities.register
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.app.millennium.core.common.reload
 import com.app.millennium.core.common.toast
 import com.app.millennium.databinding.ActivityRegisterBinding
 
@@ -26,11 +27,13 @@ class RegisterActivity : AppCompatActivity() {
                 finish()
             }
             mbtnRegister.setOnClickListener {
+                //Primero quitamos el foco y cerramos el teclado de esta vista
+                this@RegisterActivity.reload()
+
                 /**
                  * Validamos todos los campos para registrarse
                  */
-                if (
-                    validarInputs(
+                if (validarInputs(
                         tietUser.text.toString(),
                         tietEmail.text.toString(),
                         tietPhone.text.toString(),

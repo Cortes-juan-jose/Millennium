@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.google.android.material.textfield.TextInputLayout
 import java.util.regex.Matcher
@@ -114,5 +116,16 @@ fun TextInputLayout.removeError(){
                 )
             )
         )
+    }
+}
+
+//Funcion de extension para quitar el foco de los campos del registro y cerrar el teclado si esta cerrado
+fun Activity.reload(){
+    val inputMethodManager : InputMethodManager =
+        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    val view: View? = this.currentFocus
+    view?.let {
+        it.clearFocus()
+        inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
     }
 }

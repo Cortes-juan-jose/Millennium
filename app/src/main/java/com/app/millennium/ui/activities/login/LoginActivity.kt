@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.app.millennium.R
 import com.app.millennium.core.common.openActivity
+import com.app.millennium.core.common.reload
 import com.app.millennium.core.common.toast
 import com.app.millennium.databinding.ActivityLoginBinding
 import com.app.millennium.ui.activities.home.HomeActivity
@@ -71,6 +72,8 @@ class LoginActivity : AppCompatActivity() {
              * Boton para entrar en la aplicacion
              */
             mbtnSingIn.setOnClickListener {
+                //Primero quitamos el foco y el teclado
+                this@LoginActivity.reload()
                 signInEmailPassword()
             }
 
@@ -78,6 +81,8 @@ class LoginActivity : AppCompatActivity() {
              * Boton para logearse con google
              */
             btnSignInGoogle.setOnClickListener {
+                //Primero quitamos el foco y el teclado
+                this@LoginActivity.reload()
                 launcherSignInGoogle()
             }
 
@@ -85,6 +90,8 @@ class LoginActivity : AppCompatActivity() {
              * material text view para registrarse
              */
             mtvRegister.setOnClickListener {
+                //Primero quitamos el foco y el teclado
+                this@LoginActivity.reload()
                 openActivity<RegisterActivity> { }
             }
         }
