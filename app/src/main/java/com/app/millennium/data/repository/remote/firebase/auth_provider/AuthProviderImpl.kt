@@ -1,5 +1,6 @@
 package com.app.millennium.data.repository.remote.firebase.auth_provider
 
+import com.app.millennium.core.firebase.FirebaseProvider
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -11,7 +12,7 @@ class AuthProviderImpl : AuthProvider {
     /**
      * Se obtiene el objeto auth
      */
-    private val auth: FirebaseAuth = FirebaseProviderImpl().getAuth()
+    private val auth: FirebaseAuth = FirebaseProvider.auth
 
     override suspend fun createAccount(email: String, password: String): Task<AuthResult> =
         auth.createUserWithEmailAndPassword(email, password)
