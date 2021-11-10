@@ -94,7 +94,7 @@
                             android:contentDescription="@string/cd_ic_user_register" />
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/til_usuario"
+                            android:id="@+id/til_user"
                             style="@style/TextInputLayoutEndIconTint"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                             app:endIconMode="clear_text"
                             app:endIconCheckable="true">
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/tiet_usuario"
+                                android:id="@+id/tiet_user"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:maxLength="30"
