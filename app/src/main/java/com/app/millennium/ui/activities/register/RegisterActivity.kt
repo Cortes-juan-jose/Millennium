@@ -6,13 +6,17 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.app.millennium.R
 import com.app.millennium.core.common.*
+import com.app.millennium.data.model.User
 import com.app.millennium.databinding.ActivityRegisterBinding
 import com.app.millennium.ui.activities.home.HomeActivity
+import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private val viewModel : RegisterViewModel by viewModels()
+
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +52,6 @@ class RegisterActivity : AppCompatActivity() {
                         tietEmail.text.toString(),
                         tietConfirmarPassword.text.toString()
                     )
-                    toast("Usuario creado")
                 } else {
                     toast("Datos incorrectos")
                 }
@@ -146,15 +149,15 @@ class RegisterActivity : AppCompatActivity() {
             this,
             { task ->
                 task.addOnCompleteListener {
-                    if (task.isSuccessful){
+                    if (it.isSuccessful){
                         /**
                          * si la cuenta se ha creado correctamente
-                         * entonces iniciamos sesion con ella
+                         * entonces obtenemos el id de la misma para
+                         * poder guardar el usuario en la db Collection users
+                         * correctamente
                          */
-                        viewModel.signInWithEmailAndPassword(
-                            binding.tietEmail.text.toString(),
-                            binding.tietConfirmarPassword.text.toString()
-                        )
+                        viewModel.getId()
+
                     }
                 }
                 task.addOnFailureListener {
@@ -170,11 +173,9 @@ class RegisterActivity : AppCompatActivity() {
             this,
             { task ->
                 task.addOnCompleteListener {
-                    if (task.isSuccessful){
-                        viewModel.getId()
+                    if (it.isSuccessful){
                         /**
-                         * si la cuenta se ha creado correctamente
-                         * entonces iniciamos sesion con ella
+                         * Si el inicio de sesion se lleva a cabo entonces abrimos el homeAct
                          */
                         openActivity<HomeActivity> {
                             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -194,7 +195,50 @@ class RegisterActivity : AppCompatActivity() {
         viewModel.getId.observe(
             this,
             {
-                it?.let { toast(it) }
+                it?.let {
+                    /**
+                     * Obtenemos el ID y creamos un usuario
+                     */
+                    binding.apply {
+                        user = User(
+                            id = it,
+                            name = tietUser.text.toString(),
+                            email = tietEmail.text.toString(),
+                            phone = tietPhone.text.toString(),
+                            timestamp = Date().time
+                        )
+                        /**
+                         * Luego guardamos este usuario en la db Collection users
+                         */
+                        viewModel.saveUser(user)
+                    }
+                }
+            }
+        )
+
+        /**
+         * Observable para guardar un usuario en la db Collection users
+         */
+        viewModel.saveUser.observe(
+            this,
+            { task ->
+                task?.let { task_let ->
+                    task_let.addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            /**
+                             * Si se guarda correctamente se inicia sesión
+                             */
+                            viewModel.signInWithEmailAndPassword(
+                                binding.tietEmail.text.toString(),
+                                binding.tietConfirmarPassword.text.toString()
+                            )
+                        }
+                    }
+
+                    task_let.addOnFailureListener {
+                        toast("${it.message}")
+                    }
+                }
             }
         )
     }
