@@ -38,4 +38,9 @@ interface AuthProvider {
      * Metodo que devuelve el email del usuario que ha iniciado sesion
      */
     suspend fun getEmail(): String?
+
+    /**
+     * Metodo que devuelve el displayName del usuario que ha iniciado sesion
+     */
+    suspend fun getDisplayName(): String?
 }

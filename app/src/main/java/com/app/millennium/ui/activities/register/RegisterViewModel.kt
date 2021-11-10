@@ -20,8 +20,8 @@ class RegisterViewModel : ViewModel() {
      */
     private val createAccountUseCase = CreateAccountUseCase()
     private val signInEmailAndPasswordUseCase = SignInEmailAndPasswordUseCase()
-    private val saveUserUseCase = SaveUserUseCase()
     private val getIdUseCase = GetIdUseCase()
+    private val saveUserUseCase = SaveUserUseCase()
 
     /**
      * Observadores
@@ -39,7 +39,7 @@ class RegisterViewModel : ViewModel() {
     val getId: LiveData<String> get() = _getId
 
     /**
-     * Funciones
+     * Funcion para crear una cuenta con email y contraseña
      */
     fun createAccount(email: String, password: String){
         viewModelScope.launch {
@@ -49,6 +49,9 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Funcion para iniciar sesion con email y contraseña
+     */
     fun signInWithEmailAndPassword(email: String, password: String){
 
         viewModelScope.launch {
@@ -58,6 +61,9 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Funcion para guardar usuario en la db Collection users
+     */
     fun saveUser(user: User){
         viewModelScope.launch {
             _saveUser.postValue(
@@ -66,6 +72,9 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Funcion para obtener el id de inicio de sesion
+     */
     fun getId(){
         viewModelScope.launch {
             _getId.postValue(

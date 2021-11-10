@@ -1,12 +1,15 @@
 package com.app.millennium.data.repository.remote.firebase.firestore_provider.entities.users
 
-import com.app.millennium.core.firebase.base.FirebaseProviderImpl
+import com.app.millennium.core.firebase.FirebaseProvider
 import com.app.millennium.data.model.User
 import com.google.android.gms.tasks.Task
 
+/**
+ * Operaciones sobre la coleccion Users
+ */
 class UsersImpl: Users {
 
-    private val db = FirebaseProviderImpl().getUsersCollection()
+    private val db = FirebaseProvider.usersCollection
 
     /**
      * Meetodo para añadir un usuario a la db

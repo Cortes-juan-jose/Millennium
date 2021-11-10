@@ -1,7 +1,5 @@
 package com.app.millennium.data.repository.remote.firebase.auth_provider
 
-import com.app.millennium.core.common.isNotNull
-import com.app.millennium.core.firebase.base.FirebaseProviderImpl
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -54,4 +52,10 @@ class AuthProviderImpl : AuthProvider {
      */
     override suspend fun getEmail(): String? =
         auth.currentUser?.email
+
+    /**
+     * Metodo que devuelve el displayName del usuario que ha iniciado sesion
+     */
+    override suspend fun getDisplayName(): String? =
+        auth.currentUser?.displayName
 }

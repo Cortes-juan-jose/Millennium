@@ -9,6 +9,7 @@ import com.app.millennium.R
 import com.app.millennium.core.common.openActivity
 import com.app.millennium.core.common.reload
 import com.app.millennium.core.common.toast
+import com.app.millennium.data.model.User
 import com.app.millennium.databinding.ActivityLoginBinding
 import com.app.millennium.ui.activities.home.HomeActivity
 import com.app.millennium.ui.activities.register.RegisterActivity
@@ -16,12 +17,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import java.util.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val viewModel: LoginViewModel by viewModels()
+
+    private var user: User = User()
 
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -192,21 +194,85 @@ class LoginActivity : AppCompatActivity() {
                 task.addOnCompleteListener { authResult ->
                     //Si la tarea se completa entonces comprobamos si fue exitosa
                     if (authResult.isSuccessful) {
-                        //si fue exitosa entonces se navegará hasta el HomeActivity
-                        //Ahora esta de prueba con RegisterActivity
-                        //openActivity es una funcion de extensio creada para
-                        //navegar hacia activities con data y con flags
-                        val user = Firebase.auth.currentUser
-                        toast("${user?.displayName}")
-                        openActivity<HomeActivity> {
-                            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                        }
+                        /**
+                         * Si la tarea fue exitosa entonces obtenemos el email, displayname y
+                         * el id del usuario de google
+                         */
+                        viewModel.getId()
                     }
                 }
                 task.addOnFailureListener { exc ->
                     //En el caso de que la tarea haya sido fallida entonces mostrará un mensaje
                     //de error indicando el problema
                     toast(exc.message.toString())
+                }
+            }
+        )
+
+        /**
+         * Observable para obtener el id de la cuenta de google
+         */
+        viewModel.getId.observe(
+            this,
+            {
+                it?.let {
+                    user.id = it
+                }
+                viewModel.getEmail()
+            }
+        )
+
+        /**
+         * Observable para obtener el email de la cuenta de google
+         */
+        viewModel.getEmail.observe(
+            this,
+            {
+                it?.let {
+                    user.email = it
+                }
+                viewModel.getDisplayName()
+            }
+        )
+
+        /**
+         * Observable para obtener el DisplayName de la cuenta de google
+         */
+        viewModel.getDisplayName.observe(
+            this,
+            {
+                it?.let {
+                    user.name = it
+                    //Y también se guardara el timestamp
+                    user.timestamp = Date().time
+                }
+                viewModel.saveUser(user)
+            }
+        )
+
+        /**
+         * Observable para guardar un usuario en la db Collection users
+         */
+        viewModel.saveUser.observe(
+            this,
+            { task ->
+                task?.let { let ->
+                    let.addOnCompleteListener {
+                        if (it.isSuccessful){
+                            /**
+                             * Si la tarea fue exitosa entonces se abrirá el homeAct
+                             */
+                            openActivity<HomeActivity> {
+                                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                            }
+                        }
+                    }
+
+                    let.addOnFailureListener { exc ->
+                        //En el caso de que la tarea haya sido fallida entonces mostrará un mensaje
+                        //de error indicando el problema
+                        toast(exc.message.toString())
+                    }
                 }
             }
         )

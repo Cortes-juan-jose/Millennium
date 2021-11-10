@@ -1,7 +1,10 @@
 package com.app.millennium.data.model
 
+/**
+ * Modelo User
+ */
 data class User(
-    val id: String? = null,
+    var id: String? = null,
     var name: String? = null,
     var email: String? = null,
     var phone: String? = null,
