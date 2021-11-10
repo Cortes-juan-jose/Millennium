@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.widget.Toast
-import com.app.millennium.R
 import com.google.android.material.textfield.TextInputLayout
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -35,7 +34,7 @@ fun Any?.isNotNull() = this!=null
 //Extension para validar un email
 fun String?.validEmail(): Boolean {
     if (this!=null){
-        val exp: String = "^[\\w.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
+        val exp = "^[\\w.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
         val pattern: Pattern = Pattern.compile(exp, Pattern.CASE_INSENSITIVE)
         val matcher: Matcher = pattern.matcher(this)
         return matcher.matches()
@@ -46,7 +45,7 @@ fun String?.validEmail(): Boolean {
 //Extension para validar el nombre de usuario
 fun String?.validUsername(): Boolean {
     if (this!=null){
-        val exp: String = "^[A-Za-z0-9_.-]{4,}$"
+        val exp = "^[A-Za-z0-9_.-]{4,}$"
         val pattern: Pattern = Pattern.compile(exp, Pattern.CASE_INSENSITIVE)
         val matcher: Matcher = pattern.matcher(this)
         return matcher.matches()
@@ -57,7 +56,7 @@ fun String?.validUsername(): Boolean {
 //Extension para validar la contraseña
 fun String?.validPassword(): Boolean {
     if (this!=null){
-        val exp: String = "^[A-Za-z0-9!¡#~$%&()¿?*+Ç:;<>=_.-]{6,}$"
+        val exp = "^[A-Za-z0-9!¡#~$%&()¿?*+Ç:;<>=_.-]{6,}$"
         val pattern: Pattern = Pattern.compile(exp, Pattern.CASE_INSENSITIVE)
         val matcher: Matcher = pattern.matcher(this)
         return matcher.matches()
@@ -68,7 +67,7 @@ fun String?.validPassword(): Boolean {
 //Extension para validar el telefono
 fun String?.validPhone(): Boolean {
     if (this!=null){
-        val exp: String = "^[0-9]{9}$"
+        val exp = "^[0-9]{9}$"
         val pattern: Pattern = Pattern.compile(exp, Pattern.CASE_INSENSITIVE)
         val matcher: Matcher = pattern.matcher(this)
         return matcher.matches()

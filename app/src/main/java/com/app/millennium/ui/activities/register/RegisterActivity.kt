@@ -1,15 +1,9 @@
 package com.app.millennium.ui.activities.register
 
-import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.app.millennium.R
-import com.app.millennium.core.common.*
+import com.app.millennium.core.common.toast
 import com.app.millennium.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
