@@ -7,13 +7,13 @@
     <string name="cd_ic_password">ic_password</string>
     <string name="cd_ic_phone">ic_phone</string>
 
-    <string name="hint_correo_electronico_register">Correo electrónico*</string>
+    <string name="hint_correo_electronico_register">Correo electrónico (Requerido)</string>
     <string name="hint_correo_electronico">Correo electrónico</string>
-    <string name="hint_contrasena_register">Contraseña*</string>
+    <string name="hint_contrasena_register">Contraseña (Requerido)</string>
     <string name="hint_contrasena">Contraseña</string>
-    <string name="hint_nombre_de_usuario">Nombre de usuario*</string>
+    <string name="hint_nombre_de_usuario">Nombre de usuario (Requerido)</string>
     <string name="hint_telefono">Teléfono</string>
-    <string name="hint_confirmar_contrasena_register">Confirmar contraseña*</string>
+    <string name="hint_confirmar_contrasena_register">Confirmar contraseña (Requerido)</string>
 
     <string name="btn_entrar">Entrar</string>
     <string name="btn_registrarse">¡Registrarse!</string>

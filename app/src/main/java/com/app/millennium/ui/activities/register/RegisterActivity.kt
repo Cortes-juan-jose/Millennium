@@ -1,11 +1,13 @@
 package com.app.millennium.ui.activities.register
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.app.millennium.R
 import com.app.millennium.core.common.*
 import com.app.millennium.databinding.ActivityRegisterBinding
+import com.app.millennium.ui.activities.home.HomeActivity
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -42,10 +44,10 @@ class RegisterActivity : AppCompatActivity() {
                     )
                 ){
                     //En el caso que los campos sean correctos se creara una cuenta y un usuairo
-                    /*viewModel.createAccount(
+                    viewModel.createAccount(
                         tietEmail.text.toString(),
                         tietConfirmarPassword.text.toString()
-                    )*/
+                    )
                     toast("Usuario creado")
                 } else {
                     toast("Datos incorrectos")
@@ -66,11 +68,11 @@ class RegisterActivity : AppCompatActivity() {
         password: String,
         confirmPassword: String
     ): Boolean {
-        var usernameValid: Boolean = false
-        var emailValid: Boolean = false
-        var phoneValid: Boolean = false
-        var passwordValid: Boolean = false
-        var passwordConfirmValid: Boolean = false
+        var usernameValid = false
+        var emailValid = false
+        var phoneValid = false
+        var passwordValid = false
+        var passwordConfirmValid = false
 
 
         binding.apply {
@@ -137,12 +139,46 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun initObservables(){
+        /**
+         * Observable para crear una cuenta en firebase
+         */
         viewModel.createAccount.observe(
             this,
             { task ->
                 task.addOnCompleteListener {
                     if (task.isSuccessful){
+                        /**
+                         * si la cuenta se ha creado correctamente
+                         * entonces iniciamos sesion con ella
+                         */
                         toast("Registrado")
+                        viewModel.signInWithEmailAndPassword(
+                            binding.tietEmail.text.toString(),
+                            binding.tietConfirmarPassword.text.toString()
+                        )
+                    }
+                }
+                task.addOnFailureListener {
+                    toast("${it.message}")
+                }
+            }
+        )
+
+        /**
+         * Observable para iniciar sesion al terminar de crear una cuenta
+         */
+        viewModel.signInWithEmailAndPassword.observe(
+            this,
+            { task ->
+                task.addOnCompleteListener {
+                    if (task.isSuccessful){
+                        /**
+                         * si la cuenta se ha creado correctamente
+                         * entonces iniciamos sesion con ella
+                         */
+                        openActivity<HomeActivity> {
+                            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        }
                     }
                 }
                 task.addOnFailureListener {
