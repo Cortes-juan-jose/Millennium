@@ -37,15 +37,18 @@ class RegisterActivity : AppCompatActivity() {
                         tietUser.text.toString(),
                         tietEmail.text.toString(),
                         tietPhone.text.toString(),
-                        tietPassword.toString(),
+                        tietPassword.text.toString(),
                         tietConfirmarPassword.text.toString()
                     )
                 ){
                     //En el caso que los campos sean correctos se creara una cuenta y un usuairo
-                    viewModel.createAccount(
+                    /*viewModel.createAccount(
                         tietEmail.text.toString(),
                         tietConfirmarPassword.text.toString()
-                    )
+                    )*/
+                    toast("Usuario creado")
+                } else {
+                    toast("Datos incorrectos")
                 }
             }
         }
@@ -72,10 +75,59 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.apply {
 
+            //Validando el username
+            if (username.isUsername()){
+                usernameValid = true
+                tilUser.removeError()
+            } else {
+                tietUser.setText("")
+                tilUser.applyError(getString(R.string.msg_error_username))
+            }
 
+            //Validando el email
+            if (email.isEmail()){
+                emailValid = true
+                tilEmail.removeError()
+            } else {
+                tietEmail.setText("")
+                tilEmail.applyError(getString(R.string.msg_error_email))
+            }
+
+            //Validando el telefono
+            //Solo se validará si se ha introducido dígitos
+            if (phone.isNotEmpty()){
+                if (phone.isPhone()){
+                    phoneValid = true
+                    tilPhone.removeError()
+                } else {
+                    tietPhone.setText("")
+                    tilPhone.applyError(getString(R.string.msg_error_phone))
+                }
+            } else{
+                phoneValid = true
+                tilPhone.removeError()
+            }
+
+            //Validando la contraseña
+            if (password.isPassword()){
+                passwordValid = true
+                tilPassword.removeError()
+            } else {
+                tietPassword.setText("")
+                tilPassword.applyError(getString(R.string.msg_error_password))
+            }
+
+            //Validando la confirmacion de la contraseña
+            if (confirmPassword.isNotEmpty() &&
+                confirmPassword == password
+            ){
+                passwordConfirmValid = true
+                tilConfirmarPassword.removeError()
+            } else {
+                tietConfirmarPassword.setText("")
+                tilConfirmarPassword.applyError(getString(R.string.msg_error_password_confirm))
+            }
         }
-
-
 
         return usernameValid &&
                 emailValid &&
