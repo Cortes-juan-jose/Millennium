@@ -1,5 +1,6 @@
 package com.app.millennium.data.repository.remote.firebase.auth_provider
 
+import com.app.millennium.core.common.isNotNull
 import com.app.millennium.core.firebase.base.FirebaseProviderImpl
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -41,4 +42,16 @@ class AuthProviderImpl : AuthProvider {
      */
     override suspend fun getCurrentSession(): FirebaseUser? =
         auth.currentUser
+
+    /**
+     * Metodo que devuelve el id del usuario que ha iniciado sesion
+     */
+    override suspend fun getId(): String? =
+        auth.currentUser?.uid
+
+    /**
+     * Metodo que devuelve el email del usuario que ha iniciado sesion
+     */
+    override suspend fun getEmail(): String? =
+        auth.currentUser?.email
 }

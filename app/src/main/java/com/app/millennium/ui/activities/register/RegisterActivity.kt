@@ -151,7 +151,6 @@ class RegisterActivity : AppCompatActivity() {
                          * si la cuenta se ha creado correctamente
                          * entonces iniciamos sesion con ella
                          */
-                        toast("Registrado")
                         viewModel.signInWithEmailAndPassword(
                             binding.tietEmail.text.toString(),
                             binding.tietConfirmarPassword.text.toString()
@@ -172,6 +171,7 @@ class RegisterActivity : AppCompatActivity() {
             { task ->
                 task.addOnCompleteListener {
                     if (task.isSuccessful){
+                        viewModel.getId()
                         /**
                          * si la cuenta se ha creado correctamente
                          * entonces iniciamos sesion con ella
@@ -184,6 +184,17 @@ class RegisterActivity : AppCompatActivity() {
                 task.addOnFailureListener {
                     toast("${it.message}")
                 }
+            }
+        )
+
+        /**
+         * Observable para obtener el id del usuario de inicio de sesion
+         * para guardarlo en la base de datos de los usuarios
+         */
+        viewModel.getId.observe(
+            this,
+            {
+                it?.let { toast(it) }
             }
         )
     }

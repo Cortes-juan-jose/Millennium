@@ -28,4 +28,14 @@ interface AuthProvider {
      * que ha iniciado previamente sesion
      */
     suspend fun getCurrentSession () : FirebaseUser?
+
+    /**
+     * Metodo que devuelve el id del usuario que ha iniciado sesion
+     */
+    suspend fun getId(): String?
+
+    /**
+     * Metodo que devuelve el email del usuario que ha iniciado sesion
+     */
+    suspend fun getEmail(): String?
 }
