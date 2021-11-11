@@ -28,5 +28,6 @@
     <string name="msg_error_phone">El teléfono debe tener 9 dígitos</string>
     <string name="msg_error_password">Mínimo 8 caracteres</string>
     <string name="msg_error_password_confirm">La contraseña no coincide</string>
+    <string name="msg_alert_iniciando_sesion">Iniciando sesión...</string>
 
 </resources>

@@ -75,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
         dialogLoading = SpotsDialog
             .Builder()
             .setContext(this)
-            .setMessage("Cargando")
+            .setMessage(getString(R.string.msg_alert_iniciando_sesion))
             .setCancelable(false)
             .build()
 
