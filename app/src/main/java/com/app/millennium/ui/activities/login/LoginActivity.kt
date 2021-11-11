@@ -216,9 +216,33 @@ class LoginActivity : AppCompatActivity() {
             this,
             {
                 it?.let {
+                    /**
+                     * Ahora se hará una consulta para ver si el
+                     * usuario ya estaba registrado en la base de
+                     * datos para no cambiar su campo timestamp
+                     */
                     user.id = it
                 }
-                viewModel.getEmail()
+                user.id?.let { id -> viewModel.getUserById(id) }
+            }
+        )
+
+        /**
+         * Observable para obtener un usuario de la base de datos mediante un id
+         */
+        viewModel.getUser.observe(
+            this,
+            { task ->
+                task.addOnSuccessListener { document ->
+                    if (document.exists()){
+                        //Si existe que inicie sesion
+                        openActivity<HomeActivity> {
+                            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        }
+                    } else {
+                        viewModel.getEmail()
+                    }
+                }
             }
         )
 

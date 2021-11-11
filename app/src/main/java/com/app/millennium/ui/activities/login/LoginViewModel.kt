@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.millennium.data.model.User
 import com.app.millennium.domain.use_case.user_auth.*
+import com.app.millennium.domain.use_case.user_db.GetUserUseCase
 import com.app.millennium.domain.use_case.user_db.SaveUserUseCase
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
@@ -22,6 +24,7 @@ class LoginViewModel : ViewModel() {
     private val getEmailUseCase = GetEmailUseCase()
     private val getDisplayNameUseCase = GetDisplayNameUseCase()
     private val saveUserUseCase = SaveUserUseCase()
+    private val getUserUseCase = GetUserUseCase()
 
     /**
      * LiveData (Observables)
@@ -43,6 +46,9 @@ class LoginViewModel : ViewModel() {
 
     private val _getDisplayName = MutableLiveData<String>()
     val getDisplayName: LiveData<String> get() = _getDisplayName
+
+    private val _getUser = MutableLiveData<Task<DocumentSnapshot>>()
+    val getUser: LiveData<Task<DocumentSnapshot>> get() = _getUser
 
     /**
      * Funcion para iniciar sesion
@@ -110,6 +116,17 @@ class LoginViewModel : ViewModel() {
         viewModelScope.launch {
             _getDisplayName.postValue(
                 getDisplayNameUseCase.invoke()
+            )
+        }
+    }
+
+    /**
+     * Funcion para obtener un usuario de la db Collection users
+     */
+    fun getUserById(id: String){
+        viewModelScope.launch {
+            _getUser.postValue(
+                getUserUseCase.invoke(id)
             )
         }
     }
