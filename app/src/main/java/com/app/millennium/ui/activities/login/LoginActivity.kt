@@ -1,5 +1,6 @@
 package com.app.millennium.ui.activities.login
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts.*
@@ -17,13 +18,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import dmax.dialog.SpotsDialog
 import java.util.*
 
 class LoginActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityLoginBinding
     private val viewModel: LoginViewModel by viewModels()
 
     private var user: User = User()
+    private lateinit var dialogLoading: AlertDialog
 
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -67,6 +71,13 @@ class LoginActivity : AppCompatActivity() {
      * Inicializacion de eventos de la ui
      */
     private fun initUI() {
+
+        dialogLoading = SpotsDialog
+            .Builder()
+            .setContext(this)
+            .setMessage("Cargando")
+            .setCancelable(false)
+            .build()
 
         binding.apply {
 
@@ -120,6 +131,7 @@ class LoginActivity : AppCompatActivity() {
      */
     private fun signInGoogle(idToken: String) {
         if (idToken.isNotEmpty()){
+            dialogLoading.show()
             viewModel.signInGoogle(idToken)
         }
     }
@@ -135,6 +147,7 @@ class LoginActivity : AppCompatActivity() {
              * se inicia sesin
              */
             if (!tietEmail.text.isNullOrEmpty() && !tietPassword.text.isNullOrEmpty()) {
+                dialogLoading.show()
                 viewModel.signInEmailPassword(
                     tietEmail.text.toString(),
                     tietPassword.text.toString()
@@ -164,6 +177,7 @@ class LoginActivity : AppCompatActivity() {
             this,
             { task ->
                 task.addOnCompleteListener { authResult ->
+                    dialogLoading.dismiss()
                     //Si la tarea se completa entonces comprobamos si fue exitosa
                     if (authResult.isSuccessful) {
                         //si fue exitosa entonces se navegará hasta el HomeActivity
@@ -176,6 +190,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
                 task.addOnFailureListener { exc ->
+                    dialogLoading.dismiss()
                     //En el caso de que la tarea haya sido fallida entonces mostrará un mensaje
                     //de error indicando el problema
                     toast(exc.message.toString())
@@ -202,6 +217,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
                 task.addOnFailureListener { exc ->
+                    dialogLoading.dismiss()
                     //En el caso de que la tarea haya sido fallida entonces mostrará un mensaje
                     //de error indicando el problema
                     toast(exc.message.toString())
@@ -236,6 +252,7 @@ class LoginActivity : AppCompatActivity() {
                 task.addOnSuccessListener { document ->
                     if (document.exists()){
                         //Si existe que inicie sesion
+                        dialogLoading.dismiss()
                         openActivity<HomeActivity> {
                             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         }
@@ -286,6 +303,7 @@ class LoginActivity : AppCompatActivity() {
                             /**
                              * Si la tarea fue exitosa entonces se abrirá el homeAct
                              */
+                            dialogLoading.dismiss()
                             openActivity<HomeActivity> {
                                 flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                             }
@@ -293,6 +311,7 @@ class LoginActivity : AppCompatActivity() {
                     }
 
                     let.addOnFailureListener { exc ->
+                        dialogLoading.dismiss()
                         //En el caso de que la tarea haya sido fallida entonces mostrará un mensaje
                         //de error indicando el problema
                         toast(exc.message.toString())
