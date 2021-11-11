@@ -260,6 +260,12 @@ class LoginActivity : AppCompatActivity() {
                         viewModel.getEmail()
                     }
                 }
+                task.addOnFailureListener { exc ->
+                    dialogLoading.dismiss()
+                    //En el caso de que la tarea haya sido fallida entonces mostrará un mensaje
+                    //de error indicando el problema
+                    toast(exc.message.toString())
+                }
             }
         )
 

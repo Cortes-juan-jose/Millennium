@@ -1,5 +1,6 @@
 package com.app.millennium.ui.activities.register
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -9,6 +10,7 @@ import com.app.millennium.core.common.*
 import com.app.millennium.data.model.User
 import com.app.millennium.databinding.ActivityRegisterBinding
 import com.app.millennium.ui.activities.home.HomeActivity
+import dmax.dialog.SpotsDialog
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -16,6 +18,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private val viewModel : RegisterViewModel by viewModels()
 
+    private lateinit var dialogLoading: AlertDialog
     private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +31,13 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun initUI(){
+
+        dialogLoading = SpotsDialog
+            .Builder()
+            .setContext(this)
+            .setCancelable(false)
+            .build()
+
         binding.apply {
             ivBack.setOnClickListener {
                 finish()
@@ -47,6 +57,8 @@ class RegisterActivity : AppCompatActivity() {
                         tietConfirmarPassword.text.toString().trim()
                     )
                 ){
+                    dialogLoading.setMessage(getString(R.string.msg_alert_creando_cuenta))
+                    dialogLoading.show()
                     //En el caso que los campos sean correctos se creara una cuenta y un usuairo
                     viewModel.createAccount(
                         tietEmail.text.toString(),
@@ -161,6 +173,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
                 task.addOnFailureListener {
+                    dialogLoading.dismiss()
                     toast("${it.message}")
                 }
             }
@@ -173,6 +186,7 @@ class RegisterActivity : AppCompatActivity() {
             this,
             { task ->
                 task.addOnCompleteListener {
+                    dialogLoading.dismiss()
                     if (it.isSuccessful){
                         /**
                          * Si el inicio de sesion se lleva a cabo entonces abrimos el homeAct
@@ -183,6 +197,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
                 task.addOnFailureListener {
+                    dialogLoading.dismiss()
                     toast("${it.message}")
                 }
             }
@@ -228,6 +243,7 @@ class RegisterActivity : AppCompatActivity() {
                             /**
                              * Si se guarda correctamente se inicia sesión
                              */
+                            dialogLoading.setMessage(getString(R.string.msg_alert_iniciando_sesion))
                             viewModel.signInWithEmailAndPassword(
                                 binding.tietEmail.text.toString(),
                                 binding.tietConfirmarPassword.text.toString()
@@ -236,6 +252,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
 
                     task_let.addOnFailureListener {
+                        dialogLoading.dismiss()
                         toast("${it.message}")
                     }
                 }
