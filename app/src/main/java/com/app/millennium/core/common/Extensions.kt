@@ -37,11 +37,8 @@ fun Any?.isNotNull() = this!=null
 
 //Extension para validar el nombre de usuario
 fun String?.isUsername(): Boolean {
-    if (this!=null){
-        val exp = "^[A-Za-z0-9_.-]{4,}$"
-        val pattern: Pattern = Pattern.compile(exp, Pattern.CASE_INSENSITIVE)
-        val matcher: Matcher = pattern.matcher(this)
-        return matcher.matches()
+    if (this.isNotNull()){
+        return this?.length!! >= 4
     }
     return false
 }

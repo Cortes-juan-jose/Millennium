@@ -40,11 +40,11 @@ class RegisterActivity : AppCompatActivity() {
                  * Validamos todos los campos para registrarse
                  */
                 if (validarInputs(
-                        tietUser.text.toString(),
-                        tietEmail.text.toString(),
-                        tietPhone.text.toString(),
-                        tietPassword.text.toString(),
-                        tietConfirmarPassword.text.toString()
+                        tietUser.text.toString().trim(),
+                        tietEmail.text.toString().trim(),
+                        tietPhone.text.toString().trim(),
+                        tietPassword.text.toString().trim(),
+                        tietConfirmarPassword.text.toString().trim()
                     )
                 ){
                     //En el caso que los campos sean correctos se creara una cuenta y un usuairo
