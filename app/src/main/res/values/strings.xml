@@ -30,5 +30,7 @@
     <string name="msg_error_password_confirm">La contraseña no coincide</string>
     <string name="msg_alert_iniciando_sesion">Iniciando sesión...</string>
     <string name="msg_alert_creando_cuenta">Creando cuenta...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
