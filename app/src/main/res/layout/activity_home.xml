@@ -6,14 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.home.HomeActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:layout_width="@dimen/mathParent"
+        android:layout_height="@dimen/mathParent"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bnv_menu">
+
+    </androidx.fragment.app.FragmentContainerView>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        style="@style/BottomNavigationView"
+        android:id="@+id/bnv_menu"
+        android:layout_width="@dimen/mathParent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/bottom_nav_menu"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -78,4 +78,18 @@
         <item name="android:statusBarColor">@color/colorPrimary</item>
     </style>
 
+    <!--ESTILO PARA EL BOTTOM NAVIGATION VIEW-->
+    <style name="BottomNavigationView">
+        <item name="itemTextAppearanceActive">@style/BottomNavigationViewTextStyle</item>
+        <item name="itemTextAppearanceInactive">@style/BottomNavigationViewTextStyle</item>
+        <item name="itemIconTint">@color/white</item>
+        <item name="itemTextColor">@color/white</item>
+        <item name="itemBackground">@color/colorPrimary</item>
+        <item name="itemIconSize">@dimen/size_icons_bottom_nav_menu</item>
+    </style>
+
+    <style name="BottomNavigationViewTextStyle">
+        <item name="android:fontFamily">@font/balsami_regular</item>
+    </style>
+
 </resources>
