@@ -2,6 +2,9 @@ package com.app.millennium.ui.activities.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.app.millennium.R
 import com.app.millennium.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -16,6 +19,8 @@ class HomeActivity : AppCompatActivity() {
     }
     
     private fun initUI(){
-
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        binding.bnvMenu.setupWithNavController(navController)
     }
 }
