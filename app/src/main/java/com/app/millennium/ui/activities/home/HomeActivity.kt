@@ -19,6 +19,10 @@ class HomeActivity : AppCompatActivity() {
     }
     
     private fun initUI(){
+        /**
+         * El home activity se encargará se levar consigo la navegación entre los fragments del
+         * bottom navigation view
+         */
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bnvMenu.setupWithNavController(navController)

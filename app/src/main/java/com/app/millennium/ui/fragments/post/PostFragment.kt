@@ -19,6 +19,9 @@ class PostFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_post, container, false)
     }
 
+    /**
+     * En este fragment, cuando se haya creado abrirá la activity para publicar un producto
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.openActivity<PostProductActivity> {  }
