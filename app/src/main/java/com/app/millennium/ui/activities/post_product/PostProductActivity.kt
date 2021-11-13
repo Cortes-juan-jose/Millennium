@@ -1,20 +1,19 @@
-package com.app.millennium.ui.activities.post
+package com.app.millennium.ui.activities.post_product
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.app.millennium.R
+import androidx.appcompat.app.AppCompatActivity
 import com.app.millennium.core.common.openActivity
-import com.app.millennium.databinding.ActivityPostBinding
+import com.app.millennium.databinding.ActivityPostProductBinding
 import com.app.millennium.ui.activities.home.HomeActivity
 
-class PostActivity : AppCompatActivity() {
+class PostProductActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityPostBinding
+    private lateinit var binding: ActivityPostProductBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPostBinding.inflate(layoutInflater)
+        binding = ActivityPostProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initUI()
