@@ -27,7 +27,7 @@
         <item name="android:textColor">@color/colorOnSecondary</item>
     </style>
 
-    <style name="MaterialTextViewIntroducirDatos" parent="MaterialTextViewFontBold">
+    <style name="MaterialTextViewTextColorFontBold" parent="MaterialTextViewFontBold">
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 
@@ -54,6 +54,10 @@
 
     <style name="ImageViewIconPhoneColor">
         <item name="android:src">@drawable/ic_phone_dark</item>
+    </style>
+
+    <style name="ImageViewIconCameraColor">
+        <item name="android:src">@drawable/ic_camera_dark</item>
     </style>
 
     <style name="TextInputLayoutEndIconTint" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -88,6 +92,13 @@
 
     <style name="BottomNavigationViewTextStyle">
         <item name="android:fontFamily">@font/balsami_regular</item>
+    </style>
+
+    <style name="ToolbarTextStyle">
+        <item name="android:fontFamily">@font/balsami_bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
 </resources>

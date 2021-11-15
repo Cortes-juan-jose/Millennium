@@ -36,6 +36,15 @@
     <string name="bnv_title_publicar">Publicar</string>
     <string name="bnv_title_chat">Chat</string>
     <string name="bnv_title_perfil">Perfil</string>
+    <string name="mtv_info_del_producto">Info del producto</string>
+    <string name="btn_publicar">Publicar</string>
+    <string name="cd_ic_camera">ic_camera</string>
+    <string name="hint_titulo_requerido">Título (Requerido)</string>
+    <string name="hint_descripcion_requerido">Descripción (Requerido)</string>
+    <string name="hint_categoria_requerido">Categoría (Requerido)</string>
+    <string name="hint_precio_requerido">Precio (Requerido)</string>
+    <string name="hint_negociable">Negociable</string>
+    <string name="hint_estado_del_producto">Estado del producto</string>
 
 
 </resources>

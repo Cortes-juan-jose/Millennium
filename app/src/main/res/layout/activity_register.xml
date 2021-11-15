@@ -64,7 +64,7 @@
                     android:layout_marginTop="@dimen/min_padding_view">
 
                     <com.google.android.material.textview.MaterialTextView
-                        style="@style/MaterialTextViewIntroducirDatos"
+                        style="@style/MaterialTextViewTextColorFontBold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/size_mtv_introduzca_sus_datos"
@@ -108,7 +108,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:maxLength="30"
-                                android:inputType="text"
+                                android:inputType="textMultiLine"
                                 android:fontFamily="@font/balsami_regular"/>
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>

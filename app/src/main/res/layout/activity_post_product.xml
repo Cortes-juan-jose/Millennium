@@ -1,9 +1,310 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ui.activities.post_product.PostProductActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        style="@style/ViewBackground"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_toolbar">
+
+    </View>
+
+    <ScrollView
+        android:id="@+id/sv_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_top_scrollview_info_producto"
+        android:layout_marginBottom="@dimen/margin_bottom_scrollview_info_producto">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/min_padding_view"
+            android:paddingVertical="@dimen/max_padding_view">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mtv_error_imagenes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="Texto de prueba"
+                android:textColor="@color/red"/>
+
+            <!--IMAGENES-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/max_padding_view">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_img_post_1"
+                    android:layout_width="@dimen/mathParent"
+                    android:layout_height="@dimen/height_card_view_img_info_producto"
+                    android:layout_margin="@dimen/margin_cardview_img_info_producto"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorSecondaryDark"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/max_padding_view">
+
+                    <ImageView
+                        android:id="@+id/iv_img_post_1"
+                        style="@style/ImageViewIconCameraColor"
+                        android:layout_width="@dimen/size_ic_camera"
+                        android:layout_height="@dimen/size_ic_camera"
+                        android:layout_gravity="center"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/cd_ic_camera" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_img_post_2"
+                    android:layout_width="@dimen/mathParent"
+                    android:layout_height="@dimen/height_card_view_img_info_producto"
+                    android:layout_margin="@dimen/margin_cardview_img_info_producto"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorSecondaryDark"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/max_padding_view">
+
+                    <ImageView
+                        android:id="@+id/iv_img_post_2"
+                        style="@style/ImageViewIconCameraColor"
+                        android:layout_width="@dimen/size_ic_camera"
+                        android:layout_height="@dimen/size_ic_camera"
+                        android:layout_gravity="center"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/cd_ic_camera" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_img_post_3"
+                    android:layout_width="@dimen/mathParent"
+                    android:layout_height="@dimen/height_card_view_img_info_producto"
+                    android:layout_margin="@dimen/margin_cardview_img_info_producto"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorSecondaryDark"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/max_padding_view">
+
+                    <ImageView
+                        android:id="@+id/iv_img_post_3"
+                        style="@style/ImageViewIconCameraColor"
+                        android:layout_width="@dimen/size_ic_camera"
+                        android:layout_height="@dimen/size_ic_camera"
+                        android:layout_gravity="center"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/cd_ic_camera" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_img_post_4"
+                    android:layout_width="@dimen/mathParent"
+                    android:layout_height="@dimen/height_card_view_img_info_producto"
+                    android:layout_margin="@dimen/margin_cardview_img_info_producto"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorSecondaryDark"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/max_padding_view">
+
+                    <ImageView
+                        android:id="@+id/iv_img_post_4"
+                        style="@style/ImageViewIconCameraColor"
+                        android:layout_width="@dimen/size_ic_camera"
+                        android:layout_height="@dimen/size_ic_camera"
+                        android:layout_gravity="center"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/cd_ic_camera" />
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <View
+                style="@style/ViewBackground"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="@dimen/min_padding_view"
+                android:layout_marginBottom="5dp" />
+
+            <!--Titulo-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_title"
+                style="@style/TextInputLayoutEndIconTint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_titulo_requerido"
+                android:layout_margin="5dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="60"
+                app:endIconMode="clear_text"
+                app:endIconCheckable="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="60"
+                    android:inputType="textMultiLine"
+                    android:fontFamily="@font/balsami_regular"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--Descripcion-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_description"
+                style="@style/TextInputLayoutEndIconTint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_descripcion_requerido"
+                android:layout_margin="5dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="500"
+                app:endIconMode="clear_text"
+                app:endIconCheckable="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="500"
+                    android:inputType="textMultiLine"
+                    android:fontFamily="@font/balsami_regular"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--Categoria-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_category"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_categoria_requerido"
+                android:layout_margin="5dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_arrow_selector"
+                    android:clickable="true"
+                    android:focusableInTouchMode="false"
+                    android:cursorVisible="false"
+                    android:focusable="true"
+                    android:fontFamily="@font/balsami_regular"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--Precio y negociable-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <!--Precio-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_price"
+                    style="@style/TextInputLayoutEndIconTint"
+                    android:layout_width="@dimen/width_til_price"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/hint_precio_requerido"
+                    android:layout_margin="5dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="12"
+                    app:endIconMode="clear_text"
+                    app:endIconCheckable="true">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLength="12"
+                        android:inputType="numberDecimal"
+                        android:fontFamily="@font/balsami_regular"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--Negociable-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_negotiable"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="@dimen/mathParent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/hint_negociable"
+                    android:layout_margin="5dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_negotiable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_arrow_selector"
+                        android:clickable="true"
+                        android:focusableInTouchMode="false"
+                        android:cursorVisible="false"
+                        android:focusable="true"
+                        android:fontFamily="@font/balsami_regular"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <!--Estado del producto-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_product_status"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_estado_del_producto"
+                android:layout_margin="5dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_product_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_arrow_selector"
+                    android:clickable="true"
+                    android:focusableInTouchMode="false"
+                    android:cursorVisible="false"
+                    android:focusable="true"
+                    android:fontFamily="@font/balsami_regular"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/MaterialButtonBackground"
+        android:id="@+id/btn_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="@dimen/max_padding_view"
+        android:layout_marginBottom="@dimen/min_padding_view"
+        android:text="@string/btn_publicar" />
+
+    <ImageView
+        android:id="@+id/ivAtras"
+        android:layout_width="@dimen/size_icon_back"
+        android:layout_height="@dimen/size_icon_back"
+        android:layout_gravity="start"
+        android:layout_marginStart="@dimen/margin_start_ic_back_toolbar"
+        android:layout_marginTop="@dimen/margin_top_ic_back_toolbar"
+        android:src="@drawable/ic_back"
+        android:contentDescription="@string/cd_ic_back" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/balsami_bold"
+        android:gravity="center"
+        android:text="@string/mtv_info_del_producto"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_mtv_info_producto" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
