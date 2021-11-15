@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.app.millennium.core.common.openActivity
+import com.app.millennium.core.common.reload
 import com.app.millennium.databinding.ActivityPostProductBinding
 import com.app.millennium.ui.activities.home.HomeActivity
 
@@ -27,6 +28,8 @@ class PostProductActivity : AppCompatActivity() {
     }
 
     private fun initUI(){
-
+        binding.btnPost.setOnClickListener {
+            this@PostProductActivity.reload()
+        }
     }
 }
