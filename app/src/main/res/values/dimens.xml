@@ -20,7 +20,7 @@
     <dimen name="size_mtv_info_producto">20sp</dimen>
     <dimen name="margin_top_ic_back_toolbar">15dp</dimen>
     <dimen name="margin_start_ic_back_toolbar">5dp</dimen>
-    <dimen name="margin_top_scrollview_info_producto">50dp</dimen>
+    <dimen name="margin_top_scrollview_info_producto">60dp</dimen>
     <dimen name="margin_bottom_scrollview_info_producto">70dp</dimen>
     <dimen name="height_card_view_img_info_producto">70dp</dimen>
     <dimen name="margin_cardview_img_info_producto">2dp</dimen>
