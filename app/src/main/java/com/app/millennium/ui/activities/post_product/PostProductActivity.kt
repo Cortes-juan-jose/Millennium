@@ -69,25 +69,26 @@ class PostProductActivity : AppCompatActivity() {
 
             cvImgPost1.setOnClickListener {
                 this@PostProductActivity.reload()
-                openBottomSheetOption(Constant.REQUEST_CODE_CV_IMG_POST_1)
+                configBottomSheetOption(Constant.RESULT_CODE_CV_IMG_POST_1)
             }
             cvImgPost2.setOnClickListener {
                 this@PostProductActivity.reload()
-                openBottomSheetOption(Constant.REQUEST_CODE_CV_IMG_POST_2)
+                configBottomSheetOption(Constant.RESULT_CODE_CV_IMG_POST_2)
             }
             cvImgPost3.setOnClickListener {
                 this@PostProductActivity.reload()
-                openBottomSheetOption(Constant.REQUEST_CODE_CV_IMG_POST_3)
+                configBottomSheetOption(Constant.RESULT_CODE_CV_IMG_POST_3)
             }
             cvImgPost4.setOnClickListener {
                 this@PostProductActivity.reload()
-                openBottomSheetOption(Constant.REQUEST_CODE_CV_IMG_POST_4)
+                configBottomSheetOption(Constant.RESULT_CODE_CV_IMG_POST_4)
             }
         }
     }
 
     /**
-     * Metodo para setear el tag a las imagenes para aplicarles lógica
+     * Metodo para setear el tag a las imagenes para identificar
+     * qué campos image viexs tiene una imagen establecida
      */
     private fun setTagDefaultImages() {
         binding.apply {
@@ -104,21 +105,60 @@ class PostProductActivity : AppCompatActivity() {
      * imagen abrir el botttomSheet que da la accion
      * sobre eliminar la imagen o editarla
      */
-    private fun openBottomSheetOption(requestCode: Int) {
-        when (requestCode){
-            Constant.REQUEST_CODE_CV_IMG_POST_1 -> {
-                toast(requestCode.toString())
+    private fun configBottomSheetOption(resultCode: Int) {
+        when (resultCode){
+            /**
+             * El requestCode se necesita para establecer luego la imagen capturada a un inputs
+             * con el resultCode le aplicamos esta lógica para llevar el control de los inputs
+             */
+            Constant.RESULT_CODE_CV_IMG_POST_1 -> {
+                //Ahora debemos comprobar si tiene una imagen o no tiene una imagen
+                //Verificando que el tag sea default
+                //Si es default significa que no tiene ninguna imagen
+                if (binding.ivImgPost1.tag.equals(Constant.TAG_DEFAULT)){
+                    openBottomSheetDialogOptionsCameraOrGallery(resultCode)
+                } else {
+                    openBottomSheetDialogOptionsEditOrDelete(resultCode)
+                }
             }
-            Constant.REQUEST_CODE_CV_IMG_POST_2 -> {
-                toast(requestCode.toString())
+            Constant.RESULT_CODE_CV_IMG_POST_2 -> {
+                if (binding.ivImgPost2.tag.equals(Constant.TAG_DEFAULT)){
+                    openBottomSheetDialogOptionsCameraOrGallery(resultCode)
+                } else {
+                    openBottomSheetDialogOptionsEditOrDelete(resultCode)
+                }
             }
-            Constant.REQUEST_CODE_CV_IMG_POST_3 -> {
-                toast(requestCode.toString())
+            Constant.RESULT_CODE_CV_IMG_POST_3 -> {
+                if (binding.ivImgPost3.tag.equals(Constant.TAG_DEFAULT)){
+                    openBottomSheetDialogOptionsCameraOrGallery(resultCode)
+                } else {
+                    openBottomSheetDialogOptionsEditOrDelete(resultCode)
+                }
             }
-            Constant.REQUEST_CODE_CV_IMG_POST_4 -> {
-                toast(requestCode.toString())
+            Constant.RESULT_CODE_CV_IMG_POST_4 -> {
+                if (binding.ivImgPost4.tag.equals(Constant.TAG_DEFAULT)){
+                    openBottomSheetDialogOptionsCameraOrGallery(resultCode)
+                } else {
+                    openBottomSheetDialogOptionsEditOrDelete(resultCode)
+                }
             }
         }
+    }
+
+    /**
+     * Metodo para abrir el bottom sheet dialog para eliminar
+     * o editar una imagen ya capturada
+     */
+    private fun openBottomSheetDialogOptionsEditOrDelete(resultCode: Int) {
+        toast("Abriendo editar o eliminar")
+    }
+
+    /**
+     * Metodo para abrir el bottom sheet dialog para abrir la camara
+     * o abrir la galeria
+     */
+    private fun openBottomSheetDialogOptionsCameraOrGallery(resultCode: Int) {
+        toast("Abriendo camara o galeria")
     }
 
     /**

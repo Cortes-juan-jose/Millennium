@@ -13,8 +13,8 @@ object Constant {
 
     const val TAG_DEFAULT: String = "default"
 
-    const val REQUEST_CODE_CV_IMG_POST_1: Int = 1
-    const val REQUEST_CODE_CV_IMG_POST_2: Int = 2
-    const val REQUEST_CODE_CV_IMG_POST_3: Int = 3
-    const val REQUEST_CODE_CV_IMG_POST_4: Int = 4
+    const val RESULT_CODE_CV_IMG_POST_1: Int = 1
+    const val RESULT_CODE_CV_IMG_POST_2: Int = 2
+    const val RESULT_CODE_CV_IMG_POST_3: Int = 3
+    const val RESULT_CODE_CV_IMG_POST_4: Int = 4
 }
