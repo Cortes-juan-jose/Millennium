@@ -62,10 +62,15 @@ class PostProductActivity : AppCompatActivity() {
     }
 
     /**
-     * Metodo que valida todos los inputs
+     * Metodo que configura la selección de las imagenes
      */
-    private fun validarInputs() {
-        toast("Validando inputs")
+    private fun configImages() {
+        binding.apply {
+            cvImgPost1.setOnClickListener { toast("IMG1") }
+            cvImgPost2.setOnClickListener { toast("IMG2") }
+            cvImgPost3.setOnClickListener { toast("IMG3") }
+            cvImgPost4.setOnClickListener { toast("IMG4") }
+        }
     }
 
     /**
@@ -80,14 +85,9 @@ class PostProductActivity : AppCompatActivity() {
     }
 
     /**
-     * Metodo que configura la selección de las imagenes
+     * Metodo que valida todos los inputs
      */
-    private fun configImages() {
-        binding.apply {
-            cvImgPost1.setOnClickListener { toast("IMG1") }
-            cvImgPost2.setOnClickListener { toast("IMG2") }
-            cvImgPost3.setOnClickListener { toast("IMG3") }
-            cvImgPost4.setOnClickListener { toast("IMG4") }
-        }
+    private fun validarInputs() {
+        toast("Validando inputs")
     }
 }
