@@ -6,6 +6,7 @@
     <string name="cd_ic_back">ic_back</string>
     <string name="cd_ic_password">ic_password</string>
     <string name="cd_ic_phone">ic_phone</string>
+    <string name="cd_ic_camera">ic_camera</string>
 
     <string name="hint_correo_electronico_register">Correo electrónico (Requerido)</string>
     <string name="hint_correo_electronico">Correo electrónico</string>
@@ -14,37 +15,46 @@
     <string name="hint_nombre_de_usuario">Nombre de usuario (Requerido)</string>
     <string name="hint_telefono">Teléfono</string>
     <string name="hint_confirmar_contrasena_register">Confirmar contraseña (Requerido)</string>
-
-    <string name="btn_entrar">Entrar</string>
-    <string name="btn_registrarse">¡Registrarse!</string>
-
-    <string name="mtv_no_tienes_cuenta">¿No tienes cuenta? Regístrate</string>
-    <string name="mtv_o">O</string>
-    <string name="mtv_registrate_ahora">Regístrate ahora</string>
-    <string name="mtv_introduzca_sus_datos">Introduzca sus datos</string>
-
-    <string name="msg_error_username">Mínimo 4 caracteres</string>
-    <string name="msg_error_email">Correo electrónico inválido</string>
-    <string name="msg_error_phone">El teléfono debe tener 9 dígitos</string>
-    <string name="msg_error_password">Mínimo 8 caracteres</string>
-    <string name="msg_error_password_confirm">La contraseña no coincide</string>
-    <string name="msg_alert_iniciando_sesion">Iniciando sesión...</string>
-    <string name="msg_alert_creando_cuenta">Creando cuenta...</string>
-
-    <string name="bnv_title_inicio">Inicio</string>
-    <string name="bnv_title_me_gusta">Me gusta</string>
-    <string name="bnv_title_publicar">Publicar</string>
-    <string name="bnv_title_chat">Chat</string>
-    <string name="bnv_title_perfil">Perfil</string>
-    <string name="mtv_info_del_producto">Info del producto</string>
-    <string name="btn_publicar">Publicar</string>
-    <string name="cd_ic_camera">ic_camera</string>
     <string name="hint_titulo_requerido">Título (Requerido)</string>
     <string name="hint_descripcion_requerido">Descripción (Requerido)</string>
     <string name="hint_categoria_requerido">Categoría (Requerido)</string>
     <string name="hint_precio_requerido">Precio (Requerido)</string>
     <string name="hint_negociable">Negociable</string>
     <string name="hint_estado_del_producto">Estado del producto</string>
+
+    <string name="btn_entrar">Entrar</string>
+    <string name="btn_registrarse">¡Registrarse!</string>
+    <string name="btn_publicar">Publicar</string>
+
+    <string name="mtv_no_tienes_cuenta">¿No tienes cuenta? Regístrate</string>
+    <string name="mtv_o">O</string>
+    <string name="mtv_registrate_ahora">Regístrate ahora</string>
+    <string name="mtv_introduzca_sus_datos">Introduzca sus datos</string>
+    <string name="mtv_info_del_producto">Info del producto</string>
+
+    <string name="msg_error_username">Mínimo 4 caracteres</string>
+    <string name="msg_error_email">Correo electrónico inválido</string>
+    <string name="msg_error_phone">El teléfono debe tener 9 dígitos</string>
+    <string name="msg_error_password">Mínimo 8 caracteres</string>
+    <string name="msg_error_password_confirm">La contraseña no coincide</string>
+
+    <string name="msg_alert_iniciando_sesion">Iniciando sesión...</string>
+    <string name="msg_alert_creando_cuenta">Creando cuenta...</string>
+
+    <string name="msg_timestamp_hace">Hace</string>
+    <string name="msg_timestamp_un_momento">un momento</string>
+    <string name="msg_timestamp_un_minuto">un minuto</string>
+    <string name="msg_timestamp_una_hora">una hora</string>
+    <string name="msg_timestamp_minutos">minutos</string>
+    <string name="msg_timestamp_horas">horas</string>
+    <string name="msg_timestamp_ayer">ayer</string>
+    <string name="msg_timestamp_dias">dias</string>
+
+    <string name="bnv_title_inicio">Inicio</string>
+    <string name="bnv_title_me_gusta">Me gusta</string>
+    <string name="bnv_title_publicar">Publicar</string>
+    <string name="bnv_title_chat">Chat</string>
+    <string name="bnv_title_perfil">Perfil</string>
 
 
 </resources>
