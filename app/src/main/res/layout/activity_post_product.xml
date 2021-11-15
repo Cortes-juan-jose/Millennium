@@ -287,7 +287,7 @@
         android:text="@string/btn_publicar" />
 
     <ImageView
-        android:id="@+id/ivAtras"
+        android:id="@+id/iv_back"
         android:layout_width="@dimen/size_icon_back"
         android:layout_height="@dimen/size_icon_back"
         android:layout_gravity="start"
@@ -300,7 +300,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/margin_top_mtv_info_producto"
         android:fontFamily="@font/balsami_bold"
         android:gravity="center"
         android:text="@string/mtv_info_del_producto"
