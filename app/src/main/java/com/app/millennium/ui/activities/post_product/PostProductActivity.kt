@@ -4,8 +4,10 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -25,6 +27,43 @@ class PostProductActivity : AppCompatActivity() {
      * input de las imágenes se ha pulsado
      */
     private var resultCodeImageSalected: Int = 0
+
+    /**
+     * Launcher para abrir la camara y tener la lógica
+     * para saber desde que input de las imagenes ha
+     * sido lanzada.
+     */
+    private val launcherCameraImage1 =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){
+            toast("Salir de la imagen 1")
+            toast("${it.data?.extras}")
+        }
+
+    private val launcherCameraImage2 =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){
+            toast("Salir de la imagen 2")
+            toast("${it.data?.extras}")
+        }
+
+    private val launcherCameraImage3 =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){
+            toast("Salir de la imagen 3")
+            toast("${it.data?.extras}")
+        }
+
+    private val launcherCameraImage4 =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){
+            toast("Salir de la imagen 4")
+            toast("${it.data?.extras}")
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -253,7 +292,24 @@ class PostProductActivity : AppCompatActivity() {
      * Metodo para abrir la cámara
      */
     private fun openCamera() {
-        toast(resultCodeImageSalected.toString())
+        val intentCamera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        intentCamera.putExtra("saludo", "hola")
+
+        when (resultCodeImageSalected) {
+            Constant.RESULT_CODE_CV_IMG_POST_1 -> {
+                launcherCameraImage1.launch(intentCamera)
+            }
+            Constant.RESULT_CODE_CV_IMG_POST_2 -> {
+                launcherCameraImage2.launch(intentCamera)
+            }
+            Constant.RESULT_CODE_CV_IMG_POST_3 -> {
+                launcherCameraImage3.launch(intentCamera)
+            }
+            Constant.RESULT_CODE_CV_IMG_POST_4 -> {
+                launcherCameraImage4.launch(intentCamera)
+            }
+        }
+
     }
 
     /**
