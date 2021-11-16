@@ -55,6 +55,9 @@
     <string name="bnv_title_publicar">Publicar</string>
     <string name="bnv_title_chat">Chat</string>
     <string name="bnv_title_perfil">Perfil</string>
+    <string name="mtv_elige_una_opcion">Elige una opción</string>
+    <string name="mtv_tomar_una_foto">Tomar una foto</string>
+    <string name="mtv_abrir_la_galeria">Abrir la galería</string>
 
 
 </resources>
