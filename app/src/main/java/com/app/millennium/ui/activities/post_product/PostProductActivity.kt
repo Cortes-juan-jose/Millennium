@@ -195,31 +195,6 @@ class PostProductActivity : AppCompatActivity() {
     }
 
     /**
-     * Metodo para verificar si los permisos están aceptados o rechazados
-     */
-    private fun checkPermissionCamera() {
-
-        //Verificamos si el permiso ya se ha pedido por el momento y verificamos si están aceptados
-        if (
-            ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-            != PackageManager.PERMISSION_GRANTED
-        ){
-            //Si no ha sido aceptado verificamos si han sido rechazados
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)){
-                //Los permisos de la camara ya están denegados
-                toast(getString(R.string.msg_activar_permisos_camara), Toast.LENGTH_LONG)
-            } else {
-                //De lo contrario significa que nunca se han pedido los permisos, se piden
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), Constant.PERMISSION_CAMERA)
-            }
-
-        } else {
-            //El permiso ya ha sido aceptado
-            openCamera()
-        }
-    }
-
-    /**
      * Metodo para abrir el bottom sheet dialog para abrir la camara
      * o abrir la galeria
      */
@@ -279,6 +254,31 @@ class PostProductActivity : AppCompatActivity() {
      */
     private fun openCamera() {
         toast(resultCodeImageSalected.toString())
+    }
+
+    /**
+     * Metodo para verificar si los permisos están aceptados o rechazados
+     */
+    private fun checkPermissionCamera() {
+
+        //Verificamos si el permiso ya se ha pedido por el momento y verificamos si están aceptados
+        if (
+            ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+            != PackageManager.PERMISSION_GRANTED
+        ){
+            //Si no ha sido aceptado verificamos si han sido rechazados
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)){
+                //Los permisos de la camara ya están denegados
+                toast(getString(R.string.msg_activar_permisos_camara), Toast.LENGTH_LONG)
+            } else {
+                //De lo contrario significa que nunca se han pedido los permisos, se piden
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), Constant.PERMISSION_CAMERA)
+            }
+
+        } else {
+            //El permiso ya ha sido aceptado
+            openCamera()
+        }
     }
 
     /**
