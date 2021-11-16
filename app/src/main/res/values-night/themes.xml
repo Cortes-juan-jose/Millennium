@@ -101,4 +101,12 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <!--ESTILO PARA EL BOTTOMSHEET-->
+    <style name="BottomSheetTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@color/transparent</item>
+    </style>
+
 </resources>

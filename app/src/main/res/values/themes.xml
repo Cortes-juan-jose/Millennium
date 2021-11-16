@@ -100,11 +100,18 @@
         <item name="android:theme">@style/ViewBackground</item>
         <item name="titleTextColor">@color/white</item>
     </style>
-
-
+    
     <style name="ToolbarTextStyle">
         <item name="android:fontFamily">@font/balsami_bold</item>
         <item name="android:textSize">20sp</item>
+    </style>
+
+    <!--ESTILO PARA EL BOTTOMSHEET-->
+    <style name="BottomSheetTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@color/transparent</item>
     </style>
 
 </resources>

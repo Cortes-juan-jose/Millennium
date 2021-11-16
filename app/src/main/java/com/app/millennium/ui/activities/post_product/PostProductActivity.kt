@@ -2,13 +2,17 @@ package com.app.millennium.ui.activities.post_product
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import com.app.millennium.R
 import com.app.millennium.core.common.Constant
 import com.app.millennium.core.common.openActivity
 import com.app.millennium.core.common.reload
 import com.app.millennium.core.common.toast
 import com.app.millennium.databinding.ActivityPostProductBinding
+import com.app.millennium.databinding.ViewBottomSheetOptionsSourceImagesBinding
 import com.app.millennium.ui.activities.home.HomeActivity
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class PostProductActivity : AppCompatActivity() {
 
@@ -146,19 +150,55 @@ class PostProductActivity : AppCompatActivity() {
     }
 
     /**
+     * Metodo para abrir el bottom sheet dialog para abrir la camara
+     * o abrir la galeria
+     */
+    private fun openBottomSheetDialogOptionsCameraOrGallery(resultCode: Int) {
+        //Creamos el bottom sheet dialog con el estilo qeu predefinimos
+        //para los bottom sheet dialog
+        val bottomSheetDialogOptionsCameraOrGallery =
+            BottomSheetDialog(this, R.style.BottomSheetTheme)
+
+        //Obtenemos la vista del layout bottomsheetDialog y la bindeamos
+        var bindingBottomSheetDialog: ViewBottomSheetOptionsSourceImagesBinding? =
+            ViewBottomSheetOptionsSourceImagesBinding.inflate(
+                LayoutInflater.from(this)
+            )
+
+        //Le seteamos la vista al BottomSheetDialog creado
+        bottomSheetDialogOptionsCameraOrGallery.setContentView(
+            bindingBottomSheetDialog!!.root
+        )
+
+        //Y lo mostramos
+        bottomSheetDialogOptionsCameraOrGallery.show()
+
+        //Seteamos los metodos setOnClicListener a las imagesViews
+        //de la vista del bottom sheet dialog
+        bindingBottomSheetDialog.apply {
+            ivCamera.setOnClickListener {
+                toast("Camera")
+                bottomSheetDialogOptionsCameraOrGallery.dismiss()
+                bindingBottomSheetDialog = null
+                //Si se seleciona la cámara entonces se abrirá la cámara
+                //openCamera(resultCode)
+            }
+            ivGaleria.setOnClickListener {
+                toast("Galeria")
+                bottomSheetDialogOptionsCameraOrGallery.dismiss()
+                bindingBottomSheetDialog = null
+                //Si se seleciona la galería entonces se abrirá la galería
+                //openGallery(resultCode)
+            }
+        }
+    }
+
+    /**
      * Metodo para abrir el bottom sheet dialog para eliminar
      * o editar una imagen ya capturada
      */
     private fun openBottomSheetDialogOptionsEditOrDelete(resultCode: Int) {
         toast("Abriendo editar o eliminar")
-    }
-
-    /**
-     * Metodo para abrir el bottom sheet dialog para abrir la camara
-     * o abrir la galeria
-     */
-    private fun openBottomSheetDialogOptionsCameraOrGallery(resultCode: Int) {
-        toast("Abriendo camara o galeria")
     }
 
     /**

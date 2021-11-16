@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingVertical="10dp">
+        android:paddingVertical="@dimen/min_padding_view">
 
         <View
             android:layout_width="@dimen/width_line_bottom_sheet"
@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/margin_top_sources_images_bottom_sheet"
             android:baselineAligned="false">
 
             <LinearLayout
