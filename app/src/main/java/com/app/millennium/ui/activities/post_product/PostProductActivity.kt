@@ -1,14 +1,16 @@
 package com.app.millennium.ui.activities.post_product
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.app.millennium.R
-import com.app.millennium.core.common.Constant
-import com.app.millennium.core.common.openActivity
-import com.app.millennium.core.common.reload
-import com.app.millennium.core.common.toast
+import com.app.millennium.core.common.*
 import com.app.millennium.databinding.ActivityPostProductBinding
 import com.app.millennium.databinding.ViewBottomSheetOptionsSourceImagesBinding
 import com.app.millennium.ui.activities.home.HomeActivity
@@ -17,6 +19,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 class PostProductActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPostProductBinding
+
+    /*
+     * Variable para obtener un flag para saber siempre qué
+     * input de las imágenes se ha pulsado
+     */
+    private var resultCodeImageSalected: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,27 +42,34 @@ class PostProductActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Metodo sobreescrito de la activity para obtener requestcode de los permisos que se vayan a pedir
+     */
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when (requestCode) {
+            //Si el permiso es de la camara
+            Constant.PERMISSION_CAMERA -> {
+                //Ahora obtenemos esos permisos aceptados o rechazados
+                if (grantResults[0].isNotNull()
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                ){
+                    openCamera(resultCodeImageSalected)
+                }
+            }
+        }
+    }
+
     private fun initUI(){
-
-        /**
-         * Boton para ir hacia atras
-         */
-        binding.ivBack.setOnClickListener {onBackPressed()}
-
-        /**
-         * Seleccionar imagenes
-         */
-        configImages()
-
-        /**
-         * Campos selectores
-         */
-        configInputsSelectors()
-
-        /**
-         * Boton para publicar el producto
-         */
-        configPostProduct()
+        binding.ivBack.setOnClickListener {onBackPressed()} //Boton para ir hacia atras
+        configImages() //Seleccionar imagenes
+        configInputsSelectors() //Campos selectores
+        configPostProduct() //Boton para publicar el producto
     }
 
     private fun initObservables() {
@@ -73,19 +88,23 @@ class PostProductActivity : AppCompatActivity() {
 
             cvImgPost1.setOnClickListener {
                 this@PostProductActivity.reload()
-                configBottomSheetOption(Constant.RESULT_CODE_CV_IMG_POST_1)
+                resultCodeImageSalected = Constant.RESULT_CODE_CV_IMG_POST_1
+                configBottomSheetOption()
             }
             cvImgPost2.setOnClickListener {
                 this@PostProductActivity.reload()
-                configBottomSheetOption(Constant.RESULT_CODE_CV_IMG_POST_2)
+                resultCodeImageSalected = Constant.RESULT_CODE_CV_IMG_POST_2
+                configBottomSheetOption()
             }
             cvImgPost3.setOnClickListener {
                 this@PostProductActivity.reload()
-                configBottomSheetOption(Constant.RESULT_CODE_CV_IMG_POST_3)
+                resultCodeImageSalected = Constant.RESULT_CODE_CV_IMG_POST_3
+                configBottomSheetOption()
             }
             cvImgPost4.setOnClickListener {
                 this@PostProductActivity.reload()
-                configBottomSheetOption(Constant.RESULT_CODE_CV_IMG_POST_4)
+                resultCodeImageSalected = Constant.RESULT_CODE_CV_IMG_POST_4
+                configBottomSheetOption()
             }
         }
     }
@@ -109,8 +128,8 @@ class PostProductActivity : AppCompatActivity() {
      * imagen abrir el botttomSheet que da la accion
      * sobre eliminar la imagen o editarla
      */
-    private fun configBottomSheetOption(resultCode: Int) {
-        when (resultCode){
+    private fun configBottomSheetOption() {
+        when (resultCodeImageSalected){
             /**
              * El requestCode se necesita para establecer luego la imagen capturada a un inputs
              * con el resultCode le aplicamos esta lógica para llevar el control de los inputs
@@ -120,30 +139,30 @@ class PostProductActivity : AppCompatActivity() {
                 //Verificando que el tag sea default
                 //Si es default significa que no tiene ninguna imagen
                 if (binding.ivImgPost1.tag.equals(Constant.TAG_DEFAULT)){
-                    openBottomSheetDialogOptionsCameraOrGallery(resultCode)
+                    openBottomSheetDialogOptionsCameraOrGallery()
                 } else {
-                    openBottomSheetDialogOptionsEditOrDelete(resultCode)
+                    openBottomSheetDialogOptionsEditOrDelete()
                 }
             }
             Constant.RESULT_CODE_CV_IMG_POST_2 -> {
                 if (binding.ivImgPost2.tag.equals(Constant.TAG_DEFAULT)){
-                    openBottomSheetDialogOptionsCameraOrGallery(resultCode)
+                    openBottomSheetDialogOptionsCameraOrGallery()
                 } else {
-                    openBottomSheetDialogOptionsEditOrDelete(resultCode)
+                    openBottomSheetDialogOptionsEditOrDelete()
                 }
             }
             Constant.RESULT_CODE_CV_IMG_POST_3 -> {
                 if (binding.ivImgPost3.tag.equals(Constant.TAG_DEFAULT)){
-                    openBottomSheetDialogOptionsCameraOrGallery(resultCode)
+                    openBottomSheetDialogOptionsCameraOrGallery()
                 } else {
-                    openBottomSheetDialogOptionsEditOrDelete(resultCode)
+                    openBottomSheetDialogOptionsEditOrDelete()
                 }
             }
             Constant.RESULT_CODE_CV_IMG_POST_4 -> {
                 if (binding.ivImgPost4.tag.equals(Constant.TAG_DEFAULT)){
-                    openBottomSheetDialogOptionsCameraOrGallery(resultCode)
+                    openBottomSheetDialogOptionsCameraOrGallery()
                 } else {
-                    openBottomSheetDialogOptionsEditOrDelete(resultCode)
+                    openBottomSheetDialogOptionsEditOrDelete()
                 }
             }
         }
@@ -153,7 +172,7 @@ class PostProductActivity : AppCompatActivity() {
      * Metodo para abrir el bottom sheet dialog para abrir la camara
      * o abrir la galeria
      */
-    private fun openBottomSheetDialogOptionsCameraOrGallery(resultCode: Int) {
+    private fun openBottomSheetDialogOptionsCameraOrGallery() {
         //Creamos el bottom sheet dialog con el estilo qeu predefinimos
         //para los bottom sheet dialog
         val bottomSheetDialogOptionsCameraOrGallery =
@@ -181,9 +200,12 @@ class PostProductActivity : AppCompatActivity() {
                 bottomSheetDialogOptionsCameraOrGallery.dismiss()
                 bindingBottomSheetDialog = null
                 //Si se seleciona la cámara entonces se abrirá la cámara
-                //openCamera(resultCode)
+                /**
+                 * Primero chequeamos los permisos de la camara
+                 */
+                checkPermissionCamera()
             }
-            ivGaleria.setOnClickListener {
+            ivGallery.setOnClickListener {
                 toast("Galeria")
                 bottomSheetDialogOptionsCameraOrGallery.dismiss()
                 bindingBottomSheetDialog = null
@@ -194,10 +216,42 @@ class PostProductActivity : AppCompatActivity() {
     }
 
     /**
+     * Metodo para abrir la cámara
+     */
+    private fun openCamera(resultCodeImageSalected: Int) {
+        toast(resultCodeImageSalected.toString())
+    }
+
+    /**
+     * Metodo para verificar si los permisos están aceptados o rechazados
+     */
+    private fun checkPermissionCamera() {
+
+        //Verificamos si el permiso ya se ha pedido por el momento y verificamos si están aceptados
+        if (
+            ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+            != PackageManager.PERMISSION_GRANTED
+        ){
+            //Si no ha sido aceptado verificamos si han sido rechazados
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)){
+                //Los permisos de la camara ya están denegados
+                toast(getString(R.string.msg_activar_permisos_camara), Toast.LENGTH_LONG)
+            } else {
+                //De lo contrario significa que nunca se han pedido los permisos, se piden
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), Constant.PERMISSION_CAMERA)
+            }
+
+        } else {
+            //El permiso ya ha sido aceptado
+            openCamera(resultCodeImageSalected)
+        }
+    }
+
+    /**
      * Metodo para abrir el bottom sheet dialog para eliminar
      * o editar una imagen ya capturada
      */
-    private fun openBottomSheetDialogOptionsEditOrDelete(resultCode: Int) {
+    private fun openBottomSheetDialogOptionsEditOrDelete() {
         toast("Abriendo editar o eliminar")
     }
 

@@ -38,8 +38,8 @@
     <string name="msg_error_password">Mínimo 8 caracteres</string>
     <string name="msg_error_password_confirm">La contraseña no coincide</string>
 
-    <string name="msg_alert_iniciando_sesion">Iniciando sesión...</string>
-    <string name="msg_alert_creando_cuenta">Creando cuenta...</string>
+    <string name="msg_alert_iniciando_sesion">Iniciando sesión…</string>
+    <string name="msg_alert_creando_cuenta">Creando cuenta…</string>
 
     <string name="msg_timestamp_hace">Hace</string>
     <string name="msg_timestamp_un_momento">un momento</string>
@@ -49,6 +49,7 @@
     <string name="msg_timestamp_horas">horas</string>
     <string name="msg_timestamp_ayer">ayer</string>
     <string name="msg_timestamp_dias">dias</string>
+    <string name="msg_activar_permisos_camara">Tienes el permiso de la cámara denegado. Vaya a ajustes / Aplicaciones / Administrar aplicaciones / Millennium / Permisos de la aplicación</string>
 
     <string name="bnv_title_inicio">Inicio</string>
     <string name="bnv_title_me_gusta">Me gusta</string>
