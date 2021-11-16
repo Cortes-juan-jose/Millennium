@@ -35,4 +35,5 @@
     <dimen name="size_mtvs_bottom_sheet_options_source_images">15sp</dimen>
     <dimen name="size_icons_bottom_sheet_optinos_source_images">50dp</dimen>
     <dimen name="margin_top_sources_images_bottom_sheet">30dp</dimen>
+    <dimen name="size_mtv_alertdialog_info_product">20sp</dimen>
 </resources>
