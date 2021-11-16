@@ -76,5 +76,13 @@
     <string name="cat_coleccionismo">Coleccionismo</string>
     <string name="cat_otros">Otros</string>
 
+    <!--ESTADOS DEL PRODUCTO-->
+    <string name="est_sin_abrir">Sin abrir</string>
+    <string name="est_nuevo">Nuevo</string>
+    <string name="est_como_nuevo">Como nuevo</string>
+    <string name="est_buen_estado">En buen estado</string>
+    <string name="est_condiciones_aceptables">En condiciones aceptables</string>
+    <string name="est_mucho_uso">Con mucho uso</string>
+
 
 </resources>
