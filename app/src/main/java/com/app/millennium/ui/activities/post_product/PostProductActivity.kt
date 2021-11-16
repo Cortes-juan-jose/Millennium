@@ -35,6 +35,11 @@ class PostProductActivity : AppCompatActivity() {
         initObservables()
     }
 
+    /**
+     * Metodo sobreescrito para que cuando se pulse el botón del
+     * sistema ir hacia atrás la activity muera y levante el home
+     * como una activity nueva
+     */
     override fun onBackPressed() {
         super.onBackPressed()
         openActivity<HomeActivity> {
@@ -59,7 +64,7 @@ class PostProductActivity : AppCompatActivity() {
                 if (grantResults[0].isNotNull()
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ){
-                    openCamera(resultCodeImageSalected)
+                    openCamera()
                 }
             }
         }
@@ -74,6 +79,19 @@ class PostProductActivity : AppCompatActivity() {
 
     private fun initObservables() {
 
+    }
+
+    /**
+     * Metodo para setear el tag a las imagenes para identificar
+     * qué campos image viexs tiene una imagen establecida
+     */
+    private fun setTagDefaultImages() {
+        binding.apply {
+            ivImgPost1.tag = Constant.TAG_DEFAULT
+            ivImgPost2.tag = Constant.TAG_DEFAULT
+            ivImgPost3.tag = Constant.TAG_DEFAULT
+            ivImgPost4.tag = Constant.TAG_DEFAULT
+        }
     }
 
     /**
@@ -106,19 +124,6 @@ class PostProductActivity : AppCompatActivity() {
                 resultCodeImageSalected = Constant.RESULT_CODE_CV_IMG_POST_4
                 configBottomSheetOption()
             }
-        }
-    }
-
-    /**
-     * Metodo para setear el tag a las imagenes para identificar
-     * qué campos image viexs tiene una imagen establecida
-     */
-    private fun setTagDefaultImages() {
-        binding.apply {
-            ivImgPost1.tag = Constant.TAG_DEFAULT
-            ivImgPost2.tag = Constant.TAG_DEFAULT
-            ivImgPost3.tag = Constant.TAG_DEFAULT
-            ivImgPost4.tag = Constant.TAG_DEFAULT
         }
     }
 
@@ -165,6 +170,52 @@ class PostProductActivity : AppCompatActivity() {
                     openBottomSheetDialogOptionsEditOrDelete()
                 }
             }
+        }
+    }
+
+    /**
+     * Metodo para publicar un producto
+     */
+    private fun configPostProduct() {
+        binding.btnPost.setOnClickListener {
+            this@PostProductActivity.reload()
+            validarInputs()
+        }
+    }
+
+    /**
+     * Metodo que configura los editext como botones de seleccion
+     */
+    private fun configInputsSelectors() {
+        binding.apply {
+            tietCategory.setOnClickListener { this@PostProductActivity.reload() }
+            tietNegotiable.setOnClickListener { this@PostProductActivity.reload() }
+            tietProductStatus.setOnClickListener { this@PostProductActivity.reload() }
+        }
+    }
+
+    /**
+     * Metodo para verificar si los permisos están aceptados o rechazados
+     */
+    private fun checkPermissionCamera() {
+
+        //Verificamos si el permiso ya se ha pedido por el momento y verificamos si están aceptados
+        if (
+            ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+            != PackageManager.PERMISSION_GRANTED
+        ){
+            //Si no ha sido aceptado verificamos si han sido rechazados
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)){
+                //Los permisos de la camara ya están denegados
+                toast(getString(R.string.msg_activar_permisos_camara), Toast.LENGTH_LONG)
+            } else {
+                //De lo contrario significa que nunca se han pedido los permisos, se piden
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), Constant.PERMISSION_CAMERA)
+            }
+
+        } else {
+            //El permiso ya ha sido aceptado
+            openCamera()
         }
     }
 
@@ -216,38 +267,6 @@ class PostProductActivity : AppCompatActivity() {
     }
 
     /**
-     * Metodo para abrir la cámara
-     */
-    private fun openCamera(resultCodeImageSalected: Int) {
-        toast(resultCodeImageSalected.toString())
-    }
-
-    /**
-     * Metodo para verificar si los permisos están aceptados o rechazados
-     */
-    private fun checkPermissionCamera() {
-
-        //Verificamos si el permiso ya se ha pedido por el momento y verificamos si están aceptados
-        if (
-            ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-            != PackageManager.PERMISSION_GRANTED
-        ){
-            //Si no ha sido aceptado verificamos si han sido rechazados
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)){
-                //Los permisos de la camara ya están denegados
-                toast(getString(R.string.msg_activar_permisos_camara), Toast.LENGTH_LONG)
-            } else {
-                //De lo contrario significa que nunca se han pedido los permisos, se piden
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), Constant.PERMISSION_CAMERA)
-            }
-
-        } else {
-            //El permiso ya ha sido aceptado
-            openCamera(resultCodeImageSalected)
-        }
-    }
-
-    /**
      * Metodo para abrir el bottom sheet dialog para eliminar
      * o editar una imagen ya capturada
      */
@@ -256,24 +275,10 @@ class PostProductActivity : AppCompatActivity() {
     }
 
     /**
-     * Metodo para publicar un producto
+     * Metodo para abrir la cámara
      */
-    private fun configPostProduct() {
-        binding.btnPost.setOnClickListener {
-            this@PostProductActivity.reload()
-            validarInputs()
-        }
-    }
-
-    /**
-     * Metodo que configura los editext como botones de seleccion
-     */
-    private fun configInputsSelectors() {
-        binding.apply {
-            tietCategory.setOnClickListener { this@PostProductActivity.reload() }
-            tietNegotiable.setOnClickListener { this@PostProductActivity.reload() }
-            tietProductStatus.setOnClickListener { this@PostProductActivity.reload() }
-        }
+    private fun openCamera() {
+        toast(resultCodeImageSalected.toString())
     }
 
     /**
