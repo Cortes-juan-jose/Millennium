@@ -60,5 +60,21 @@
     <string name="mtv_tomar_una_foto">Tomar una foto</string>
     <string name="mtv_abrir_la_galeria">Abrir la galería</string>
 
+    <!--CATEGORIAS-->
+    <string name="cat_coches">Coches</string>
+    <string name="cat_motos_bicicleta">Motos y Bicicletas</string>
+    <string name="cat_motor_accesorios">Motor y Accesorios</string>
+    <string name="cat_moda_accesorios">Modas y Accesorios</string>
+    <string name="cat_inmobiliaria">Inmobiliaria</string>
+    <string name="cat_informatica_electronica">Informática y Electrónica</string>
+    <string name="cat_deporte_ocio">Deporte y Ocio</string>
+    <string name="cat_consolas_videojuegos">Consolas y Videojuegos</string>
+    <string name="cat_hogar_jardin">Hogar y Jardín</string>
+    <string name="cat_electrodomésticos">Electrodomésticos</string>
+    <string name="cat_cine_libros_música">Cine, Libros y Música</string>
+    <string name="cat_niños_bebes">Niños y Bebes</string>
+    <string name="cat_coleccionismo">Coleccionismo</string>
+    <string name="cat_otros">Otros</string>
+
 
 </resources>
