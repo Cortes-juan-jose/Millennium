@@ -49,6 +49,7 @@
     <string name="msg_timestamp_horas">horas</string>
     <string name="msg_timestamp_ayer">ayer</string>
     <string name="msg_timestamp_dias">dias</string>
+
     <string name="msg_activar_permisos_camara">Tienes el permiso de la cámara denegado. Vaya a ajustes / Aplicaciones / Administrar aplicaciones / Millennium / Permisos de la aplicación</string>
 
     <string name="bnv_title_inicio">Inicio</string>
@@ -83,6 +84,9 @@
     <string name="est_buen_estado">En buen estado</string>
     <string name="est_condiciones_aceptables">En condiciones aceptables</string>
     <string name="est_mucho_uso">Con mucho uso</string>
+
+    <string name="neg_si">Sí</string>
+    <string name="neg_no">No</string>
 
 
 </resources>
