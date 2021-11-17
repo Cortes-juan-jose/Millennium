@@ -250,9 +250,9 @@ class PostProductActivity : AppCompatActivity() {
      */
     private fun configSelectorCategory() {
 
-        //Creamos un listview para mostrar todas las categorias
+        //Creamos un listview para mostrar una lista
         val listViewOptions = ListView(this)
-        //Creamos la lista de todas las categorias
+        //Creamos la lista
         val listOptions = mutableListOf(
             getString(R.string.cat_coches),
             getString(R.string.cat_motos_bicicleta),
@@ -269,17 +269,17 @@ class PostProductActivity : AppCompatActivity() {
             getString(R.string.cat_coleccionismo),
             getString(R.string.cat_otros)
         )
-        //Creamos el adapter para setear en una vista la lista de categorias
+        //Creamos el adapter para setear en una vista la lista
         val adapter = ArrayAdapter(this, R.layout.view_alertdialog_info_product, R.id.mtv_parametro, listOptions)
-        //Seteamos el adapter al listview para mostrar la lista de categorias
+        //Seteamos el adapter al listview para mostrar la lista
         listViewOptions.adapter = adapter
         //Creamos el alertDialog para setear el listview a este alertDialog y se lance
         val adbCategories = AlertDialog.Builder(this).setView(listViewOptions)
         val adCategories = adbCategories.create()
         adCategories.show()
-        //Dar funcionalidad al listView para cuando se seleccione una categoria
-        listViewOptions.setOnItemClickListener { adapterView, view, i, l ->
-            binding.tietCategory.setText(listOptions[i])
+        //Dar funcionalidad al listView para cuando se seleccione un item de la lista
+        listViewOptions.setOnItemClickListener { _, _, pos, _ ->
+            binding.tietCategory.setText(listOptions[pos])
             adCategories.dismiss()
         }
     }
@@ -305,8 +305,8 @@ class PostProductActivity : AppCompatActivity() {
         val adNegotiables = adbNegotiables.create()
         adNegotiables.show()
         //Dar funcionalidad al listView para cuando se seleccione un item del listview
-        listViewOptions.setOnItemClickListener { adapterView, view, i, l ->
-            binding.tietNegotiable.setText(listOptions[i])
+        listViewOptions.setOnItemClickListener { _, _, pos, _ ->
+            binding.tietNegotiable.setText(listOptions[pos])
             adNegotiables.dismiss()
         }
     }
@@ -316,9 +316,9 @@ class PostProductActivity : AppCompatActivity() {
      */
     private fun configSelectorProductStatus() {
 
-        //Creamos un listview para mostrar todas las categorias
+        //Creamos un listview para mostrar una lista
         val listViewOptions = ListView(this)
-        //Creamos la lista de todas las categorias
+        //Creamos la lista
         val listOptions = mutableListOf(
             getString(R.string.est_sin_abrir),
             getString(R.string.est_nuevo),
@@ -336,8 +336,8 @@ class PostProductActivity : AppCompatActivity() {
         val adProductStatus = adbProductStatus.create()
         adProductStatus.show()
         //Dar funcionalidad al listView para cuando se seleccione un item del listView
-        listViewOptions.setOnItemClickListener { adapterView, view, i, l ->
-            binding.tietProductStatus.setText(listOptions[i])
+        listViewOptions.setOnItemClickListener { _, _, pos, _ ->
+            binding.tietProductStatus.setText(listOptions[pos])
             adProductStatus.dismiss()
         }
     }
