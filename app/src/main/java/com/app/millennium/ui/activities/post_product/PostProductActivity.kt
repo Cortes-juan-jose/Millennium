@@ -294,7 +294,8 @@ class PostProductActivity : AppCompatActivity() {
         //Creamos la lista
         val listOptions = mutableListOf(
             getString(R.string.neg_no),
-            getString(R.string.neg_si)
+            getString(R.string.neg_si),
+            getString(R.string.sel_sin_especificar)
         )
         //Creamos el adapter para setear en una vista la lista
         val adapter = ArrayAdapter(this, R.layout.view_alertdialog_info_product, R.id.mtv_parametro, listOptions)
@@ -325,7 +326,8 @@ class PostProductActivity : AppCompatActivity() {
             getString(R.string.est_como_nuevo),
             getString(R.string.est_buen_estado),
             getString(R.string.est_condiciones_aceptables),
-            getString(R.string.est_mucho_uso)
+            getString(R.string.est_mucho_uso),
+            getString(R.string.sel_sin_especificar)
         )
         //Creamos el adapter para setear en una vista la lista
         val adapter = ArrayAdapter(this, R.layout.view_alertdialog_info_product, R.id.mtv_parametro, listOptions)

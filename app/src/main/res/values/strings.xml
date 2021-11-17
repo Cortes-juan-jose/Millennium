@@ -85,8 +85,12 @@
     <string name="est_condiciones_aceptables">En condiciones aceptables</string>
     <string name="est_mucho_uso">Con mucho uso</string>
 
+    <!--OPCIONES DE PRECIO NEGOCIABLE-->
     <string name="neg_si">Sí</string>
     <string name="neg_no">No</string>
+
+    <!--String sin especificar-->
+    <string name="sel_sin_especificar">Sin especificar</string>
 
 
 </resources>
