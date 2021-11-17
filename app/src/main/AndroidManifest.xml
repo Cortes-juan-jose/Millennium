@@ -13,6 +13,17 @@
         android:roundIcon="@mipmap/ic_app_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Millennium">
+
+        <provider
+            android:authorities="com.app.millennium"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
         <activity
             android:name=".ui.activities.post_product.PostProductActivity"
             android:exported="false" />

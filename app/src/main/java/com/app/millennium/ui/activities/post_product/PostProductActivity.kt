@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.widget.ArrayAdapter
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.app.millennium.R
 import com.app.millennium.core.common.*
 import com.app.millennium.core.utils.FileUtil
@@ -22,8 +24,10 @@ import com.app.millennium.databinding.ActivityPostProductBinding
 import com.app.millennium.databinding.ViewBottomSheetOptionsSourceImagesBinding
 import com.app.millennium.ui.activities.home.HomeActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.squareup.picasso.Picasso
 import java.io.File
 import java.lang.Exception
+import java.util.*
 
 class PostProductActivity : AppCompatActivity() {
 
@@ -34,6 +38,18 @@ class PostProductActivity : AppCompatActivity() {
     private var fileImage2: File? = null
     private var fileImage3: File? = null
     private var fileImage4: File? = null
+
+    //Paths de las imagenes de la camara
+    private var photoPath1: String? = null
+    private var photoPath2: String? = null
+    private var photoPath3: String? = null
+    private var photoPath4: String? = null
+
+    //AbsolutePaths de las imagenes de la camara
+    private var photoAbsolutePath1: String? = null
+    private var photoAbsolutePath2: String? = null
+    private var photoAbsolutePath3: String? = null
+    private var photoAbsolutePath4: String? = null
 
     /*
      * Variable para obtener un flag para saber siempre qué
@@ -50,32 +66,48 @@ class PostProductActivity : AppCompatActivity() {
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ){
-            toast("Salir de la imagen 1")
-            toast("${it.data?.extras}")
+            if (it.resultCode == RESULT_OK){
+                Picasso.get().load(photoPath1).into(
+                    binding.ivImgPost1
+                )
+                binding.ivImgPost1.tag = Constant.TAG_NOT_DEFAULT
+            }
         }
 
     private val launcherCameraImage2 =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ){
-            toast("Salir de la imagen 2")
-            toast("${it.data?.extras}")
+            if (it.resultCode == RESULT_OK){
+                Picasso.get().load(photoPath2).into(
+                    binding.ivImgPost2
+                )
+                binding.ivImgPost2.tag = Constant.TAG_NOT_DEFAULT
+            }
         }
 
     private val launcherCameraImage3 =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ){
-            toast("Salir de la imagen 3")
-            toast("${it.data?.extras}")
+            if (it.resultCode == RESULT_OK){
+                Picasso.get().load(photoPath3).into(
+                    binding.ivImgPost3
+                )
+                binding.ivImgPost3.tag = Constant.TAG_NOT_DEFAULT
+            }
         }
 
     private val launcherCameraImage4 =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ){
-            toast("Salir de la imagen 4")
-            toast("${it.data?.extras}")
+            if (it.resultCode == RESULT_OK){
+                Picasso.get().load(photoPath4).into(
+                    binding.ivImgPost4
+                )
+                binding.ivImgPost4.tag = Constant.TAG_NOT_DEFAULT
+            }
         }
 
     /**
@@ -616,25 +648,104 @@ class PostProductActivity : AppCompatActivity() {
      * Metodo para abrir la cámara
      */
     private fun openCamera() {
-        val intentCamera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        intentCamera.putExtra("saludo", "hola")
+        //Creamos el intent para abrir la camara
+        val camera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        //Creamos un fichero para guardar la imagen en un fichero
+        //en una ruta del sistema
+        var filePhoto: File? = null
 
-        when (resultCodeImageSalected) {
-            Constant.RESULT_CODE_CV_IMG_POST_1 -> {
-
-                launcherCameraImage1.launch(intentCamera)
-            }
-            Constant.RESULT_CODE_CV_IMG_POST_2 -> {
-                launcherCameraImage2.launch(intentCamera)
-            }
-            Constant.RESULT_CODE_CV_IMG_POST_3 -> {
-                launcherCameraImage3.launch(intentCamera)
-            }
-            Constant.RESULT_CODE_CV_IMG_POST_4 -> {
-                launcherCameraImage4.launch(intentCamera)
-            }
+        try {
+            //Creamos el fichero para almacenar la foto
+            filePhoto = createFilePhoto()
+        } catch (e: Exception){
+            toast(e.message!!)
         }
 
+        //Verificamos que no sea nulo
+        if (filePhoto.isNotNull()){
+            /**
+             * Si no es nulo creamos la uri que referencia al fichero
+             * para pasárselo al intent de la camara
+             * Para que pueda almacenar la imagen en el fichero
+             */
+
+            /**
+             * Además se debe configurar un provider en el manifest
+             * e indicarle a este provider el path con un fichero xml
+             * con el path definido
+             */
+            val photoUri = FileProvider.getUriForFile(
+                this,
+                Constant.PACKAGE_PROJECT,
+                filePhoto!!
+            )
+            camera.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+        }
+
+        /**
+         * Ahora dependiendo del input seleccionado
+         * se lanzará el launcher correspondiente
+         */
+        when (resultCodeImageSalected) {
+            Constant.RESULT_CODE_CV_IMG_POST_1 -> {
+                launcherCameraImage1.launch(camera)
+            }
+            Constant.RESULT_CODE_CV_IMG_POST_2 -> {
+                launcherCameraImage2.launch(camera)
+            }
+            Constant.RESULT_CODE_CV_IMG_POST_3 -> {
+                launcherCameraImage3.launch(camera)
+            }
+            Constant.RESULT_CODE_CV_IMG_POST_4 -> {
+                launcherCameraImage4.launch(camera)
+            }
+        }
+    }
+
+    /**
+     * Metodo que crea un fichero con un nombre
+     * mas la ruta de donde se va a crear el fichero
+     */
+    private fun createFilePhoto(): File? {
+        //Obtenemos el directorio de Pictures
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        //Construimo el fichero con el nombre, la extension y la ruta de almacenaje
+        val filePhoto = File.createTempFile(
+            "${Date()}_photo",
+            ".jpg",
+            storageDir
+        )
+
+        /**
+         * Ahora dependiendo de que input se seleccionó
+         * se guardará la ruta en las var correspondientes
+         * y retornamos el fichero construido
+         */
+        when (resultCodeImageSalected){
+            Constant.RESULT_CODE_CV_IMG_POST_1 -> {
+                photoPath1 = "file:${filePhoto.absolutePath}"
+                photoAbsolutePath1 = filePhoto.absolutePath
+                return filePhoto
+            }
+            Constant.RESULT_CODE_CV_IMG_POST_2 -> {
+                photoPath2 = "file:${filePhoto.absolutePath}"
+                photoAbsolutePath2 = filePhoto.absolutePath
+                return filePhoto
+            }
+            Constant.RESULT_CODE_CV_IMG_POST_3 -> {
+                photoPath3 = "file:${filePhoto.absolutePath}"
+                photoAbsolutePath3 = filePhoto.absolutePath
+                return filePhoto
+            }
+            Constant.RESULT_CODE_CV_IMG_POST_4 -> {
+                photoPath4 = "file:${filePhoto.absolutePath}"
+                photoAbsolutePath4 = filePhoto.absolutePath
+                return filePhoto
+            }
+            else -> {
+                return null
+            }
+        }
     }
 
     /**

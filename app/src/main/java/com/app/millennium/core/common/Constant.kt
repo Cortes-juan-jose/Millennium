@@ -21,4 +21,6 @@ object Constant {
 
     const val PERMISSION_CAMERA: Int  = 111
     const val PERMISSION_GALLERY: Int  = 222
+
+    const val PACKAGE_PROJECT: String = "com.app.millennium"
 }
