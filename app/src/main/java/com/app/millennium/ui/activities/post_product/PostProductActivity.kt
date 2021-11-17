@@ -88,7 +88,45 @@ class PostProductActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ){
             if (it.resultCode == RESULT_OK){
+                /**
+                 * Si el result code es ok
+                 * significa que se ha seleccionado
+                 * una imagen de la galeria
+                 */
+                try {
+                    /**
+                     * La seleccion de la imagen obtenemos la uri
+                     * de la imagen y construimos un fichero
+                     * en base a la uri obtenida
+                     */
+                    fileImage1 = FileUtil.from(
+                        this,
+                        it.data?.data!!
+                    )
+                    /**
+                     * Le seteamos la imagen al input del que se haya
+                     * pulsado para abrir la galeria
+                     */
+                    binding.ivImgPost1.setImageBitmap(
+                        BitmapFactory.decodeFile(
+                            fileImage1?.absolutePath
+                        )
+                    )
+                    /**
+                     * Le seteamos el tag al imageview donde
+                     * ha sido establecida la imagen para
+                     * saber siempre si el input tiene una imagen
+                     * o no la tiene
+                     */
+                    binding.ivImgPost1.tag = Constant.TAG_NOT_DEFAULT
 
+                } catch (e: Exception){
+                    /**
+                     * Al crear el fichero puede lanzarse una excepcion
+                     * al cargar la imagen
+                     */
+                    toast(getString(R.string.msg_error_cargar_imagen_galeria))
+                }
             }
         }
 
@@ -97,7 +135,46 @@ class PostProductActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ){
             if (it.resultCode == RESULT_OK){
-                toast("Se ha elegido una imagen")
+
+                /**
+                 * Si el result code es ok
+                 * significa que se ha seleccionado
+                 * una imagen de la galeria
+                 */
+                try {
+                    /**
+                     * La seleccion de la imagen obtenemos la uri
+                     * de la imagen y construimos un fichero
+                     * en base a la uri obtenida
+                     */
+                    fileImage2 = FileUtil.from(
+                        this,
+                        it.data?.data!!
+                    )
+                    /**
+                     * Le seteamos la imagen al input del que se haya
+                     * pulsado para abrir la galeria
+                     */
+                    binding.ivImgPost2.setImageBitmap(
+                        BitmapFactory.decodeFile(
+                            fileImage2?.absolutePath
+                        )
+                    )
+                    /**
+                     * Le seteamos el tag al imageview donde
+                     * ha sido establecida la imagen para
+                     * saber siempre si el input tiene una imagen
+                     * o no la tiene
+                     */
+                    binding.ivImgPost2.tag = Constant.TAG_NOT_DEFAULT
+
+                } catch (e: Exception){
+                    /**
+                     * Al crear el fichero puede lanzarse una excepcion
+                     * al cargar la imagen
+                     */
+                    toast(getString(R.string.msg_error_cargar_imagen_galeria))
+                }
             }
         }
 
@@ -106,7 +183,45 @@ class PostProductActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ){
             if (it.resultCode == RESULT_OK){
-                toast("Se ha elegido una imagen")
+                /**
+                 * Si el result code es ok
+                 * significa que se ha seleccionado
+                 * una imagen de la galeria
+                 */
+                try {
+                    /**
+                     * La seleccion de la imagen obtenemos la uri
+                     * de la imagen y construimos un fichero
+                     * en base a la uri obtenida
+                     */
+                    fileImage3 = FileUtil.from(
+                        this,
+                        it.data?.data!!
+                    )
+                    /**
+                     * Le seteamos la imagen al input del que se haya
+                     * pulsado para abrir la galeria
+                     */
+                    binding.ivImgPost3.setImageBitmap(
+                        BitmapFactory.decodeFile(
+                            fileImage3?.absolutePath
+                        )
+                    )
+                    /**
+                     * Le seteamos el tag al imageview donde
+                     * ha sido establecida la imagen para
+                     * saber siempre si el input tiene una imagen
+                     * o no la tiene
+                     */
+                    binding.ivImgPost3.tag = Constant.TAG_NOT_DEFAULT
+
+                } catch (e: Exception){
+                    /**
+                     * Al crear el fichero puede lanzarse una excepcion
+                     * al cargar la imagen
+                     */
+                    toast(getString(R.string.msg_error_cargar_imagen_galeria))
+                }
             }
         }
 
@@ -115,7 +230,45 @@ class PostProductActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ){
             if (it.resultCode == RESULT_OK){
-                toast("Se ha elegido una imagen")
+                /**
+                 * Si el result code es ok
+                 * significa que se ha seleccionado
+                 * una imagen de la galeria
+                 */
+                try {
+                    /**
+                     * La seleccion de la imagen obtenemos la uri
+                     * de la imagen y construimos un fichero
+                     * en base a la uri obtenida
+                     */
+                    fileImage4 = FileUtil.from(
+                        this,
+                        it.data?.data!!
+                    )
+                    /**
+                     * Le seteamos la imagen al input del que se haya
+                     * pulsado para abrir la galeria
+                     */
+                    binding.ivImgPost4.setImageBitmap(
+                        BitmapFactory.decodeFile(
+                            fileImage4?.absolutePath
+                        )
+                    )
+                    /**
+                     * Le seteamos el tag al imageview donde
+                     * ha sido establecida la imagen para
+                     * saber siempre si el input tiene una imagen
+                     * o no la tiene
+                     */
+                    binding.ivImgPost4.tag = Constant.TAG_NOT_DEFAULT
+
+                } catch (e: Exception){
+                    /**
+                     * Al crear el fichero puede lanzarse una excepcion
+                     * al cargar la imagen
+                     */
+                    toast(getString(R.string.msg_error_cargar_imagen_galeria))
+                }
             }
         }
 
