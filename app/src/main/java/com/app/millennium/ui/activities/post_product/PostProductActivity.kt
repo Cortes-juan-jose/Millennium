@@ -372,7 +372,6 @@ class PostProductActivity : AppCompatActivity() {
         //de la vista del bottom sheet dialog
         bindingBottomSheetDialog.apply {
             ivCamera.setOnClickListener {
-                toast("Camera")
                 bottomSheetDialogOptionsCameraOrGallery.dismiss()
                 bindingBottomSheetDialog = null
                 //Si se seleciona la cámara entonces se abrirá la cámara
