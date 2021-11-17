@@ -111,13 +111,18 @@ class PostProductActivity : AppCompatActivity() {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ){
                     openCamera()
+                } else {
+                    toast(getString(R.string.msg_permisos_denegados))
                 }
             }
+            //Si el permiso es de la galeria
             Constant.PERMISSION_GALLERY -> {
                 if(grantResults[0].isNotNull()
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ){
                     toast("Abrir la galeria")
+                } else {
+                    toast(getString(R.string.msg_permisos_denegados))
                 }
             }
         }
