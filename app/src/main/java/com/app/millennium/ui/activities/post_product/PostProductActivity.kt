@@ -72,6 +72,48 @@ class PostProductActivity : AppCompatActivity() {
             toast("${it.data?.extras}")
         }
 
+    /**
+     * Launcher para abrir la galería y tener la lógica
+     * para saber desde que input de las imagenes ha
+     * sido lanzada.
+     */
+    private val launcherGalleryImage1 =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){
+            if (it.resultCode == RESULT_OK){
+
+            }
+        }
+
+    private val launcherGalleryImage2 =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){
+            if (it.resultCode == RESULT_OK){
+                toast("Se ha elegido una imagen")
+            }
+        }
+
+    private val launcherGalleryImage3 =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){
+            if (it.resultCode == RESULT_OK){
+                toast("Se ha elegido una imagen")
+            }
+        }
+
+    private val launcherGalleryImage4 =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){
+            if (it.resultCode == RESULT_OK){
+                toast("Se ha elegido una imagen")
+            }
+        }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPostProductBinding.inflate(layoutInflater)
@@ -438,6 +480,29 @@ class PostProductActivity : AppCompatActivity() {
     }
 
     /**
+     * Metodo para abrir la galería
+     */
+    private fun openGallery() {
+        val gallery = Intent(Intent.ACTION_GET_CONTENT)
+        gallery.type = "image/"
+
+        when (resultCodeImageSalected) {
+            Constant.RESULT_CODE_CV_IMG_POST_1 -> {
+                launcherGalleryImage1.launch(gallery)
+            }
+            Constant.RESULT_CODE_CV_IMG_POST_2 -> {
+                launcherGalleryImage2.launch(gallery)
+            }
+            Constant.RESULT_CODE_CV_IMG_POST_3 -> {
+                launcherGalleryImage3.launch(gallery)
+            }
+            Constant.RESULT_CODE_CV_IMG_POST_4 -> {
+                launcherGalleryImage4.launch(gallery)
+            }
+        }
+    }
+
+    /**
      * Metodo para verificar si los permisos de la camara
      * están aceptados o rechazados
      */
@@ -485,8 +550,7 @@ class PostProductActivity : AppCompatActivity() {
 
         } else {
             //El permiso ya ha sido aceptado
-            //openGallery()
-            toast("Abrir la galeria")
+            openGallery()
         }
     }
 
