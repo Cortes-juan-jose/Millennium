@@ -29,6 +29,12 @@ class PostProductActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPostProductBinding
 
+    //Ficheros para almacenar las imagenes
+    private var fileImage1: File? = null
+    private var fileImage2: File? = null
+    private var fileImage3: File? = null
+    private var fileImage4: File? = null
+
     /*
      * Variable para obtener un flag para saber siempre qué
      * input de las imágenes se ha pulsado
@@ -113,7 +119,6 @@ class PostProductActivity : AppCompatActivity() {
             }
         }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPostProductBinding.inflate(layoutInflater)
@@ -162,7 +167,7 @@ class PostProductActivity : AppCompatActivity() {
                 if(grantResults[0].isNotNull()
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ){
-                    toast("Abrir la galeria")
+                    openGallery()
                 } else {
                     toast(getString(R.string.msg_permisos_denegados))
                 }
