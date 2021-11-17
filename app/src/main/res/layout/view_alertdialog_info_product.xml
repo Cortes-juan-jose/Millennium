@@ -6,14 +6,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <com.google.android.material.textview.MaterialTextView
+        style="@style/MaterialTextViewSelector"
         android:id="@+id/mtv_parametro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/balsami_regular"
-        android:textSize="@dimen/size_mtv_alertdialog_info_product"
         android:textAlignment="center"
         android:layout_marginVertical="@dimen/max_padding_view"
-        android:textColor="@color/black"
         tools:text="Hola a todos"/>
 
 </RelativeLayout>
