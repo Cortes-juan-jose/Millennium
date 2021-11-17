@@ -3,6 +3,7 @@ package com.app.millennium.ui.activities.post_product
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -16,10 +17,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.app.millennium.R
 import com.app.millennium.core.common.*
+import com.app.millennium.core.utils.FileUtil
 import com.app.millennium.databinding.ActivityPostProductBinding
 import com.app.millennium.databinding.ViewBottomSheetOptionsSourceImagesBinding
 import com.app.millennium.ui.activities.home.HomeActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import java.io.File
+import java.lang.Exception
 
 class PostProductActivity : AppCompatActivity() {
 
@@ -107,6 +111,13 @@ class PostProductActivity : AppCompatActivity() {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ){
                     openCamera()
+                }
+            }
+            Constant.PERMISSION_GALLERY -> {
+                if(grantResults[0].isNotNull()
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                ){
+                    toast("Abrir la galeria")
                 }
             }
         }
@@ -353,7 +364,6 @@ class PostProductActivity : AppCompatActivity() {
         //para los bottom sheet dialog
         val bottomSheetDialogOptionsCameraOrGallery =
             BottomSheetDialog(this, R.style.BottomSheetTheme)
-
         //Obtenemos la vista del layout bottomsheetDialog y la bindeamos
         var bindingBottomSheetDialog: ViewBottomSheetOptionsSourceImagesBinding? =
             ViewBottomSheetOptionsSourceImagesBinding.inflate(
@@ -381,11 +391,10 @@ class PostProductActivity : AppCompatActivity() {
                 checkPermissionCamera()
             }
             ivGallery.setOnClickListener {
-                toast("Galeria")
                 bottomSheetDialogOptionsCameraOrGallery.dismiss()
                 bindingBottomSheetDialog = null
-                //Si se seleciona la galería entonces se abrirá la galería
-                //openGallery(resultCode)
+                //Si se seleciona la galería entonces se chequearán los permisos de la galería
+                checkPermissionGallery()
             }
         }
     }
@@ -407,6 +416,7 @@ class PostProductActivity : AppCompatActivity() {
 
         when (resultCodeImageSalected) {
             Constant.RESULT_CODE_CV_IMG_POST_1 -> {
+
                 launcherCameraImage1.launch(intentCamera)
             }
             Constant.RESULT_CODE_CV_IMG_POST_2 -> {
@@ -423,7 +433,8 @@ class PostProductActivity : AppCompatActivity() {
     }
 
     /**
-     * Metodo para verificar si los permisos están aceptados o rechazados
+     * Metodo para verificar si los permisos de la camara
+     * están aceptados o rechazados
      */
     private fun checkPermissionCamera() {
 
@@ -444,6 +455,33 @@ class PostProductActivity : AppCompatActivity() {
         } else {
             //El permiso ya ha sido aceptado
             openCamera()
+        }
+    }
+
+    /**
+     * Metodo para verificar si los permisos de la galeria
+     * están aceptados o rechazados
+     */
+    private fun checkPermissionGallery() {
+
+        //Verificamos si el permiso ya se ha pedido por el momento y verificamos si están aceptados
+        if (
+            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED
+        ){
+            //Si no ha sido aceptado verificamos si han sido rechazados
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
+                //Los permisos de la camara ya están denegados
+                toast(getString(R.string.msg_activar_permisos_galeria), Toast.LENGTH_LONG)
+            } else {
+                //De lo contrario significa que nunca se han pedido los permisos, se piden
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), Constant.PERMISSION_GALLERY)
+            }
+
+        } else {
+            //El permiso ya ha sido aceptado
+            //openGallery()
+            toast("Abrir la galeria")
         }
     }
 
