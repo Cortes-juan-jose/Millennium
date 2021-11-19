@@ -997,15 +997,15 @@ class PostProductActivity : AppCompatActivity() {
     }
 
     /**
-     * Metodo que valida si hay alguna imagen cargada
-     * mediante el tag del imageview
+     * Metodo que valida si hay algun archivo cargado
+     * para ser subidos al almacenamiento de firebase
      */
     private fun isUploadedImages(): Boolean {
         if (
-            binding.ivImgPost1.tag.equals(Constant.TAG_DEFAULT)
-            && binding.ivImgPost2.tag.equals(Constant.TAG_DEFAULT)
-            && binding.ivImgPost3.tag.equals(Constant.TAG_DEFAULT)
-            && binding.ivImgPost4.tag.equals(Constant.TAG_DEFAULT)
+            fileImage1.isNull()
+            && fileImage2.isNull()
+            && fileImage3.isNull()
+            && fileImage4.isNull()
         ) {
             return false
         }
