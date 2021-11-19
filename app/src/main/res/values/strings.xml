@@ -34,6 +34,9 @@
     <string name="mtv_debes_subir_al_menos_1_imagen">Debes subir al menos 1 imagen</string>
     <string name="mtv_editar">Editar</string>
     <string name="mtv_eliminar">Eliminar</string>
+    <string name="mtv_elige_una_opcion">Elige una opción</string>
+    <string name="mtv_tomar_una_foto">Tomar una foto</string>
+    <string name="mtv_abrir_la_galeria">Abrir la galería</string>
 
     <string name="msg_error_username">Mínimo 4 caracteres</string>
     <string name="msg_error_email">Correo electrónico inválido</string>
@@ -41,6 +44,7 @@
     <string name="msg_error_password">Mínimo 8 caracteres</string>
     <string name="msg_error_password_confirm">La contraseña no coincide</string>
     <string name="msg_error_cargar_imagen_galeria">Se produjo un error al cargar la imagen</string>
+    <string name="msg_error_archivo_no_permitido">Archivo no permitido</string>
 
     <string name="msg_alert_iniciando_sesion">Iniciando sesión…</string>
     <string name="msg_alert_creando_cuenta">Creando cuenta…</string>
@@ -54,20 +58,16 @@
     <string name="msg_timestamp_ayer">ayer</string>
     <string name="msg_timestamp_dias">dias</string>
 
-    <string name="msg_activar_permisos_camara">Tienes el permiso de la cámara denegado. Vaya a ajustes / Aplicaciones / Administrar aplicaciones / Millennium / Permisos de la aplicación</string>
-    <string name="msg_activar_permisos_galeria">Tienes el permiso de write_external_storage denegado. Vaya a ajustes / Aplicaciones / Administrar aplicaciones / Millennium / Permisos de la aplicación</string>
-    <string name="msg_permisos_denegados">Permisos denegados</string>
-
-    <string name="msg_imagen_eliminada">Imagen eliminada</string>
+    <string name="msg_info_activar_permisos_camara">Tienes el permiso de la cámara denegado. Vaya a ajustes / Aplicaciones / Administrar aplicaciones / Millennium / Permisos de la aplicación</string>
+    <string name="msg_info_activar_permisos_galeria">Tienes el permiso de write_external_storage denegado. Vaya a ajustes / Aplicaciones / Administrar aplicaciones / Millennium / Permisos de la aplicación</string>
+    <string name="msg_info_permisos_denegados">Permisos denegados</string>
+    <string name="msg_info_imagen_eliminada">Imagen eliminada</string>
 
     <string name="bnv_title_inicio">Inicio</string>
     <string name="bnv_title_me_gusta">Me gusta</string>
     <string name="bnv_title_publicar">Publicar</string>
     <string name="bnv_title_chat">Chat</string>
     <string name="bnv_title_perfil">Perfil</string>
-    <string name="mtv_elige_una_opcion">Elige una opción</string>
-    <string name="mtv_tomar_una_foto">Tomar una foto</string>
-    <string name="mtv_abrir_la_galeria">Abrir la galería</string>
 
     <!--CATEGORIAS-->
     <string name="cat_coches">Coches</string>

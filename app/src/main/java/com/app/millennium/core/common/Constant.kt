@@ -23,4 +23,8 @@ object Constant {
     const val PERMISSION_GALLERY: Int  = 222
 
     const val PACKAGE_PROJECT: String = "com.app.millennium"
+
+    const val FORMAT_JPG: String = ".jpg"
+    const val FORMAT_JPEG: String = ".jpeg"
+    const val FORMAT_PNG: String = ".png"
 }

@@ -5,11 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import com.app.millennium.core.utils.FileUtil
 import com.google.android.material.textfield.TextInputLayout
+import java.io.File
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -126,5 +127,15 @@ fun Activity.reload(){
     view?.let {
         it.clearFocus()
         inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
+    }
+}
+
+//Funcion de extension para comprobar si un tipo de fichero es permitido
+fun File.permitted(): Boolean{
+    return when (FileUtil.splitFileName(this.name)[1].toString()) {
+        Constant.FORMAT_JPEG -> true
+        Constant.FORMAT_JPG -> true
+        Constant.FORMAT_PNG -> true
+        else -> false
     }
 }

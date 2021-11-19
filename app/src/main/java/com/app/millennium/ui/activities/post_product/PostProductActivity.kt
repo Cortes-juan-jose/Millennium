@@ -1,7 +1,6 @@
 package com.app.millennium.ui.activities.post_product
 
 import android.Manifest
-import android.app.UiModeManager
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -30,7 +29,6 @@ import com.app.millennium.ui.activities.home.HomeActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import java.io.File
-import java.lang.Exception
 import java.util.*
 
 class PostProductActivity : AppCompatActivity() {
@@ -160,26 +158,38 @@ class PostProductActivity : AppCompatActivity() {
                         it.data?.data!!
                     )
                     /**
-                     * Le seteamos la imagen al input del que se haya
-                     * pulsado para abrir la galeria
+                     * A continuación verificamos si la extension
+                     * del fichero es permitido porque puede ser
+                     * que el usuario elija un archivo que no sea una
+                     * imagen (formatos permitidos = JPEG, PNG, JPG)
                      */
-                    binding.ivImgPost1.setImageBitmap(
-                        BitmapFactory.decodeFile(
-                            fileImage1?.absolutePath
+                    if (fileImage1!!.permitted()){
+                        //Si el formato es permitido entonces:
+
+                        /**
+                         * Le seteamos la imagen al input del que se haya
+                         * pulsado para abrir la galeria
+                         */
+                        binding.ivImgPost1.setImageBitmap(
+                            BitmapFactory.decodeFile(
+                                fileImage1?.absolutePath
+                            )
                         )
-                    )
-                    /**
-                     * Le seteamos el tag al imageview donde
-                     * ha sido establecida la imagen para
-                     * saber siempre si el input tiene una imagen
-                     * o no la tiene
-                     */
-                    binding.ivImgPost1.tag = Constant.TAG_NOT_DEFAULT
-                    /**
-                     * Y por último quitamos el textview del error
-                     */
-                    if (binding.mtvErrorImagenes.isVisible)
-                        binding.mtvErrorImagenes.visibility = View.GONE
+                        /**
+                         * Le seteamos el tag al imageview donde
+                         * ha sido establecida la imagen para
+                         * saber siempre si el input tiene una imagen
+                         * o no la tiene
+                         */
+                        binding.ivImgPost1.tag = Constant.TAG_NOT_DEFAULT
+                        /**
+                         * Y por último quitamos el textview del error
+                         */
+                        if (binding.mtvErrorImagenes.isVisible)
+                            binding.mtvErrorImagenes.visibility = View.GONE
+                    } else {
+                        toast(getString(R.string.msg_error_archivo_no_permitido))
+                    }
 
                 } catch (e: Exception){
                     /**
@@ -213,26 +223,38 @@ class PostProductActivity : AppCompatActivity() {
                         it.data?.data!!
                     )
                     /**
-                     * Le seteamos la imagen al input del que se haya
-                     * pulsado para abrir la galeria
+                     * A continuación verificamos si la extension
+                     * del fichero es permitido porque puede ser
+                     * que el usuario elija un archivo que no sea una
+                     * imagen (formatos permitidos = JPEG, PNG, JPG)
                      */
-                    binding.ivImgPost2.setImageBitmap(
-                        BitmapFactory.decodeFile(
-                            fileImage2?.absolutePath
+                    if (fileImage2!!.permitted()){
+                        //Si el formato es permitido entonces:
+
+                        /**
+                         * Le seteamos la imagen al input del que se haya
+                         * pulsado para abrir la galeria
+                         */
+                        binding.ivImgPost2.setImageBitmap(
+                            BitmapFactory.decodeFile(
+                                fileImage2?.absolutePath
+                            )
                         )
-                    )
-                    /**
-                     * Le seteamos el tag al imageview donde
-                     * ha sido establecida la imagen para
-                     * saber siempre si el input tiene una imagen
-                     * o no la tiene
-                     */
-                    binding.ivImgPost2.tag = Constant.TAG_NOT_DEFAULT
-                    /**
-                     * Y por último quitamos el textview del error
-                     */
-                    if (binding.mtvErrorImagenes.isVisible)
-                        binding.mtvErrorImagenes.visibility = View.GONE
+                        /**
+                         * Le seteamos el tag al imageview donde
+                         * ha sido establecida la imagen para
+                         * saber siempre si el input tiene una imagen
+                         * o no la tiene
+                         */
+                        binding.ivImgPost2.tag = Constant.TAG_NOT_DEFAULT
+                        /**
+                         * Y por último quitamos el textview del error
+                         */
+                        if (binding.mtvErrorImagenes.isVisible)
+                            binding.mtvErrorImagenes.visibility = View.GONE
+                    } else {
+                        toast(getString(R.string.msg_error_archivo_no_permitido))
+                    }
 
                 } catch (e: Exception){
                     /**
@@ -265,26 +287,38 @@ class PostProductActivity : AppCompatActivity() {
                         it.data?.data!!
                     )
                     /**
-                     * Le seteamos la imagen al input del que se haya
-                     * pulsado para abrir la galeria
+                     * A continuación verificamos si la extension
+                     * del fichero es permitido porque puede ser
+                     * que el usuario elija un archivo que no sea una
+                     * imagen (formatos permitidos = JPEG, PNG, JPG)
                      */
-                    binding.ivImgPost3.setImageBitmap(
-                        BitmapFactory.decodeFile(
-                            fileImage3?.absolutePath
+                    if (fileImage3!!.permitted()){
+                        //Si el formato es permitido entonces:
+
+                        /**
+                         * Le seteamos la imagen al input del que se haya
+                         * pulsado para abrir la galeria
+                         */
+                        binding.ivImgPost3.setImageBitmap(
+                            BitmapFactory.decodeFile(
+                                fileImage3?.absolutePath
+                            )
                         )
-                    )
-                    /**
-                     * Le seteamos el tag al imageview donde
-                     * ha sido establecida la imagen para
-                     * saber siempre si el input tiene una imagen
-                     * o no la tiene
-                     */
-                    binding.ivImgPost3.tag = Constant.TAG_NOT_DEFAULT
-                    /**
-                     * Y por último quitamos el textview del error
-                     */
-                    if (binding.mtvErrorImagenes.isVisible)
-                        binding.mtvErrorImagenes.visibility = View.GONE
+                        /**
+                         * Le seteamos el tag al imageview donde
+                         * ha sido establecida la imagen para
+                         * saber siempre si el input tiene una imagen
+                         * o no la tiene
+                         */
+                        binding.ivImgPost3.tag = Constant.TAG_NOT_DEFAULT
+                        /**
+                         * Y por último quitamos el textview del error
+                         */
+                        if (binding.mtvErrorImagenes.isVisible)
+                            binding.mtvErrorImagenes.visibility = View.GONE
+                    } else {
+                        toast(getString(R.string.msg_error_archivo_no_permitido))
+                    }
 
                 } catch (e: Exception){
                     /**
@@ -317,26 +351,38 @@ class PostProductActivity : AppCompatActivity() {
                         it.data?.data!!
                     )
                     /**
-                     * Le seteamos la imagen al input del que se haya
-                     * pulsado para abrir la galeria
+                     * A continuación verificamos si la extension
+                     * del fichero es permitido porque puede ser
+                     * que el usuario elija un archivo que no sea una
+                     * imagen (formatos permitidos = JPEG, PNG, JPG)
                      */
-                    binding.ivImgPost4.setImageBitmap(
-                        BitmapFactory.decodeFile(
-                            fileImage4?.absolutePath
+                    if (fileImage4!!.permitted()){
+                        //Si el formato es permitido entonces:
+
+                        /**
+                         * Le seteamos la imagen al input del que se haya
+                         * pulsado para abrir la galeria
+                         */
+                        binding.ivImgPost4.setImageBitmap(
+                            BitmapFactory.decodeFile(
+                                fileImage4?.absolutePath
+                            )
                         )
-                    )
-                    /**
-                     * Le seteamos el tag al imageview donde
-                     * ha sido establecida la imagen para
-                     * saber siempre si el input tiene una imagen
-                     * o no la tiene
-                     */
-                    binding.ivImgPost4.tag = Constant.TAG_NOT_DEFAULT
-                    /**
-                     * Y por último quitamos el textview del error
-                     */
-                    if (binding.mtvErrorImagenes.isVisible)
-                        binding.mtvErrorImagenes.visibility = View.GONE
+                        /**
+                         * Le seteamos el tag al imageview donde
+                         * ha sido establecida la imagen para
+                         * saber siempre si el input tiene una imagen
+                         * o no la tiene
+                         */
+                        binding.ivImgPost4.tag = Constant.TAG_NOT_DEFAULT
+                        /**
+                         * Y por último quitamos el textview del error
+                         */
+                        if (binding.mtvErrorImagenes.isVisible)
+                            binding.mtvErrorImagenes.visibility = View.GONE
+                    } else {
+                        toast(getString(R.string.msg_error_archivo_no_permitido))
+                    }
 
                 } catch (e: Exception){
                     /**
@@ -388,7 +434,7 @@ class PostProductActivity : AppCompatActivity() {
                 ){
                     openCamera()
                 } else {
-                    toast(getString(R.string.msg_permisos_denegados))
+                    toast(getString(R.string.msg_info_permisos_denegados))
                 }
             }
             //Si el permiso es de la galeria
@@ -398,7 +444,7 @@ class PostProductActivity : AppCompatActivity() {
                 ){
                     openGallery()
                 } else {
-                    toast(getString(R.string.msg_permisos_denegados))
+                    toast(getString(R.string.msg_info_permisos_denegados))
                 }
             }
         }
@@ -741,7 +787,7 @@ class PostProductActivity : AppCompatActivity() {
                         fileImage4 = null
                     }
                 }
-                toast(getString(R.string.msg_imagen_eliminada))
+                toast(getString(R.string.msg_info_imagen_eliminada))
             }
         }
     }
@@ -887,7 +933,7 @@ class PostProductActivity : AppCompatActivity() {
             //Si no ha sido aceptado verificamos si han sido rechazados
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)){
                 //Los permisos de la camara ya están denegados
-                toast(getString(R.string.msg_activar_permisos_camara), Toast.LENGTH_LONG)
+                toast(getString(R.string.msg_info_activar_permisos_camara), Toast.LENGTH_LONG)
             } else {
                 //De lo contrario significa que nunca se han pedido los permisos, se piden
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), Constant.PERMISSION_CAMERA)
@@ -913,7 +959,7 @@ class PostProductActivity : AppCompatActivity() {
             //Si no ha sido aceptado verificamos si han sido rechazados
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
                 //Los permisos de la camara ya están denegados
-                toast(getString(R.string.msg_activar_permisos_galeria), Toast.LENGTH_LONG)
+                toast(getString(R.string.msg_info_activar_permisos_galeria), Toast.LENGTH_LONG)
             } else {
                 //De lo contrario significa que nunca se han pedido los permisos, se piden
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), Constant.PERMISSION_GALLERY)

@@ -36,7 +36,7 @@ object FileUtil {
         return tempFile
     }
 
-    private fun splitFileName(fileName: String?): Array<String?> {
+    fun splitFileName(fileName: String?): Array<String?> {
         var name = fileName
         var extension: String? = ""
         val i = fileName!!.lastIndexOf(".")
