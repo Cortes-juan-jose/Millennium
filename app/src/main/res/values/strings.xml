@@ -38,13 +38,16 @@
     <string name="mtv_tomar_una_foto">Tomar una foto</string>
     <string name="mtv_abrir_la_galeria">Abrir la galería</string>
 
-    <string name="msg_error_username">Mínimo 4 caracteres</string>
-    <string name="msg_error_email">Correo electrónico inválido</string>
+    <string name="msg_error_username">Nombre requerido - mínimo 4 caracteres</string>
+    <string name="msg_error_email">Email requerido - introduzca un email válido</string>
     <string name="msg_error_phone">El teléfono debe tener 9 dígitos</string>
-    <string name="msg_error_password">Mínimo 8 caracteres</string>
+    <string name="msg_error_password">Contraseña requerida - mínimo 8 caracteres</string>
     <string name="msg_error_password_confirm">La contraseña no coincide</string>
     <string name="msg_error_cargar_imagen_galeria">Se produjo un error al cargar la imagen</string>
     <string name="msg_error_archivo_no_permitido">Archivo no permitido</string>
+    <string name="msg_error_title_producto">Título requerido- mínimo 10 caracteres</string>
+    <string name="msg_error_description_producto">Descripción requerida - mínimo 10 caracteres</string>
+    <string name="msg_error_category_producto">Seleccione una categoría</string>
 
     <string name="msg_alert_iniciando_sesion">Iniciando sesión…</string>
     <string name="msg_alert_creando_cuenta">Creando cuenta…</string>

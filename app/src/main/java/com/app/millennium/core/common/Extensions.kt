@@ -77,6 +77,14 @@ fun String?.isPassword(): Boolean {
     return false
 }
 
+//Extension para validar el titulo y/o la descripcion del producto
+fun String?.isTitleOrDescription(): Boolean {
+    if (this.isNotNull()){
+        return this?.length!! >= 10
+    }
+    return false
+}
+
 //Extension para aplicar propiedades de error a un text input layout
 fun TextInputLayout.applyError(msg: String){
 

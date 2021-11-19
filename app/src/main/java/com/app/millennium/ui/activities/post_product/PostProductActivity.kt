@@ -990,14 +990,55 @@ class PostProductActivity : AppCompatActivity() {
     /**
      * Metodo que valida todos los inputs
      */
-    private fun validateFields() {
-        if (isUploadedImages()){
-            //Quitar el error de las imagenes vacías
-            toast("imagen cargada")
-        } else {
-            //Poner error de las imagenes
-            binding.mtvErrorImagenes.visibility = View.VISIBLE
+    private fun validateFields(): Boolean {
+
+        var imagesUploaded = false
+        var titleValid = false
+        var descriptionValid = false
+        var categoryValid = false
+        var priceValid = false
+
+        binding.apply {
+            //Validar las imagenes
+            if (isUploadedImages()){
+                imagesUploaded = true
+            } else {
+                //Poner error de las imagenes
+                mtvErrorImagenes.visibility = View.VISIBLE
+            }
+
+            //Validar el titulo
+            if (tietTitle.text.toString().trim().isTitleOrDescription()){
+                tilTitle.removeError()
+                titleValid = true
+            } else {
+                tietTitle.setText("")
+                tilTitle.applyError(getString(R.string.msg_error_title_producto))
+            }
+            //Validar la descripción
+            if (tietDescription.text.toString().trim().isTitleOrDescription()){
+                descriptionValid = true
+                tilDescription.removeError()
+            } else {
+                tietDescription.setText("")
+                tilDescription.applyError(getString(R.string.msg_error_description_producto))
+            }
+            //Validar la categoría
+            if (tietCategory.text.toString().trim().isNotEmpty()){
+                categoryValid = true
+                tilCategory.removeError()
+            } else {
+                tietCategory.setText("")
+                tilCategory.applyError(getString(R.string.msg_error_category_producto))
+            }
+            //Validar el precio
         }
+
+        return imagesUploaded
+                && titleValid
+                && descriptionValid
+                && categoryValid
+                && priceValid
     }
 
     /**
