@@ -69,6 +69,7 @@ class PostProductActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ){
             if (it.resultCode == RESULT_OK){
+                fileImage1 = File(photoAbsolutePath1!!)
                 Picasso.get().load(photoPath1).into(
                     binding.ivImgPost1
                 )
@@ -86,6 +87,7 @@ class PostProductActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ){
             if (it.resultCode == RESULT_OK){
+                fileImage2 = File(photoAbsolutePath2!!)
                 Picasso.get().load(photoPath2).into(
                     binding.ivImgPost2
                 )
@@ -103,6 +105,7 @@ class PostProductActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ){
             if (it.resultCode == RESULT_OK){
+                fileImage3 = File(photoAbsolutePath3!!)
                 Picasso.get().load(photoPath3).into(
                     binding.ivImgPost3
                 )
@@ -120,6 +123,7 @@ class PostProductActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ){
             if (it.resultCode == RESULT_OK){
+                fileImage4 = File(photoAbsolutePath4!!)
                 Picasso.get().load(photoPath4).into(
                     binding.ivImgPost4
                 )
