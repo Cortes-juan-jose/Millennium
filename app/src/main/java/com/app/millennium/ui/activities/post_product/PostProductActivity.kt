@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.view.isVisible
 import com.app.millennium.R
 import com.app.millennium.core.common.*
 import com.app.millennium.core.utils.FileUtil
@@ -71,6 +73,11 @@ class PostProductActivity : AppCompatActivity() {
                     binding.ivImgPost1
                 )
                 binding.ivImgPost1.tag = Constant.TAG_NOT_DEFAULT
+                /**
+                 * Quitamos el textview del error
+                 */
+                if (binding.mtvErrorImagenes.isVisible)
+                    binding.mtvErrorImagenes.visibility = View.GONE
             }
         }
 
@@ -83,6 +90,11 @@ class PostProductActivity : AppCompatActivity() {
                     binding.ivImgPost2
                 )
                 binding.ivImgPost2.tag = Constant.TAG_NOT_DEFAULT
+                /**
+                 * Quitamos el textview del error
+                 */
+                if (binding.mtvErrorImagenes.isVisible)
+                    binding.mtvErrorImagenes.visibility = View.GONE
             }
         }
 
@@ -95,6 +107,11 @@ class PostProductActivity : AppCompatActivity() {
                     binding.ivImgPost3
                 )
                 binding.ivImgPost3.tag = Constant.TAG_NOT_DEFAULT
+                /**
+                 * Quitamos el textview del error
+                 */
+                if (binding.mtvErrorImagenes.isVisible)
+                    binding.mtvErrorImagenes.visibility = View.GONE
             }
         }
 
@@ -107,6 +124,11 @@ class PostProductActivity : AppCompatActivity() {
                     binding.ivImgPost4
                 )
                 binding.ivImgPost4.tag = Constant.TAG_NOT_DEFAULT
+                /**
+                 * Quitamos el textview del error
+                 */
+                if (binding.mtvErrorImagenes.isVisible)
+                    binding.mtvErrorImagenes.visibility = View.GONE
             }
         }
 
@@ -151,6 +173,11 @@ class PostProductActivity : AppCompatActivity() {
                      * o no la tiene
                      */
                     binding.ivImgPost1.tag = Constant.TAG_NOT_DEFAULT
+                    /**
+                     * Y por último quitamos el textview del error
+                     */
+                    if (binding.mtvErrorImagenes.isVisible)
+                        binding.mtvErrorImagenes.visibility = View.GONE
 
                 } catch (e: Exception){
                     /**
@@ -199,6 +226,11 @@ class PostProductActivity : AppCompatActivity() {
                      * o no la tiene
                      */
                     binding.ivImgPost2.tag = Constant.TAG_NOT_DEFAULT
+                    /**
+                     * Y por último quitamos el textview del error
+                     */
+                    if (binding.mtvErrorImagenes.isVisible)
+                        binding.mtvErrorImagenes.visibility = View.GONE
 
                 } catch (e: Exception){
                     /**
@@ -246,6 +278,11 @@ class PostProductActivity : AppCompatActivity() {
                      * o no la tiene
                      */
                     binding.ivImgPost3.tag = Constant.TAG_NOT_DEFAULT
+                    /**
+                     * Y por último quitamos el textview del error
+                     */
+                    if (binding.mtvErrorImagenes.isVisible)
+                        binding.mtvErrorImagenes.visibility = View.GONE
 
                 } catch (e: Exception){
                     /**
@@ -293,6 +330,11 @@ class PostProductActivity : AppCompatActivity() {
                      * o no la tiene
                      */
                     binding.ivImgPost4.tag = Constant.TAG_NOT_DEFAULT
+                    /**
+                     * Y por último quitamos el textview del error
+                     */
+                    if (binding.mtvErrorImagenes.isVisible)
+                        binding.mtvErrorImagenes.visibility = View.GONE
 
                 } catch (e: Exception){
                     /**
@@ -469,7 +511,7 @@ class PostProductActivity : AppCompatActivity() {
     private fun configPostProduct() {
         binding.btnPost.setOnClickListener {
             this@PostProductActivity.reload()
-            validarInputs()
+            validateFields()
         }
     }
 
@@ -826,7 +868,29 @@ class PostProductActivity : AppCompatActivity() {
     /**
      * Metodo que valida todos los inputs
      */
-    private fun validarInputs() {
-        toast("Validando inputs")
+    private fun validateFields() {
+        if (isUploadedImages()){
+            //Quitar el error de las imagenes vacías
+            toast("imagen cargada")
+        } else {
+            //Poner error de las imagenes
+            binding.mtvErrorImagenes.visibility = View.VISIBLE
+        }
+    }
+
+    /**
+     * Metodo que valida si hay alguna imagen cargada
+     * mediante el tag del imageview
+     */
+    private fun isUploadedImages(): Boolean {
+        if (
+            binding.ivImgPost1.tag.equals(Constant.TAG_DEFAULT)
+            && binding.ivImgPost2.tag.equals(Constant.TAG_DEFAULT)
+            && binding.ivImgPost3.tag.equals(Constant.TAG_DEFAULT)
+            && binding.ivImgPost4.tag.equals(Constant.TAG_DEFAULT)
+        ) {
+            return false
+        }
+        return true
     }
 }

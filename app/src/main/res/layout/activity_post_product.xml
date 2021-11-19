@@ -36,9 +36,9 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:layout_gravity="center"
+                android:text="@string/mtv_debes_subir_al_menos_1_imagen"
                 android:visibility="gone"
                 tools:visibility="visible"
-                tools:text="Texto de prueba"
                 android:textColor="@color/red"/>
 
             <!--IMAGENES-->

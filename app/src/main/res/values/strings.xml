@@ -94,6 +94,7 @@
 
     <!--String sin especificar-->
     <string name="sel_sin_especificar">---</string>
+    <string name="mtv_debes_subir_al_menos_1_imagen">Debes subir al menos 1 imagen</string>
 
 
 </resources>
