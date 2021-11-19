@@ -394,7 +394,7 @@ class PostProductActivity : AppCompatActivity() {
         setTagDefaultImages()
         binding.apply {
 
-            cvImgPost1.setOnClickListener {
+            ivImgPost1.setOnClickListener {
                 this@PostProductActivity.reload()
                 resultCodeImageSalected = Constant.RESULT_CODE_CV_IMG_POST_1
                 configBottomSheetOption()

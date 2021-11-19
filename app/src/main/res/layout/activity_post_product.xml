@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingVertical="@dimen/max_padding_view">
+                android:layout_marginVertical="@dimen/max_padding_view">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cv_img_post_1"
@@ -54,15 +54,14 @@
                     android:layout_height="@dimen/height_card_view_img_info_producto"
                     android:layout_margin="@dimen/margin_cardview_img_info_producto"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/colorSecondaryDark"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="@dimen/max_padding_view">
 
                     <ImageView
                         android:id="@+id/iv_img_post_1"
                         style="@style/ImageViewIconCameraColor"
-                        android:layout_width="@dimen/size_ic_camera"
-                        android:layout_height="@dimen/size_ic_camera"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:scaleType="centerCrop"
                         android:contentDescription="@string/cd_ic_camera" />
@@ -74,15 +73,14 @@
                     android:layout_height="@dimen/height_card_view_img_info_producto"
                     android:layout_margin="@dimen/margin_cardview_img_info_producto"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/colorSecondaryDark"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="@dimen/max_padding_view">
 
                     <ImageView
                         android:id="@+id/iv_img_post_2"
                         style="@style/ImageViewIconCameraColor"
-                        android:layout_width="@dimen/size_ic_camera"
-                        android:layout_height="@dimen/size_ic_camera"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:scaleType="centerCrop"
                         android:contentDescription="@string/cd_ic_camera" />
@@ -94,15 +92,14 @@
                     android:layout_height="@dimen/height_card_view_img_info_producto"
                     android:layout_margin="@dimen/margin_cardview_img_info_producto"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/colorSecondaryDark"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="@dimen/max_padding_view">
 
                     <ImageView
                         android:id="@+id/iv_img_post_3"
                         style="@style/ImageViewIconCameraColor"
-                        android:layout_width="@dimen/size_ic_camera"
-                        android:layout_height="@dimen/size_ic_camera"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:scaleType="centerCrop"
                         android:contentDescription="@string/cd_ic_camera" />
@@ -114,15 +111,14 @@
                     android:layout_height="@dimen/height_card_view_img_info_producto"
                     android:layout_margin="@dimen/margin_cardview_img_info_producto"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/colorSecondaryDark"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="@dimen/max_padding_view">
 
                     <ImageView
                         android:id="@+id/iv_img_post_4"
                         style="@style/ImageViewIconCameraColor"
-                        android:layout_width="@dimen/size_ic_camera"
-                        android:layout_height="@dimen/size_ic_camera"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:scaleType="centerCrop"
                         android:contentDescription="@string/cd_ic_camera" />

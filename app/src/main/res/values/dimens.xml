@@ -24,7 +24,6 @@
     <dimen name="margin_bottom_scrollview_info_producto">70dp</dimen>
     <dimen name="height_card_view_img_info_producto">70dp</dimen>
     <dimen name="margin_cardview_img_info_producto">2dp</dimen>
-    <dimen name="size_ic_camera">60dp</dimen>
     <dimen name="width_til_price">80dp</dimen>
     <dimen name="margin_top_mtv_info_producto">15dp</dimen>
     <dimen name="padding_bottom_view_bottom_sheet_options_source_images">50dp</dimen>

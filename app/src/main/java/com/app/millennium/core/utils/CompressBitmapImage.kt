@@ -6,7 +6,6 @@ import id.zelory.compressor.Compressor
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
-import java.util.*
 
 /*
  * Objeto que permite comprimir imagenes y transformarlas a bitmap
@@ -19,7 +18,7 @@ object CompressBitmapImage {
         width: Int,
         height: Int
     ): ByteArray {
-        val file_thumb_path = File(path)
+        val file_thumb_path = File(path!!)
         var thumb_bitmap: Bitmap? = null
         try {
             thumb_bitmap = Compressor(ctx)
