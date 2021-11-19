@@ -1,6 +1,7 @@
 package com.app.millennium.ui.activities.post_product
 
 import android.Manifest
+import android.app.UiModeManager
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -23,6 +24,7 @@ import com.app.millennium.R
 import com.app.millennium.core.common.*
 import com.app.millennium.core.utils.FileUtil
 import com.app.millennium.databinding.ActivityPostProductBinding
+import com.app.millennium.databinding.ViewBottomSheetOptionsImagesSelectedBinding
 import com.app.millennium.databinding.ViewBottomSheetOptionsSourceImagesBinding
 import com.app.millennium.ui.activities.home.HomeActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -683,7 +685,65 @@ class PostProductActivity : AppCompatActivity() {
      * o editar una imagen ya capturada
      */
     private fun openBottomSheetDialogOptionsEditOrDelete() {
-        toast("Abriendo editar o eliminar")
+        //Creamos el bottom sheet dialog con el estilo qeu predefinimos
+        //para los bottom sheet dialog
+        val bottomSheetDialogOptionsImagesSelected =
+            BottomSheetDialog(this, R.style.BottomSheetTheme)
+        //Obtenemos la vista del layout bottomsheetDialog y la bindeamos
+        var bindingBottomSheetDialog: ViewBottomSheetOptionsImagesSelectedBinding? =
+            ViewBottomSheetOptionsImagesSelectedBinding.inflate(
+                LayoutInflater.from(this)
+            )
+
+        //Le seteamos la vista al BottomSheetDialog creado
+        bottomSheetDialogOptionsImagesSelected.setContentView(
+            bindingBottomSheetDialog!!.root
+        )
+
+        //Y lo mostramos
+        bottomSheetDialogOptionsImagesSelected.show()
+
+        bindingBottomSheetDialog.apply {
+
+            mtvEdit.setOnClickListener {
+                //Cerramos este dialog
+                bottomSheetDialogOptionsImagesSelected.dismiss()
+                //Quitamos el binding
+                bindingBottomSheetDialog = null
+                //Abrimos el bottom sheet de las opciones de la camara y la galeria
+                openBottomSheetDialogOptionsCameraOrGallery()
+            }
+            mtvDelete.setOnClickListener {
+                //Cerramos este dialog
+                bottomSheetDialogOptionsImagesSelected.dismiss()
+                //Quitamos el binding
+                bindingBottomSheetDialog = null
+                //Quitamos la imagen
+                when (resultCodeImageSalected){
+                    Constant.RESULT_CODE_CV_IMG_POST_1 -> {
+                        binding.ivImgPost1.setImageResource(R.drawable.ic_camera)
+                        binding.ivImgPost1.tag = Constant.TAG_DEFAULT
+                        fileImage1 = null
+                    }
+                    Constant.RESULT_CODE_CV_IMG_POST_2 -> {
+                        binding.ivImgPost2.setImageResource(R.drawable.ic_camera)
+                        binding.ivImgPost2.tag = Constant.TAG_DEFAULT
+                        fileImage2 = null
+                    }
+                    Constant.RESULT_CODE_CV_IMG_POST_3 -> {
+                        binding.ivImgPost3.setImageResource(R.drawable.ic_camera)
+                        binding.ivImgPost3.tag = Constant.TAG_DEFAULT
+                        fileImage3 = null
+                    }
+                    Constant.RESULT_CODE_CV_IMG_POST_4 -> {
+                        binding.ivImgPost4.setImageResource(R.drawable.ic_camera)
+                        binding.ivImgPost4.tag = Constant.TAG_DEFAULT
+                        fileImage4 = null
+                    }
+                }
+                toast(getString(R.string.msg_imagen_eliminada))
+            }
+        }
     }
 
     /**

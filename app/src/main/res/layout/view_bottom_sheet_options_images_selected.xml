@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cl_bottom_sheet_options_images_selected">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtv_edit"
+            android:textColor="@color/black"
+            android:background="@color/white"
+            android:fontFamily="@font/balsami_bold"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:layout_width="@dimen/mathParent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="@string/mtv_editar" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtv_delete"
+            android:textColor="@color/white"
+            android:fontFamily="@font/balsami_bold"
+            android:gravity="center"
+            android:background="@color/red"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:layout_width="@dimen/mathParent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="@string/mtv_eliminar" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
