@@ -770,21 +770,29 @@ class PostProductActivity : AppCompatActivity() {
                         binding.ivImgPost1.setImageResource(R.drawable.ic_camera)
                         binding.ivImgPost1.tag = Constant.TAG_DEFAULT
                         fileImage1 = null
+                        photoPath1 = null
+                        photoAbsolutePath1 = null
                     }
                     Constant.RESULT_CODE_CV_IMG_POST_2 -> {
                         binding.ivImgPost2.setImageResource(R.drawable.ic_camera)
                         binding.ivImgPost2.tag = Constant.TAG_DEFAULT
                         fileImage2 = null
+                        photoPath2 = null
+                        photoAbsolutePath2 = null
                     }
                     Constant.RESULT_CODE_CV_IMG_POST_3 -> {
                         binding.ivImgPost3.setImageResource(R.drawable.ic_camera)
                         binding.ivImgPost3.tag = Constant.TAG_DEFAULT
                         fileImage3 = null
+                        photoPath3 = null
+                        photoAbsolutePath3 = null
                     }
                     Constant.RESULT_CODE_CV_IMG_POST_4 -> {
                         binding.ivImgPost4.setImageResource(R.drawable.ic_camera)
                         binding.ivImgPost4.tag = Constant.TAG_DEFAULT
                         fileImage4 = null
+                        photoPath4 = null
+                        photoAbsolutePath4 = null
                     }
                 }
                 toast(getString(R.string.msg_info_imagen_eliminada))
