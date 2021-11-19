@@ -189,6 +189,7 @@ class PostProductActivity : AppCompatActivity() {
                             binding.mtvErrorImagenes.visibility = View.GONE
                     } else {
                         toast(getString(R.string.msg_error_archivo_no_permitido))
+                        fileImage1 = null
                     }
 
                 } catch (e: Exception){
@@ -254,6 +255,7 @@ class PostProductActivity : AppCompatActivity() {
                             binding.mtvErrorImagenes.visibility = View.GONE
                     } else {
                         toast(getString(R.string.msg_error_archivo_no_permitido))
+                        fileImage2 = null
                     }
 
                 } catch (e: Exception){
@@ -318,6 +320,7 @@ class PostProductActivity : AppCompatActivity() {
                             binding.mtvErrorImagenes.visibility = View.GONE
                     } else {
                         toast(getString(R.string.msg_error_archivo_no_permitido))
+                        fileImage3 = null
                     }
 
                 } catch (e: Exception){
@@ -382,6 +385,7 @@ class PostProductActivity : AppCompatActivity() {
                             binding.mtvErrorImagenes.visibility = View.GONE
                     } else {
                         toast(getString(R.string.msg_error_archivo_no_permitido))
+                        fileImage4 = null
                     }
 
                 } catch (e: Exception){
