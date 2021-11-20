@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
@@ -463,6 +465,7 @@ class PostProductActivity : AppCompatActivity() {
         configImages() //Seleccionar imagenes
         configInputsSelectors() //Campos selectores
         configPostProduct() //Boton para publicar el producto
+        configEventTextWatcherPrice()
     }
 
     private fun initObservables() {
@@ -687,6 +690,44 @@ class PostProductActivity : AppCompatActivity() {
         listViewOptions.setOnItemClickListener { _, _, pos, _ ->
             binding.tietProductStatus.setText(listOptions[pos])
             adProductStatus.dismiss()
+        }
+    }
+
+    private fun configEventTextWatcherPrice() {
+        binding.apply {
+            tietPrice.afterTextChanged {
+                //si se introduce un punto al principio se le pondra un 0 delante
+                if (it == ".") {
+                    tietPrice.setText("0.")
+                    //y el cursor se va al final
+                    tietPrice.setSelection(tietPrice.text.toString().length)
+                }
+                //si se introduce dos 0 entonces no pondrá el segundo si no que pondrá un 0.
+                else if (it == "00") {
+                    tietPrice.setText("0.")
+                    //y el cursor se va al final
+                    tietPrice.setSelection(tietPrice.text.toString().length)
+                }
+                //validar que solo admita 2 decimales
+                else if (tietPrice.text.toString().contains(".")) {
+                    //si el texto que se ha introducido ya tiene un punto verificamos lo deseado
+                    if (it.substring(it.lastIndexOf("."), it.length - 1).length > 2) {
+                        tietPrice.setText(it.substring(0, it.length - 1))
+                        //y el cursor se va al final
+                        tietPrice.setSelection(tietPrice.text.toString().length)
+                    }
+                }
+                //validar que el punto no se pueda poner al final
+                //Primero confirmamos si tiene 12 caracteres
+                if (it.length == 12) {
+                    //Si tiene 12 caracteres confirmamos si tiene un punto al final
+                    if (it[11] == '.') {
+                        tietPrice.setText(it.substring(0, it.length - 1))
+                        //y el cursor se va al final
+                        tietPrice.setSelection(tietPrice.text.toString().length)
+                    }
+                }
+            }
         }
     }
 
@@ -1032,6 +1073,15 @@ class PostProductActivity : AppCompatActivity() {
                 tilCategory.applyError(getString(R.string.msg_error_category_producto))
             }
             //Validar el precio
+            if (tietPrice.text.toString().isNotEmpty()
+                && tietPrice.text.toString()[tietPrice.text.toString().length-1]!='.'
+            ){
+                priceValid = true
+                tilPrice.removeError()
+            } else {
+                tietPrice.setText("")
+                tilPrice.applyError(getString(R.string.msg_error_price_producto))
+            }
         }
 
         return imagesUploaded

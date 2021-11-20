@@ -5,10 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.app.millennium.core.utils.FileUtil
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.io.File
 import java.util.regex.Matcher
@@ -146,4 +149,22 @@ fun File.permitted(): Boolean{
         Constant.FORMAT_PNG -> true
         else -> false
     }
+}
+
+/**
+ * Funcion de extension que lanza un evento después de introducir
+ * texto en un edittext y lo retorna este valor en una lambda
+ */
+fun TextInputEditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+    this.addTextChangedListener(object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(editable: Editable?) {
+            afterTextChanged.invoke(editable.toString())
+        }
+    })
 }
