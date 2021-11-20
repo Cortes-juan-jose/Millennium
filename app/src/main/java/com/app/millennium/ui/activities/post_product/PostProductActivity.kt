@@ -502,7 +502,7 @@ class PostProductActivity : AppCompatActivity() {
 
                     } else {
                         dialogLoading.dismiss()
-                        toast("Error al subir la imagen")
+                        toast(getString(R.string.msg_error_guardar_imagen))
                     }
                 }
             }
@@ -517,7 +517,7 @@ class PostProductActivity : AppCompatActivity() {
                         viewModel.getUrlImage(Constant.RESULT_CODE_CV_IMG_POST_2)
                     } else {
                         dialogLoading.dismiss()
-                        toast("Error al subir la imagen")
+                        toast(getString(R.string.msg_error_guardar_imagen))
                     }
                 }
             }
@@ -532,7 +532,7 @@ class PostProductActivity : AppCompatActivity() {
                         viewModel.getUrlImage(Constant.RESULT_CODE_CV_IMG_POST_3)
                     } else {
                         dialogLoading.dismiss()
-                        toast("Error al subir la imagen")
+                        toast(getString(R.string.msg_error_guardar_imagen))
                     }
                 }
             }
@@ -548,7 +548,7 @@ class PostProductActivity : AppCompatActivity() {
                         viewModel.getUrlImage(Constant.RESULT_CODE_CV_IMG_POST_4)
                     } else {
                         dialogLoading.dismiss()
-                        toast("Error al subir la imagen")
+                        toast(getString(R.string.msg_error_guardar_imagen))
                     }
                 }
             }
@@ -694,13 +694,14 @@ class PostProductActivity : AppCompatActivity() {
             {
                 it?.let{
                     it.addOnCompleteListener { comp ->
+                        dialogLoading.dismiss()
                         if (comp.isSuccessful){
                             //Se obtiene el id del producto para setearlo
-
+                                toast(getString(R.string.msg_info_producto_publicado))
+                            onBackPressed()
                         } else {
-                            toast("Producto no subido")
+                            toast(getString(R.string.msg_error_producto_publicado))
                         }
-                        dialogLoading.dismiss()
                     }
                     it.addOnFailureListener { e ->
                         toast(e.message!!)
