@@ -9,8 +9,6 @@ object Constant {
     const val PRIMARY_COLOR_GREEN : Int = 135
     const val PRIMARY_COLOR_BLUE : Int = 135
 
-    const val COLLECTION_USERS: String = "Users"
-
     const val TAG_DEFAULT: String = "default"
     const val TAG_NOT_DEFAULT: String = "no default"
 
@@ -27,4 +25,10 @@ object Constant {
     const val FORMAT_JPG: String = ".jpg"
     const val FORMAT_JPEG: String = ".jpeg"
     const val FORMAT_PNG: String = ".png"
+
+    const val COLLECTION_USERS: String = "Users"
+
+    const val STORAGE_IMAGES : String = "images"
+    const val WIDTH_IMAGE_STORAGE: Int = 500
+    const val HEIGHT_IMAGE_STORAGE: Int = 500
 }

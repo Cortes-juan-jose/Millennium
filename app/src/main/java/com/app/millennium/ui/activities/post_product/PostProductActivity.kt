@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -21,6 +22,7 @@ import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import com.app.millennium.R
 import com.app.millennium.core.common.*
+import com.app.millennium.core.utils.CompressBitmapImage
 import com.app.millennium.core.utils.FileUtil
 import com.app.millennium.databinding.ActivityPostProductBinding
 import com.app.millennium.databinding.ViewBottomSheetOptionsImagesSelectedBinding
@@ -34,6 +36,7 @@ import java.util.*
 class PostProductActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPostProductBinding
+    private val viewModel : PostProductViewModel by viewModels()
 
     //Ficheros para almacenar las imagenes
     private var fileImage1: File? = null
@@ -458,15 +461,144 @@ class PostProductActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Inicializar todos los componentes de la ui
+     */
     private fun initUI(){
         binding.ivBack.setOnClickListener {onBackPressed()} //Boton para ir hacia atras
         configImages() //Seleccionar imagenes
         configInputsSelectors() //Campos selectores
         configPostProduct() //Boton para publicar el producto
-        configEventTextWatcherPrice()
+        configEventTextWatcherPrice() //Evento para el campo del precio
     }
 
+    /**
+     * Metodo que lanza los observables del viewmodel asociado
+     */
     private fun initObservables() {
+
+        //Observer para cuando se guarde la primera imagen
+        viewModel.saveImage1.observe(
+            this,
+            {
+                it.addOnCompleteListener { task ->
+                    if (task.isSuccessful){
+                        //Si la primera imagen ha sido subida, verificamos la 2, 3, 4
+                        when {
+                            fileImage2.isNotNull() -> {
+                                //Construimos la imagen en bytes
+                                val imageByte = CompressBitmapImage.getImage(
+                                    this,
+                                    fileImage2?.path,
+                                    Constant.WIDTH_IMAGE_STORAGE,
+                                    Constant.HEIGHT_IMAGE_STORAGE)
+                                //y la guardamos
+                                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_2)
+                            }
+                            fileImage3.isNotNull() -> {
+                                //Construimos la imagen en bytes
+                                val imageByte = CompressBitmapImage.getImage(
+                                    this,
+                                    fileImage3?.path,
+                                    Constant.WIDTH_IMAGE_STORAGE,
+                                    Constant.HEIGHT_IMAGE_STORAGE)
+                                //y la guardamos
+                                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_3)
+                            }
+                            fileImage4.isNotNull() -> {
+                                //Construimos la imagen en bytes
+                                val imageByte = CompressBitmapImage.getImage(
+                                    this,
+                                    fileImage4?.path,
+                                    Constant.WIDTH_IMAGE_STORAGE,
+                                    Constant.HEIGHT_IMAGE_STORAGE)
+                                //y la guardamos
+                                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_4)
+                            }
+                        }
+                    } else {
+                        toast("Error al subir la imagen")
+                    }
+                }
+            }
+        )
+
+        //Observer para cuando se guarde la segunda imagen
+        viewModel.saveImage2.observe(
+            this,
+            {
+                it.addOnCompleteListener { task ->
+                    if (task.isSuccessful){
+                        //Si la segunda imagen ha sido subida, verificamos la 3, 4
+                        when {
+                            fileImage3.isNotNull() -> {
+                                //Construimos la imagen en bytes
+                                val imageByte = CompressBitmapImage.getImage(
+                                    this,
+                                    fileImage3?.path,
+                                    Constant.WIDTH_IMAGE_STORAGE,
+                                    Constant.HEIGHT_IMAGE_STORAGE)
+                                //y la guardamos
+                                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_3)
+                            }
+                            fileImage4.isNotNull() -> {
+                                //Construimos la imagen en bytes
+                                val imageByte = CompressBitmapImage.getImage(
+                                    this,
+                                    fileImage4?.path,
+                                    Constant.WIDTH_IMAGE_STORAGE,
+                                    Constant.HEIGHT_IMAGE_STORAGE)
+                                //y la guardamos
+                                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_4)
+                            }
+                        }
+                    } else {
+                        toast("Error al subir la imagen")
+                    }
+                }
+            }
+        )
+
+        //Observer para cuando se guarde la tercera imagen
+        viewModel.saveImage3.observe(
+            this,
+            {
+                it.addOnCompleteListener { task ->
+                    if (task.isSuccessful){
+                        //Si la tercera imagen ha sido subida, verificamos la 4
+                        when {
+                            fileImage4.isNotNull() -> {
+                                //Construimos la imagen en bytes
+                                val imageByte = CompressBitmapImage.getImage(
+                                    this,
+                                    fileImage4?.path,
+                                    Constant.WIDTH_IMAGE_STORAGE,
+                                    Constant.HEIGHT_IMAGE_STORAGE)
+                                //y la guardamos
+                                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_4)
+                            }
+                        }
+                    } else {
+                        toast("Error al subir la imagen")
+                    }
+                }
+            }
+        )
+
+        //Observer para cuando se guarde la cuarta imagen
+        viewModel.saveImage4.observe(
+            this,
+            {
+                it.addOnCompleteListener { task ->
+                    if (task.isSuccessful){
+                        //Si la cuarta imagen ha sido subida entonces yan han sido todas subidas
+                        toast("Imagenes subidas")
+                    } else {
+                        toast("Error al subir la imagen")
+                    }
+                }
+            }
+        )
 
     }
 
@@ -575,13 +707,6 @@ class PostProductActivity : AppCompatActivity() {
                 saveProduct()
             }
         }
-    }
-
-    /**
-     * Metodo que publica el producto
-     */
-    private fun saveProduct() {
-        //Primero guarda las imagenes en storage de firebase
     }
 
     /**
@@ -1115,5 +1240,67 @@ class PostProductActivity : AppCompatActivity() {
             return false
         }
         return true
+    }
+
+    /**
+     * Metodo que publica el producto
+     */
+    private fun saveProduct() {
+        //Primero guarda las imagenes en storage de firebase
+        saveImages()
+
+    }
+
+    private fun saveImages() {
+        //Si la primera imagen no es nula se guarda en firebase
+        when {
+            fileImage1.isNotNull() -> {
+                //Construimos la imagen en bytes
+                val imageByte = CompressBitmapImage.getImage(
+                    this,
+                    fileImage1?.path,
+                    Constant.WIDTH_IMAGE_STORAGE,
+                    Constant.HEIGHT_IMAGE_STORAGE)
+                //y la guardamos
+                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_1)
+                //Una vez subida se comprueba en el observable si la segunda imagen no es nula
+            }
+            //De lo contrario si la segunda imagen no es nula se guarda en firebase
+            fileImage2.isNotNull() -> {
+                //Construimos la imagen en bytes
+                val imageByte = CompressBitmapImage.getImage(
+                    this,
+                    fileImage2?.path,
+                    Constant.WIDTH_IMAGE_STORAGE,
+                    Constant.HEIGHT_IMAGE_STORAGE)
+                //y la guardamos
+                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_2)
+                //Una vez subida se comprueba en el observable si la tercera imagen no es nula
+            }
+            //De lo contrario si la tercera imagen no es nula se guarda en firebase
+            fileImage3.isNotNull() -> {
+                //Construimos la imagen en bytes
+                val imageByte = CompressBitmapImage.getImage(
+                    this,
+                    fileImage3?.path,
+                    Constant.WIDTH_IMAGE_STORAGE,
+                    Constant.HEIGHT_IMAGE_STORAGE)
+                //y la guardamos
+                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_3)
+                //Una vez subida se comprueba en el observable si la cuarta imagen no es nula
+            }
+            //De lo contrario si la tercera imagen no es nula se guarda en firebase
+            fileImage4.isNotNull() -> {
+                //Construimos la imagen en bytes
+                val imageByte = CompressBitmapImage.getImage(
+                    this,
+                    fileImage4?.path,
+                    Constant.WIDTH_IMAGE_STORAGE,
+                    Constant.HEIGHT_IMAGE_STORAGE)
+                //y la guardamos
+                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_4)
+                //Al ser la ultima ya no se comprobara mas imagenes
+            }
+        }
     }
 }
