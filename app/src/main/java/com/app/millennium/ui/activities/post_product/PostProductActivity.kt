@@ -7,8 +7,6 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
@@ -570,8 +568,20 @@ class PostProductActivity : AppCompatActivity() {
     private fun configPostProduct() {
         binding.btnPost.setOnClickListener {
             this@PostProductActivity.reload()
-            validateFields()
+            if (validateFields()){
+                //Mostrar una alerta de carga
+                //publicar producto
+                toast("Publicando producto...")
+                saveProduct()
+            }
         }
+    }
+
+    /**
+     * Metodo que publica el producto
+     */
+    private fun saveProduct() {
+        //Primero guarda las imagenes en storage de firebase
     }
 
     /**

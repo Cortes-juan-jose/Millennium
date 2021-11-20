@@ -64,8 +64,6 @@ class RegisterActivity : AppCompatActivity() {
                         tietEmail.text.toString(),
                         tietConfirmarPassword.text.toString()
                     )
-                } else {
-                    toast("Datos incorrectos")
                 }
             }
         }
