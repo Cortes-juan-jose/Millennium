@@ -27,6 +27,7 @@ object Constant {
     const val FORMAT_PNG: String = ".png"
 
     const val COLLECTION_USERS: String = "Users"
+    const val COLLECTION_PRODUCTS: String = "Products"
 
     const val STORAGE_IMAGES : String = "images"
     const val WIDTH_IMAGE_STORAGE: Int = 500

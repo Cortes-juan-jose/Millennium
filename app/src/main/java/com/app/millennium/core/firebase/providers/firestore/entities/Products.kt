@@ -5,8 +5,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 /**
- * Objeto que hace referencia a la coleccion users
+ * Objeto que hace referencia a la coleccion products
  */
-object Users {
-    val db = Firebase.firestore.collection(Constant.COLLECTION_USERS)
+object Products {
+    val db = Firebase.firestore.collection(Constant.COLLECTION_PRODUCTS)
 }

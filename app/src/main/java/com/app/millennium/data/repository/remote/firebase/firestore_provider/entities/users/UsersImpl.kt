@@ -15,8 +15,8 @@ class UsersImpl: Users {
     /**
      * Meetodo para añadir un usuario a la db
      */
-    override suspend fun save(user: User): Task<Void>? =
-        user.id?.let { db.document(it).set(user) }
+    override suspend fun save(user: User): Task<Void> =
+        user.id?.let { db.document(it).set(user) } as Task<Void>
 
     override suspend fun get(id: String): Task<DocumentSnapshot> =
         db.document(id).get()

@@ -24,12 +24,14 @@ import com.app.millennium.R
 import com.app.millennium.core.common.*
 import com.app.millennium.core.utils.CompressBitmapImage
 import com.app.millennium.core.utils.FileUtil
+import com.app.millennium.data.model.Product
 import com.app.millennium.databinding.ActivityPostProductBinding
 import com.app.millennium.databinding.ViewBottomSheetOptionsImagesSelectedBinding
 import com.app.millennium.databinding.ViewBottomSheetOptionsSourceImagesBinding
 import com.app.millennium.ui.activities.home.HomeActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
+import dmax.dialog.SpotsDialog
 import java.io.File
 import java.util.*
 
@@ -61,6 +63,11 @@ class PostProductActivity : AppCompatActivity() {
      * input de las imágenes se ha pulsado
      */
     private var resultCodeImageSalected: Int = 0
+
+    //Products modelo
+    private lateinit var product: Product
+    //AlertDialog
+    private lateinit var dialogLoading: android.app.AlertDialog
 
     /**
      * Launcher para abrir la camara y tener la lógica
@@ -465,6 +472,13 @@ class PostProductActivity : AppCompatActivity() {
      * Inicializar todos los componentes de la ui
      */
     private fun initUI(){
+
+        dialogLoading = SpotsDialog
+            .Builder()
+            .setContext(this)
+            .setCancelable(false)
+            .build()
+
         binding.ivBack.setOnClickListener {onBackPressed()} //Boton para ir hacia atras
         configImages() //Seleccionar imagenes
         configInputsSelectors() //Campos selectores
@@ -483,40 +497,11 @@ class PostProductActivity : AppCompatActivity() {
             {
                 it.addOnCompleteListener { task ->
                     if (task.isSuccessful){
-                        //Si la primera imagen ha sido subida, verificamos la 2, 3, 4
-                        when {
-                            fileImage2.isNotNull() -> {
-                                //Construimos la imagen en bytes
-                                val imageByte = CompressBitmapImage.getImage(
-                                    this,
-                                    fileImage2?.path,
-                                    Constant.WIDTH_IMAGE_STORAGE,
-                                    Constant.HEIGHT_IMAGE_STORAGE)
-                                //y la guardamos
-                                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_2)
-                            }
-                            fileImage3.isNotNull() -> {
-                                //Construimos la imagen en bytes
-                                val imageByte = CompressBitmapImage.getImage(
-                                    this,
-                                    fileImage3?.path,
-                                    Constant.WIDTH_IMAGE_STORAGE,
-                                    Constant.HEIGHT_IMAGE_STORAGE)
-                                //y la guardamos
-                                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_3)
-                            }
-                            fileImage4.isNotNull() -> {
-                                //Construimos la imagen en bytes
-                                val imageByte = CompressBitmapImage.getImage(
-                                    this,
-                                    fileImage4?.path,
-                                    Constant.WIDTH_IMAGE_STORAGE,
-                                    Constant.HEIGHT_IMAGE_STORAGE)
-                                //y la guardamos
-                                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_4)
-                            }
-                        }
+                        //Si se guarda la primera obtenemos la url
+                        viewModel.getUrlImage(Constant.RESULT_CODE_CV_IMG_POST_1)
+
                     } else {
+                        dialogLoading.dismiss()
                         toast("Error al subir la imagen")
                     }
                 }
@@ -529,30 +514,9 @@ class PostProductActivity : AppCompatActivity() {
             {
                 it.addOnCompleteListener { task ->
                     if (task.isSuccessful){
-                        //Si la segunda imagen ha sido subida, verificamos la 3, 4
-                        when {
-                            fileImage3.isNotNull() -> {
-                                //Construimos la imagen en bytes
-                                val imageByte = CompressBitmapImage.getImage(
-                                    this,
-                                    fileImage3?.path,
-                                    Constant.WIDTH_IMAGE_STORAGE,
-                                    Constant.HEIGHT_IMAGE_STORAGE)
-                                //y la guardamos
-                                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_3)
-                            }
-                            fileImage4.isNotNull() -> {
-                                //Construimos la imagen en bytes
-                                val imageByte = CompressBitmapImage.getImage(
-                                    this,
-                                    fileImage4?.path,
-                                    Constant.WIDTH_IMAGE_STORAGE,
-                                    Constant.HEIGHT_IMAGE_STORAGE)
-                                //y la guardamos
-                                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_4)
-                            }
-                        }
+                        viewModel.getUrlImage(Constant.RESULT_CODE_CV_IMG_POST_2)
                     } else {
+                        dialogLoading.dismiss()
                         toast("Error al subir la imagen")
                     }
                 }
@@ -565,20 +529,9 @@ class PostProductActivity : AppCompatActivity() {
             {
                 it.addOnCompleteListener { task ->
                     if (task.isSuccessful){
-                        //Si la tercera imagen ha sido subida, verificamos la 4
-                        when {
-                            fileImage4.isNotNull() -> {
-                                //Construimos la imagen en bytes
-                                val imageByte = CompressBitmapImage.getImage(
-                                    this,
-                                    fileImage4?.path,
-                                    Constant.WIDTH_IMAGE_STORAGE,
-                                    Constant.HEIGHT_IMAGE_STORAGE)
-                                //y la guardamos
-                                viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_4)
-                            }
-                        }
+                        viewModel.getUrlImage(Constant.RESULT_CODE_CV_IMG_POST_3)
                     } else {
+                        dialogLoading.dismiss()
                         toast("Error al subir la imagen")
                     }
                 }
@@ -592,10 +545,178 @@ class PostProductActivity : AppCompatActivity() {
                 it.addOnCompleteListener { task ->
                     if (task.isSuccessful){
                         //Si la cuarta imagen ha sido subida entonces yan han sido todas subidas
-                        toast("Imagenes subidas")
+                        viewModel.getUrlImage(Constant.RESULT_CODE_CV_IMG_POST_4)
                     } else {
+                        dialogLoading.dismiss()
                         toast("Error al subir la imagen")
                     }
+                }
+            }
+        )
+
+        //Observer para obtener la url image 1
+        viewModel.getUrlImage1.observe(
+            this,
+            {
+                it?.let { task ->
+                    task.addOnSuccessListener { uri ->
+                        uri?.let {
+                            product.image1 = uri.toString()
+                            //Si la primera imagen ha sido subida, verificamos la 2, 3, 4
+                            when {
+                                fileImage2.isNotNull() -> {
+                                    //Construimos la imagen en bytes
+                                    val imageByte = CompressBitmapImage.getImage(
+                                        this,
+                                        fileImage2?.path,
+                                        Constant.WIDTH_IMAGE_STORAGE,
+                                        Constant.HEIGHT_IMAGE_STORAGE)
+                                    //y la guardamos
+                                    viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_2)
+                                }
+                                fileImage3.isNotNull() -> {
+                                    //Construimos la imagen en bytes
+                                    val imageByte = CompressBitmapImage.getImage(
+                                        this,
+                                        fileImage3?.path,
+                                        Constant.WIDTH_IMAGE_STORAGE,
+                                        Constant.HEIGHT_IMAGE_STORAGE)
+                                    //y la guardamos
+                                    viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_3)
+                                }
+                                fileImage4.isNotNull() -> {
+                                    //Construimos la imagen en bytes
+                                    val imageByte = CompressBitmapImage.getImage(
+                                        this,
+                                        fileImage4?.path,
+                                        Constant.WIDTH_IMAGE_STORAGE,
+                                        Constant.HEIGHT_IMAGE_STORAGE)
+                                    //y la guardamos
+                                    viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_4)
+                                }
+                                else -> {
+                                    viewModel.getIdUser()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        )
+        //Observer para obtener la url image 1
+        viewModel.getUrlImage2.observe(
+            this,
+            {
+                it?.let { task ->
+                    task.addOnSuccessListener { uri ->
+                        uri?.let {
+                            product.image2 = uri.toString()
+
+                            //Si la segunda imagen ha sido subida, verificamos la 3, 4
+                            when {
+                                fileImage3.isNotNull() -> {
+                                    //Construimos la imagen en bytes
+                                    val imageByte = CompressBitmapImage.getImage(
+                                        this,
+                                        fileImage3?.path,
+                                        Constant.WIDTH_IMAGE_STORAGE,
+                                        Constant.HEIGHT_IMAGE_STORAGE)
+                                    //y la guardamos
+                                    viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_3)
+                                }
+                                fileImage4.isNotNull() -> {
+                                    //Construimos la imagen en bytes
+                                    val imageByte = CompressBitmapImage.getImage(
+                                        this,
+                                        fileImage4?.path,
+                                        Constant.WIDTH_IMAGE_STORAGE,
+                                        Constant.HEIGHT_IMAGE_STORAGE)
+                                    //y la guardamos
+                                    viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_4)
+                                }
+                                else -> { viewModel.getIdUser() }
+                            }
+                        }
+                    }
+                }
+            }
+        )
+        //Observer para obtener la url image 1
+        viewModel.getUrlImage3.observe(
+            this,
+            {
+                it?.let { task ->
+                    task.addOnSuccessListener { uri ->
+                        uri?.let {
+                            product.image3 = uri.toString()
+
+                            //Si la tercera imagen ha sido subida, verificamos la 4
+                            when {
+                                fileImage4.isNotNull() -> {
+                                    //Construimos la imagen en bytes
+                                    val imageByte = CompressBitmapImage.getImage(
+                                        this,
+                                        fileImage4?.path,
+                                        Constant.WIDTH_IMAGE_STORAGE,
+                                        Constant.HEIGHT_IMAGE_STORAGE)
+                                    //y la guardamos
+                                    viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_4)
+                                }
+                                else -> {viewModel.getIdUser()}
+                            }
+                        }
+                    }
+                }
+            }
+        )
+        //Observer para obtener la url image 1
+        viewModel.getUrlImage4.observe(
+            this,
+            {
+                it?.let { task ->
+                    task.addOnSuccessListener { uri ->
+                        uri?.let {
+                            product.image4 = uri.toString()
+                            viewModel.getIdUser()
+                        }
+                    }
+                    task.addOnFailureListener { e ->
+                        dialogLoading.dismiss()
+                        toast("${e.message}")
+                    }
+                }
+            }
+        )
+
+        //Observer que guarda el producto
+        viewModel.saveProduct.observe(
+            this,
+            {
+                it?.let{
+                    it.addOnCompleteListener { comp ->
+                        if (comp.isSuccessful){
+                            //Se obtiene el id del producto para setearlo
+
+                        } else {
+                            toast("Producto no subido")
+                        }
+                        dialogLoading.dismiss()
+                    }
+                    it.addOnFailureListener { e ->
+                        toast(e.message!!)
+                        dialogLoading.dismiss()
+                    }
+                }
+            }
+        )
+
+        //Observer que obtiene el id del usuario
+        viewModel.getIdUser.observe(
+            this,
+            {
+                it?.let {
+                    product.idUser = it
+                    viewModel.saveProduct(product)
                 }
             }
         )
@@ -698,13 +819,16 @@ class PostProductActivity : AppCompatActivity() {
      * Metodo para publicar un producto
      */
     private fun configPostProduct() {
-        binding.btnPost.setOnClickListener {
-            this@PostProductActivity.reload()
-            if (validateFields()){
-                //Mostrar una alerta de carga
-                //publicar producto
-                toast("Publicando producto...")
-                saveProduct()
+        binding.apply {
+            btnPost.setOnClickListener {
+                this@PostProductActivity.reload()
+                if (validateFields()){
+                    //Mostrar una alerta de carga
+                    dialogLoading.setMessage(getString(R.string.msg_alert_creando_producto))
+                    dialogLoading.show()
+                    //Guardamos el producto
+                    saveProduct()
+                }
             }
         }
     }
@@ -1246,12 +1370,23 @@ class PostProductActivity : AppCompatActivity() {
      * Metodo que publica el producto
      */
     private fun saveProduct() {
-        //Primero guarda las imagenes en storage de firebase
+        //Construir el producto ya que los campos están validados
+        binding.apply {
+            product = Product(
+                title = tietTitle.text.toString(),
+                description = tietDescription.text.toString(),
+                category = tietCategory.text.toString(),
+                price = tietPrice.text.toString().toDouble(),
+                negotiable = tietNegotiable.text.toString(),
+                productStatus = tietProductStatus.text.toString(),
+                timestamp = Date().time
+            )
+        }
         saveImages()
-
     }
 
     private fun saveImages() {
+
         //Si la primera imagen no es nula se guarda en firebase
         when {
             fileImage1.isNotNull() -> {

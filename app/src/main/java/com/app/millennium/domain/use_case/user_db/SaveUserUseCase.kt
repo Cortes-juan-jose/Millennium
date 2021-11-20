@@ -10,6 +10,6 @@ import com.google.android.gms.tasks.Task
 class SaveUserUseCase {
     private val repository = RepositoryDataSource.remote.firebase.firestore.users
 
-    suspend operator fun invoke(user: User): Task<Void>? =
+    suspend operator fun invoke(user: User): Task<Void> =
         repository.save(user)
 }

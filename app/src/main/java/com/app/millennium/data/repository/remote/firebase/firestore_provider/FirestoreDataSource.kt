@@ -1,5 +1,6 @@
 package com.app.millennium.data.repository.remote.firebase.firestore_provider
 
+import com.app.millennium.data.repository.remote.firebase.firestore_provider.entities.products.ProductsImpl
 import com.app.millennium.data.repository.remote.firebase.firestore_provider.entities.users.UsersImpl
 
 /**
@@ -7,4 +8,5 @@ import com.app.millennium.data.repository.remote.firebase.firestore_provider.ent
  */
 object FirestoreDataSource {
     val users = UsersImpl()
+    val products = ProductsImpl()
 }

@@ -6,6 +6,6 @@ import com.google.firebase.firestore.DocumentSnapshot
 
 interface Users {
 
-    suspend fun save(user: User) : Task<Void>?
+    suspend fun save(user: User) : Task<Void>
     suspend fun get(id:String) : Task<DocumentSnapshot>
 }

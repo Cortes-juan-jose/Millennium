@@ -52,6 +52,7 @@
 
     <string name="msg_alert_iniciando_sesion">Iniciando sesión…</string>
     <string name="msg_alert_creando_cuenta">Creando cuenta…</string>
+    <string name="msg_alert_creando_producto">Creando producto…</string>
 
     <string name="msg_timestamp_hace">Hace</string>
     <string name="msg_timestamp_un_momento">un momento</string>

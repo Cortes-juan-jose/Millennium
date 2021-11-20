@@ -9,7 +9,9 @@ import com.app.millennium.core.firebase.providers.storage.StorageProvider
  */
 object FirebaseProvider {
     val auth = AuthProvider.auth
+
     val usersCollection = FirestoreProvider.users
+    val productsCollection = FirestoreProvider.products
 
     val storage_images = StorageProvider.storage_images
 }
