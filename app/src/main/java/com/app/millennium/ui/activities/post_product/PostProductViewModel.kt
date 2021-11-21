@@ -7,11 +7,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.millennium.core.common.Constant
 import com.app.millennium.data.model.Product
+import com.app.millennium.data.model.User
 import com.app.millennium.domain.use_case.images_storage.GetUrlImageUseCase
 import com.app.millennium.domain.use_case.images_storage.SaveImageUseCase
 import com.app.millennium.domain.use_case.product_db.SaveProductUseCase
 import com.app.millennium.domain.use_case.user_auth.GetIdUseCase
+import com.app.millennium.domain.use_case.user_db.GetUserUseCase
+import com.app.millennium.domain.use_case.user_db.UpdateUploadedProductsUserUseCase
 import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.storage.UploadTask
 import kotlinx.coroutines.launch
 
@@ -25,6 +29,10 @@ class PostProductViewModel: ViewModel() {
     private val getUrlImageUseCase = GetUrlImageUseCase()
     //Caso de uso para obtener el id del usuario
     private val getIdUserUseCase = GetIdUseCase()
+    //Caso de uso para actualizar el campo uploadedProducts del usuario
+    private val updateUploadedProductsUserUseCase = UpdateUploadedProductsUserUseCase()
+    //Caso de uso para obtener el usuario que publica el producto
+    private val getUserUseCase = GetUserUseCase()
 
     //Live data guardar imagen
     private val _saveImage1 = MutableLiveData<UploadTask>()
@@ -59,6 +67,14 @@ class PostProductViewModel: ViewModel() {
     //Live data obtener id usuario
     private val _getIdUser = MutableLiveData<String>()
     val getIdUser: LiveData<String> get() = _getIdUser
+
+    //Live data actualizar uploadedProducts del usuario
+    private val _updateUploadedProducts = MutableLiveData<Task<Void>>()
+    val updateUploadedProducts: LiveData<Task<Void>> get() = _updateUploadedProducts
+    
+    //Live data obtener usuario que ha publicdo el producto
+    private val _getUser = MutableLiveData<Task<DocumentSnapshot>>()
+    val getUser: LiveData<Task<DocumentSnapshot>> get() = _getUser
 
     //Metodo guardar imagen
     fun saveImage(imageByteArray: ByteArray, resultCodeImageSalected: Int) {
@@ -140,9 +156,7 @@ class PostProductViewModel: ViewModel() {
         }
     }
 
-    /**
-     * Funcion para obtener el id de inicio de sesion
-     */
+     //Funcion para obtener el id de inicio de sesion
     fun getIdUser(){
         viewModelScope.launch {
             _getIdUser.postValue(
@@ -150,4 +164,23 @@ class PostProductViewModel: ViewModel() {
             )
         }
     }
+
+    //Metodo para actualizar el campo uploadedProducts del usuario
+    fun updateUploadedProducts(user: User){
+        viewModelScope.launch {
+            _updateUploadedProducts.postValue(
+                updateUploadedProductsUserUseCase.invoke(user)
+            )
+        }
+    }
+
+    //Metodo para obtener el usuario que ha publiado el producto
+    fun getUser(id: String){
+        viewModelScope.launch {
+            _getUser.postValue(
+                getUserUseCase.invoke(id)
+            )
+        }
+    }
+
 }

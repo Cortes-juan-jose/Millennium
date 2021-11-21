@@ -8,4 +8,5 @@ interface Users {
 
     suspend fun save(user: User) : Task<Void>
     suspend fun get(id:String) : Task<DocumentSnapshot>
+    suspend fun updateUploadedProducts(user: User): Task<Void>
 }

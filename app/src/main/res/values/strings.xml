@@ -51,10 +51,11 @@
     <string name="msg_error_price_producto">Precio requerido - introduzca un precio válido</string>
     <string name="msg_error_producto_publicado">No se ha podido publicar su producto. Inténtelo de nuevo</string>
     <string name="msg_error_guardar_imagen">No se ha podido guardar las imágenes. Inténtelo de nuevo</string>
+    <string name="msg_error_usuario_no_existe">Usuario no existe</string>
 
     <string name="msg_alert_iniciando_sesion">Iniciando sesión…</string>
     <string name="msg_alert_creando_cuenta">Creando cuenta…</string>
-    <string name="msg_alert_creando_producto">Creando producto…</string>
+    <string name="msg_alert_creando_producto">Publicando producto…</string>
 
     <string name="msg_timestamp_hace">Hace</string>
     <string name="msg_timestamp_un_momento">un momento</string>

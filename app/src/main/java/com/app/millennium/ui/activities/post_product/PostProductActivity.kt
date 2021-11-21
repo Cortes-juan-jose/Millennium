@@ -25,6 +25,7 @@ import com.app.millennium.core.common.*
 import com.app.millennium.core.utils.CompressBitmapImage
 import com.app.millennium.core.utils.FileUtil
 import com.app.millennium.data.model.Product
+import com.app.millennium.data.model.User
 import com.app.millennium.databinding.ActivityPostProductBinding
 import com.app.millennium.databinding.ViewBottomSheetOptionsImagesSelectedBinding
 import com.app.millennium.databinding.ViewBottomSheetOptionsSourceImagesBinding
@@ -696,9 +697,9 @@ class PostProductActivity : AppCompatActivity() {
                     it.addOnCompleteListener { comp ->
                         dialogLoading.dismiss()
                         if (comp.isSuccessful){
-                            //Se obtiene el id del producto para setearlo
-                                toast(getString(R.string.msg_info_producto_publicado))
-                            onBackPressed()
+                            //Cuando se guarde el producto actualizamos el valor en el usuario
+                            viewModel.getUser(product.idUser!!)
+
                         } else {
                             toast(getString(R.string.msg_error_producto_publicado))
                         }
@@ -718,6 +719,47 @@ class PostProductActivity : AppCompatActivity() {
                 it?.let {
                     product.idUser = it
                     viewModel.saveProduct(product)
+                }
+            }
+        )
+
+        //Observer que obtiene el usuario del producto
+        viewModel.getUser.observe(
+            this,
+            { task ->
+                task?.let { _task ->
+                    _task.addOnSuccessListener { document ->
+                        document?.let { _document ->
+                            if (_document.exists()){
+                                //Obtenemos el usuario
+                                val user = _document.toObject(User::class.java)
+                                //Sumamos 1 a la propiedad uploadedProducts
+                                user?.uploadedProducts = user?.uploadedProducts!! + 1
+                                //Y lo actualizamos en la base de datos
+                                viewModel.updateUploadedProducts(user)
+                            } else {
+                                dialogLoading.dismiss()
+                                toast(getString(R.string.msg_error_usuario_no_existe))
+                            }
+                        }
+                    }
+                }
+            }
+        )
+
+        viewModel.updateUploadedProducts.observe(
+            this,
+            { task ->
+                task?.let { _task ->
+                    _task.addOnCompleteListener {
+                        dialogLoading.dismiss()
+                        toast(getString(R.string.msg_info_producto_publicado))
+                        onBackPressed()
+                    }
+                    _task.addOnFailureListener {
+                        dialogLoading.dismiss()
+                        toast(it.message!!)
+                    }
                 }
             }
         )
@@ -1383,6 +1425,7 @@ class PostProductActivity : AppCompatActivity() {
                 timestamp = Date().time
             )
         }
+        //Luego guardamos las imagenes
         saveImages()
     }
 

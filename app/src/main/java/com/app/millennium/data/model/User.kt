@@ -9,7 +9,6 @@ data class User(
     var email: String? = null,
     var phone: String? = null,
     var imgProfile: String? = null,
-    var imgCoverPage: String? = null,
     var uploadedProducts: Int = 0,
     var timestamp: Long = 0L
 ) {
