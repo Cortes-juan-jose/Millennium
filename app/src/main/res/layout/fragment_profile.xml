@@ -1,20 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#66BB6A"
+    android:layout_marginBottom="50dp"
     tools:context=".ui.fragments.profile.ProfileFragment">
 
-
-    <TextView
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="@color/white"
-        android:text="PROFILE"
-        android:textSize="30sp"
-        android:textStyle="bold"/>
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-</FrameLayout>
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/ctl_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <!--TODO EL CONTENIDO DEL APPBARLAYOUT-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:transitionName="@string/transitionname_picture"
+                app:layout_collapseMode="parallax">
+
+                <!--VISTA PARA OSCURECER LA IMAGEN DE LA PORTADA-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:background="@color/black"/>
+
+                <!--PORTADA-->
+                <ImageView
+                    android:id="@+id/iv_portada"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_camera"
+                    android:alpha="0.7"
+                    android:contentDescription="@string/cd_ic_camera" />
+
+                <!--DATOS DEL TELEFONO Y PRODUCTOS Y LA IMG DEL PERFIL-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="160dp">
+
+                    <!--NUMERO PUBLICACIONES-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/mtv_uploaded_products"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/balsami_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:text="@string/mtv_sin_internet"/>
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/balsami_bold"
+                            android:text="@string/mtv_productos"
+                            android:textColor="@color/white"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <!--IMG PERFIL-->
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_imagen_perfil"
+                        android:layout_width="40dp"
+                        android:layout_weight="1"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_user_profile"
+                        app:civ_border_color="@color/white"
+                        app:civ_border_width="1dp"
+                        app:civ_circle_background_color="@color/grey" />
+
+                    <!--NUMERO DE TELEFONO-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/mtv_opinions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/balsami_bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:text="@string/mtv_sin_internet" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/balsami_bold"
+                            android:text="@string/mtv_opiniones"
+                            android:textColor="@color/white"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--CORREO ELECTRONICO DEL USUARIO-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="260dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_gravity="center_horizontal">
+                    <TextView
+                        android:id="@+id/tv_nombre_usuario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/balsami_bold"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/mtv_sin_internet"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/tv_correo_electronico"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:fontFamily="@font/balsami_bold"
+                        android:text="@string/mtv_sin_internet"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <!--TOOLBAR-->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_perfil"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:theme="@style/toolbar_menu_perfil"
+                app:menu="@menu/bottom_nav_menu"
+                app:layout_collapseMode="pin"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:theme="@style/tl_menu_perfil"
+            android:id="@+id/tl_menu_perfil"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_gravity="bottom"
+            app:tabMode="scrollable"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--SCROLL PARA QUE EL APBARLAYOUT SE ESCONDA-->
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp2_menu_perfil"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:isScrollContainer="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

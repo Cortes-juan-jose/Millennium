@@ -37,6 +37,7 @@
     <string name="mtv_elige_una_opcion">Elige una opción</string>
     <string name="mtv_tomar_una_foto">Tomar una foto</string>
     <string name="mtv_abrir_la_galeria">Abrir la galería</string>
+    <string name="mtv_productos">Productos</string>
 
     <string name="msg_error_username">Nombre requerido - mínimo 4 caracteres</string>
     <string name="msg_error_email">Email requerido - introduzca un email válido</string>
@@ -108,6 +109,11 @@
 
     <!--String sin especificar-->
     <string name="sel_sin_especificar">---</string>
+
+    <!--Transicion picture-->
+    <string name="transitionname_picture">transitionnamepicture</string>
+    <string name="mtv_sin_internet">-</string>
+    <string name="mtv_opiniones">Opiniones</string>
 
 
 </resources>
