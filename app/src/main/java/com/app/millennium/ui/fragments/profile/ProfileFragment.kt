@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.app.millennium.R
+import com.app.millennium.core.common.convertUser
 import com.app.millennium.core.common.openActivity
 import com.app.millennium.core.common.toast
 import com.app.millennium.core.utils.ConfigThemeApp
@@ -19,13 +20,17 @@ import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment() {
 
+    //Binding
     private var _binding : FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
+    //Viewmodel
     private val viewModel: ProfileViewModel by viewModels()
 
+    //Usuario
     private lateinit var user: User
 
+    //Bindear la vista
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +40,7 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+    //Una vez la vista creada inicializamos todos los componentes
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -42,6 +48,7 @@ class ProfileFragment : Fragment() {
         initObservables()
     }
 
+    //Inicializar todos los componentes de la vista
     private fun initUI() {
         viewModel.getIdUser()
         configToolbar() //Configurar el toolbar
@@ -59,18 +66,29 @@ class ProfileFragment : Fragment() {
         viewModel.getUser.observe(
             viewLifecycleOwner,
             { task ->
-                task?.let { _task ->
-                    _task.addOnSuccessListener { document ->
-                        document?.let { _document ->
-                            if (_document.exists()){
-                                //Obtenemos el usuario
-                                user = _document.toObject(User::class.java)!!
-                                configComponent()
-                            } else {
-                                activity?.toast(getString(R.string.msg_error_usuario_no_existe))
-                            }
-                        }
+                task.addSnapshotListener { value, error ->
+                    //Obtenemos la información en tiempo real
+                    if (error!=null)
+                        return@addSnapshotListener
+                    //Si existe este usuario
+                    if (value != null && value.exists()){
+                        //Construimos un usuario a partir del map obtenido
+                        viewModel.buildUser(value.data)
                     }
+                }
+            }
+        )
+
+        /**
+         * Observer que construye un objeto user a partir de un map con las propiedades
+         * del usuario obtenidas de la base de datos en tiempo real
+         */
+        viewModel.buildUser.observe(
+            viewLifecycleOwner,
+            {
+                it?.let {
+                    user = it
+                    configComponent()
                 }
             }
         )
@@ -154,6 +172,7 @@ class ProfileFragment : Fragment() {
      */
     private fun signOut() {
         viewModel.signOut()
+        activity?.toast(getString(R.string.msg_info_sesion_cerrada))
         activity?.openActivity<LoginActivity> {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         }

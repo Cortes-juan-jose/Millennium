@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.app.millennium.core.common.convertUser
+import com.app.millennium.core.common.isNotNull
+import com.app.millennium.data.model.User
 import com.app.millennium.domain.use_case.user_auth.GetIdUseCase
 import com.app.millennium.domain.use_case.user_auth.SignOutUseCase
-import com.app.millennium.domain.use_case.user_db.GetUserUseCase
-import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.DocumentSnapshot
+import com.app.millennium.domain.use_case.user_db.GetDocumentReferenceUserUseCase
+import com.google.firebase.firestore.DocumentReference
 import kotlinx.coroutines.launch
 
 class ProfileViewModel: ViewModel() {
@@ -16,16 +18,21 @@ class ProfileViewModel: ViewModel() {
     //Caso de uso para cerrar sesion
     private val signOutUseCase = SignOutUseCase()
     //Caso de uso para obtener el usuario
-    private val getUserUseCase = GetUserUseCase()
+    private val getDocumentReferenceUserUseCase = GetDocumentReferenceUserUseCase()
     //Caso de uso para obtener el id del usuario
     private val getIdUserUseCase = GetIdUseCase()
 
     //Live data que devuelve la tarea de la obtención del usuario
-    private val _getUser = MutableLiveData<Task<DocumentSnapshot>>()
-    val getUser: LiveData<Task<DocumentSnapshot>> get() = _getUser
+    private val _getUser = MutableLiveData<DocumentReference>()
+    val getUser: LiveData<DocumentReference> get() = _getUser
+
     //Live data obtener id usuario
     private val _getIdUser = MutableLiveData<String>()
     val getIdUser: LiveData<String> get() = _getIdUser
+
+    //Live data para construir un objeto user a partir de un map con todos sus propiedades
+    private val _buildUser = MutableLiveData<User?>()
+    val buildUser: LiveData<User?> get() = _buildUser
 
     /**
      * Metodo para cerrar sesion
@@ -42,7 +49,7 @@ class ProfileViewModel: ViewModel() {
     fun getUser(id: String){
         viewModelScope.launch {
             _getUser.postValue(
-                getUserUseCase.invoke(id)
+                getDocumentReferenceUserUseCase.invoke(id)
             )
         }
     }
@@ -56,5 +63,14 @@ class ProfileViewModel: ViewModel() {
                 getIdUserUseCase.invoke()
             )
         }
+    }
+
+    /**
+     * Metodo para construir un usuario a partir de un map
+     */
+    fun buildUser(data: Map<String, Any>?) {
+        val user: User = data?.convertUser()!!
+        if (user.isNotNull())
+            _buildUser.postValue(user)
     }
 }

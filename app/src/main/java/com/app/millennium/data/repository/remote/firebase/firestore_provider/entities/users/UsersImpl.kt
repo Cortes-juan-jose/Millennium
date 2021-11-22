@@ -23,6 +23,9 @@ class UsersImpl: Users {
     override suspend fun get(id: String): Task<DocumentSnapshot> =
         db.document(id).get()
 
+    override suspend fun getDataRealTime(id: String) =
+        db.document(id)
+
     override suspend fun updateUploadedProducts(user: User): Task<Void> =
         db.document(user.id!!).update(UPLOADED_PRODUCTS, user.uploadedProducts)
 }

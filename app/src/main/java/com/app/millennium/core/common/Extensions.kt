@@ -11,6 +11,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.app.millennium.core.utils.FileUtil
+import com.app.millennium.data.model.User
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.io.File
@@ -167,4 +168,23 @@ fun TextInputEditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
             afterTextChanged.invoke(editable.toString())
         }
     })
+}
+
+/**
+ * Extension para construir un objeto user a partir de un map de propiedades
+ */
+fun Map<String, Any>?.convertUser(): User {
+
+    val user = User()
+    this?.get("id")?.let { user.id = it.toString() }
+    this?.get("name")?.let { user.name = it.toString() }
+    this?.get("email")?.let { user.email = it.toString() }
+    this?.get("phone")?.let { user.phone = it.toString() }
+    this?.get("uploadedProducts")?.let { user.uploadedProducts = it.toString().toInt() }
+    this?.get("opinions")?.let { user.opinions = it.toString().toInt() }
+    this?.get("imgProfile")?.let { user.imgProfile = it.toString() }
+    this?.get("imgCover")?.let { user.imgCover = it.toString() }
+    this?.get("timestamp")?.let { user.timestamp = it.toString().toLong() }
+
+    return user
 }
