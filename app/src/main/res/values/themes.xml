@@ -29,6 +29,11 @@
         <item name="android:textColor">@color/colorOnSecondary</item>
     </style>
 
+    <style name="MaterialTextViewEmailProfile" parent="MaterialTextViewFontBold">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+    </style>
+
     <style name="MaterialTextViewTextColorFontBold" parent="MaterialTextViewFontBold">
         <item name="android:textColor">@color/colorPrimary</item>
     </style>

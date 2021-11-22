@@ -8,6 +8,23 @@
     android:layout_marginBottom="50dp"
     tools:context=".ui.fragments.profile.ProfileFragment">
 
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/balsami_bold"
+        android:textColor="@color/white"
+        android:elevation="5dp"
+        android:layout_marginTop="@dimen/min_padding_view"
+        android:layout_marginStart="@dimen/max_padding_view"
+        tools:text="123456789012345678901234567890123456789012345678901234567890"
+        android:lines="1"
+        android:ems="10"
+        android:ellipsize="end"
+        android:text="@string/mtv_sin_internet"
+        android:textSize="20sp" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -117,27 +134,27 @@
                     android:layout_marginTop="270dp"
                     android:layout_marginBottom="20dp"
                     android:layout_gravity="center_horizontal">
-                    <TextView
-                        android:id="@+id/tv_nombre_usuario"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:fontFamily="@font/balsami_bold"
-                        android:textColor="@color/black"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="5dp"
-                        android:text="@string/mtv_sin_internet"
-                        android:textSize="20sp" />
-                    <TextView
-                        android:id="@+id/tv_correo_electronico"
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/MaterialTextViewEmailProfile"
+                        android:id="@+id/mtv_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:fontFamily="@font/balsami_bold"
+                        android:paddingHorizontal="@dimen/max_padding_view"
                         android:text="@string/mtv_sin_internet"
-                        android:textColor="@color/black"
+                        tools:text="juan.jose.cortes.dam.prueba.android@gmail.com"
+                        android:layout_gravity="center" />
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/MaterialButtonBackground"
+                        android:id="@+id/btn_edit_profile"
+                        android:layout_width="wrap_content"
+                        app:cornerRadius="5dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/colorSecondary"
                         android:layout_gravity="center"
-                        android:textSize="15sp" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/min_padding_view"
+                        android:text="@string/btn_editar_perfil"/>
                 </LinearLayout>
 
             </FrameLayout>

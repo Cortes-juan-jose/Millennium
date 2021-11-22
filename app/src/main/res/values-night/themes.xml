@@ -36,6 +36,11 @@
         <item name="android:textColor">@color/colorOnSecondary</item>
     </style>
 
+    <style name="MaterialTextViewEmailProfile" parent="MaterialTextViewFontBold">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/colorOnSecondary</item>
+    </style>
+
     <style name="MaterialTextViewSelector" parent="MaterialTextViewFontRegular">
         <item name="android:textSize">@dimen/size_mtv_alertdialog_info_product</item>
         <item name="android:textColor">@color/colorOnSecondary</item>
