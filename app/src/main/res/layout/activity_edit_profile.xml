@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ui.activities.edit_profile.EditProfileActivity">
+
+    <View
+        style="@style/ViewBackground"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_toolbar"/>
+
+    <ScrollView
+        android:layout_marginTop="@dimen/height_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--IMAGENES DE PORTADA Y PERFIL-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--VISTA PARA OSCURECER LA IMAGEN DE LA PORTADA-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@color/black"/>
+
+                <!--PORTADA-->
+                <ImageView
+                    android:id="@+id/iv_cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_camera"
+                    android:alpha="0.7"
+                    android:contentDescription="@string/cd_ic_camera" />
+
+                <!--IMG PERFIL-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="140dp"
+                    android:paddingVertical="5dp">
+
+                    <!--IMG PERFIL-->
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_image_profile"
+                        android:layout_width="40dp"
+                        android:layout_weight="1"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_user_profile"
+                        app:civ_border_color="@color/white"
+                        app:civ_border_width="1dp"
+                        app:civ_circle_background_color="@color/grey" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/MaterialTextViewTextColorFontBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/balsami_bold"
+                    android:text="@string/mtv_modificar_datos_usuario_perfil"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!--INPUT PARA NOMBRE Y TELEFONO-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="60dp"
+                android:paddingHorizontal="20dp">
+
+                <!--Nombre de usuario-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        style="@style/ImageViewIconUserColor"
+                        android:layout_width="@dimen/size_icon"
+                        android:layout_height="@dimen/size_icon"
+                        android:layout_marginTop="@dimen/min_padding_view"
+                        android:layout_marginEnd="@dimen/min_padding_view"
+                        android:contentDescription="@string/cd_ic_user_register" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_user"
+                        style="@style/TextInputLayoutEndIconTint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_nombre_de_usuario"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="30"
+                        app:endIconMode="clear_text"
+                        app:endIconCheckable="true">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tiet_user"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLength="30"
+                            android:inputType="textMultiLine"
+                            android:fontFamily="@font/balsami_regular"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!--Telefono de usuario-->
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        style="@style/ImageViewIconPhoneColor"
+                        android:layout_width="@dimen/size_icon"
+                        android:layout_height="@dimen/size_icon"
+                        android:layout_marginTop="@dimen/min_padding_view"
+                        android:layout_marginEnd="@dimen/min_padding_view"
+                        android:contentDescription="@string/cd_ic_phone" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_phone"
+                        style="@style/TextInputLayoutEndIconTint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_telefono"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="9"
+                        app:endIconMode="clear_text"
+                        app:endIconCheckable="true">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tiet_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLength="9"
+                            android:inputType="phone"
+                            android:fontFamily="@font/balsami_regular"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/size_icon_back"
+        android:layout_height="@dimen/size_icon_back"
+        android:layout_gravity="start"
+        android:layout_marginStart="@dimen/margin_start_ic_back_toolbar"
+        android:layout_marginTop="@dimen/margin_top_ic_back_toolbar"
+        android:src="@drawable/ic_back"
+        android:contentDescription="@string/cd_ic_back" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginTop="@dimen/margin_top_mtv_info_producto"
+        android:fontFamily="@font/balsami_bold"
+        android:gravity="center"
+        android:text="@string/mtv_info_del_producto"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_mtv_info_producto" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/MaterialButtonBackground"
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_confirm"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="@dimen/min_padding_view"
+        android:layout_marginBottom="5dp"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

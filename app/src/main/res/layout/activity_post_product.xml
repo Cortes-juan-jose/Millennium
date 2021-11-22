@@ -11,9 +11,7 @@
     <View
         style="@style/ViewBackground"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_toolbar">
-
-    </View>
+        android:layout_height="@dimen/height_toolbar"/>
 
     <ScrollView
         android:id="@+id/sv_scroll"

@@ -118,6 +118,8 @@
     <string name="item_menu_profile_cerrar_sesion">Cerrar sesión</string>
     <string name="item_menu_profile_informacion_de_la_app">Información de la app</string>
     <string name="msg_info_sesion_cerrada">Sesión cerrada</string>
+    <string name="mtv_modificar_datos_usuario_perfil">Modifica su foto de portada, su foto de perfil y/o sus datos personales</string>
+    <string name="btn_confirm">Confirmar</string>
 
 
 </resources>

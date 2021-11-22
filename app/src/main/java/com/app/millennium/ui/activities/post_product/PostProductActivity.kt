@@ -748,6 +748,7 @@ class PostProductActivity : AppCompatActivity() {
             }
         )
 
+        //Observer para actualizar el campo uploadedProducts
         viewModel.updateUploadedProducts.observe(
             this,
             { task ->
@@ -764,7 +765,6 @@ class PostProductActivity : AppCompatActivity() {
                 }
             }
         )
-
     }
 
     /**
