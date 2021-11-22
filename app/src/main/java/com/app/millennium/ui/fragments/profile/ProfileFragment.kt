@@ -15,6 +15,7 @@ import com.app.millennium.core.common.toast
 import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.data.model.User
 import com.app.millennium.databinding.FragmentProfileBinding
+import com.app.millennium.ui.activities.edit_profile.EditProfileActivity
 import com.app.millennium.ui.activities.login.LoginActivity
 import com.squareup.picasso.Picasso
 
@@ -52,6 +53,9 @@ class ProfileFragment : Fragment() {
     private fun initUI() {
         viewModel.getIdUser()
         configToolbar() //Configurar el toolbar
+        binding.btnEditProfile.setOnClickListener {
+            activity?.openActivity<EditProfileActivity> {  }
+        }
     }
 
     private fun initObservables() {

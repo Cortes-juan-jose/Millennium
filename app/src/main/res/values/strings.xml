@@ -120,6 +120,7 @@
     <string name="msg_info_sesion_cerrada">Sesión cerrada</string>
     <string name="mtv_modificar_datos_usuario_perfil">Modifica su foto de portada, su foto de perfil y/o sus datos personales</string>
     <string name="btn_confirm">Confirmar</string>
+    <string name="mtv_editar_perfil">Editar perfil</string>
 
 
 </resources>

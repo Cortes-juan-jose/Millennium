@@ -35,4 +35,9 @@
     <dimen name="size_icons_bottom_sheet_optinos_source_images">50dp</dimen>
     <dimen name="margin_top_sources_images_bottom_sheet">30dp</dimen>
     <dimen name="size_mtv_alertdialog_info_product">20sp</dimen>
+    <dimen name="margin_bottom_btn_bottom">60dp</dimen>
+    <dimen name="size_civ_profile">100dp</dimen>
+    <dimen name="margin_top_fields_edit_profile">60dp</dimen>
+    <dimen name="size_iv_cover">200dp</dimen>
+    <dimen name="margin_bottom_btn_confirm">5dp</dimen>
 </resources>

@@ -18,6 +18,8 @@ class EditProfileActivity : AppCompatActivity() {
     }
     
     private fun initUI(){
-
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
     }
 }
