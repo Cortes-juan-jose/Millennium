@@ -119,14 +119,15 @@
         <item name="android:background">@color/transparent</item>
     </style>
 
-    <style name="toolbar_menu_perfil" parent="ThemeOverlay.AppCompat.ActionBar">
+    <!--ESTILO PARA EL TOOLBAR PROFILE-->
+    <style name="ToolbarThemeText" parent="ThemeOverlay.AppCompat.ActionBar">
         <item name="android:textColor">@color/black</item>
         <item name="colorControlNormal">@color/white</item>
         <item name="fontFamily">@font/balsami_regular</item>
     </style>
 
     <!--ESTILO PARA EL TABLAYOUT DEL PERFIL-->
-    <style name="tl_menu_perfil" parent="Widget.Design.TabLayout">
+    <style name="TabLayoutTheme" parent="Widget.Design.TabLayout">
         <item name="fontFamily">@font/balsami_bold</item>
     </style>
 

@@ -114,4 +114,16 @@
         <item name="android:background">@color/transparent</item>
     </style>
 
+    <!--ESTILO PARA EL TOOLBAR PROFILE-->
+    <style name="ToolbarThemeText" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColor">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="fontFamily">@font/balsami_regular</item>
+    </style>
+
+    <!--ESTILO PARA EL TABLAYOUT DEL PERFIL-->
+    <style name="TabLayoutTheme" parent="Widget.Design.TabLayout">
+        <item name="fontFamily">@font/balsami_bold</item>
+    </style>
+
 </resources>
