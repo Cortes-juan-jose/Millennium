@@ -23,6 +23,7 @@ import androidx.core.view.isVisible
 import com.app.millennium.R
 import com.app.millennium.core.common.*
 import com.app.millennium.core.utils.CompressBitmapImage
+import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.core.utils.FileUtil
 import com.app.millennium.data.model.Product
 import com.app.millennium.data.model.User
@@ -1118,28 +1119,40 @@ class PostProductActivity : AppCompatActivity() {
                 //Quitamos la imagen
                 when (resultCodeImageSalected){
                     Constant.RESULT_CODE_CV_IMG_POST_1 -> {
-                        binding.ivImgPost1.setImageResource(R.drawable.ic_camera)
+                        if (ConfigThemeApp.isThemeLight(applicationContext))
+                            binding.ivImgPost1.setImageResource(R.drawable.ic_camera)
+                        else
+                            binding.ivImgPost1.setImageResource(R.drawable.ic_camera_dark)
                         binding.ivImgPost1.tag = Constant.TAG_DEFAULT
                         fileImage1 = null
                         photoPath1 = null
                         photoAbsolutePath1 = null
                     }
                     Constant.RESULT_CODE_CV_IMG_POST_2 -> {
-                        binding.ivImgPost2.setImageResource(R.drawable.ic_camera)
+                        if (ConfigThemeApp.isThemeLight(applicationContext))
+                            binding.ivImgPost2.setImageResource(R.drawable.ic_camera)
+                        else
+                            binding.ivImgPost2.setImageResource(R.drawable.ic_camera_dark)
                         binding.ivImgPost2.tag = Constant.TAG_DEFAULT
                         fileImage2 = null
                         photoPath2 = null
                         photoAbsolutePath2 = null
                     }
                     Constant.RESULT_CODE_CV_IMG_POST_3 -> {
-                        binding.ivImgPost3.setImageResource(R.drawable.ic_camera)
+                        if (ConfigThemeApp.isThemeLight(applicationContext))
+                            binding.ivImgPost3.setImageResource(R.drawable.ic_camera)
+                        else
+                            binding.ivImgPost3.setImageResource(R.drawable.ic_camera_dark)
                         binding.ivImgPost3.tag = Constant.TAG_DEFAULT
                         fileImage3 = null
                         photoPath3 = null
                         photoAbsolutePath3 = null
                     }
                     Constant.RESULT_CODE_CV_IMG_POST_4 -> {
-                        binding.ivImgPost4.setImageResource(R.drawable.ic_camera)
+                        if (ConfigThemeApp.isThemeLight(applicationContext))
+                            binding.ivImgPost4.setImageResource(R.drawable.ic_camera)
+                        else
+                            binding.ivImgPost4.setImageResource(R.drawable.ic_camera_dark)
                         binding.ivImgPost4.tag = Constant.TAG_DEFAULT
                         fileImage4 = null
                         photoPath4 = null
