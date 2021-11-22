@@ -11,6 +11,7 @@ data class User(
     var imgProfile: String? = null,
     var imgCover: String? = null,
     var uploadedProducts: Int = 0,
+    var opinions: Int = 0,
     var timestamp: Long = 0L
 ) {
     override fun equals(other: Any?): Boolean {

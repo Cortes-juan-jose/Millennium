@@ -156,7 +156,7 @@ class PostProductViewModel: ViewModel() {
         }
     }
 
-     //Funcion para obtener el id de inicio de sesion
+    //Funcion para obtener el id de inicio de sesion
     fun getIdUser(){
         viewModelScope.launch {
             _getIdUser.postValue(

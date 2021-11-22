@@ -51,7 +51,7 @@
 
                 <!--PORTADA-->
                 <ImageView
-                    android:id="@+id/iv_portada"
+                    android:id="@+id/iv_cover"
                     android:layout_width="match_parent"
                     android:layout_height="210dp"
                     android:scaleType="centerInside"
@@ -92,7 +92,7 @@
 
                     <!--IMG PERFIL-->
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/civ_imagen_perfil"
+                        android:id="@+id/civ_image_profile"
                         android:layout_width="40dp"
                         android:layout_weight="1"
                         android:layout_height="100dp"
