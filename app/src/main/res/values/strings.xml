@@ -115,6 +115,8 @@
     <string name="mtv_sin_internet">-</string>
     <string name="mtv_opiniones">Opiniones</string>
     <string name="btn_editar_perfil">Editar perfil</string>
+    <string name="item_menu_profile_cerrar_sesion">Cerrar sesión</string>
+    <string name="item_menu_profile_informacion_de_la_app">Información de la app</string>
 
 
 </resources>

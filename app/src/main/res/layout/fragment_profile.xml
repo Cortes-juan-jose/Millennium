@@ -161,21 +161,22 @@
 
             <!--TOOLBAR-->
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_perfil"
+                android:id="@+id/toolbar_profile"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:theme="@style/ToolbarThemeText"
-                app:menu="@menu/bottom_nav_menu"
+                app:menu="@menu/toolbar_profile_menu"
                 app:layout_collapseMode="pin"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:theme="@style/TabLayoutTheme"
-            android:id="@+id/tl_menu_perfil"
+            android:id="@+id/tl_post_opinions"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:layout_gravity="bottom"
+            android:background="@color/colorSecondary"
             app:tabMode="scrollable"/>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -183,7 +184,7 @@
     <!--SCROLL PARA QUE EL APBARLAYOUT SE ESCONDA-->
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vp2_menu_perfil"
+        android:id="@+id/vp2__post_opinions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:isScrollContainer="true"
