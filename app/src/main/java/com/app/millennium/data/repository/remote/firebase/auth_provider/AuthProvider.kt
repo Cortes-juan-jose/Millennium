@@ -24,6 +24,11 @@ interface AuthProvider {
     suspend fun signInGoogle(idToken: String) : Task<AuthResult>
 
     /**
+     * Metodo para cerrar sesion
+     */
+    suspend fun signOut()
+
+    /**
      * Metodo para obtener la sesion actual del usuario
      * que ha iniciado previamente sesion
      */

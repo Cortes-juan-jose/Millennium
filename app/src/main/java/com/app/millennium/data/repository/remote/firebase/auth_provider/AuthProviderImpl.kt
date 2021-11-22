@@ -37,6 +37,12 @@ class AuthProviderImpl : AuthProvider {
     }
 
     /**
+     * Metodo para cerrar sesion
+     */
+    override suspend fun signOut() =
+        auth.signOut()
+
+    /**
      * Metodo para obtener el usuario que ha inicado sesión
      */
     override suspend fun getCurrentSession(): FirebaseUser? =
