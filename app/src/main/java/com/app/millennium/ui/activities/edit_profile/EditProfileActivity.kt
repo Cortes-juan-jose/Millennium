@@ -139,6 +139,7 @@ class EditProfileActivity : AppCompatActivity() {
                                 fileImageCover?.absolutePath
                             )
                         )
+                        binding.ivCover.scaleType = ImageView.ScaleType.CENTER_CROP
                         /**
                          * Le seteamos el tag al imageview donde
                          * ha sido establecida la imagen para
