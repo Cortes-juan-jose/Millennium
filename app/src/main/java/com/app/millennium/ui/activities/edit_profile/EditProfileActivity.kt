@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,7 +16,6 @@ import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.view.isVisible
 import com.app.millennium.R
 import com.app.millennium.core.common.*
 import com.app.millennium.core.utils.CompressBitmapImage
@@ -55,6 +53,10 @@ class EditProfileActivity : AppCompatActivity() {
      * input de las imágenes se ha pulsado
      */
     private var resultCodeImageSalected: Int = 0
+
+    //Variables para saber si las imagenes se han cambiado
+    private var isCoverChanged = false
+    private var isProfileChanged = false
     //AlertDialog
     private lateinit var dialogLoading: android.app.AlertDialog
 
@@ -74,6 +76,8 @@ class EditProfileActivity : AppCompatActivity() {
                 )
                 binding.ivCover.scaleType = ImageView.ScaleType.CENTER_CROP
                 binding.ivCover.tag = Constant.TAG_NOT_DEFAULT
+                //Si se le establece una imagen significa que se ha cambiado
+                isCoverChanged = true
             }
         }
 
@@ -87,6 +91,8 @@ class EditProfileActivity : AppCompatActivity() {
                     binding.civImageProfile
                 )
                 binding.civImageProfile.tag = Constant.TAG_NOT_DEFAULT
+                //Si se le establece una imagen significa que se ha cambiado
+                isProfileChanged = true
             }
         }
 
@@ -140,9 +146,12 @@ class EditProfileActivity : AppCompatActivity() {
                          * o no la tiene
                          */
                         binding.ivCover.tag = Constant.TAG_NOT_DEFAULT
+                        //Si se le establece una imagen significa que se ha cambiado
+                        isCoverChanged = true
                     } else {
                         toast(getString(R.string.msg_error_archivo_no_permitido))
                         fileImageCover = null
+                        isCoverChanged = false
                     }
 
                 } catch (e: Exception){
@@ -201,9 +210,11 @@ class EditProfileActivity : AppCompatActivity() {
                          * o no la tiene
                          */
                         binding.civImageProfile.tag = Constant.TAG_NOT_DEFAULT
+                        isProfileChanged = true
                     } else {
                         toast(getString(R.string.msg_error_archivo_no_permitido))
                         fileImageProfile = null
+                        isProfileChanged = false
                     }
 
                 } catch (e: Exception){
@@ -354,38 +365,56 @@ class EditProfileActivity : AppCompatActivity() {
                         task.addOnCompleteListener { _task ->
                             if (_task.isSuccessful){
 
-                                //Ahora preguntamos si la imagen del perfil es establecida
                                 when {
-                                    fileImageProfile.isNotNull() -> {
-                                        //Construimos la imagen en bytes
-                                        val imageByte = CompressBitmapImage.getImage(
-                                            this@EditProfileActivity,
-                                            fileImageProfile?.path,
-                                            Constant.WIDTH_IMAGE_STORAGE,
-                                            Constant.HEIGHT_IMAGE_STORAGE
-                                        )
-                                        //y la guardamos
-                                        viewModel.saveImage(
-                                            imageByte,
-                                            Constant.RESULT_CODE_CV_IMG_POST_PROFILE
-                                        )
-                                    }
-                                    binding.tietUsername.text.toString() != bundle[Constant.PROP_USERNAME_USER] -> {
-                                        viewModel.updateName(
-                                            bundle[Constant.PROP_ID_USER].toString(),
-                                            binding.tietUsername.text.toString()
-                                        )
-                                    }
-                                    binding.tietPhone.text.toString() != bundle[Constant.PROP_PHONE_USER].toString() -> {
-                                        viewModel.updatePhone(
-                                            bundle[Constant.PROP_ID_USER].toString(),
-                                            binding.tietPhone.text.toString()
-                                        )
+                                    isProfileChanged -> {
+                                        //si el profile fue cambiado entonces
+
+                                        //Ahora vamos a preguntar si el fichero del profile es nulo
+                                        //si es nulo significa que ha sido eliminada la foto
+                                        if (fileImageProfile.isNull()){
+                                            //Se actualiza la foto a eliminado
+                                            viewModel.updateImgProfile(
+                                                bundle[Constant.PROP_ID_USER].toString(),
+                                                null
+                                            )
+                                        } else {
+                                            //Se construye la foto y se sube
+                                            //Construimos la imagen en bytes
+                                            val imageByte = CompressBitmapImage.getImage(
+                                                this@EditProfileActivity,
+                                                fileImageProfile?.path,
+                                                Constant.WIDTH_IMAGE_STORAGE,
+                                                Constant.HEIGHT_IMAGE_STORAGE)
+                                            //y la guardamos
+                                            viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_PROFILE)
+
+                                        }
+
                                     }
                                     else -> {
-                                        dialogLoading.dismiss()
-                                        toast(getString(R.string.msg_info_cambios_aplicados))
-                                        finishAndRemoveTask()
+                                        //De lo contrario las imagenes no fueron modificadas
+                                        when {
+                                            //Si el nombre es distinto a como vino entonces se actualiza
+                                            binding.tietUsername.text.toString() != bundle[Constant.PROP_USERNAME_USER] -> {
+                                                viewModel.updateName(
+                                                    bundle[Constant.PROP_ID_USER].toString(),
+                                                    binding.tietUsername.text.toString()
+                                                )
+                                            }
+                                            //Si el telefono es distinto a como vino entonces se actualiza
+                                            binding.tietPhone.text.toString() != bundle[Constant.PROP_PHONE_USER].toString() -> {
+                                                viewModel.updatePhone(
+                                                    bundle[Constant.PROP_ID_USER].toString(),
+                                                    binding.tietPhone.text.toString()
+                                                )
+                                            }
+                                            //si no se han modificado ningun campo entonces cerramos la activiti
+                                            else -> {
+                                                dialogLoading.dismiss()
+                                                toast(getString(R.string.msg_info_cambios_aplicados))
+                                                finishAndRemoveTask()
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -405,21 +434,23 @@ class EditProfileActivity : AppCompatActivity() {
                     it?.let { task ->
                         task.addOnCompleteListener { _task ->
                             if (_task.isSuccessful){
-                                //Si se ha actualizado entonces preguntamos si el nombre también ha sido cambiado
+
                                 when {
+                                    //Si el nombre es distinto a como vino entonces se actualiza
                                     binding.tietUsername.text.toString() != bundle[Constant.PROP_USERNAME_USER] -> {
                                         viewModel.updateName(
                                             bundle[Constant.PROP_ID_USER].toString(),
                                             binding.tietUsername.text.toString()
                                         )
                                     }
-                                    //De lo contrario preguntamos si el telefono se ha cambiado
+                                    //Si el telefono es distinto a como vino entonces se actualiza
                                     binding.tietPhone.text.toString() != bundle[Constant.PROP_PHONE_USER].toString() -> {
                                         viewModel.updatePhone(
                                             bundle[Constant.PROP_ID_USER].toString(),
                                             binding.tietPhone.text.toString()
                                         )
                                     }
+                                    //si no se han modificado ningun campo entonces cerramos la activiti
                                     else -> {
                                         dialogLoading.dismiss()
                                         toast(getString(R.string.msg_info_cambios_aplicados))
@@ -445,8 +476,7 @@ class EditProfileActivity : AppCompatActivity() {
                             if (_task.isSuccessful){
                                 //Si el nombre se ha actualizado entonces preguntamos si el telefono
                                 //tambien ha sido modificado
-                                if (binding.tietPhone.text.toString() != bundle[Constant.PROP_PHONE_USER].toString()
-                                ) {
+                                if (binding.tietPhone.text.toString() != bundle[Constant.PROP_PHONE_USER].toString()){
                                     viewModel.updatePhone(
                                         bundle[Constant.PROP_ID_USER].toString(),
                                         binding.tietPhone.text.toString()
@@ -586,63 +616,6 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     /**
-     * Metodo para guardar los cambios
-     */
-    private fun saveChanges() {
-        binding.apply {
-
-            when {
-                //Imagen cover
-                fileImageCover.isNotNull() -> {
-                    //Construimos la imagen en bytes
-                    val imageByte = CompressBitmapImage.getImage(
-                        this@EditProfileActivity,
-                        fileImageCover?.path,
-                        Constant.WIDTH_IMAGE_STORAGE,
-                        Constant.HEIGHT_IMAGE_STORAGE)
-                    //y la guardamos
-                    viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_COVER)
-                }
-
-                //Imaen Profile
-                fileImageProfile.isNotNull() -> {
-                    //Construimos la imagen en bytes
-                    val imageByte = CompressBitmapImage.getImage(
-                        this@EditProfileActivity,
-                        fileImageProfile?.path,
-                        Constant.WIDTH_IMAGE_STORAGE,
-                        Constant.HEIGHT_IMAGE_STORAGE
-                    )
-                    //y la guardamos
-                    viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_PROFILE)
-                }
-
-                //Field name User
-                tietUsername.text.toString() != bundle[Constant.PROP_USERNAME_USER] -> {
-                    viewModel.updateName(
-                        bundle[Constant.PROP_ID_USER].toString(),
-                        tietUsername.text.toString()
-                    )
-                }
-
-                //Field phone User
-                tietPhone.text.toString() != bundle[Constant.PROP_PHONE_USER].toString() -> {
-                    viewModel.updatePhone(
-                        bundle[Constant.PROP_ID_USER].toString(),
-                        tietPhone.text.toString()
-                    )
-                }
-
-                else -> {
-                    dialogLoading.dismiss()
-                    toast(getString(R.string.msg_info_cambios_aplicados))
-                    finishAndRemoveTask()
-                }
-            }
-        }
-    }
-
-    /**
      * Metodo para abrir el bottomSheet de las acciones
      * para abrir la cámara o la galeria o si ya tiene una
      * imagen abrir el botttomSheet que da la accion
@@ -669,6 +642,100 @@ class EditProfileActivity : AppCompatActivity() {
                     openBottomSheetDialogOptionsCameraOrGallery()
                 } else {
                     openBottomSheetDialogOptionsEditOrDelete()
+                }
+            }
+        }
+    }
+
+    /**
+     * Metodo para guardar los cambios
+     */
+    private fun saveChanges() {
+        binding.apply {
+
+            when {
+                isCoverChanged -> {
+                    //si el cover fue cambiado entonces
+
+                    //Ahora vamos a preguntar si el fichero del cover es nulo
+                    //si es nulo significa que ha sido eliminada la foto
+                    if (fileImageCover.isNull()){
+                        //Se actualiza la foto a eliminado
+                        viewModel.updateImgCover(
+                            bundle[Constant.PROP_ID_USER].toString(),
+                            null
+                        )
+                    } else {
+                        //Se construye la foto y se sube
+                        //Construimos la imagen en bytes
+                        val imageByte = CompressBitmapImage.getImage(
+                            this@EditProfileActivity,
+                            fileImageCover?.path,
+                            Constant.WIDTH_IMAGE_STORAGE,
+                            Constant.HEIGHT_IMAGE_STORAGE)
+                        //y la guardamos
+                        viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_COVER)
+
+                    }
+
+                }
+                isProfileChanged -> {
+                    //si el profile fue cambiado entonces
+
+                    //Ahora vamos a preguntar si el fichero del profile es nulo
+                    //si es nulo significa que ha sido eliminada la foto
+                    if (fileImageProfile.isNull()){
+                        //Se actualiza la foto a eliminado
+                        viewModel.updateImgProfile(
+                            bundle[Constant.PROP_ID_USER].toString(),
+                            null
+                        )
+                    } else {
+                        //Se construye la foto y se sube
+                        //Construimos la imagen en bytes
+                        val imageByte = CompressBitmapImage.getImage(
+                            this@EditProfileActivity,
+                            fileImageProfile?.path,
+                            Constant.WIDTH_IMAGE_STORAGE,
+                            Constant.HEIGHT_IMAGE_STORAGE)
+                        //y la guardamos
+                        viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_PROFILE)
+
+                    }
+
+                }
+                else -> {
+                    //De lo contrario las imagenes no fueron modificadas
+                    when {
+                        //Si el nombre es distinto a como vino entonces se actualiza
+                        tietUsername.text.toString() != bundle[Constant.PROP_USERNAME_USER] -> {
+                            viewModel.updateName(
+                                bundle[Constant.PROP_ID_USER].toString(),
+                                tietUsername.text.toString()
+                            )
+                        }
+                        //Si el telefono es distinto a como vino entonces se actualiza
+                        tietPhone.text.toString() != bundle[Constant.PROP_PHONE_USER].toString() -> {
+
+                            if (tietPhone.text.toString().isEmpty()){
+                                viewModel.updatePhone(
+                                    bundle[Constant.PROP_ID_USER].toString(),
+                                    null
+                                )
+                            } else {
+                                viewModel.updatePhone(
+                                    bundle[Constant.PROP_ID_USER].toString(),
+                                    tietPhone.text.toString()
+                                )
+                            }
+                        }
+                        //si no se han modificado ningun campo entonces cerramos la activiti
+                        else -> {
+                            dialogLoading.dismiss()
+                            toast(getString(R.string.msg_info_cambios_aplicados))
+                            finishAndRemoveTask()
+                        }
+                    }
                 }
             }
         }
@@ -770,6 +837,8 @@ class EditProfileActivity : AppCompatActivity() {
                         fileImageCover = null
                         photoPathCover = null
                         photoAbsolutePathCover = null
+                        //Si se elimina la imagen entonces se ha cambiado
+                        isCoverChanged = true
                     }
                     Constant.RESULT_CODE_CV_IMG_POST_PROFILE -> {
 
@@ -779,6 +848,8 @@ class EditProfileActivity : AppCompatActivity() {
                         fileImageProfile = null
                         photoPathProfile = null
                         photoAbsolutePathProfile = null
+                        //Si se elimina la imagen entonces se ha cambiado
+                        isProfileChanged = true
                     }
                 }
                 toast(getString(R.string.msg_info_imagen_eliminada))

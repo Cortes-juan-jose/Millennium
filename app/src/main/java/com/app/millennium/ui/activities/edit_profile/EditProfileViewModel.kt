@@ -103,7 +103,7 @@ class EditProfileViewModel : ViewModel() {
     }
 
     //Metodo actualizar imgCover
-    fun updateImgCover(id: String, newValue: String){
+    fun updateImgCover(id: String, newValue: String?){
         viewModelScope.launch {
             _updateImgCoverUser.postValue(
                 updateImgCoverUserUseCase.invoke(id, newValue)
@@ -112,7 +112,7 @@ class EditProfileViewModel : ViewModel() {
     }
 
     //Metodo actualizar imgProfile
-    fun updateImgProfile(id: String, newValue: String){
+    fun updateImgProfile(id: String, newValue: String?){
         viewModelScope.launch {
             _updateImgProfileUser.postValue(
                 updateImgProfileUserUseCase.invoke(id, newValue)
@@ -130,7 +130,7 @@ class EditProfileViewModel : ViewModel() {
     }
 
     //Metodo actualizar phone
-    fun updatePhone(id: String, newValue: String){
+    fun updatePhone(id: String, newValue: String?){
         viewModelScope.launch {
             _updatePhoneUser.postValue(
                 updatePhoneUserUseCase.invoke(id, newValue)

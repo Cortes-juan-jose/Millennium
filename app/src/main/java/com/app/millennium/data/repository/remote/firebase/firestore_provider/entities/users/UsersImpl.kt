@@ -28,15 +28,15 @@ class UsersImpl: Users {
     override suspend fun updateUploadedProducts(user: User): Task<Void> =
         db.document(user.id!!).update(Constant.PROP_UPLOADED_PRODUCTS_USER, user.uploadedProducts)
 
-    override suspend fun updateImgCover(id: String, newValue: String): Task<Void> =
+    override suspend fun updateImgCover(id: String, newValue: String?): Task<Void> =
         db.document(id).update(Constant.PROP_IMG_COVER_USER, newValue)
 
-    override suspend fun updateImgProfile(id: String, newValue: String): Task<Void> =
+    override suspend fun updateImgProfile(id: String, newValue: String?): Task<Void> =
         db.document(id).update(Constant.PROP_IMG_PROFILE_USER, newValue)
 
     override suspend fun updateName(id: String, newValue: String): Task<Void> =
         db.document(id).update(Constant.PROP_USERNAME_USER, newValue)
 
-    override suspend fun updatePhone(id: String, newValue: String): Task<Void> =
+    override suspend fun updatePhone(id: String, newValue: String?): Task<Void> =
         db.document(id).update(Constant.PROP_PHONE_USER, newValue)
 }

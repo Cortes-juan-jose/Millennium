@@ -7,6 +7,6 @@ class UpdateImgCoverUserUseCase {
 
     private val repository = RepositoryDataSource.remote.firebase.firestore.users
 
-    suspend operator fun invoke(id: String, newValue: String) =
+    suspend operator fun invoke(id: String, newValue: String?) =
         repository.updateImgCover(id, newValue)
 }
