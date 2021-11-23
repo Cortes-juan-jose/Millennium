@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.app.millennium.R
 import com.app.millennium.core.common.convertUser
+import com.app.millennium.core.common.isNotNull
 import com.app.millennium.core.common.openActivity
 import com.app.millennium.core.common.toast
 import com.app.millennium.core.utils.ConfigThemeApp
@@ -29,7 +30,7 @@ class ProfileFragment : Fragment() {
     private val viewModel: ProfileViewModel by viewModels()
 
     //Usuario
-    private lateinit var user: User
+    private var user: User? = null
 
     //Bindear la vista
     override fun onCreateView(
@@ -53,9 +54,7 @@ class ProfileFragment : Fragment() {
     private fun initUI() {
         viewModel.getIdUser()
         configToolbar() //Configurar el toolbar
-        binding.btnEditProfile.setOnClickListener {
-            activity?.openActivity<EditProfileActivity> {  }
-        }
+        configEditProfileButton()
     }
 
     private fun initObservables() {
@@ -98,38 +97,6 @@ class ProfileFragment : Fragment() {
         )
     }
 
-    /**
-     * Metodo que setea las propiedades del usuario
-     * en sus campos correspondientes
-     */
-    private fun configComponent() {
-        binding.apply {
-            mtvUsername.text = user.name
-            mtvEmail.text = user.email
-            mtvUploadedProducts.text = user.uploadedProducts.toString()
-            mtvOpinions.text = user.opinions.toString()
-
-            if (user.imgCover.isNullOrEmpty()){
-                ivCover.scaleType = ImageView.ScaleType.CENTER_INSIDE
-                if (ConfigThemeApp.isThemeLight(requireContext())){
-                    ivCover.setImageResource(R.drawable.ic_camera)
-                } else {
-                    ivCover.setImageResource(R.drawable.ic_camera_dark)
-                }
-            } else {
-                Picasso.get().load(user.imgCover).into(ivCover)
-                ivCover.scaleType = ImageView.ScaleType.CENTER_CROP
-            }
-
-            if (user.imgProfile.isNullOrEmpty()){
-                civImageProfile.setImageResource(R.drawable.ic_user_profile)
-            } else {
-                Picasso.get().load(user.imgProfile).into(civImageProfile)
-            }
-
-        }
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -169,6 +136,60 @@ class ProfileFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarProfile)
         (activity as AppCompatActivity).supportActionBar!!.title = ""
         setHasOptionsMenu(true)
+    }
+
+    /**
+     * Metodo que setea las propiedades del usuario
+     * en sus campos correspondientes
+     */
+    private fun configComponent() {
+        binding.apply {
+            user?.let { user ->
+                mtvUsername.text = user.name
+                mtvEmail.text = user.email
+                mtvUploadedProducts.text = user.uploadedProducts.toString()
+                mtvOpinions.text = user.opinions.toString()
+
+                if (user.imgCover.isNullOrEmpty()){
+                    ivCover.scaleType = ImageView.ScaleType.CENTER_INSIDE
+                    if (ConfigThemeApp.isThemeLight(requireContext())){
+                        ivCover.setImageResource(R.drawable.ic_camera)
+                    } else {
+                        ivCover.setImageResource(R.drawable.ic_camera_dark)
+                    }
+                } else {
+                    Picasso.get().load(user.imgCover).into(ivCover)
+                    ivCover.scaleType = ImageView.ScaleType.CENTER_CROP
+                }
+
+                if (user.imgProfile.isNullOrEmpty()){
+                    civImageProfile.setImageResource(R.drawable.ic_user_profile)
+                } else {
+                    Picasso.get().load(user.imgProfile).into(civImageProfile)
+                }
+            }
+        }
+    }
+
+    private fun configEditProfileButton() {
+
+        val bundle = Bundle()
+
+        binding.btnEditProfile.setOnClickListener {
+
+            if (user.isNotNull()){
+                bundle.putString("imgCover", user?.imgCover)
+                bundle.putString("imgProfile", user?.imgProfile)
+                bundle.putString("name", user?.name)
+                bundle.putString("phone", user?.phone)
+            } else {
+                activity?.toast(getString(R.string.msg_info_tiempo_espera))
+            }
+
+            activity?.openActivity<EditProfileActivity> {
+                putExtra("user", bundle)
+            }
+        }
     }
 
     /**

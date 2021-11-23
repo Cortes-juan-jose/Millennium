@@ -17,6 +17,9 @@ object Constant {
     const val RESULT_CODE_CV_IMG_POST_3: Int = 3
     const val RESULT_CODE_CV_IMG_POST_4: Int = 4
 
+    const val RESULT_CODE_CV_IMG_POST_COVER: Int = 5
+    const val RESULT_CODE_CV_IMG_POST_PROFILE: Int = 6
+
     const val PERMISSION_CAMERA: Int  = 111
     const val PERMISSION_GALLERY: Int  = 222
 

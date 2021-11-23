@@ -46,7 +46,7 @@
     <string name="msg_error_password_confirm">La contraseña no coincide</string>
     <string name="msg_error_cargar_imagen_galeria">Se produjo un error al cargar la imagen</string>
     <string name="msg_error_archivo_no_permitido">Archivo no permitido</string>
-    <string name="msg_error_title_producto">Título requerido- mínimo 10 caracteres</string>
+    <string name="msg_error_title_producto">Título requerido - mínimo 10 caracteres</string>
     <string name="msg_error_description_producto">Descripción requerida - mínimo 10 caracteres</string>
     <string name="msg_error_category_producto">Seleccione una categoría</string>
     <string name="msg_error_price_producto">Precio requerido - introduzca un precio válido</string>
@@ -72,6 +72,7 @@
     <string name="msg_info_permisos_denegados">Permisos denegados</string>
     <string name="msg_info_imagen_eliminada">Imagen eliminada</string>
     <string name="msg_info_producto_publicado">Producto publicado</string>
+    <string name="msg_info_tiempo_espera">Espere a que se establezca la información del usuario</string>
 
     <string name="bnv_title_inicio">Inicio</string>
     <string name="bnv_title_me_gusta">Me gusta</string>
