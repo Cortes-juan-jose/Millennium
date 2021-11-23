@@ -507,6 +507,9 @@ class PostProductActivity : AppCompatActivity() {
                         toast(getString(R.string.msg_error_guardar_imagen))
                     }
                 }
+                it.addOnFailureListener{ exc ->
+                    toast("${exc.message}")
+                }
             }
         )
 
@@ -522,6 +525,9 @@ class PostProductActivity : AppCompatActivity() {
                         toast(getString(R.string.msg_error_guardar_imagen))
                     }
                 }
+                it.addOnFailureListener{ exc ->
+                    toast("${exc.message}")
+                }
             }
         )
 
@@ -536,6 +542,9 @@ class PostProductActivity : AppCompatActivity() {
                         dialogLoading.dismiss()
                         toast(getString(R.string.msg_error_guardar_imagen))
                     }
+                }
+                it.addOnFailureListener{ exc ->
+                    toast("${exc.message}")
                 }
             }
         )
@@ -553,6 +562,9 @@ class PostProductActivity : AppCompatActivity() {
                         toast(getString(R.string.msg_error_guardar_imagen))
                     }
                 }
+                it.addOnFailureListener{ exc ->
+                    toast("${exc.message}")
+                }
             }
         )
 
@@ -562,8 +574,8 @@ class PostProductActivity : AppCompatActivity() {
             {
                 it?.let { task ->
                     task.addOnSuccessListener { uri ->
-                        uri?.let {
-                            product.image1 = uri.toString()
+                        uri?.let { _user ->
+                            product.image1 = _user.toString()
                             //Si la primera imagen ha sido subida, verificamos la 2, 3, 4
                             when {
                                 fileImage2.isNotNull() -> {
@@ -602,6 +614,9 @@ class PostProductActivity : AppCompatActivity() {
                             }
                         }
                     }
+                    task.addOnFailureListener { exc ->
+                        toast("${exc.message}")
+                    }
                 }
             }
         )
@@ -611,8 +626,8 @@ class PostProductActivity : AppCompatActivity() {
             {
                 it?.let { task ->
                     task.addOnSuccessListener { uri ->
-                        uri?.let {
-                            product.image2 = uri.toString()
+                        uri?.let { _uri ->
+                            product.image2 = _uri.toString()
 
                             //Si la segunda imagen ha sido subida, verificamos la 3, 4
                             when {
@@ -640,6 +655,9 @@ class PostProductActivity : AppCompatActivity() {
                             }
                         }
                     }
+                    task.addOnFailureListener { exc ->
+                        toast("${exc.message}")
+                    }
                 }
             }
         )
@@ -649,8 +667,8 @@ class PostProductActivity : AppCompatActivity() {
             {
                 it?.let { task ->
                     task.addOnSuccessListener { uri ->
-                        uri?.let {
-                            product.image3 = uri.toString()
+                        uri?.let { _uri ->
+                            product.image3 = _uri.toString()
 
                             //Si la tercera imagen ha sido subida, verificamos la 4
                             when {
@@ -668,6 +686,9 @@ class PostProductActivity : AppCompatActivity() {
                             }
                         }
                     }
+                    task.addOnFailureListener { exc ->
+                        toast("${exc.message}")
+                    }
                 }
             }
         )
@@ -677,14 +698,14 @@ class PostProductActivity : AppCompatActivity() {
             {
                 it?.let { task ->
                     task.addOnSuccessListener { uri ->
-                        uri?.let {
-                            product.image4 = uri.toString()
+                        uri?.let { _uri ->
+                            product.image4 = _uri.toString()
                             viewModel.getIdUser()
                         }
                     }
-                    task.addOnFailureListener { e ->
+                    task.addOnFailureListener { exc ->
                         dialogLoading.dismiss()
-                        toast("${e.message}")
+                        toast("${exc.message}")
                     }
                 }
             }

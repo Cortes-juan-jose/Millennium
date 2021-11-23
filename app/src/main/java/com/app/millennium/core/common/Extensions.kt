@@ -176,15 +176,15 @@ fun TextInputEditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 fun Map<String, Any>?.convertUser(): User {
 
     val user = User()
-    this?.get("id")?.let { user.id = it.toString() }
-    this?.get("name")?.let { user.name = it.toString() }
-    this?.get("email")?.let { user.email = it.toString() }
-    this?.get("phone")?.let { user.phone = it.toString() }
-    this?.get("uploadedProducts")?.let { user.uploadedProducts = it.toString().toInt() }
-    this?.get("opinions")?.let { user.opinions = it.toString().toInt() }
-    this?.get("imgProfile")?.let { user.imgProfile = it.toString() }
-    this?.get("imgCover")?.let { user.imgCover = it.toString() }
-    this?.get("timestamp")?.let { user.timestamp = it.toString().toLong() }
+    this?.get(Constant.PROP_ID_USER)?.let { user.id = it.toString() }
+    this?.get(Constant.PROP_USERNAME_USER)?.let { user.name = it.toString() }
+    this?.get(Constant.PROP_EMAIL_USER)?.let { user.email = it.toString() }
+    this?.get(Constant.PROP_PHONE_USER)?.let { user.phone = it.toString() }
+    this?.get(Constant.PROP_UPLOADED_PRODUCTS_USER)?.let { user.uploadedProducts = it.toString().toInt() }
+    this?.get(Constant.PROP_OPINIONS_USER)?.let { user.opinions = it.toString().toInt() }
+    this?.get(Constant.PROP_IMG_PROFILE_USER)?.let { user.imgProfile = it.toString() }
+    this?.get(Constant.PROP_IMG_COVER_USER)?.let { user.imgCover = it.toString() }
+    this?.get(Constant.PROP_TIMESTAMP_USER)?.let { user.timestamp = it.toString().toLong() }
 
     return user
 }

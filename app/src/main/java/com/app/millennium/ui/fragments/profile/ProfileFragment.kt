@@ -9,10 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.app.millennium.R
-import com.app.millennium.core.common.convertUser
-import com.app.millennium.core.common.isNotNull
-import com.app.millennium.core.common.openActivity
-import com.app.millennium.core.common.toast
+import com.app.millennium.core.common.*
 import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.data.model.User
 import com.app.millennium.databinding.FragmentProfileBinding
@@ -178,16 +175,17 @@ class ProfileFragment : Fragment() {
         binding.btnEditProfile.setOnClickListener {
 
             if (user.isNotNull()){
-                bundle.putString("imgCover", user?.imgCover)
-                bundle.putString("imgProfile", user?.imgProfile)
-                bundle.putString("name", user?.name)
-                bundle.putString("phone", user?.phone)
+                bundle.putString(Constant.PROP_ID_USER, user?.id)
+                bundle.putString(Constant.PROP_IMG_COVER_USER, user?.imgCover)
+                bundle.putString(Constant.PROP_IMG_PROFILE_USER, user?.imgProfile)
+                bundle.putString(Constant.PROP_USERNAME_USER, user?.name)
+                bundle.putString(Constant.PROP_PHONE_USER, user?.phone)
             } else {
                 activity?.toast(getString(R.string.msg_info_tiempo_espera))
             }
 
             activity?.openActivity<EditProfileActivity> {
-                putExtra("user", bundle)
+                putExtra(Constant.BUNDLE_USER, bundle)
             }
         }
     }

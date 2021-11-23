@@ -122,6 +122,8 @@
     <string name="mtv_modificar_datos_usuario_perfil">Modifica su foto de portada, su foto de perfil y/o sus datos personales</string>
     <string name="btn_confirm">Confirmar</string>
     <string name="mtv_editar_perfil">Editar perfil</string>
+    <string name="msg_info_cambios_aplicados">Cambios aplicados</string>
+    <string name="msg_alert_aplicando_cambios">Aplicando cambios</string>
 
 
 </resources>

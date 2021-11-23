@@ -11,4 +11,8 @@ interface Users {
     suspend fun get(id:String) : Task<DocumentSnapshot>
     suspend fun getDataRealTime(id: String): DocumentReference
     suspend fun updateUploadedProducts(user: User): Task<Void>
+    suspend fun updateImgCover(id: String, newValue: String): Task<Void>
+    suspend fun updateImgProfile(id: String, newValue: String): Task<Void>
+    suspend fun updateName(id: String, newValue: String): Task<Void>
+    suspend fun updatePhone(id: String, newValue: String): Task<Void>
 }

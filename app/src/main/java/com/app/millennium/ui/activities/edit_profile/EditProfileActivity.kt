@@ -20,6 +20,7 @@ import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import com.app.millennium.R
 import com.app.millennium.core.common.*
+import com.app.millennium.core.utils.CompressBitmapImage
 import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.core.utils.FileUtil
 import com.app.millennium.databinding.ActivityEditProfileBinding
@@ -27,6 +28,7 @@ import com.app.millennium.databinding.ViewBottomSheetOptionsImagesSelectedBindin
 import com.app.millennium.databinding.ViewBottomSheetOptionsSourceImagesBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
+import dmax.dialog.SpotsDialog
 import java.io.File
 import java.util.*
 
@@ -53,8 +55,8 @@ class EditProfileActivity : AppCompatActivity() {
      * input de las imágenes se ha pulsado
      */
     private var resultCodeImageSalected: Int = 0
-
-
+    //AlertDialog
+    private lateinit var dialogLoading: android.app.AlertDialog
 
     /**
      * Launcher para abrir la camara y tener la lógica
@@ -220,9 +222,10 @@ class EditProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //Obtener bundle
-        bundle = intent.getBundleExtra("user")!!
+        bundle = intent.getBundleExtra(Constant.BUNDLE_USER)!!
 
         initUI()
+        initObservables()
     }
 
     /**
@@ -262,52 +265,249 @@ class EditProfileActivity : AppCompatActivity() {
     
     private fun initUI(){
         configComponents() //Setear info del bundle a los componentes de la vista
-        confingOnClickComponents()
-
-
+        configOnClickComponents()
     }
 
-    private fun confingOnClickComponents() {
+    private fun initObservables() {
+
+        viewModel.apply {
+
+            //Cuando se guarde el cover entonces
+            saveImageCover.observe(
+                this@EditProfileActivity,
+                {
+                    it.addOnCompleteListener{ task ->
+                        if (task.isSuccessful){
+                            viewModel.getUrlImage(Constant.RESULT_CODE_CV_IMG_POST_COVER)
+                        }
+                    }
+                    it.addOnFailureListener{ exc ->
+                        toast("${exc.message}")
+                        dialogLoading.dismiss()
+                    }
+                }
+            )
+
+            //Cuando se guarde el profile entonces
+            saveImageProfile.observe(
+                this@EditProfileActivity,
+                {
+                    it.addOnCompleteListener{ task ->
+                        if (task.isSuccessful){
+                            viewModel.getUrlImage(Constant.RESULT_CODE_CV_IMG_POST_PROFILE)
+                        }
+                    }
+                    it.addOnFailureListener{ exc ->
+                        toast("${exc.message}")
+                        dialogLoading.dismiss()
+                    }
+                }
+            )
+
+            //Cuando se obtenga la url del cover entonces
+            getUrlImageCover.observe(
+                this@EditProfileActivity,
+                {
+                    it?.let { task ->
+                        task.addOnSuccessListener { uri ->
+                            uri?.let { _uri ->
+                                viewModel.updateImgCover(
+                                    bundle[Constant.PROP_ID_USER].toString(),
+                                    _uri.toString()
+                                )
+                            }
+                        }
+                        task.addOnFailureListener { exc ->
+                            toast("${exc.message}")
+                            dialogLoading.dismiss()
+                        }
+                    }
+                }
+            )
+
+            //Cuando se obtenga la url del profile entonces
+            getUrlImageProfile.observe(
+                this@EditProfileActivity,
+                {
+                    it?.let { task ->
+                        task.addOnSuccessListener { uri ->
+                            uri?.let { _uri ->
+                                viewModel.updateImgProfile(
+                                    bundle[Constant.PROP_ID_USER].toString(),
+                                    _uri.toString()
+                                )
+                            }
+                        }
+                        task.addOnFailureListener { exc ->
+                            toast("${exc.message}")
+                            dialogLoading.dismiss()
+                        }
+                    }
+                }
+            )
+
+            //Cuando se actualice el cover en el user entonces
+            updateImgCoverUser.observe(
+                this@EditProfileActivity,
+                {
+                    it?.let { task ->
+                        task.addOnCompleteListener { _task ->
+                            if (_task.isSuccessful){
+
+                                //Ahora preguntamos si la imagen del perfil es establecida
+                                when {
+                                    fileImageProfile.isNotNull() -> {
+                                        //Construimos la imagen en bytes
+                                        val imageByte = CompressBitmapImage.getImage(
+                                            this@EditProfileActivity,
+                                            fileImageProfile?.path,
+                                            Constant.WIDTH_IMAGE_STORAGE,
+                                            Constant.HEIGHT_IMAGE_STORAGE
+                                        )
+                                        //y la guardamos
+                                        viewModel.saveImage(
+                                            imageByte,
+                                            Constant.RESULT_CODE_CV_IMG_POST_PROFILE
+                                        )
+                                    }
+                                    binding.tietUsername.text.toString() != bundle[Constant.PROP_USERNAME_USER] -> {
+                                        viewModel.updateName(
+                                            bundle[Constant.PROP_ID_USER].toString(),
+                                            binding.tietUsername.text.toString()
+                                        )
+                                    }
+                                    binding.tietPhone.text.toString() != bundle[Constant.PROP_PHONE_USER].toString() -> {
+                                        viewModel.updatePhone(
+                                            bundle[Constant.PROP_ID_USER].toString(),
+                                            binding.tietPhone.text.toString()
+                                        )
+                                    }
+                                    else -> {
+                                        dialogLoading.dismiss()
+                                        toast(getString(R.string.msg_info_cambios_aplicados))
+                                        finishAndRemoveTask()
+                                    }
+                                }
+                            }
+                        }
+                        task.addOnFailureListener { exc ->
+                            toast("${exc.message}")
+                            dialogLoading.dismiss()
+                        }
+                    }
+                }
+            )
+
+            //Cuando se actualice el profile en el user entonces
+            updateImgProfileUser.observe(
+                this@EditProfileActivity,
+                {
+                    it?.let { task ->
+                        task.addOnCompleteListener { _task ->
+                            if (_task.isSuccessful){
+                                //Si se ha actualizado entonces preguntamos si el nombre también ha sido cambiado
+                                when {
+                                    binding.tietUsername.text.toString() != bundle[Constant.PROP_USERNAME_USER] -> {
+                                        viewModel.updateName(
+                                            bundle[Constant.PROP_ID_USER].toString(),
+                                            binding.tietUsername.text.toString()
+                                        )
+                                    }
+                                    //De lo contrario preguntamos si el telefono se ha cambiado
+                                    binding.tietPhone.text.toString() != bundle[Constant.PROP_PHONE_USER].toString() -> {
+                                        viewModel.updatePhone(
+                                            bundle[Constant.PROP_ID_USER].toString(),
+                                            binding.tietPhone.text.toString()
+                                        )
+                                    }
+                                    else -> {
+                                        dialogLoading.dismiss()
+                                        toast(getString(R.string.msg_info_cambios_aplicados))
+                                        finishAndRemoveTask()
+                                    }
+                                }
+                            }
+                        }
+                        task.addOnFailureListener { exc ->
+                            toast("${exc.message}")
+                            dialogLoading.dismiss()
+                        }
+                    }
+                }
+            )
+
+            //Cuando se actualice el name en el user entonces
+            updateNameUser.observe(
+                this@EditProfileActivity,
+                {
+                    it?.let { task ->
+                        task.addOnCompleteListener { _task ->
+                            if (_task.isSuccessful){
+                                //Si el nombre se ha actualizado entonces preguntamos si el telefono
+                                //tambien ha sido modificado
+                                if (binding.tietPhone.text.toString() != bundle[Constant.PROP_PHONE_USER].toString()
+                                ) {
+                                    viewModel.updatePhone(
+                                        bundle[Constant.PROP_ID_USER].toString(),
+                                        binding.tietPhone.text.toString()
+                                    )
+                                } else {
+                                    dialogLoading.dismiss()
+                                    toast(getString(R.string.msg_info_cambios_aplicados))
+                                    finishAndRemoveTask()
+                                }
+                            }
+                        }
+                        task.addOnFailureListener { exc ->
+                            toast("${exc.message}")
+                            dialogLoading.dismiss()
+                        }
+                    }
+                }
+            )
+
+            //Cuando se actualice el phone en el user entonces
+            updatePhoneUser.observe(
+                this@EditProfileActivity,
+                {
+                    it?.let { task ->
+                        task.addOnCompleteListener { _task ->
+                            dialogLoading.dismiss()
+                            if (_task.isSuccessful){
+                                //Como ya no hay más cambios entonces volvemos al fragment del perfil
+                                toast(getString(R.string.msg_info_cambios_aplicados))
+                                finishAndRemoveTask()
+                            }
+                        }
+                        task.addOnFailureListener { exc ->
+                            toast("${exc.message}")
+                            dialogLoading.dismiss()
+                        }
+                    }
+                }
+            )
+        }
+    }
+
+    private fun configOnClickComponents() {
+        configImages()
 
         binding.apply {
+
             //btn iv_back para cerrar la activity
             ivBack.setOnClickListener {
                 finish()
             }
-            configImages()
 
+            //btnConfirm para guardar los cambios establecidos
             btnConfirm.setOnClickListener {
-
-                if (fileImageCover.isNotNull()){
-                    toast("guardamos cover")
-                    if (fileImageProfile.isNotNull()){
-                        toast("Guardamos profile")
-                        if (tietUsername.text.toString().isUsername()){
-                            toast("Actualizamos el username")
-                            if (tietPhone.text.toString().isPhone()){
-                                toast("Actualizamos el phone")
-                            }
-                        }
-                    }
-                } else if (fileImageProfile.isNotNull()){
-                    toast("Guardamos profile")
-                    if (tietUsername.text.toString().isUsername()){
-                        toast("Actualizamos el username")
-                        if (tietPhone.text.toString().isNotEmpty()){
-                            if (tietPhone.text.toString().isPhone()){
-                                toast("Actualizamos el phone")
-                            }
-                        }
-                    }
-                } else {
-                    if (tietUsername.text.toString().isUsername()){
-                        toast("Actualizamos el username")
-                        if (tietPhone.text.toString().isNotEmpty()){
-                            if (tietPhone.text.toString().isPhone()){
-                                toast("Actualizamos el phone")
-                            }
-                        }
-                    }
+                this@EditProfileActivity.reload()
+                if (validateInputs(
+                        tietUsername.text.toString().trim(),
+                        tietPhone.text.toString().trim()
+                )){
+                    dialogLoading.show()
+                    saveChanges()
                 }
             }
         }
@@ -317,19 +517,26 @@ class EditProfileActivity : AppCompatActivity() {
      * Metodo que setea todos los campos de la ui
      */
     private fun configComponents() {
+
+        dialogLoading = SpotsDialog
+            .Builder()
+            .setMessage(getString(R.string.msg_alert_aplicando_cambios))
+            .setContext(this)
+            .setCancelable(false)
+            .build()
+
         binding.apply {
 
             //Username
-            tietUsername.setText(bundle["name"].toString())
+            tietUsername.setText(bundle[Constant.PROP_USERNAME_USER].toString())
 
             //Phone
-            if (bundle["phone"].isNotNull())
-                tietPhone.setText(bundle["phone"].toString())
-            else
-                tietPhone.setText(bundle["phone"].toString())
+            if (bundle[Constant.PROP_PHONE_USER].isNotNull())
+                tietPhone.setText(bundle[Constant.PROP_PHONE_USER].toString())
+
 
             //ImgCover
-            if (bundle["imgCover"].isNull()){
+            if (bundle[Constant.PROP_IMG_COVER_USER].isNull()){
                 ivCover.scaleType = ImageView.ScaleType.CENTER_INSIDE
                 if (ConfigThemeApp.isThemeLight(applicationContext)){
                     ivCover.setImageResource(R.drawable.ic_camera)
@@ -338,20 +545,22 @@ class EditProfileActivity : AppCompatActivity() {
                 }
                 ivCover.tag = Constant.TAG_DEFAULT
             } else {
-                Picasso.get().load(bundle["imgCover"].toString()).into(ivCover)
+                Picasso.get().load(bundle[Constant.PROP_IMG_COVER_USER].toString()).into(ivCover)
                 ivCover.scaleType = ImageView.ScaleType.CENTER_CROP
                 ivCover.tag = Constant.TAG_NOT_DEFAULT
-                fileImageCover = File(bundle["imgCover"].toString())
+                //Pero no se guarda el fichero porque no se ha modificado por ello no se
+                //debe guardar nuevamente en la base de datos
             }
 
             //ImgProfile
-            if (bundle["imgProfile"].isNull()){
+            if (bundle[Constant.PROP_IMG_PROFILE_USER].isNull()){
                 civImageProfile.setImageResource(R.drawable.ic_user_profile)
                 civImageProfile.tag = Constant.TAG_DEFAULT
             } else {
-                Picasso.get().load(bundle["imgProfile"].toString()).into(civImageProfile)
+                Picasso.get().load(bundle[Constant.PROP_IMG_PROFILE_USER].toString()).into(civImageProfile)
                 civImageProfile.tag = Constant.TAG_NOT_DEFAULT
-                fileImageProfile = File(bundle["imgProfile"].toString())
+                //Pero no se guarda el fichero porque no se ha modificado por ello no se
+                //debe guardar nuevamente en la base de datos
             }
         }
     }
@@ -372,6 +581,63 @@ class EditProfileActivity : AppCompatActivity() {
                 this@EditProfileActivity.reload()
                 resultCodeImageSalected = Constant.RESULT_CODE_CV_IMG_POST_PROFILE
                 configBottomSheetOption()
+            }
+        }
+    }
+
+    /**
+     * Metodo para guardar los cambios
+     */
+    private fun saveChanges() {
+        binding.apply {
+
+            when {
+                //Imagen cover
+                fileImageCover.isNotNull() -> {
+                    //Construimos la imagen en bytes
+                    val imageByte = CompressBitmapImage.getImage(
+                        this@EditProfileActivity,
+                        fileImageCover?.path,
+                        Constant.WIDTH_IMAGE_STORAGE,
+                        Constant.HEIGHT_IMAGE_STORAGE)
+                    //y la guardamos
+                    viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_COVER)
+                }
+
+                //Imaen Profile
+                fileImageProfile.isNotNull() -> {
+                    //Construimos la imagen en bytes
+                    val imageByte = CompressBitmapImage.getImage(
+                        this@EditProfileActivity,
+                        fileImageProfile?.path,
+                        Constant.WIDTH_IMAGE_STORAGE,
+                        Constant.HEIGHT_IMAGE_STORAGE
+                    )
+                    //y la guardamos
+                    viewModel.saveImage(imageByte, Constant.RESULT_CODE_CV_IMG_POST_PROFILE)
+                }
+
+                //Field name User
+                tietUsername.text.toString() != bundle[Constant.PROP_USERNAME_USER] -> {
+                    viewModel.updateName(
+                        bundle[Constant.PROP_ID_USER].toString(),
+                        tietUsername.text.toString()
+                    )
+                }
+
+                //Field phone User
+                tietPhone.text.toString() != bundle[Constant.PROP_PHONE_USER].toString() -> {
+                    viewModel.updatePhone(
+                        bundle[Constant.PROP_ID_USER].toString(),
+                        tietPhone.text.toString()
+                    )
+                }
+
+                else -> {
+                    dialogLoading.dismiss()
+                    toast(getString(R.string.msg_info_cambios_aplicados))
+                    finishAndRemoveTask()
+                }
             }
         }
     }
@@ -675,5 +941,51 @@ class EditProfileActivity : AppCompatActivity() {
                 launcherGalleryImageProfile.launch(gallery)
             }
         }
+    }
+
+    /**
+     * Metodo para validar los campos, devuelve true
+     * si todos los campos son correctos y devuelve
+     * false de todo lo contrario
+     */
+    private fun validateInputs(
+        username: String,
+        phone: String
+    ): Boolean {
+        var usernameValid = false
+        var phoneValid = false
+
+        binding.apply {
+
+            //Validando el username
+            if (username.isUsername()){
+                usernameValid = true
+                tilUsername.removeError()
+            } else {
+                tietUsername.setText(bundle[Constant.PROP_USERNAME_USER].toString())
+                tilUsername.applyError(getString(R.string.msg_error_username))
+            }
+
+            //Validando el telefono
+            //Solo se validará si se ha introducido dígitos
+            if (phone.isNotEmpty()){
+                if (phone.isPhone()){
+                    phoneValid = true
+                    tilPhone.removeError()
+                } else {
+                    if (bundle[Constant.PROP_PHONE_USER].isNotNull()){
+                        tietPhone.setText(bundle[Constant.PROP_PHONE_USER].toString())
+                    } else {
+                        tietPhone.setText("")
+                    }
+                    tilPhone.applyError(getString(R.string.msg_error_phone))
+                }
+            } else{
+                phoneValid = true
+                tilPhone.removeError()
+            }
+        }
+
+        return usernameValid && phoneValid
     }
 }
