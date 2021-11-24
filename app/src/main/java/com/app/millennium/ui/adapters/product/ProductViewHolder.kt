@@ -1,6 +1,7 @@
 package com.app.millennium.ui.adapters.product
 
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +24,14 @@ class ProductViewHolder(
         binding.mtvTitle.text = product.title
         binding.mtvPrice.text = product.price.formatAsPrice()
         binding.mtvTimestamp.text = RelativeTime.getTimeAgo(product.timestamp, view.context)
+
+        binding.root.setOnClickListener {
+            Log.d("CARD", "Pulsado")
+        }
+
+        binding.ivLike.setOnClickListener {
+            Log.d("CARD", "Like")
+        }
     }
 
     /**
