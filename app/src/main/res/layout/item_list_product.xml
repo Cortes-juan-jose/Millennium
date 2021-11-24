@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
-    android:id="@+id/cv_product"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="20dp"
+    android:layout_margin="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_product"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/red"
+            tools:src="@drawable/ic_user_profile"
+            android:contentDescription="@string/cd_imagen_producto" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/mtv_timestamp"
@@ -24,17 +35,8 @@
             app:layout_constraintBottom_toBottomOf="@id/iv_product"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="@dimen/min_padding_view"
-            android:shadowRadius="20"
+            android:shadowRadius="5"
             tools:text="Hace 113 días"/>
-
-        <ImageView
-            android:id="@+id/iv_product"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:background="@color/red"
-            tools:src="@drawable/ic_user_profile"
-            android:contentDescription="@string/cd_imagen_producto" />
 
         <com.google.android.material.textview.MaterialTextView
             style="@style/TextColor"
@@ -58,10 +60,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/min_padding_view"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/balsami_bold"
             android:textSize="26sp"
             app:layout_constraintTop_toBottomOf="@id/mtv_title"
             app:layout_constraintStart_toStartOf="@id/line_margin_start"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="123.456.789.012 €" />
 
         <ImageView
@@ -72,13 +76,6 @@
             app:layout_constraintBottom_toBottomOf="@id/mtv_price"
             app:layout_constraintEnd_toEndOf="@id/line_margin_end"
             android:contentDescription="@string/cd_imagen_like" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="@dimen/min_padding_view"
-            android:background="@color/grey_light"
-            app:layout_constraintTop_toBottomOf="@id/mtv_price" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/line_margin_start"

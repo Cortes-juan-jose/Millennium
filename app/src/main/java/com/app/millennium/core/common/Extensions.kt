@@ -11,6 +11,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.app.millennium.core.utils.FileUtil
+import com.app.millennium.data.model.Product
 import com.app.millennium.data.model.User
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -187,4 +188,26 @@ fun Map<String, Any>?.convertUser(): User {
     this?.get(Constant.PROP_TIMESTAMP_USER)?.let { user.timestamp = it.toString().toLong() }
 
     return user
+}
+
+/**
+ * Extension para construir un objeto product a partir de un map de propiedades
+ */
+fun Map<String, Any>?.converProduct(): Product {
+
+    val product = Product()
+    this?.get(Constant.PROP_ID_PRODUCT)?.let { product.id = it.toString() }
+    this?.get(Constant.PROP_ID_USER_PRODUCT)?.let { product.idUser = it.toString() }
+    this?.get(Constant.PROP_TITLE_PRODUCT)?.let { product.title = it.toString() }
+    this?.get(Constant.PROP_DESCRIPTION_PRODUCT)?.let { product.description = it.toString() }
+    this?.get(Constant.PROP_CATEGORY_PRODUCT)?.let { product.category = it.toString() }
+    this?.get(Constant.PROP_PRICE_PRODUCT)?.let { product.price = it.toString().toDouble() }
+    this?.get(Constant.PROP_NEGOTIABLE_PRODUCT)?.let { product.negotiable = it.toString() }
+    this?.get(Constant.PROP_IMAGE1_PRODUCT)?.let { product.image1 = it.toString() }
+    this?.get(Constant.PROP_IMAGE2_PRODUCT)?.let { product.image2 = it.toString() }
+    this?.get(Constant.PROP_IMAGE3_PRODUCT)?.let { product.image3 = it.toString() }
+    this?.get(Constant.PROP_IMAGE4_PRODUCT)?.let { product.image4 = it.toString() }
+    this?.get(Constant.PROP_TIMESTAMP_PRODUCT)?.let { product.timestamp = it.toString().toLong() }
+
+    return product
 }
