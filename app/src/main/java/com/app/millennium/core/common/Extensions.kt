@@ -7,6 +7,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -20,10 +21,7 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 //Extension para construir toast
-fun Activity.toast(
-    text: String,
-    lenght:Int = Toast.LENGTH_SHORT
-){
+fun Activity.toast(text: String, lenght:Int = Toast.LENGTH_SHORT){
     Toast.makeText(this, text, lenght).show()
 }
 
@@ -39,7 +37,6 @@ fun Any?.isNull() = this==null
 
 //Extension para verificar que un objeto no sea nulo
 fun Any?.isNotNull() = this!=null
-
 
 //Extension para validar el nombre de usuario
 fun String?.isUsername(): Boolean {
@@ -88,6 +85,63 @@ fun String?.isTitleOrDescription(): Boolean {
         return this?.length!! >= 10
     }
     return false
+}
+
+//Extension para formatear el percio del producto para poner puntos y la moneda
+fun Double.formatAsPrice(): String {
+
+    var priceFormatted = ""
+    var beforeToPoint = ""
+    var latesToPoint = ""
+
+    //Primero verificamos si tiene un punto para obtener la
+    //parte de los decimales y la parte entera
+    var splitPrice = listOf<String>()
+    if (this.toString().contains(".")){
+        beforeToPoint = this.toString().split(".")[0]
+        latesToPoint = this.toString().split(".")[1]
+    } else {
+        beforeToPoint = this.toString().split(".")[0]
+    }
+
+    //Ahora a darle la vuelta el string del precio para poner puntos
+    var temp = ""
+    var pos = beforeToPoint.length
+    while (pos>0){
+        temp += beforeToPoint[pos-1]
+        pos--
+    }
+
+    //Ahora poner puntos
+    //pos vale 0 reutilizamos
+    var priceWithPoints = ""
+    while (pos<temp.length){
+        when(pos){
+            3, 6 -> {
+                priceWithPoints+=".${temp[pos]}"
+            }
+            else -> {
+                priceWithPoints+=temp[pos]
+            }
+        }
+        pos++
+    }
+
+    //Ahora le volvemos a dar la vuelta
+    //reutilizamos pos
+    pos = priceWithPoints.length
+    while (pos>0){
+        priceFormatted += priceWithPoints[pos-1]
+        pos--
+    }
+
+    //Ahora le ponemos los decimales
+    if (latesToPoint.isNotEmpty() && latesToPoint!="0")
+        priceFormatted += ",${latesToPoint} €"
+    else
+        priceFormatted += " €"
+
+    return priceFormatted.trim()
 }
 
 //Extension para aplicar propiedades de error a un text input layout

@@ -1041,6 +1041,17 @@ class PostProductActivity : AppCompatActivity() {
                         tietPrice.setSelection(tietPrice.text.toString().length)
                     }
                 }
+                //validar que solo permita 1 punto y no más
+                if (it.length > 2){
+                    if (
+                        (it.substring(it.length-2, it.length-1)) == "."
+                        && (it.substring(it.length-1, it.length)) == it.substring(it.length-2, it.length-1)
+                    ){
+                        tietPrice.setText(it.substring(0, it.length-1))
+                        //y el cursor se va al final
+                        tietPrice.setSelection(tietPrice.text.toString().length)
+                    }
+                }
                 //validar que el punto no se pueda poner al final
                 //Primero confirmamos si tiene 12 caracteres
                 if (it.length == 12) {
