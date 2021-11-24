@@ -46,6 +46,10 @@
         <item name="android:textColor">@color/colorOnSecondary</item>
     </style>
 
+    <style name="TextColor">
+        <item name="android:textColor">@color/colorOnSecondary</item>
+    </style>
+
     <style name="ViewBackground">
         <item name="android:background">@color/colorPrimaryDark</item>
     </style>
@@ -64,6 +68,10 @@
 
     <style name="ImageViewIconPhoneColor">
         <item name="android:src">@drawable/ic_phone_dark</item>
+    </style>
+
+    <style name="ImageViewIconLikeColor">
+        <item name="android:src">@drawable/ic_like</item>
     </style>
 
     <style name="ImageViewIconCameraColor">

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/cv_product"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtv_timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/min_padding_view"
+            android:textSize="12sp"
+            android:fontFamily="@font/balsami_regular"
+            android:elevation="5dp"
+            android:textColor="@color/white"
+            android:shadowColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/iv_product"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="@dimen/min_padding_view"
+            android:shadowRadius="20"
+            tools:text="Hace 113 días"/>
+
+        <ImageView
+            android:id="@+id/iv_product"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/colorPrimary"
+            tools:src="@drawable/ic_user_profile"
+            android:contentDescription="@string/cd_imagen_producto" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextColor"
+            android:id="@+id/mtv_title"
+            android:layout_width="@dimen/mathParent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/min_padding_view"
+            android:ellipsize="end"
+            android:fontFamily="@font/balsami_regular"
+            android:lines="1"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@id/iv_product"
+            app:layout_constraintStart_toStartOf="@id/line_margin_start"
+            app:layout_constraintEnd_toEndOf="@id/line_margin_end"
+            tools:text="MMMMMM MMMMM MMMM MM MMM MMMM MMMM MMMMM MMMMM MMM M MMM M MM" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextColor"
+            android:id="@+id/mtv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/min_padding_view"
+            android:fontFamily="@font/balsami_bold"
+            android:textSize="26sp"
+            app:layout_constraintTop_toBottomOf="@id/mtv_title"
+            app:layout_constraintStart_toStartOf="@id/line_margin_start"
+            tools:text="123.456.789.012 €" />
+
+        <ImageView
+            style="@style/ImageViewIconLikeColor"
+            android:id="@+id/iv_like"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toBottomOf="@id/mtv_price"
+            app:layout_constraintEnd_toEndOf="@id/line_margin_end"
+            android:contentDescription="@string/cd_imagen_like" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/min_padding_view"
+            android:background="@color/grey_light"
+            app:layout_constraintTop_toBottomOf="@id/mtv_price" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/line_margin_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/line_margin_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

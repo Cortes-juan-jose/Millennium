@@ -124,6 +124,8 @@
     <string name="mtv_editar_perfil">Editar perfil</string>
     <string name="msg_info_cambios_aplicados">Cambios aplicados</string>
     <string name="msg_alert_aplicando_cambios">Aplicando cambios</string>
+    <string name="cd_imagen_producto">imagen producto</string>
+    <string name="cd_imagen_like">imagen like</string>
 
 
 </resources>
