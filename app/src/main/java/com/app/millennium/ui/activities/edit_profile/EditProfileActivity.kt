@@ -404,10 +404,17 @@ class EditProfileActivity : AppCompatActivity() {
                                             }
                                             //Si el telefono es distinto a como vino entonces se actualiza
                                             binding.tietPhone.text.toString() != bundle[Constant.PROP_PHONE_USER].toString() -> {
-                                                viewModel.updatePhone(
-                                                    bundle[Constant.PROP_ID_USER].toString(),
-                                                    binding.tietPhone.text.toString()
-                                                )
+                                                if (binding.tietPhone.text.toString().isEmpty()){
+                                                    viewModel.updatePhone(
+                                                        bundle[Constant.PROP_ID_USER].toString(),
+                                                        null
+                                                    )
+                                                } else {
+                                                    viewModel.updatePhone(
+                                                        bundle[Constant.PROP_ID_USER].toString(),
+                                                        binding.tietPhone.text.toString()
+                                                    )
+                                                }
                                             }
                                             //si no se han modificado ningun campo entonces cerramos la activiti
                                             else -> {
@@ -446,10 +453,17 @@ class EditProfileActivity : AppCompatActivity() {
                                     }
                                     //Si el telefono es distinto a como vino entonces se actualiza
                                     binding.tietPhone.text.toString() != bundle[Constant.PROP_PHONE_USER].toString() -> {
-                                        viewModel.updatePhone(
-                                            bundle[Constant.PROP_ID_USER].toString(),
-                                            binding.tietPhone.text.toString()
-                                        )
+                                        if (binding.tietPhone.text.toString().isEmpty()){
+                                            viewModel.updatePhone(
+                                                bundle[Constant.PROP_ID_USER].toString(),
+                                                null
+                                            )
+                                        } else {
+                                            viewModel.updatePhone(
+                                                bundle[Constant.PROP_ID_USER].toString(),
+                                                binding.tietPhone.text.toString()
+                                            )
+                                        }
                                     }
                                     //si no se han modificado ningun campo entonces cerramos la activiti
                                     else -> {
@@ -478,10 +492,17 @@ class EditProfileActivity : AppCompatActivity() {
                                 //Si el nombre se ha actualizado entonces preguntamos si el telefono
                                 //tambien ha sido modificado
                                 if (binding.tietPhone.text.toString() != bundle[Constant.PROP_PHONE_USER].toString()){
-                                    viewModel.updatePhone(
-                                        bundle[Constant.PROP_ID_USER].toString(),
-                                        binding.tietPhone.text.toString()
-                                    )
+                                    if (binding.tietPhone.text.toString().isEmpty()){
+                                        viewModel.updatePhone(
+                                            bundle[Constant.PROP_ID_USER].toString(),
+                                            null
+                                        )
+                                    } else {
+                                        viewModel.updatePhone(
+                                            bundle[Constant.PROP_ID_USER].toString(),
+                                            binding.tietPhone.text.toString()
+                                        )
+                                    }
                                 } else {
                                     dialogLoading.dismiss()
                                     toast(getString(R.string.msg_info_cambios_aplicados))
