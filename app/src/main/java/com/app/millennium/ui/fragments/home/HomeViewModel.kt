@@ -18,18 +18,12 @@ class HomeViewModel: ViewModel() {
     private val _getAllProducts = MutableLiveData<Task<QuerySnapshot>>()
     val getAllProducts: LiveData<Task<QuerySnapshot>> get() = _getAllProducts
 
-    //Live data para quitar progress bar
-    private val _visibilityProgressBar = MutableLiveData<Boolean>()
-    val visibilityProgressBar: LiveData<Boolean> get() = _visibilityProgressBar
-
     fun init (){
 
         viewModelScope.launch {
-            _visibilityProgressBar.postValue(true)
             _getAllProducts.postValue(
                 getAllProductsUseCase.invoke()
             )
-            _visibilityProgressBar.postValue(false)
         }
     }
 }

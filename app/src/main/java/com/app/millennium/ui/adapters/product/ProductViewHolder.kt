@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.app.millennium.core.common.isNull
+import com.app.millennium.core.utils.RelativeTime
 import com.app.millennium.data.model.Product
 import com.app.millennium.databinding.ItemListProductBinding
 import com.squareup.picasso.Picasso
@@ -20,7 +21,7 @@ class ProductViewHolder(
         Picasso.get().load(getFirtsImageProductNotNull(product)).into(binding.ivProduct)
         binding.mtvTitle.text = product.title
         binding.mtvPrice.text = product.price.toString()
-        binding.mtvTimestamp.text = product.timestamp.toString()
+        binding.mtvTimestamp.text = RelativeTime.getTimeAgo(product.timestamp, view.context)
     }
 
     /**

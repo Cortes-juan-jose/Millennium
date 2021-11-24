@@ -33,37 +33,31 @@ object RelativeTime : Application() {
         return when {
             diff < MINUTE_MILLIS -> {
                 //"Hace un momento"
-                "${getString(R.string.msg_timestamp_hace)} ${getString(R.string.msg_timestamp_un_momento)}"
+                "Hace un momento"
             }
             diff < 2 * MINUTE_MILLIS -> {
                 //"Hace un minuto"
-                "${getString(R.string.msg_timestamp_hace)} ${getString(R.string.msg_timestamp_un_minuto)}"
+                "Hace un minuto"
             }
             diff < 50 * MINUTE_MILLIS -> {
                 //"Hace " + diff / MINUTE_MILLIS + " minutos"
-                "${getString(R.string.msg_timestamp_hace)} " +
-                        diff / MINUTE_MILLIS +
-                        " ${getString(R.string.msg_timestamp_minutos)}"
+                "Hace ${diff / MINUTE_MILLIS} minutos"
             }
             diff < 90 * MINUTE_MILLIS -> {
                 //"Hace una hora"
-                "${getString(R.string.msg_timestamp_hace)} ${getString(R.string.msg_timestamp_una_hora)}"
+                "Hace una hora"
             }
             diff < 24 * HOUR_MILLIS -> {
                 //"Hace " + diff / HOUR_MILLIS + " horas"
-                "${getString(R.string.msg_timestamp_hace)} " +
-                        diff / HOUR_MILLIS +
-                        " ${getString(R.string.msg_timestamp_horas)}"
+                "Hace ${diff / HOUR_MILLIS} horas"
             }
             diff < 48 * HOUR_MILLIS -> {
                 //"Ayer"
-                getString(R.string.msg_timestamp_ayer)
+                "Ayer"
             }
             else -> {
                 //"Hace " + diff / DAY_MILLIS + " dias"
-                "${getString(R.string.msg_timestamp_hace)} " +
-                        diff / DAY_MILLIS +
-                        " ${getString(R.string.msg_timestamp_dias)}"
+                "Hace ${diff / DAY_MILLIS} dias"
             }
         }
     }

@@ -43,6 +43,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun initUI() {
+        binding.progress.visibility = View.VISIBLE
+        binding.rvProducts.visibility = View.GONE
         products = mutableListOf()
         viewModel.init()
     }
@@ -72,23 +74,9 @@ class HomeFragment : Fragment() {
                             )
                             binding.rvProducts.adapter = productAdapter
                         }
-                        task.addOnFailureListener { exc -> activity?.toast("${exc.message}") }
-                    }
-                }
-            )
-
-            /**
-             * Observer para seterar la visibilidad al progress bar
-             */
-            visibilityProgressBar.observe(
-                viewLifecycleOwner,
-                {
-                    if (it){
-                        binding.progress.visibility = View.VISIBLE
-                        binding.rvProducts.visibility = View.GONE
-                    } else {
                         binding.progress.visibility = View.GONE
                         binding.rvProducts.visibility = View.VISIBLE
+                        task.addOnFailureListener { exc -> activity?.toast("${exc.message}") }
                     }
                 }
             )
