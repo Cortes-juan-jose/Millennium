@@ -60,23 +60,33 @@ class HomeFragment : Fragment() {
                 {
                     it?.let { task ->
                         task.addOnSuccessListener { result ->
-                            for (document in result){
-                                if (document.isNotNull() && document.exists()){
-                                    //Entonces se guarda en la lista
-                                    products.add(document.data.converProduct())
+                            if (result.isEmpty){
+                                activity?.toast("Lista vacia")
+                                binding.rvProducts.visibility = View.GONE
+                                binding.progress.visibility = View.VISIBLE
+                            } else {
+                                for (document in result){
+                                    if (document.isNotNull() && document.exists()){
+                                        //Entonces se guarda en la lista
+                                        products.add(document.data.converProduct())
+                                    }
                                 }
+                                productAdapter = ProductAdapter(products)
+                                binding.rvProducts.layoutManager = LinearLayoutManager(
+                                    requireContext(),
+                                    LinearLayoutManager.VERTICAL,
+                                    false
+                                )
+                                binding.rvProducts.adapter = productAdapter
+                                binding.rvProducts.visibility = View.VISIBLE
+                                binding.progress.visibility = View.GONE
                             }
-                            productAdapter = ProductAdapter(products)
-                            binding.rvProducts.layoutManager = LinearLayoutManager(
-                                requireContext(),
-                                LinearLayoutManager.VERTICAL,
-                                false
-                            )
-                            binding.rvProducts.adapter = productAdapter
                         }
-                        binding.progress.visibility = View.GONE
-                        binding.rvProducts.visibility = View.VISIBLE
-                        task.addOnFailureListener { exc -> activity?.toast("${exc.message}") }
+                        task.addOnFailureListener { exc ->
+                            activity?.toast("${exc.message}")
+                            binding.rvProducts.visibility = View.VISIBLE
+                            binding.progress.visibility = View.GONE
+                        }
                     }
                 }
             )

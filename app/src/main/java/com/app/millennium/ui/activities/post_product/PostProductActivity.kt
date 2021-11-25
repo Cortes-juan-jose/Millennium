@@ -1027,18 +1027,20 @@ class PostProductActivity : AppCompatActivity() {
                     tietPrice.setSelection(tietPrice.text.toString().length)
                 }
                 //si se introduce dos 0 entonces no pondrá el segundo si no que pondrá un 0.
-                if (it == "00") {
+                else if (it == "00") {
                     tietPrice.setText("0.")
                     //y el cursor se va al final
                     tietPrice.setSelection(tietPrice.text.toString().length)
                 }
                 //validar que solo admita 2 decimales
-                if (tietPrice.text.toString().contains(".")) {
+                else if (tietPrice.text.toString().contains(".")) {
                     //si el texto que se ha introducido ya tiene un punto verificamos lo deseado
-                    if (it.substring(it.lastIndexOf("."), it.length - 1).length > 2) {
-                        tietPrice.setText(it.substring(0, it.length - 1))
-                        //y el cursor se va al final
-                        tietPrice.setSelection(tietPrice.text.toString().length)
+                    if (it[it.length-1] != '.'){
+                        if (it.substring(it.lastIndexOf("."), it.length - 1).length > 2) {
+                            tietPrice.setText(it.substring(0, it.length - 1))
+                            //y el cursor se va al final
+                            tietPrice.setSelection(tietPrice.text.toString().length)
+                        }
                     }
                     //validar que solo permita 1 punto y no más
                     if (it.length > 2){

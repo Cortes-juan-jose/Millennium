@@ -8,7 +8,7 @@ import com.app.millennium.data.model.Product
 
 class ProductAdapter(
     private val products : List<Product>
-    ) : RecyclerView.Adapter<ProductViewHolder>() {
+) : RecyclerView.Adapter<ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
@@ -26,5 +26,9 @@ class ProductAdapter(
 
     override fun getItemCount(): Int {
         return products.size
+    }
+
+    private fun filter(s: String){
+
     }
 }
