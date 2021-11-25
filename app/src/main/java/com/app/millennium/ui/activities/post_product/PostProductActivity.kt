@@ -1017,52 +1017,83 @@ class PostProductActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Metodo que controla los eventos de un TextInputEditText para cuando
+     * se introduce un digito
+     */
     private fun configEventTextWatcherPrice() {
         binding.apply {
             tietPrice.afterTextChanged {
+
                 //si se introduce un punto al principio se le pondra un 0 delante
                 if (it == ".") {
                     tietPrice.setText("0.")
                     //y el cursor se va al final
                     tietPrice.setSelection(tietPrice.text.toString().length)
                 }
-                //si se introduce dos 0 entonces no pondrá el segundo si no que pondrá un 0.
-                else if (it == "00") {
+                //De lo contrario
+                else if (it == "00"){
                     tietPrice.setText("0.")
                     //y el cursor se va al final
                     tietPrice.setSelection(tietPrice.text.toString().length)
                 }
-                //validar que solo admita 2 decimales
-                else if (tietPrice.text.toString().contains(".")) {
-                    //si el texto que se ha introducido ya tiene un punto verificamos lo deseado
-                    if (it[it.length-1] != '.'){
-                        if (it.substring(it.lastIndexOf("."), it.length - 1).length > 2) {
-                            tietPrice.setText(it.substring(0, it.length - 1))
-                            //y el cursor se va al final
-                            tietPrice.setSelection(tietPrice.text.toString().length)
+                //De lo contrario al poner punto o dos ceros, autmoaticamente entra también en
+                //este if porque en los dos casos anteriores setea el valor a 0. por lo tanto
+                //con este else obviamos que cuando lo setea el 0. en los dos primeros casos
+                //que lo setee y no haga comprobaciones
+                else if (it != "0."){
+                    //Si es distinto a 0. entonces comprobamos que el valor no sea vacio
+                    //porque puede darse el caso de que se pueda borrar
+                    if (it.isNotEmpty()){
+                        //Si no es vacia entonces separamos el valor en dos partes
+                        //el texto antes de introducir el ultimo digito
+                        //y el ultimo digito introducido
+                        var beforeToLastDigit = it.substring(0, it.length-1)
+                        var lastDigitInsert = it[it.length-1]
+
+                        //Comprobamos que el digito introducido sea 1 punto
+                        if (lastDigitInsert=='.'){
+                            //Si es punto entonces comprobamos que el valor antes de introducit
+                            //este punto no contenga un punto
+                            if (beforeToLastDigit.contains(".")){
+                                //Si contiene un punto entonces lo quitamos
+                                tietPrice.setText(beforeToLastDigit)
+                                //y el cursor se va al final
+                                tietPrice.setSelection(tietPrice.text.toString().length)
+                            }
                         }
-                    }
-                    //validar que solo permita 1 punto y no más
-                    if (it.length > 2){
-                        if (it[it.length-1] == '.'){
-                            tietPrice.setText(it.substring(0, it.length-1))
-                            tietPrice.setSelection(tietPrice.text.toString().length)
+
+                        //Tambien se da el caso de que no sea vacia el valor completo y este
+                        //tenga un punto porque es así como se está controlando qu solo se pueda
+                        //introducir 2 decimales
+                        if (it.contains(".")){
+                            //Si contiene un punto entonces comprobamos que el digito
+                            //que se ha introducido no sea un punto
+                            if (lastDigitInsert != '.'){
+                                //si no esta en la ultima posicion entonces que ponga solo 2 decimales
+                                if (it.split(".")[1].length > 2){
+                                    tietPrice.setText(it.substring(0, it.length-1))
+                                    tietPrice.setSelection(tietPrice.text.toString().length)
+                                }
+                            }
                         }
-                    }
-                }
-                //validar que el punto no se pueda poner al final
-                //Primero confirmamos si tiene 12 caracteres
-                if (it.length == 12) {
-                    //Si tiene 12 caracteres confirmamos si tiene un punto al final
-                    if (it[11] == '.') {
-                        tietPrice.setText(it.substring(0, it.length - 1))
-                        //y el cursor se va al final
-                        tietPrice.setSelection(tietPrice.text.toString().length)
+
+                        //validar que el punto no se pueda poner al final
+                        //Primero confirmamos si tiene 12 caracteres
+                        if (it.length == 12) {
+                            //Si tiene 12 caracteres confirmamos si tiene un punto al final
+                            if (it[11] == '.') {
+                                tietPrice.setText(it.substring(0, it.length - 1))
+                                //y el cursor se va al final
+                                tietPrice.setSelection(tietPrice.text.toString().length)
+                            }
+                        }
                     }
                 }
             }
         }
     }
+
 
     /**
      * Metodo para abrir el bottom sheet dialog para abrir la camara
