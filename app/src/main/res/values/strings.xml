@@ -126,6 +126,7 @@
     <string name="msg_alert_aplicando_cambios">Aplicando cambios</string>
     <string name="cd_imagen_producto">imagen producto</string>
     <string name="cd_imagen_like">imagen like</string>
+    <string name="msg_info_sin_productos">Aún no se han publicado productos. Estás de suerte! Prueba en ser el primero</string>
 
 
 </resources>

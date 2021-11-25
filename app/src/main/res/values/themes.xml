@@ -144,4 +144,8 @@
         <item name="fontFamily">@font/balsami_bold</item>
     </style>
 
+    <style name="LottieTheme">
+        <item name="lottie_rawRes">"@raw/anim_arrow_down_post_product"</item>
+    </style>
+
 </resources>

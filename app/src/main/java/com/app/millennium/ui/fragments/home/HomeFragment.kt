@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.millennium.R
 import com.app.millennium.core.common.converProduct
 import com.app.millennium.core.common.isNotNull
 import com.app.millennium.core.common.toast
+import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.data.model.Product
 import com.app.millennium.databinding.FragmentHomeBinding
 import com.app.millennium.ui.adapters.product.ProductAdapter
@@ -42,11 +44,23 @@ class HomeFragment : Fragment() {
 
     }
 
+    //Init ui
     private fun initUI() {
-        binding.progress.visibility = View.VISIBLE
-        binding.rvProducts.visibility = View.GONE
+        buildLottieAnimation()
+
         products = mutableListOf()
         viewModel.init()
+    }
+
+    /**
+     * Metodo que setea una u otra animacion dependiendo del tema del dispositivo
+     */
+    private fun buildLottieAnimation() {
+        if (ConfigThemeApp.isThemeLight(requireContext())){
+            binding.animArrow.setAnimation(R.raw.anim_arrow_down_post_product)
+        } else {
+            binding.animArrow.setAnimation(R.raw.anim_arrow_down_post_product_theme_dark)
+        }
     }
 
     private fun initObservables() {
@@ -60,32 +74,50 @@ class HomeFragment : Fragment() {
                 {
                     it?.let { task ->
                         task.addOnSuccessListener { result ->
+                            //En result tenemos la lista de todos los productos
+                            //Verificamos que haya productos en la lista
                             if (result.isEmpty){
-                                activity?.toast("Lista vacia")
-                                binding.rvProducts.visibility = View.GONE
-                                binding.progress.visibility = View.VISIBLE
+                                //Si la lista es vacía mostramos un layout indicándoolo
+                                binding.llListProducts.visibility = View.GONE
+                                binding.progress.visibility = View.GONE
+                                binding.clSinProductos.visibility = View.VISIBLE
                             } else {
-                                for (document in result){
-                                    if (document.isNotNull() && document.exists()){
-                                        //Entonces se guarda en la lista
-                                        products.add(document.data.converProduct())
+                                //De lo contrario recorremos la lista
+                                for (product in result){
+                                    //Ahora para casa product (document) verificamos
+                                    //que exista y no sea nulo
+                                    if (product.isNotNull() && product.exists()){
+                                        //si no es nulo y existe ntonces se guarda en la lista
+                                        //convirtiendo cada product en un objeto producto
+                                        //ya que data del product devuelve un map con todas
+                                        //las propiedades
+                                        products.add(product.data.converProduct())
                                     }
                                 }
+                                //Una vez tengamos todos los productos creamos el adapter
+                                //con la lista de los producots
                                 productAdapter = ProductAdapter(products)
+                                //Configuramos la disposicion del recycler view
                                 binding.rvProducts.layoutManager = LinearLayoutManager(
                                     requireContext(),
                                     LinearLayoutManager.VERTICAL,
                                     false
                                 )
+                                //y le seteamos el adapter al recycler view
                                 binding.rvProducts.adapter = productAdapter
-                                binding.rvProducts.visibility = View.VISIBLE
+
+                                //Y a continuación, mostramos la vista de la lista con el serachview
+                                //y escondemos el progress bar y la vista de aviso sin productos
+                                binding.llListProducts.visibility = View.VISIBLE
+                                binding.clSinProductos.visibility = View.GONE
                                 binding.progress.visibility = View.GONE
                             }
                         }
                         task.addOnFailureListener { exc ->
                             activity?.toast("${exc.message}")
-                            binding.rvProducts.visibility = View.VISIBLE
+                            binding.llListProducts.visibility = View.GONE
                             binding.progress.visibility = View.GONE
+                            binding.clSinProductos.visibility = View.GONE
                         }
                     }
                 }

@@ -27,27 +27,27 @@
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
         app:layout_constraintEnd_toEndOf="@id/toolbar"/>
 
-    <androidx.appcompat.widget.SearchView
-        style="@style/ViewBackground"
-        android:id="@+id/sv_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
-
     <LinearLayout
+        android:id="@+id/ll_list_products"
         android:layout_width="match_parent"
         android:layout_height="@dimen/mathParent"
-        app:layout_constraintTop_toBottomOf="@id/sv_toolbar"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.SearchView
+            style="@style/ViewBackground"
+            android:id="@+id/sv_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_products"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
             android:elevation="5dp"
             tools:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@id/sv_toolbar"
             tools:listitem="@layout/item_list_product"/>
 
     </LinearLayout>
@@ -58,10 +58,47 @@
         android:layout_height="wrap_content"
         android:visibility="visible"
         android:elevation="10dp"
-        tools:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/sv_toolbar"
+        tools:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!--Linear layout para mostrar un mensaje de error-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_sin_productos"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mathParent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TextColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:layout_gravity="center_vertical"
+            android:textAlignment="center"
+            android:padding="@dimen/min_padding_view"
+            android:fontFamily="@font/balsami_bold_italic"
+            android:text="@string/msg_info_sin_productos"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="RtlCompat" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/anim_arrow"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
