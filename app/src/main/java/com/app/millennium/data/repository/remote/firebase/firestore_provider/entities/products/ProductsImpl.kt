@@ -27,7 +27,7 @@ class ProductsImpl : Products {
      * Metodo para obtener todos los productos de un usuario
      */
     override suspend fun getAllByUser(idUser: String): Task<QuerySnapshot> =
-        db.whereEqualTo(Constant.PROP_ID_USER, idUser)
+        db.whereEqualTo(Constant.PROP_ID_USER_PRODUCT, idUser)
             .orderBy(
                 Constant.PROP_TIMESTAMP_PRODUCT,
                 Query.Direction.DESCENDING

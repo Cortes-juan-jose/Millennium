@@ -63,4 +63,17 @@ object Constant {
     const val PROP_IMAGE3_PRODUCT: String = "image3"
     const val PROP_IMAGE4_PRODUCT: String = "image4"
     const val PROP_TIMESTAMP_PRODUCT: String = "timestamp"
+
+    const val PROP_ID_LIKE: String = "id"
+    const val PROP_ID_USER_TO_SESSION_LIKE: String = "idUserToSession"
+    const val PROP_ID_USER_TO_POST_PRODUCT_LIKE: String = "idUserToPostProduct"
+    const val PROP_ID_PRODUCT_LIKE: String = "idProduct"
+    const val PROP_TIMESTAMP_LIKE: String = "timestamp"
+
+    const val PROP_ID_OPINION: String = "id"
+    const val PROP_ID_USER_CREATOR_OPINION: String = "idUserCreator"
+    const val PROP_ID_USER_RECEPTOR_OPINION: String = "idUserReceptor"
+    const val PROP_MSG_OPINION: String = "msg"
+    const val PROP_ASSESSMENT_OPINION: String = "assessment"
+    const val PROP_TIMESTAMP_OPINION: String = "timestamp"
 }
