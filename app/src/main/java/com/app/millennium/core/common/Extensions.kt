@@ -257,6 +257,7 @@ fun Map<String, Any>?.converProduct(): Product {
     this?.get(Constant.PROP_CATEGORY_PRODUCT)?.let { product.category = it.toString() }
     this?.get(Constant.PROP_PRICE_PRODUCT)?.let { product.price = it.toString().toDouble() }
     this?.get(Constant.PROP_NEGOTIABLE_PRODUCT)?.let { product.negotiable = it.toString() }
+    this?.get(Constant.PROP_PRODUCT_STATUS_PRODUCT)?.let { product.productStatus = it.toString() }
     this?.get(Constant.PROP_IMAGE1_PRODUCT)?.let { product.image1 = it.toString() }
     this?.get(Constant.PROP_IMAGE2_PRODUCT)?.let { product.image2 = it.toString() }
     this?.get(Constant.PROP_IMAGE3_PRODUCT)?.let { product.image3 = it.toString() }
