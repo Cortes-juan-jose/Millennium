@@ -4,12 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.fragments.products_and_opinions_to_user.ProductsUserFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:itemCount="2"
-        tools:listitem="@layout/item_list_product"/>
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="22sp"
+            android:visibility="visible"
+            android:fontFamily="@font/balsami_regular"
+            android:padding="@dimen/max_padding_view"
+            android:text="@string/mtv_sin_productos" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_list_product"/>
+
+    </RelativeLayout>
 
 </androidx.core.widget.NestedScrollView>

@@ -129,6 +129,8 @@
     <string name="msg_info_sin_productos">Aún no se han publicado productos. Estás de suerte! Prueba en ser el primero</string>
     <string name="tab_productos">Productos</string>
     <string name="tab_opiniones">Opiniones</string>
+    <string name="mtv_sin_opiniones">Sin opiniones…</string>
+    <string name="mtv_sin_productos">Sin productos…</string>
 
 
 </resources>
