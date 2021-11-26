@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.app.millennium.R
 import com.app.millennium.core.common.*
 import com.app.millennium.core.utils.ConfigThemeApp
@@ -16,6 +17,9 @@ import com.app.millennium.databinding.FragmentProfileBinding
 import com.app.millennium.ui.activities.edit_profile.EditProfileActivity
 import com.app.millennium.ui.activities.info_app.InfoAppActivity
 import com.app.millennium.ui.activities.login.LoginActivity
+import com.app.millennium.ui.adapters.view_pager_profile.ViewPagerProfileAdapter
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment() {
@@ -212,6 +216,50 @@ class ProfileFragment : Fragment() {
      */
     private fun configTabLayout() {
 
+        val adapterViewPagerProfile =
+            activity?.let {
+                ViewPagerProfileAdapter(
+                    it.supportFragmentManager,
+                    it.lifecycle
+                )
+            }
+        binding.vp2PostOpinions.adapter = adapterViewPagerProfile
+
+        /*TabLayoutMediator(binding.tlPostOpinions, binding.vp2PostOpinions) {tab, pos ->
+            when(pos){
+                0 -> {tab.text=getString(R.string.tab_productos)}
+                1 -> {tab.text=getString(R.string.tab_opiniones)}
+            }
+        }.attach()*/
+
+        binding.tlPostOpinions.addTab(
+            binding.tlPostOpinions.newTab().setText(getString(R.string.tab_productos))
+        )
+        binding.tlPostOpinions.addTab(
+            binding.tlPostOpinions.newTab().setText(getString(R.string.tab_opiniones))
+        )
+
+        binding.tlPostOpinions.addOnTabSelectedListener(
+            object : TabLayout.OnTabSelectedListener{
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    binding.vp2PostOpinions.currentItem = tab?.position!!
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+                }
+
+            }
+        )
+        binding.vp2PostOpinions.registerOnPageChangeCallback(
+            object : ViewPager2.OnPageChangeCallback(){
+                override fun onPageSelected(position: Int) {
+                    binding.tlPostOpinions.selectTab(binding.tlPostOpinions.getTabAt(position))
+                }
+            }
+        )
     }
 
     /**

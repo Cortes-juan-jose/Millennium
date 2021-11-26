@@ -176,15 +176,14 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:layout_gravity="bottom"
-            android:background="@color/colorSecondary"
-            app:tabMode="scrollable"/>
+            app:tabMode="fixed"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <!--SCROLL PARA QUE EL APBARLAYOUT SE ESCONDA-->
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vp2__post_opinions"
+        android:id="@+id/vp2_post_opinions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:isScrollContainer="true"
