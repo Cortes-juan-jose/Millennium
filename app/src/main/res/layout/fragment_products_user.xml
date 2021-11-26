@@ -6,11 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.products_and_opinions_to_user.ProductsUserFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="50sp"
-        android:gravity="center"
-        android:text="PRODUCTOS" />
+        android:layout_height="wrap_content"
+        tools:itemCount="2"
+        tools:listitem="@layout/item_list_product"/>
 
 </androidx.core.widget.NestedScrollView>

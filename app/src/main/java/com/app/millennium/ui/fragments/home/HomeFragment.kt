@@ -74,6 +74,13 @@ class HomeFragment : Fragment() {
                 {
                     it?.let { task ->
                         task.addOnSuccessListener { result ->
+                            /**
+                             * Si se vuelve a este fragment desde el botón de ir hacia
+                             * atrás se cargara por dos veces he por ello que la lista debemos
+                             * vaciarla y volver a insertarle todos los productos
+                             */
+                            if (products.isNotEmpty())
+                                products.clear()
                             //En result tenemos la lista de todos los productos
                             //Verificamos que haya productos en la lista
                             if (result.isEmpty){
