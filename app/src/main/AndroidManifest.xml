@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Millennium">
         <activity
+            android:name=".ui.activities.info_app.InfoAppActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.edit_profile.EditProfileActivity"
             android:exported="false" />
 
@@ -43,8 +46,8 @@
         </activity>
         <activity
             android:name=".ui.activities.home.HomeActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activities.register.RegisterActivity"
             android:exported="false" />

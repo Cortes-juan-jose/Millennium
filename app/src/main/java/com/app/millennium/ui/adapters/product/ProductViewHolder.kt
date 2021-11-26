@@ -1,24 +1,41 @@
 package com.app.millennium.ui.adapters.product
 
 import android.net.Uri
-import android.util.Log
 import android.view.View
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.app.millennium.core.common.formatAsPrice
-import com.app.millennium.core.common.isNull
 import com.app.millennium.core.utils.RelativeTime
 import com.app.millennium.data.model.Product
 import com.app.millennium.databinding.ItemListProductBinding
+import com.app.millennium.domain.use_case.likes_db.SaveLikeUseCase
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ProductViewHolder(
     private val view : View
-) : RecyclerView.ViewHolder(view){
+) : RecyclerView.ViewHolder(view), UsesCasesViewHolderProduct{
 
+    //Binding
     private val binding: ItemListProductBinding = ItemListProductBinding.bind(view)
 
-    fun init(product: Product){
+    //Caso de uso para guardar un like
+    override val saveLikeUseCase: SaveLikeUseCase
+        get() = SaveLikeUseCase()
+
+    //Producto
+    private lateinit var product: Product
+
+    //Cargar el producto
+    fun loadData(product: Product){
+        this.product = product
+        initUI()
+    }
+
+    //inicializar la vista
+    private fun initUI() {
         //Seteamos todos los campos en la vista
         Picasso.get().load(getFirtsImageProductNotNull(product)).into(binding.ivProduct)
         binding.mtvTitle.text = product.title
@@ -26,11 +43,14 @@ class ProductViewHolder(
         binding.mtvTimestamp.text = RelativeTime.getTimeAgo(product.timestamp, view.context)
 
         binding.root.setOnClickListener {
-            Log.d("CARD", "Pulsado")
+
         }
 
         binding.ivLike.setOnClickListener {
-            Log.d("CARD", "Like")
+            CoroutineScope(Dispatchers.IO).launch {
+                //Creamos un like y consultamos en la base de dato si ese like existe
+
+            }
         }
     }
 

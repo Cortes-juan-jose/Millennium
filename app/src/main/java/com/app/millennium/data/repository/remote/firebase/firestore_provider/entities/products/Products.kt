@@ -8,4 +8,5 @@ import com.google.firebase.firestore.QuerySnapshot
 interface Products {
     suspend fun save(product: Product) : Task<Void>
     suspend fun getAll(): Task<QuerySnapshot>
+    suspend fun getAllByUser(idUser: String): Task<QuerySnapshot>
 }

@@ -14,19 +14,4 @@ data class Product(
     var image3: String? = null,
     var image4: String? = null,
     var timestamp: Long = 0L
-){
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Product
-
-        if (id != other.id) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return id?.hashCode() ?: 0
-    }
-}
+)

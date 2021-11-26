@@ -21,13 +21,14 @@ class ProductAdapter(
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.init(products[position])
+        holder.loadData(products[position])
     }
 
     override fun getItemCount(): Int {
         return products.size
     }
 
+    //Metodo para filtrar en la lista
     private fun filter(s: String){
 
     }

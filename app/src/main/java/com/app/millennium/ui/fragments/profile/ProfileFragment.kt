@@ -14,6 +14,7 @@ import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.data.model.User
 import com.app.millennium.databinding.FragmentProfileBinding
 import com.app.millennium.ui.activities.edit_profile.EditProfileActivity
+import com.app.millennium.ui.activities.info_app.InfoAppActivity
 import com.app.millennium.ui.activities.login.LoginActivity
 import com.squareup.picasso.Picasso
 
@@ -29,7 +30,9 @@ class ProfileFragment : Fragment() {
     //Usuario
     private var user: User? = null
 
-    //Bindear la vista
+    /**
+     * Bindear la vista
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,7 +42,9 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    //Una vez la vista creada inicializamos todos los componentes
+    /*
+     * Una vez la vista creada inicializamos todos los componentes
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,13 +52,19 @@ class ProfileFragment : Fragment() {
         initObservables()
     }
 
-    //Inicializar todos los componentes de la vista
+    /**
+     * Inicializar todos los componentes de la vista
+     */
     private fun initUI() {
-        viewModel.getIdUser()
+        viewModel.getIdUser() //Obtener el id del usuario que tiene iniciada la sesion
         configToolbar() //Configurar el toolbar
-        configEditProfileButton()
+        configEditProfileButton() //Configurar el editar perfil
+        configTabLayout() //Configurar el tab layout
     }
 
+    /**
+     * Metodo que configura los observers asociados a esta vista con el viewmodel
+     */
     private fun initObservables() {
         //Observer para el id del usuario
         viewModel.getIdUser.observe(
@@ -88,12 +99,15 @@ class ProfileFragment : Fragment() {
             {
                 it?.let {
                     user = it
-                    configComponent()
+                    configComponents()
                 }
             }
         )
     }
 
+    /**
+     * Metodo sobreescrito para cuando está vista se destruya
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -113,7 +127,7 @@ class ProfileFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId){
-            R.id.info_app -> { activity?.toast("Abrir info")/*activity?.openActivity<PostProductActivity> {  }*/ }
+            R.id.info_app -> { activity?.openActivity<InfoAppActivity> {  } }
             R.id.sign_out -> { signOut() }
         }
 
@@ -139,7 +153,7 @@ class ProfileFragment : Fragment() {
      * Metodo que setea las propiedades del usuario
      * en sus campos correspondientes
      */
-    private fun configComponent() {
+    private fun configComponents() {
         binding.apply {
             user?.let { user ->
                 mtvUsername.text = user.name
@@ -168,6 +182,9 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    /**
+     * Metodo que configura el clicl del boton para editar perfil
+     */
     private fun configEditProfileButton() {
 
         val bundle = Bundle()
@@ -188,6 +205,13 @@ class ProfileFragment : Fragment() {
                 putExtra(Constant.BUNDLE_USER, bundle)
             }
         }
+    }
+
+    /**
+     * Metodo que configura todo el tabLayout para mostrar las opiniones y los productos
+     */
+    private fun configTabLayout() {
+
     }
 
     /**
