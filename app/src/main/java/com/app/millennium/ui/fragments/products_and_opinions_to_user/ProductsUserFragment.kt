@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.millennium.core.common.converProduct
 import com.app.millennium.core.common.isNotNull
+import com.app.millennium.core.common.isNull
 import com.app.millennium.data.model.Product
 import com.app.millennium.databinding.FragmentProductsUserBinding
 import com.app.millennium.ui.adapters.product_profile.ProductProfileAdapter
@@ -61,34 +62,38 @@ class ProductsUserFragment : Fragment() {
                             products.clear()
 
                         if (error.isNotNull()){
-                            binding.rvProducts.visibility = View.GONE
-                            binding.progress.visibility = View.GONE
-                            binding.mtvWithoutProducts.visibility = View.VISIBLE
                             return@addSnapshotListener
                         }
 
-                        for (product in value!!.documents){
-                            if (product.isNotNull() && product.exists()){
-                                products.add(product.data.converProduct())
+                        if (value.isNull() || value!!.isEmpty){
+                            binding.rvProducts.visibility = View.GONE
+                            binding.progress.visibility = View.GONE
+                            binding.mtvWithoutProducts.visibility = View.VISIBLE
+                        } else {
+
+                            for (product in value.documents){
+                                if (product.isNotNull() && product.exists()){
+                                    products.add(product.data.converProduct())
+                                }
                             }
+
+                            //Una vez tengamos todos los productos creamos el adapter
+                            //con la lista de los producots
+                            productProfileAdapter = ProductProfileAdapter(products)
+                            //Configuramos la disposicion del recycler view
+                            binding.rvProducts.layoutManager = LinearLayoutManager(
+                                requireContext(),
+                                LinearLayoutManager.VERTICAL,
+                                false
+                            )
+                            //y le seteamos el adapter al recycler view
+                            binding.rvProducts.adapter = productProfileAdapter
+
+                            //Escondemos el texto sin productos el progress y mostramos la lista
+                            binding.rvProducts.visibility = View.VISIBLE
+                            binding.mtvWithoutProducts.visibility = View.GONE
+                            binding.progress.visibility = View.GONE
                         }
-
-                        //Una vez tengamos todos los productos creamos el adapter
-                        //con la lista de los producots
-                        productProfileAdapter = ProductProfileAdapter(products)
-                        //Configuramos la disposicion del recycler view
-                        binding.rvProducts.layoutManager = LinearLayoutManager(
-                            requireContext(),
-                            LinearLayoutManager.VERTICAL,
-                            false
-                        )
-                        //y le seteamos el adapter al recycler view
-                        binding.rvProducts.adapter = productProfileAdapter
-
-                        //Escondemos el texto sin productos el progress y mostramos la lista
-                        binding.rvProducts.visibility = View.VISIBLE
-                        binding.mtvWithoutProducts.visibility = View.GONE
-                        binding.progress.visibility = View.GONE
                     }
                 }
             }
