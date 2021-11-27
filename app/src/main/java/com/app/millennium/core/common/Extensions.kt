@@ -5,9 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -265,4 +265,29 @@ fun Map<String, Any>?.converProduct(): Product {
     this?.get(Constant.PROP_TIMESTAMP_PRODUCT)?.let { product.timestamp = it.toString().toLong() }
 
     return product
+}
+
+/**
+ * Extension para guardar un producto en un bundle
+ */
+fun Product?.loadBundle(): Bundle{
+    val bundle = Bundle()
+
+    this?.let {
+        bundle.putString(Constant.PROP_ID_PRODUCT, this.id)
+        bundle.putString(Constant.PROP_ID_USER_PRODUCT, this.idUser)
+        bundle.putString(Constant.PROP_TITLE_PRODUCT, this.title)
+        bundle.putString(Constant.PROP_DESCRIPTION_PRODUCT, this.description)
+        bundle.putString(Constant.PROP_CATEGORY_PRODUCT, this.category)
+        bundle.putDouble(Constant.PROP_PRICE_PRODUCT, this.price)
+        bundle.putString(Constant.PROP_NEGOTIABLE_PRODUCT, this.negotiable)
+        bundle.putString(Constant.PROP_PRODUCT_STATUS_PRODUCT, this.productStatus)
+        bundle.putString(Constant.PROP_IMAGE1_PRODUCT, this.image1)
+        bundle.putString(Constant.PROP_IMAGE2_PRODUCT, this.image2)
+        bundle.putString(Constant.PROP_IMAGE3_PRODUCT, this.image3)
+        bundle.putString(Constant.PROP_IMAGE4_PRODUCT, this.image4)
+        bundle.putLong(Constant.PROP_TIMESTAMP_PRODUCT, this.timestamp)
+    }
+
+    return bundle
 }

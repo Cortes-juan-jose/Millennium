@@ -1,21 +1,27 @@
 package com.app.millennium.ui.adapters.product_home
 
+import android.content.Context
 import android.net.Uri
 import android.view.View
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import com.app.millennium.core.common.Constant
 import com.app.millennium.core.common.formatAsPrice
+import com.app.millennium.core.common.loadBundle
+import com.app.millennium.core.common.openActivity
 import com.app.millennium.core.utils.RelativeTime
 import com.app.millennium.data.model.Product
 import com.app.millennium.databinding.ItemListProductHomeBinding
 import com.app.millennium.domain.use_case.likes_db.SaveLikeUseCase
+import com.app.millennium.ui.activities.product_detail.ProductDetailActivity
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProductHomeViewHolder(
-    private val view : View
+    private val view : View,
+    private val context : Context
 ) : RecyclerView.ViewHolder(view), ProductHomeUsesCases{
 
     //Binding
@@ -43,6 +49,11 @@ class ProductHomeViewHolder(
         binding.mtvTimestamp.text = RelativeTime.getTimeAgo(product.timestamp, view.context)
 
         binding.root.setOnClickListener {
+            val bundle = product.loadBundle()
+
+            context.openActivity<ProductDetailActivity> {
+                putExtra(Constant.BUNDLE_PRODUCT, bundle)
+            }
 
         }
 

@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Millennium">
         <activity
+            android:name=".ui.activities.product_detail.ProductDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.info_app.InfoAppActivity"
             android:exported="false" />
         <activity

@@ -102,7 +102,7 @@ class HomeFragment : Fragment() {
                                 }
                                 //Una vez tengamos todos los productos creamos el adapter
                                 //con la lista de los producots
-                                productHomeAdapter = ProductHomeAdapter(products)
+                                productHomeAdapter = ProductHomeAdapter(products, requireContext())
                                 //Configuramos la disposicion del recycler view
                                 binding.rvProducts.layoutManager = LinearLayoutManager(
                                     requireContext(),

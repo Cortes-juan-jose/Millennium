@@ -1,5 +1,6 @@
 package com.app.millennium.ui.adapters.product_home
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,7 +8,8 @@ import com.app.millennium.R
 import com.app.millennium.data.model.Product
 
 class ProductHomeAdapter(
-    private val products : List<Product>
+    private val products : List<Product>,
+    private val context: Context
 ) : RecyclerView.Adapter<ProductHomeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHomeViewHolder {
@@ -17,7 +19,7 @@ class ProductHomeAdapter(
             parent,
             false
         )
-        return ProductHomeViewHolder(view)
+        return ProductHomeViewHolder(view, context)
     }
 
     override fun onBindViewHolder(holderHome: ProductHomeViewHolder, position: Int) {

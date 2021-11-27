@@ -67,7 +67,7 @@ class PostProductActivity : AppCompatActivity() {
     private var resultCodeImageSalected: Int = 0
 
     //Products modelo
-    private lateinit var product: Product
+    private var product: Product = Product()
     //AlertDialog
     private lateinit var dialogLoading: android.app.AlertDialog
 
@@ -1487,16 +1487,20 @@ class PostProductActivity : AppCompatActivity() {
      */
     private fun saveProduct() {
         //Construir el producto ya que los campos están validados
+
         binding.apply {
-            product = Product(
-                title = tietTitle.text.toString(),
-                description = tietDescription.text.toString(),
-                category = tietCategory.text.toString(),
-                price = tietPrice.text.toString().toDouble(),
-                negotiable = tietNegotiable.text.toString(),
-                productStatus = tietProductStatus.text.toString(),
-                timestamp = Date().time
-            )
+
+            product.title = tietTitle.text.toString()
+            product.description = tietDescription.text.toString()
+            product.category = tietCategory.text.toString()
+            product.price = tietPrice.text.toString().toDouble()
+            product.timestamp = Date().time
+
+            if (tietNegotiable.text.toString() != getString(R.string.sel_sin_especificar))
+                product.negotiable = tietNegotiable.text.toString()
+
+            if (tietProductStatus.text.toString() != getString(R.string.sel_sin_especificar))
+                product.productStatus = tietProductStatus.text.toString()
         }
         //Luego guardamos las imagenes
         saveImages()
