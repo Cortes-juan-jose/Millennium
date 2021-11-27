@@ -83,14 +83,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:elevation="0dp"
-                    app:carouselBackground="@drawable/ic_camera"
                     app:carouselType="BLOCK"
                     app:autoPlay="false"
+                    app:infiniteCarousel="false"
                     app:showTopShadow="true"
                     app:topShadowHeight="100dp"
                     app:showBottomShadow="true"
                     app:bottomShadowHeight="100dp"
-                    app:imageScaleType="centerCrop"
+                    app:imageScaleType="center"
+                    app:carouselGravity="CENTER"
                     app:imagePlaceholder="@drawable/ic_camera"
                     app:showNavigationButtons="false"
                     app:showIndicator="true"
@@ -139,7 +140,8 @@
                     <!--IMG PERFIL-->
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/civ_imagen_perfil"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/mathParent"
+                        android:layout_marginStart="5dp"
                         android:padding="3dp"
                         android:layout_weight="0.5"
                         android:layout_height="60dp"
@@ -150,7 +152,7 @@
 
                     <!--NOMBRE Y TELEFONO USUARIO-->
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/mathParent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical"
@@ -187,7 +189,7 @@
                         android:layout_width="@dimen/mathParent"
                         android:layout_weight="0.7"
                         android:layout_height="60dp"
-                        android:layout_marginEnd="5dp"
+                        android:layout_marginEnd="8dp"
                         android:textSize="12sp"
                         app:cornerRadius="5dp"
                         app:strokeWidth="1dp"

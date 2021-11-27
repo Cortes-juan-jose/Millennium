@@ -8,6 +8,7 @@ import com.app.millennium.R
 import com.app.millennium.core.common.Constant
 import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.databinding.ActivityProductDetailBinding
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 class ProductDetailActivity : AppCompatActivity() {
     
@@ -41,6 +42,34 @@ class ProductDetailActivity : AppCompatActivity() {
         Log.d("BUNDLE", "${Constant.PROP_TIMESTAMP_PRODUCT} -> " + bundle[Constant.PROP_TIMESTAMP_PRODUCT].toString())
 
         configToolbar()
+        configComponents()
+    }
+
+    private fun configComponents() {
+        configSlider()
+        configDataProduct()
+    }
+
+    private fun configDataProduct() {
+
+    }
+
+    private fun configSlider() {
+        val images = mutableListOf<CarouselItem>()
+        bundle[Constant.PROP_IMAGE1_PRODUCT]?.let {
+            images.add(CarouselItem((it as String)))
+        }
+        bundle[Constant.PROP_IMAGE2_PRODUCT]?.let {
+            images.add(CarouselItem((it as String)))
+        }
+        bundle[Constant.PROP_IMAGE3_PRODUCT]?.let {
+            images.add(CarouselItem((it as String)))
+        }
+        bundle[Constant.PROP_IMAGE4_PRODUCT]?.let {
+            images.add(CarouselItem((it as String)))
+        }
+
+        binding.imCarousel.setData(images)
     }
 
     /**
