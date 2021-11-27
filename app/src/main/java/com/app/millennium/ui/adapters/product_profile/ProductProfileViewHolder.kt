@@ -8,8 +8,7 @@ import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.app.millennium.R
-import com.app.millennium.core.common.convertUser
-import com.app.millennium.core.common.formatAsPrice
+import com.app.millennium.core.common.*
 import com.app.millennium.core.utils.RelativeTime
 import com.app.millennium.data.model.Product
 import com.app.millennium.databinding.ItemListProductProfileBinding
@@ -17,6 +16,7 @@ import com.app.millennium.databinding.ViewBottomSheetConfirmDeleteProductBinding
 import com.app.millennium.domain.use_case.product_db.DeleteProductUseCase
 import com.app.millennium.domain.use_case.user_db.GetUserUseCase
 import com.app.millennium.domain.use_case.user_db.UpdateUploadedProductsUserUseCase
+import com.app.millennium.ui.activities.product_detail.ProductDetailActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -57,7 +57,11 @@ class ProductProfileViewHolder(
         binding.mtvTimestamp.text = RelativeTime.getTimeAgo(product.timestamp, view.context)
 
         binding.root.setOnClickListener {
+            val bundle = product.loadBundle()
 
+            context.openActivity<ProductDetailActivity> {
+                putExtra(Constant.BUNDLE_PRODUCT, bundle)
+            }
         }
 
         binding.ivDeleteProduct.setOnClickListener {
