@@ -9,6 +9,6 @@ class LikesImpl : Likes {
     private val db = FirebaseProvider.likesCollection
 
     override suspend fun save(like: Like): Task<Void> =
-        db.document().set(like)
+        db.document(like.id).set(like)
 
 }

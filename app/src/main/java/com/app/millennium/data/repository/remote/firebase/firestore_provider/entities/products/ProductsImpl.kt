@@ -16,8 +16,8 @@ class ProductsImpl : Products {
     /**
      * Meetodo para añadir un producto a la db
      */
-    override suspend fun save(product: Product): Task<Void>? =
-        product.id?.let { db.document(it).set(product) }
+    override suspend fun save(product: Product): Task<Void> =
+        db.document(product.id).set(product)
 
     /**
      * Metodo para obtener todos los productos

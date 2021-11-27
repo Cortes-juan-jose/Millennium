@@ -1,7 +1,9 @@
 package com.app.millennium.data.model
 
+import java.util.*
+
 data class Product(
-    var id: String? = null,
+    var id: String = UUID.randomUUID().toString(),
     var idUser: String? = null,
     var title: String? = null,
     var description: String? = null,

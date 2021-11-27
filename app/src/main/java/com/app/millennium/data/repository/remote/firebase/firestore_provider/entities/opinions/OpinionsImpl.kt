@@ -13,7 +13,7 @@ class OpinionsImpl : Opinions {
     private val db = FirebaseProvider.opinionsCollection
 
     override suspend fun save(opinion: Opinion): Task<Void> =
-        db.document().set(opinion)
+        db.document(opinion.id).set(opinion)
 
     override suspend fun getMadeByUser(idUser: String): Query =
         db.whereEqualTo(Constant.PROP_ID_USER_CREATOR_OPINION, idUser)

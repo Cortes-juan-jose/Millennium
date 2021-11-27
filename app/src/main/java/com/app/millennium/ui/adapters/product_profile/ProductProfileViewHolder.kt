@@ -111,42 +111,41 @@ class ProductProfileViewHolder(
     private fun deleteProduct() {
         CoroutineScope(Dispatchers.IO).launch {
             //Eliminamos el producto
-            product.id?.let { id ->
-                deleteProductUseCase.invoke(id)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful){
-                            //Si la tarea fue exitosa entonces modificamos el campo de uploadedProducts
-                            //del usuario
-                            CoroutineScope(Dispatchers.IO).launch {
-                                product.idUser?.let { idUser ->
-                                    getUserUseCase.invoke(idUser)
-                                        .addOnSuccessListener { _user ->
-                                            val user = _user.data.convertUser()
-                                            user.uploadedProducts -= 1
-                                            //Y ahora actualizamos este campo
-                                            CoroutineScope(Dispatchers.IO).launch {
-                                                updateUploadedProductsUserUseCase.invoke(user)
-                                                    .addOnCompleteListener { task2 ->
-                                                        if (task2.isSuccessful){
-                                                            Toast.makeText(context, "Eliminado", Toast.LENGTH_SHORT).show()
-                                                        }
+            deleteProductUseCase.invoke(product.id)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful){
+                        //Si la tarea fue exitosa entonces modificamos el campo de uploadedProducts
+                        //del usuario
+                        CoroutineScope(Dispatchers.IO).launch {
+                            product.idUser?.let { idUser ->
+                                getUserUseCase.invoke(idUser)
+                                    .addOnSuccessListener { _user ->
+                                        val user = _user.data.convertUser()
+                                        user.uploadedProducts -= 1
+                                        //Y ahora actualizamos este campo
+                                        CoroutineScope(Dispatchers.IO).launch {
+                                            updateUploadedProductsUserUseCase.invoke(user)
+                                                .addOnCompleteListener { task2 ->
+                                                    if (task2.isSuccessful){
+                                                        Toast.makeText(context, "Eliminado", Toast.LENGTH_SHORT).show()
                                                     }
-                                                    .addOnFailureListener {
-                                                        //Toast.makeText(context, "${exc.message}", Toast.LENGTH_SHORT).show()
-                                                    }
-                                            }
+                                                }
+                                                .addOnFailureListener { exc ->
+                                                    Toast.makeText(context, "${exc.message}", Toast.LENGTH_LONG).show()
+                                                }
                                         }
-                                        .addOnFailureListener {
-                                            //Toast.makeText(context, "${exc.message}", Toast.LENGTH_SHORT).show()
-                                        }
-                                }
+                                    }
+                                    .addOnFailureListener { exc ->
+                                        Toast.makeText(context, "${exc.message}", Toast.LENGTH_LONG).show()
+                                    }
                             }
                         }
                     }
-                    .addOnFailureListener {
-                        //Toast.makeText(context, "${exc.message}", Toast.LENGTH_SHORT).show()
-                    }
-            }
+                }
+                .addOnFailureListener { exc ->
+                    Toast.makeText(context, "${exc.message}", Toast.LENGTH_LONG).show()
+                }
+
         }
     }
 

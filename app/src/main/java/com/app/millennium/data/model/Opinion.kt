@@ -1,7 +1,9 @@
 package com.app.millennium.data.model
 
+import java.util.*
+
 data class Opinion(
-    var id: String? = null,
+    var id: String = UUID.randomUUID().toString(),
     var idUserCreator: String? = null,
     var idUserReceptor: String? = null,
     var msg: String? = null,
