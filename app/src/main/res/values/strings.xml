@@ -135,6 +135,12 @@
     <string name="mtv_eliminar_producto">Eliminar producto</string>
     <string name="mtv_seguro_que_desea_eliminar_la_publicacion">¿Seguro que desea eliminar la publicación?</string>
     <string name="mtv_cancelar">Cancelar</string>
+    <string name="item_menu_detail_product_likes">likes</string>
+    <string name="cd_ic_like">ic_like</string>
+    <string name="btn_ver_perfil">Ver perfil</string>
+    <string name="mtv_descripcion">Descripción</string>
+    <string name="mtv_estado_del_producto">Estado del producto</string>
+    <string name="mtv_negociable">Negociable</string>
 
 
 </resources>

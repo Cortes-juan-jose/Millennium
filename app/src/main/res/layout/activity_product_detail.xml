@@ -1,9 +1,326 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.product_detail.ProductDetailActivity">
+    tools:context="ui.activities.product_detail.ProductDetailActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!--FLECHA IR HACIA ATRAS-->
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/size_icon_back"
+        android:layout_height="@dimen/size_icon_back"
+        android:layout_gravity="start"
+        android:elevation="10dp"
+        android:layout_marginStart="@dimen/margin_start_ic_back_toolbar"
+        android:layout_marginTop="@dimen/margin_top_ic_back_toolbar"
+        android:src="@drawable/ic_back"
+        android:contentDescription="@string/cd_ic_back" />
+
+    <!--ICONO ME GUSTA-->
+    <ImageView
+        android:id="@+id/iv_megusta"
+        android:layout_width="44dp"
+        android:layout_height="30dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/margin_start_ic_back_toolbar"
+        android:elevation="6dp"
+        android:layout_marginTop="@dimen/margin_top_ic_back_toolbar"
+        android:src="@drawable/ic_like"
+        android:contentDescription="@string/cd_ic_like" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/ctl_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <!--PARTE DEL SLIDER DE IMAGENES-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:layout_collapseMode="pin">
+
+                <!--PRECIO-->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mtv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:elevation="2dp"
+                    android:fontFamily="@font/balsami_bold"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="40dp"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="@dimen/min_padding_view"/>
+
+                <!--TIEMPO-->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mtv_timestamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:elevation="2dp"
+                    android:fontFamily="@font/balsami_regular"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/max_padding_view"
+                    android:textColor="@color/grey_light"
+                    android:layout_marginStart="@dimen/min_padding_view"/>
+
+                <!--SLIDER DE IMAGENES-->
+                <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                    android:id="@+id/im_carousel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:carouselType="BLOCK"
+                    app:autoPlay="false"
+                    app:showTopShadow="true"
+                    app:topShadowHeight="100dp"
+                    app:showBottomShadow="true"
+                    app:bottomShadowHeight="100dp"
+                    app:imageScaleType="centerCrop"
+                    app:imagePlaceholder="@drawable/ic_camera"
+                    app:showNavigationButtons="false"
+                    app:showIndicator="true"
+                    app:showCaption="false"/>
+            </FrameLayout>
+
+            <!--TOOLBAR-->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_detail_product"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:theme="@style/ToolbarThemeText"
+                app:layout_collapseMode="pin"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--SCROLL PARA QUE EL APBARLAYOUT SE ESCONDA-->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_productos_subidos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--TARJETA DEL USUARIO-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="5dp"
+                android:elevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <!--IMG PERFIL-->
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_imagen_perfil"
+                        android:layout_width="0dp"
+                        android:padding="3dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_user_profile"
+                        app:civ_border_color="@color/colorSecondary"
+                        app:civ_border_width="1dp"
+                        app:civ_circle_background_color="@color/grey_light" />
+
+                    <!--NOMBRE Y TELEFONO USUARIO-->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="5dp"
+                        android:gravity="center">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextColor"
+                            android:id="@+id/mtv_name_user"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/balsami_regular"
+                            android:textSize="16sp"
+                            android:text="@string/mtv_sin_internet"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/mtv_email_user"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/balsami_regular"
+                            android:text="@string/mtv_sin_internet" />
+
+                    </LinearLayout>
+
+                    <!--VER PERFIL-->
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/MaterialButtonBackground"
+                        android:id="@+id/mbtn_view_profile"
+                        android:layout_width="@dimen/mathParent"
+                        android:layout_weight="0.7"
+                        android:layout_height="60dp"
+                        android:layout_marginEnd="5dp"
+                        android:textSize="12sp"
+                        app:cornerRadius="5dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/colorSecondary"
+                        android:text="@string/btn_ver_perfil"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--TITULO DE LA PUBLICACION-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/MaterialTextViewTextColorFontBold"
+                    android:id="@+id/mtv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="26sp"
+                    android:text="@string/mtv_sin_internet"
+                    android:layout_marginHorizontal="20dp"/>
+            </LinearLayout>
+
+            <!--CATEGORIA-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="@dimen/max_padding_view"
+                android:layout_marginBottom="@dimen/max_padding_view"
+                android:layout_gravity="end">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:elevation="1dp"
+                    android:layout_marginBottom="2dp"
+                    app:cardCornerRadius="10dp"
+                    android:backgroundTint="@color/grey_light">
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextColor"
+                        android:id="@+id/mtv_category"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/min_padding_view"
+                        android:fontFamily="@font/balsami_regular"
+                        android:text="@string/mtv_sin_internet"/>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!--LINEA SEPARADORA-->
+            <View
+                android:layout_marginHorizontal="@dimen/max_padding_view"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/grey_light"/>
+
+            <!--DESCRIPCION DEL PRODUCTO-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/min_padding_view"
+                android:layout_marginHorizontal="@dimen/max_padding_view"
+                android:layout_marginBottom="@dimen/max_padding_view"
+                android:orientation="vertical">
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/TextColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mtv_descripcion"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/balsami_bold"/>
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/TextColor"
+                    android:id="@+id/mtv_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/balsami_regular"
+                    android:text="@string/mtv_sin_internet"/>
+            </LinearLayout>
+
+            <!--ESTADO DEL PRODUCTO-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/max_padding_view"
+                android:layout_marginBottom="@dimen/max_padding_view"
+                android:orientation="vertical">
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/TextColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mtv_estado_del_producto"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/balsami_bold"/>
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/TextColor"
+                    android:id="@+id/mtv_status_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/balsami_regular"
+                    android:text="@string/mtv_sin_internet"/>
+            </LinearLayout>
+
+            <!--PRODUCTO NEGOCIABLE-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:orientation="vertical">
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/TextColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mtv_negociable"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/balsami_bold"/>
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/TextColor"
+                    android:id="@+id/mtv_negotiable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/balsami_regular"
+                    android:text="@string/mtv_sin_internet"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

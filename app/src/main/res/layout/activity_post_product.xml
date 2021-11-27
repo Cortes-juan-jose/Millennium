@@ -296,7 +296,6 @@
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginTop="@dimen/margin_top_mtv_info_producto"
         android:fontFamily="@font/balsami_bold"
         android:gravity="center"

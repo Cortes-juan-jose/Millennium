@@ -3,7 +3,10 @@ package com.app.millennium.ui.activities.product_detail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.core.content.ContextCompat
+import com.app.millennium.R
 import com.app.millennium.core.common.Constant
+import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.databinding.ActivityProductDetailBinding
 
 class ProductDetailActivity : AppCompatActivity() {
@@ -36,5 +39,21 @@ class ProductDetailActivity : AppCompatActivity() {
         Log.d("BUNDLE", "${Constant.PROP_IMAGE3_PRODUCT} -> " + bundle[Constant.PROP_IMAGE3_PRODUCT].toString())
         Log.d("BUNDLE", "${Constant.PROP_IMAGE4_PRODUCT} -> " + bundle[Constant.PROP_IMAGE4_PRODUCT].toString())
         Log.d("BUNDLE", "${Constant.PROP_TIMESTAMP_PRODUCT} -> " + bundle[Constant.PROP_TIMESTAMP_PRODUCT].toString())
+
+        configToolbar()
+    }
+
+    /**
+     * Metodo que configura el toolbar
+     */
+    private fun configToolbar() {
+        //Setear el color del toolbar dependiendo del tema del teléfono
+        if (ConfigThemeApp.isThemeLight(this))
+            binding.ctlAppbar.contentScrim = ContextCompat.getDrawable(this, R.drawable.toolbar_light)
+        else
+            binding.ctlAppbar.contentScrim = ContextCompat.getDrawable(this, R.drawable.toolbar_dark)
+
+        (this as AppCompatActivity).setSupportActionBar(binding.toolbarDetailProduct)
+        (this as AppCompatActivity).supportActionBar!!.title = ""
     }
 }
