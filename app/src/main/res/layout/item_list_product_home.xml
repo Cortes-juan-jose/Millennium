@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/min_padding_view"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:fontFamily="@font/balsami_regular"
             android:elevation="5dp"
             android:textColor="@color/white"

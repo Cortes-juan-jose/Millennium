@@ -1,7 +1,6 @@
 package com.app.millennium.ui.fragments.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import com.app.millennium.core.common.toast
 import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.data.model.Product
 import com.app.millennium.databinding.FragmentHomeBinding
-import com.app.millennium.ui.adapters.product.ProductAdapter
+import com.app.millennium.ui.adapters.product_home.ProductHomeAdapter
 
 class HomeFragment : Fragment() {
 
@@ -25,7 +24,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
 
     private lateinit var products: MutableList<Product>
-    private lateinit var productAdapter: ProductAdapter
+    private lateinit var productHomeAdapter: ProductHomeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,7 +102,7 @@ class HomeFragment : Fragment() {
                                 }
                                 //Una vez tengamos todos los productos creamos el adapter
                                 //con la lista de los producots
-                                productAdapter = ProductAdapter(products)
+                                productHomeAdapter = ProductHomeAdapter(products)
                                 //Configuramos la disposicion del recycler view
                                 binding.rvProducts.layoutManager = LinearLayoutManager(
                                     requireContext(),
@@ -111,7 +110,7 @@ class HomeFragment : Fragment() {
                                     false
                                 )
                                 //y le seteamos el adapter al recycler view
-                                binding.rvProducts.adapter = productAdapter
+                                binding.rvProducts.adapter = productHomeAdapter
 
                                 //Y a continuación, mostramos la vista de la lista con el serachview
                                 //y escondemos el progress bar y la vista de aviso sin productos

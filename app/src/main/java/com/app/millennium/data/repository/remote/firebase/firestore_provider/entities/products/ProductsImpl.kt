@@ -4,6 +4,8 @@ import com.app.millennium.core.common.Constant
 import com.app.millennium.core.firebase.FirebaseProvider
 import com.app.millennium.data.model.Product
 import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 
@@ -24,12 +26,9 @@ class ProductsImpl : Products {
         db.orderBy(Constant.PROP_TIMESTAMP_PRODUCT, Query.Direction.DESCENDING).get()
 
     /**
-     * Metodo para obtener todos los productos de un usuario
+     * Metodo para obtener todos los productos de un usuario en tiempo real
      */
-    override suspend fun getAllByUser(idUser: String): Task<QuerySnapshot> =
+    override suspend fun getAllByUser(idUser: String): Query =
         db.whereEqualTo(Constant.PROP_ID_USER_PRODUCT, idUser)
-            .orderBy(
-                Constant.PROP_TIMESTAMP_PRODUCT,
-                Query.Direction.DESCENDING
-            ).get()
+            .orderBy(Constant.PROP_TIMESTAMP_PRODUCT, Query.Direction.DESCENDING)
 }

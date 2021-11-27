@@ -1,4 +1,4 @@
-package com.app.millennium.ui.adapters.product
+package com.app.millennium.ui.adapters.product_profile
 
 import android.net.Uri
 import android.view.View
@@ -7,23 +7,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.millennium.core.common.formatAsPrice
 import com.app.millennium.core.utils.RelativeTime
 import com.app.millennium.data.model.Product
-import com.app.millennium.databinding.ItemListProductBinding
+import com.app.millennium.databinding.ItemListProductProfileBinding
 import com.app.millennium.domain.use_case.likes_db.SaveLikeUseCase
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ProductViewHolder(
+class ProductProfileViewHolder(
     private val view : View
-) : RecyclerView.ViewHolder(view), UsesCasesViewHolderProduct{
+) : RecyclerView.ViewHolder(view), ProductProfileUsesCases{
 
     //Binding
-    private val binding: ItemListProductBinding = ItemListProductBinding.bind(view)
-
-    //Caso de uso para guardar un like
-    override val saveLikeUseCase: SaveLikeUseCase
-        get() = SaveLikeUseCase()
+    private val binding: ItemListProductProfileBinding = ItemListProductProfileBinding.bind(view)
 
     //Producto
     private lateinit var product: Product
@@ -46,7 +42,7 @@ class ProductViewHolder(
 
         }
 
-        binding.ivLike.setOnClickListener {
+        binding.ivDeleteProduct.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 //Creamos un like y consultamos en la base de dato si ese like existe
 

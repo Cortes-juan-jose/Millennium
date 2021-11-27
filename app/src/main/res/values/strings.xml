@@ -131,6 +131,7 @@
     <string name="tab_opiniones">Opiniones</string>
     <string name="mtv_sin_opiniones">Sin opiniones…</string>
     <string name="mtv_sin_productos">Sin productos…</string>
+    <string name="cd_ic_delete">ic_delete</string>
 
 
 </resources>

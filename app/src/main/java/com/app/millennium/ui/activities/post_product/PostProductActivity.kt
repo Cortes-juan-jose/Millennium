@@ -1080,9 +1080,9 @@ class PostProductActivity : AppCompatActivity() {
 
                         //validar que el punto no se pueda poner al final
                         //Primero confirmamos si tiene 12 caracteres
-                        if (it.length == 12) {
+                        if (it.length == 7) {
                             //Si tiene 12 caracteres confirmamos si tiene un punto al final
-                            if (it[11] == '.') {
+                            if (it[6] == '.') {
                                 tietPrice.setText(it.substring(0, it.length - 1))
                                 //y el cursor se va al final
                                 tietPrice.setSelection(tietPrice.text.toString().length)

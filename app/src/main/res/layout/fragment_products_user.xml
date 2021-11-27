@@ -12,20 +12,30 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtv_without_products"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="22sp"
-            android:visibility="visible"
+            android:textSize="18sp"
+            android:visibility="gone"
             android:fontFamily="@font/balsami_regular"
             android:padding="@dimen/max_padding_view"
             android:text="@string/mtv_sin_productos" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_products"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
             tools:itemCount="2"
-            tools:listitem="@layout/item_list_product"/>
+            tools:listitem="@layout/item_list_product_home"/>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/max_padding_view"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            tools:visibility="visible"/>
 
     </RelativeLayout>
 

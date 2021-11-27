@@ -1,4 +1,4 @@
-package com.app.millennium.ui.adapters.product
+package com.app.millennium.ui.adapters.product_home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,30 +6,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.millennium.R
 import com.app.millennium.data.model.Product
 
-class ProductAdapter(
+class ProductHomeAdapter(
     private val products : List<Product>
-) : RecyclerView.Adapter<ProductViewHolder>() {
+) : RecyclerView.Adapter<ProductHomeViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHomeViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(
-            R.layout.item_list_product,
+            R.layout.item_list_product_home,
             parent,
             false
         )
-        return ProductViewHolder(view)
+        return ProductHomeViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.loadData(products[position])
+    override fun onBindViewHolder(holderHome: ProductHomeViewHolder, position: Int) {
+        holderHome.loadData(products[position])
     }
 
     override fun getItemCount(): Int {
         return products.size
-    }
-
-    //Metodo para filtrar en la lista
-    private fun filter(s: String){
-
     }
 }

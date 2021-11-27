@@ -225,13 +225,6 @@ class ProfileFragment : Fragment() {
             }
         binding.vp2PostOpinions.adapter = adapterViewPagerProfile
 
-        /*TabLayoutMediator(binding.tlPostOpinions, binding.vp2PostOpinions) {tab, pos ->
-            when(pos){
-                0 -> {tab.text=getString(R.string.tab_productos)}
-                1 -> {tab.text=getString(R.string.tab_opiniones)}
-            }
-        }.attach()*/
-
         binding.tlPostOpinions.addTab(
             binding.tlPostOpinions.newTab().setText(getString(R.string.tab_productos))
         )

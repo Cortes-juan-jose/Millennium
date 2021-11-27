@@ -42,7 +42,7 @@
             android:layout_height="match_parent"
             android:elevation="5dp"
             tools:visibility="visible"
-            tools:listitem="@layout/item_list_product"/>
+            tools:listitem="@layout/item_list_product_home"/>
 
     </LinearLayout>
 
