@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:textSize="18sp"
             android:visibility="gone"
-            android:fontFamily="@font/balsami_regular"
+            android:fontFamily="@font/balsami_italic"
             android:padding="@dimen/max_padding_view"
             android:text="@string/mtv_sin_opiniones" />
 

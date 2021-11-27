@@ -1,5 +1,6 @@
 package com.app.millennium.ui.adapters.product_profile
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,7 +8,8 @@ import com.app.millennium.R
 import com.app.millennium.data.model.Product
 
 class ProductProfileAdapter(
-    private val products : List<Product>
+    private val products : List<Product>,
+    private val context: Context
 ) : RecyclerView.Adapter<ProductProfileViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductProfileViewHolder {
@@ -17,7 +19,7 @@ class ProductProfileAdapter(
             parent,
             false
         )
-        return ProductProfileViewHolder(view)
+        return ProductProfileViewHolder(view, context)
     }
 
     override fun onBindViewHolder(holderProfile: ProductProfileViewHolder, position: Int) {

@@ -132,6 +132,9 @@
     <string name="mtv_sin_opiniones">Sin opiniones…</string>
     <string name="mtv_sin_productos">Sin productos…</string>
     <string name="cd_ic_delete">ic_delete</string>
+    <string name="mtv_eliminar_producto">Eliminar producto</string>
+    <string name="mtv_seguro_que_desea_eliminar_la_publicacion">¿Seguro que desea eliminar la publicación?</string>
+    <string name="mtv_cancelar">Cancelar</string>
 
 
 </resources>

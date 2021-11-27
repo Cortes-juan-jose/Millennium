@@ -1,21 +1,26 @@
 package com.app.millennium.ui.adapters.product_profile
 
+import android.content.Context
 import android.net.Uri
+import android.view.LayoutInflater
 import android.view.View
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import com.app.millennium.R
 import com.app.millennium.core.common.formatAsPrice
 import com.app.millennium.core.utils.RelativeTime
 import com.app.millennium.data.model.Product
 import com.app.millennium.databinding.ItemListProductProfileBinding
-import com.app.millennium.domain.use_case.likes_db.SaveLikeUseCase
+import com.app.millennium.databinding.ViewBottomSheetConfirmDeleteProductBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProductProfileViewHolder(
-    private val view : View
+    private val view : View,
+    private val context: Context
 ) : RecyclerView.ViewHolder(view), ProductProfileUsesCases{
 
     //Binding
@@ -43,11 +48,54 @@ class ProductProfileViewHolder(
         }
 
         binding.ivDeleteProduct.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                //Creamos un like y consultamos en la base de dato si ese like existe
 
+            openBottomSheetConfirmDeleteProduct()
+        }
+    }
+
+    /**
+     * Metodo que construye un bottom sheet con la vista de confirmar la eliminacion
+     * y devuelve un valor dependiendo de lo que haya pulsado el usuario si en eliminar
+     * o cancelar
+     */
+    private fun openBottomSheetConfirmDeleteProduct() {
+
+        //Creamos el bottom sheet dialog con el estilo qeu predefinimos
+        //para los bottom sheet dialog
+        val bottomSheetConfirmDeleteProduct =
+            BottomSheetDialog(context, R.style.BottomSheetTheme)
+        //Obtenemos la vista del layout bottomsheetDialog y la bindeamos
+        var bindingBottomSheetDialog: ViewBottomSheetConfirmDeleteProductBinding? =
+            ViewBottomSheetConfirmDeleteProductBinding.inflate(
+                LayoutInflater.from(context)
+            )
+
+        //Le seteamos la vista al BottomSheetDialog creado
+        bottomSheetConfirmDeleteProduct.setContentView(
+            bindingBottomSheetDialog!!.root
+        )
+
+        //Y lo mostramos
+        bottomSheetConfirmDeleteProduct.show()
+
+        //Seteamos los metodos setOnClicListener a las textviews
+        //de la vista del bottom sheet dialog
+        bindingBottomSheetDialog.apply {
+            mtvCancel.setOnClickListener {
+                bottomSheetConfirmDeleteProduct.dismiss()
+                bindingBottomSheetDialog = null
+            }
+            mtvDelete.setOnClickListener {
+                bottomSheetConfirmDeleteProduct.dismiss()
+                bindingBottomSheetDialog = null
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    //Eliminamos el producto
+
+                }
             }
         }
+
     }
 
     /**
