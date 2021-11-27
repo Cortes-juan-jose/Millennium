@@ -13,7 +13,7 @@
         android:layout_width="@dimen/size_icon_back"
         android:layout_height="@dimen/size_icon_back"
         android:layout_gravity="start"
-        android:elevation="10dp"
+        android:elevation="6dp"
         android:layout_marginStart="@dimen/margin_start_ic_back_toolbar"
         android:layout_marginTop="@dimen/margin_top_ic_back_toolbar"
         android:src="@drawable/ic_back"
@@ -54,8 +54,9 @@
                     android:id="@+id/mtv_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/mtv_sin_internet"
                     android:textSize="20sp"
-                    android:elevation="2dp"
+                    android:elevation="1dp"
                     android:fontFamily="@font/balsami_bold"
                     android:layout_gravity="bottom"
                     android:layout_marginBottom="40dp"
@@ -68,11 +69,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
-                    android:elevation="2dp"
+                    android:elevation="1dp"
+                    android:text="@string/mtv_sin_internet"
                     android:fontFamily="@font/balsami_regular"
                     android:layout_gravity="bottom"
                     android:layout_marginBottom="@dimen/max_padding_view"
-                    android:textColor="@color/grey_light"
+                    android:textColor="@color/white"
                     android:layout_marginStart="@dimen/min_padding_view"/>
 
                 <!--SLIDER DE IMAGENES-->
@@ -80,6 +82,8 @@
                     android:id="@+id/im_carousel"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:elevation="0dp"
+                    app:carouselBackground="@drawable/ic_camera"
                     app:carouselType="BLOCK"
                     app:autoPlay="false"
                     app:showTopShadow="true"
@@ -109,7 +113,6 @@
         android:id="@+id/nsv_productos_subidos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout

@@ -15,7 +15,7 @@
     <color name="colorOnSecondary">@color/white</color>
     <color name="colorOnPrimary">@color/black</color>
     <color name="red">#FF0000</color>
-    <color name="grey_light">#A5A5A5</color>
+    <color name="grey_light">#D6D6D6</color>
 
 
 </resources>
