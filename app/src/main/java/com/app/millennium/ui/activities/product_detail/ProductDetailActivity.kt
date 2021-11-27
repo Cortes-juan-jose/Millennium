@@ -6,7 +6,10 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import com.app.millennium.R
 import com.app.millennium.core.common.Constant
+import com.app.millennium.core.common.formatAsPrice
+import com.app.millennium.core.common.toast
 import com.app.millennium.core.utils.ConfigThemeApp
+import com.app.millennium.core.utils.RelativeTime
 import com.app.millennium.databinding.ActivityProductDetailBinding
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
@@ -43,15 +46,45 @@ class ProductDetailActivity : AppCompatActivity() {
 
         configToolbar()
         configComponents()
+        configEventsClickButtons()
+    }
+
+    private fun configEventsClickButtons() {
+        binding.apply {
+            ivBack.setOnClickListener { finish() }
+
+            ivLike.setOnClickListener { toast("Like") }
+
+            mbtnViewProfile.setOnClickListener { toast("Abrir el perfil del usuario") }
+        }
     }
 
     private fun configComponents() {
         configSlider()
         configDataProduct()
+        configDataUser()
+    }
+
+    private fun configDataUser() {
+
     }
 
     private fun configDataProduct() {
+        binding.apply {
+            mtvPrice.text = bundle[Constant.PROP_PRICE_PRODUCT].toString().toDouble().formatAsPrice()
+            mtvTimestamp.text = RelativeTime.getTimeAgo(bundle[Constant.PROP_TIMESTAMP_PRODUCT].toString().toLong(), this@ProductDetailActivity)
+            mtvTitle.text = bundle[Constant.PROP_TITLE_PRODUCT].toString()
+            mtvCategory.text = bundle[Constant.PROP_CATEGORY_PRODUCT].toString()
+            mtvDescription.text = bundle[Constant.PROP_DESCRIPTION_PRODUCT].toString()
 
+            bundle[Constant.PROP_DESCRIPTION_PRODUCT]?.let {
+                mtvDescription.text = (it as String)
+            }
+
+            bundle[Constant.PROP_NEGOTIABLE_PRODUCT]?.let {
+                mtvNegotiable.text = (it as String)
+            }
+        }
     }
 
     private fun configSlider() {

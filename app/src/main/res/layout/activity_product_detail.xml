@@ -21,7 +21,7 @@
 
     <!--ICONO ME GUSTA-->
     <ImageView
-        android:id="@+id/iv_megusta"
+        android:id="@+id/iv_like"
         android:layout_width="44dp"
         android:layout_height="30dp"
         android:layout_gravity="end"
