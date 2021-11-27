@@ -16,8 +16,8 @@ class ProductsImpl : Products {
     /**
      * Meetodo para añadir un producto a la db
      */
-    override suspend fun save(product: Product): Task<Void> =
-        db.document().set(product)
+    override suspend fun save(product: Product): Task<Void>? =
+        product.id?.let { db.document(it).set(product) }
 
     /**
      * Metodo para obtener todos los productos
@@ -31,4 +31,10 @@ class ProductsImpl : Products {
     override suspend fun getAllByUser(idUser: String): Query =
         db.whereEqualTo(Constant.PROP_ID_USER_PRODUCT, idUser)
             .orderBy(Constant.PROP_TIMESTAMP_PRODUCT, Query.Direction.DESCENDING)
+
+    /**
+     * Metodo que elimina un producto
+     */
+    override suspend fun delete(id: String): Task<Void> =
+        db.document(id).delete()
 }

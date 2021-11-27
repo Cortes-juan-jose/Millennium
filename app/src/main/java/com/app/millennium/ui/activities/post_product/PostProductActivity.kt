@@ -1094,7 +1094,6 @@ class PostProductActivity : AppCompatActivity() {
         }
     }
 
-
     /**
      * Metodo para abrir el bottom sheet dialog para abrir la camara
      * o abrir la galeria
@@ -1490,6 +1489,7 @@ class PostProductActivity : AppCompatActivity() {
         //Construir el producto ya que los campos están validados
         binding.apply {
             product = Product(
+                id = UUID.randomUUID().toString(),
                 title = tietTitle.text.toString(),
                 description = tietDescription.text.toString(),
                 category = tietCategory.text.toString(),
