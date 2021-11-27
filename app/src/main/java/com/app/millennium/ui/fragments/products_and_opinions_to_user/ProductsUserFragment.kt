@@ -64,7 +64,6 @@ class ProductsUserFragment : Fragment() {
                             binding.rvProducts.visibility = View.GONE
                             binding.progress.visibility = View.GONE
                             binding.mtvWithoutProducts.visibility = View.VISIBLE
-                            binding.mtvWithoutProducts.text = error?.message
                             return@addSnapshotListener
                         }
 
@@ -86,8 +85,7 @@ class ProductsUserFragment : Fragment() {
                         //y le seteamos el adapter al recycler view
                         binding.rvProducts.adapter = productProfileAdapter
 
-                        //Y a continuación, mostramos la vista de la lista con el serachview
-                        //y escondemos el progress bar y la vista de aviso sin productos
+                        //Escondemos el texto sin productos el progress y mostramos la lista
                         binding.rvProducts.visibility = View.VISIBLE
                         binding.mtvWithoutProducts.visibility = View.GONE
                         binding.progress.visibility = View.GONE

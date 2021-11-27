@@ -41,7 +41,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_product"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="MMMMMM MMMMM MMMM MM MMM MMMM MMMM MMMMM MMMMM MMM M MMM M MM" />
+        tools:text="MMMMMM MMMMM MMMM MM MMM MMMM MMMM MMMMM MMMMM MMM M MMM M MM"
+        tools:ignore="RtlSymmetry" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/mtv_price"

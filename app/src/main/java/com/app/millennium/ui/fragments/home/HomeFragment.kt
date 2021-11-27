@@ -112,7 +112,7 @@ class HomeFragment : Fragment() {
                                 //y le seteamos el adapter al recycler view
                                 binding.rvProducts.adapter = productHomeAdapter
 
-                                //Y a continuación, mostramos la vista de la lista con el serachview
+                                //Y a continuación, mostramos la vista de la lista
                                 //y escondemos el progress bar y la vista de aviso sin productos
                                 binding.llListProducts.visibility = View.VISIBLE
                                 binding.clSinProductos.visibility = View.GONE
