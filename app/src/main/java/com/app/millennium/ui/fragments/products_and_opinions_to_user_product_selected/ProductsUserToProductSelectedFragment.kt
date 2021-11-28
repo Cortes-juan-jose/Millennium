@@ -1,4 +1,4 @@
-package com.app.millennium.ui.fragments.products_and_opinions_to_user
+package com.app.millennium.ui.fragments.products_and_opinions_to_user_product_selected
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,24 +11,25 @@ import com.app.millennium.core.common.converProduct
 import com.app.millennium.core.common.isNotNull
 import com.app.millennium.core.common.isNull
 import com.app.millennium.data.model.Product
-import com.app.millennium.databinding.FragmentProductsUserBinding
-import com.app.millennium.ui.adapters.product_profile.ProductProfileAdapter
+import com.app.millennium.databinding.FragmentProductsUserToProductSelectedBinding
+import com.app.millennium.ui.adapters.product_profile_user_to_product_selected.ProductProfileUserToProductSelectedAdapter
 
-class ProductsUserFragment : Fragment() {
+class ProductsUserToProductSelectedFragment(private val idUser: String) : Fragment() {
 
-    private var _binding: FragmentProductsUserBinding? = null
+    private var _binding: FragmentProductsUserToProductSelectedBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: UserViewModel by viewModels()
+    private val viewModel: UserToProductSelectedViewModel by viewModels()
 
     private val products = mutableListOf<Product>()
-    private lateinit var productProfileAdapter: ProductProfileAdapter
+    private lateinit var productProfileUserToProductSelectedAdapter: ProductProfileUserToProductSelectedAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentProductsUserBinding.inflate(inflater, container, false)
+
+        _binding = FragmentProductsUserToProductSelectedBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -40,18 +41,10 @@ class ProductsUserFragment : Fragment() {
     }
 
     private fun initUI() {
-        viewModel.getIdUserToSession()
+        viewModel.getProducts(idUser)
     }
 
     private fun initObservables() {
-
-        viewModel.getIdUserToSession.observe(
-            viewLifecycleOwner,
-            {
-                it?.let { viewModel.getProducts(it) }
-            }
-        )
-
         viewModel.getAllProductsByUser.observe(
             viewLifecycleOwner,
             {
@@ -79,7 +72,7 @@ class ProductsUserFragment : Fragment() {
 
                             //Una vez tengamos todos los productos creamos el adapter
                             //con la lista de los producots
-                            productProfileAdapter = ProductProfileAdapter(products)
+                            productProfileUserToProductSelectedAdapter = ProductProfileUserToProductSelectedAdapter(products)
                             //Configuramos la disposicion del recycler view
                             binding.rvProducts.layoutManager = LinearLayoutManager(
                                 activity?.applicationContext,
@@ -87,7 +80,7 @@ class ProductsUserFragment : Fragment() {
                                 false
                             )
                             //y le seteamos el adapter al recycler view
-                            binding.rvProducts.adapter = productProfileAdapter
+                            binding.rvProducts.adapter = productProfileUserToProductSelectedAdapter
 
                             //Escondemos el texto sin productos el progress y mostramos la lista
                             binding.rvProducts.visibility = View.VISIBLE
@@ -98,6 +91,5 @@ class ProductsUserFragment : Fragment() {
                 }
             }
         )
-
     }
 }

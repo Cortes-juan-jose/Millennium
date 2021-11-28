@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.fragments.products_and_opinions_to_user_product_selected.OpinionsUserToProductSelectedFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:fontFamily="@font/balsami_italic"
+            android:padding="@dimen/max_padding_view"
+            android:text="@string/mtv_sin_opiniones" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_list_product_home"/>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/max_padding_view"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            tools:visibility="visible"/>
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

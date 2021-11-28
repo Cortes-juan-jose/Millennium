@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/min_padding_view">
+
+    <ImageView
+        android:id="@+id/iv_product"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/cd_imagen_producto"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:background="@color/red"
+        tools:src="@drawable/ic_user_profile" />
+
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/TextColor"
+        android:id="@+id/mtv_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/balsami_regular"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/iv_product"
+        app:layout_constraintTop_toBottomOf="@+id/iv_product"
+        tools:text="Hace 113 días" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_title"
+        style="@style/TextColor"
+        android:layout_width="@dimen/mathParent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/balsami_regular"
+        android:lines="2"
+        android:paddingStart="10dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_product"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="MMMMMM MMMMM MMMM MM MMM MMMM MMMM MMMMM MMMMM MMM M MMM M MM"
+        tools:ignore="RtlSymmetry" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_price"
+        style="@style/TextColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/balsami_bold"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mtv_title"
+        tools:text="123.456.789.012 €" />
+
+    <ImageView
+        style="@style/ImageViewIconLikeColor"
+        android:id="@+id/iv_like_product"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/cd_ic_delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

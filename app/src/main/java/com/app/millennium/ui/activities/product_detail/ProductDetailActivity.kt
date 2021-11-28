@@ -7,13 +7,13 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.app.millennium.R
-import com.app.millennium.core.common.Constant
-import com.app.millennium.core.common.formatAsPrice
-import com.app.millennium.core.common.toast
+import com.app.millennium.core.common.*
 import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.core.utils.RelativeTime
 import com.app.millennium.data.model.User
 import com.app.millennium.databinding.ActivityProductDetailBinding
+import com.app.millennium.ui.activities.edit_profile.EditProfileActivity
+import com.app.millennium.ui.activities.profile_user_to_product.ProfileUserToProductActivity
 import com.squareup.picasso.Picasso
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
@@ -73,13 +73,35 @@ class ProductDetailActivity : AppCompatActivity() {
         )
     }
 
+    /**
+     * Metodo que controla todos los eventos click del activity
+     */
     private fun configEventsClickButtons() {
+
+        val bundleUser = Bundle()
+
         binding.apply {
             ivBack.setOnClickListener { finish() }
 
             ivLike.setOnClickListener { toast("Like") }
 
-            mbtnViewProfile.setOnClickListener { toast("Abrir el perfil del usuario") }
+            mbtnViewProfile.setOnClickListener {
+                if (user.isNotNull()){
+                    bundleUser.putString(Constant.PROP_ID_USER, user.id)
+                    bundleUser.putString(Constant.PROP_USERNAME_USER, user.name)
+                    bundleUser.putString(Constant.PROP_EMAIL_USER, user.email)
+                    bundleUser.putString(Constant.PROP_IMG_COVER_USER, user.imgCover)
+                    bundleUser.putString(Constant.PROP_IMG_PROFILE_USER, user.imgProfile)
+                    bundleUser.putInt(Constant.PROP_UPLOADED_PRODUCTS_USER, user.uploadedProducts)
+                    bundleUser.putInt(Constant.PROP_OPINIONS_USER, user.opinions)
+                } else {
+                    toast(getString(R.string.msg_info_tiempo_espera))
+                }
+
+                openActivity<ProfileUserToProductActivity> {
+                    putExtra(Constant.BUNDLE_USER, bundleUser)
+                }
+            }
         }
     }
 
