@@ -183,16 +183,12 @@ class ProfileFragment : Fragment() {
      */
     private fun configEditProfileButton() {
 
-        val bundle = Bundle()
+        var bundle = Bundle()
 
         binding.btnEditProfile.setOnClickListener {
 
             if (user.isNotNull()){
-                bundle.putString(Constant.PROP_ID_USER, user?.id)
-                bundle.putString(Constant.PROP_IMG_COVER_USER, user?.imgCover)
-                bundle.putString(Constant.PROP_IMG_PROFILE_USER, user?.imgProfile)
-                bundle.putString(Constant.PROP_USERNAME_USER, user?.name)
-                bundle.putString(Constant.PROP_PHONE_USER, user?.phone)
+                bundle = user.loadBundle()
             } else {
                 activity?.toast(getString(R.string.msg_info_tiempo_espera))
             }

@@ -50,10 +50,22 @@ class ProductDetailActivity : AppCompatActivity() {
                 it?.let {
                     it.addOnSuccessListener { snapshot ->
                         user = snapshot?.toObject(User::class.java)!!
-                        binding.llUserData.visibility = View.VISIBLE
-                        binding.llLoadDataUser.visibility = View.GONE
-                        configDataUser()
+                        viewModel.getIdUserSession()
                     }
+                }
+            }
+        )
+
+        viewModel.getIdUserSession.observe(
+            this,
+            {
+                it?.let {
+                    binding.llUserData.visibility = View.VISIBLE
+                    binding.llLoadDataUser.visibility = View.GONE
+                    if (it != user.id){
+                        binding.mbtnViewProfile.visibility = View.VISIBLE
+                    }
+                    configDataUser()
                 }
             }
         )
@@ -64,7 +76,7 @@ class ProductDetailActivity : AppCompatActivity() {
      */
     private fun configEventsClickButtons() {
 
-        val bundleUser = Bundle()
+        var bundleUser = Bundle()
 
         binding.apply {
             ivBack.setOnClickListener { finish() }
@@ -73,13 +85,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
             mbtnViewProfile.setOnClickListener {
                 if (user.isNotNull()){
-                    bundleUser.putString(Constant.PROP_ID_USER, user.id)
-                    bundleUser.putString(Constant.PROP_USERNAME_USER, user.name)
-                    bundleUser.putString(Constant.PROP_EMAIL_USER, user.email)
-                    bundleUser.putString(Constant.PROP_IMG_COVER_USER, user.imgCover)
-                    bundleUser.putString(Constant.PROP_IMG_PROFILE_USER, user.imgProfile)
-                    bundleUser.putInt(Constant.PROP_UPLOADED_PRODUCTS_USER, user.uploadedProducts)
-                    bundleUser.putInt(Constant.PROP_OPINIONS_USER, user.opinions)
+                    bundleUser = user.loadBundle()
                 } else {
                     toast(getString(R.string.msg_info_tiempo_espera))
                 }
@@ -91,6 +97,9 @@ class ProductDetailActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Metodo que configura todos los componentes del activity
+     */
     private fun configComponents() {
         configSlider()
         configDataProduct()
@@ -98,12 +107,18 @@ class ProductDetailActivity : AppCompatActivity() {
         viewModel.getUser(bundle[Constant.PROP_ID_USER_PRODUCT].toString())
     }
 
+    /**
+     * Metodo que setea toda la informacion del usuario
+     */
     private fun configDataUser() {
         user.imgProfile?.let { Picasso.get().load(it).into(binding.civImagenPerfil) }
         binding.mtvNameUser.text = user.name
         binding.mtvEmailUser.text = user.email
     }
 
+    /**
+     * metodo que setea toda la informacion del producto
+     */
     private fun configDataProduct() {
         binding.apply {
             mtvPrice.text = bundle[Constant.PROP_PRICE_PRODUCT].toString().toDouble().formatAsPrice()
@@ -126,6 +141,9 @@ class ProductDetailActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Metodo que configura el slider de imagenes del producto
+     */
     private fun configSlider() {
         val images = mutableListOf<CarouselItem>()
         bundle[Constant.PROP_IMAGE1_PRODUCT]?.let {

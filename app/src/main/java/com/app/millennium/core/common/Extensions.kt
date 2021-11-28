@@ -319,3 +319,24 @@ fun Product?.loadBundle(): Bundle{
 
     return bundle
 }
+
+/**
+ * Extension para guardar un usuario en un bundle
+ */
+fun User?.loadBundle(): Bundle{
+    val bundle = Bundle()
+
+    this?.let {
+        bundle.putString(Constant.PROP_ID_USER, it.id)
+        bundle.putString(Constant.PROP_USERNAME_USER, it.name)
+        bundle.putString(Constant.PROP_EMAIL_USER, it.email)
+        bundle.putString(Constant.PROP_PHONE_USER, it.phone)
+        bundle.putString(Constant.PROP_IMG_COVER_USER, it.imgCover)
+        bundle.putString(Constant.PROP_IMG_PROFILE_USER, it.imgProfile)
+        bundle.putInt(Constant.PROP_UPLOADED_PRODUCTS_USER, it.uploadedProducts)
+        bundle.putInt(Constant.PROP_OPINIONS_USER, it.opinions)
+        bundle.putLong(Constant.PROP_TIMESTAMP_USER, it.timestamp)
+    }
+
+    return bundle
+}
