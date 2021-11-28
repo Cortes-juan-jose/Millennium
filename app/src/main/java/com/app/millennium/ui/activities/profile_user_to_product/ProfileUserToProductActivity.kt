@@ -136,7 +136,14 @@ class ProfileUserToProductActivity : AppCompatActivity() {
         )
     }
 
+    /**
+     * Metodo qeu registra todos los eventos del activity
+     */
     private fun configEventsOnClick() {
+        binding.ivBack.setOnClickListener { finish() }
 
+        binding.mbtnChat.setOnClickListener {
+            toast("Chatear")
+        }
     }
 }

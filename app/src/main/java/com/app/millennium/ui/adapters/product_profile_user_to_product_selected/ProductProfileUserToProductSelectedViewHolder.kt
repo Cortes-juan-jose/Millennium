@@ -58,6 +58,7 @@ class ProductProfileUserToProductSelectedViewHolder(
         }
 
         binding.ivLikeProduct.setOnClickListener {
+            likeProduct()
         }
     }
 
@@ -65,6 +66,7 @@ class ProductProfileUserToProductSelectedViewHolder(
         CoroutineScope(Dispatchers.IO).launch {
 
         }
+        Toast.makeText(context, "Like", Toast.LENGTH_SHORT).show()
     }
 
     /**
