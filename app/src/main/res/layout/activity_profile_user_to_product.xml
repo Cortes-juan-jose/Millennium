@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.profile.ProfileFragment">
 
+    <!--FLECHA IR HACIA ATRAS-->
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/size_icon_back"
+        android:layout_height="@dimen/size_icon_back"
+        android:layout_gravity="start"
+        android:elevation="6dp"
+        android:layout_marginStart="@dimen/margin_start_ic_back_toolbar"
+        android:layout_marginTop="@dimen/margin_top_ic_back_toolbar"
+        android:src="@drawable/ic_back"
+        android:contentDescription="@string/cd_ic_back" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/mtv_username"
@@ -15,8 +26,8 @@
         android:fontFamily="@font/balsami_bold"
         android:textColor="@color/white"
         android:elevation="5dp"
-        android:layout_marginTop="@dimen/min_padding_view"
-        android:layout_marginStart="@dimen/max_padding_view"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="60dp"
         android:lines="1"
         android:ems="10"
         android:ellipsize="end"
@@ -130,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginTop="270dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="@dimen/max_padding_view"
                     android:layout_gravity="center_horizontal">
                     <com.google.android.material.textview.MaterialTextView
                         style="@style/MaterialTextViewEmailProfile"
@@ -141,17 +152,6 @@
                         android:paddingHorizontal="@dimen/max_padding_view"
                         android:text="@string/mtv_sin_internet"
                         android:layout_gravity="center" />
-                    <com.google.android.material.button.MaterialButton
-                        style="@style/MaterialButtonBackground"
-                        android:id="@+id/btn_edit_profile"
-                        android:layout_width="wrap_content"
-                        app:cornerRadius="5dp"
-                        app:strokeWidth="1dp"
-                        app:strokeColor="@color/colorSecondary"
-                        android:layout_gravity="center"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/min_padding_view"
-                        android:text="@string/btn_editar_perfil"/>
                 </LinearLayout>
 
             </FrameLayout>
@@ -162,7 +162,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:theme="@style/ToolbarThemeText"
-                app:menu="@menu/toolbar_profile_menu"
                 app:layout_collapseMode="pin"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

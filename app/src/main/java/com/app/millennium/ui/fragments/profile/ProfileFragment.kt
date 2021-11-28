@@ -225,14 +225,14 @@ class ProfileFragment : Fragment() {
             }
         binding.vp2PostOpinions.adapter = adapterViewPagerProfile
 
-        binding.tlPostOpinions.addTab(
-            binding.tlPostOpinions.newTab().setText(getString(R.string.tab_productos))
+        binding.tlProductsOpinions.addTab(
+            binding.tlProductsOpinions.newTab().setText(getString(R.string.tab_productos))
         )
-        binding.tlPostOpinions.addTab(
-            binding.tlPostOpinions.newTab().setText(getString(R.string.tab_opiniones))
+        binding.tlProductsOpinions.addTab(
+            binding.tlProductsOpinions.newTab().setText(getString(R.string.tab_opiniones))
         )
 
-        binding.tlPostOpinions.addOnTabSelectedListener(
+        binding.tlProductsOpinions.addOnTabSelectedListener(
             object : TabLayout.OnTabSelectedListener{
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     binding.vp2PostOpinions.currentItem = tab?.position!!
@@ -249,7 +249,7 @@ class ProfileFragment : Fragment() {
         binding.vp2PostOpinions.registerOnPageChangeCallback(
             object : ViewPager2.OnPageChangeCallback(){
                 override fun onPageSelected(position: Int) {
-                    binding.tlPostOpinions.selectTab(binding.tlPostOpinions.getTabAt(position))
+                    binding.tlProductsOpinions.selectTab(binding.tlProductsOpinions.getTabAt(position))
                 }
             }
         )

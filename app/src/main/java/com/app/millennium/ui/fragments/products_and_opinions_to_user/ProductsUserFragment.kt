@@ -82,7 +82,7 @@ class ProductsUserFragment : Fragment() {
                             productProfileAdapter = ProductProfileAdapter(products)
                             //Configuramos la disposicion del recycler view
                             binding.rvProducts.layoutManager = LinearLayoutManager(
-                                requireContext(),
+                                activity?.applicationContext,
                                 LinearLayoutManager.VERTICAL,
                                 false
                             )
