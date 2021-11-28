@@ -50,11 +50,25 @@ class ProductProfileViewHolder(
 
     //inicializar la vista
     private fun initUI() {
+        configDataProduct()
+        configEventsOnClick()
+    }
+
+    /**
+     * Metodo que setea los datos del producto
+     */
+    private fun configDataProduct() {
         //Seteamos todos los campos en la vista
         Picasso.get().load(getFirtsImageProductNotNull(product)).into(binding.ivProduct)
         binding.mtvTitle.text = product.title
         binding.mtvPrice.text = product.price.formatAsPrice()
         binding.mtvTimestamp.text = RelativeTime.getTimeAgo(product.timestamp, view.context)
+    }
+
+    /**
+     * Metodo que registra todos los eventos de la vista del producto
+     */
+    private fun configEventsOnClick() {
 
         binding.root.setOnClickListener {
             val bundle = product.loadBundle()
@@ -62,6 +76,10 @@ class ProductProfileViewHolder(
             context.openActivity<ProductDetailActivity> {
                 putExtra(Constant.BUNDLE_PRODUCT, bundle)
             }
+        }
+
+        binding.ivLikeProduct.setOnClickListener {
+            Toast.makeText(context, "Like", Toast.LENGTH_SHORT).show()
         }
 
         binding.ivDeleteProduct.setOnClickListener {
@@ -112,6 +130,9 @@ class ProductProfileViewHolder(
 
     }
 
+    /**
+     * Metodo que elimina un producto de la lista y cambia el valor uploadedProducts del usuario
+     */
     private fun deleteProduct() {
         CoroutineScope(Dispatchers.IO).launch {
             //Eliminamos el producto
