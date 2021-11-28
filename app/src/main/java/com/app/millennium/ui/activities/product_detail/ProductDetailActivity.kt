@@ -14,6 +14,7 @@ import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.core.utils.RelativeTime
 import com.app.millennium.data.model.User
 import com.app.millennium.databinding.ActivityProductDetailBinding
+import com.squareup.picasso.Picasso
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 class ProductDetailActivity : AppCompatActivity() {
@@ -65,6 +66,7 @@ class ProductDetailActivity : AppCompatActivity() {
                         user = snapshot?.toObject(User::class.java)!!
                         binding.llUserData.visibility = View.VISIBLE
                         binding.llLoadDataUser.visibility = View.GONE
+                        configDataUser()
                     }
                 }
             }
@@ -84,11 +86,14 @@ class ProductDetailActivity : AppCompatActivity() {
     private fun configComponents() {
         configSlider()
         configDataProduct()
-        configDataUser()
+        //Obtenemos el usuario de la publicacion
+        viewModel.getUser(bundle[Constant.PROP_ID_USER_PRODUCT].toString())
     }
 
     private fun configDataUser() {
-        viewModel.getUser(bundle[Constant.PROP_ID_USER_PRODUCT].toString())
+        user.imgProfile?.let { Picasso.get().load(it).into(binding.civImagenPerfil) }
+        binding.mtvNameUser.text = user.name
+        binding.mtvEmailUser.text = user.email
     }
 
     private fun configDataProduct() {
