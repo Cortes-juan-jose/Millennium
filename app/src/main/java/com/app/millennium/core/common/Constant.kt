@@ -8,9 +8,12 @@ object Constant {
     const val KO: Int = 876
     const val OK: Int = 877
 
-    const val PRIMARY_COLOR_RED : Int = 243
-    const val PRIMARY_COLOR_GREEN : Int = 135
-    const val PRIMARY_COLOR_BLUE : Int = 135
+    const val COLOR_RED_PRIMARY : Int = 243
+    const val COLOR_RED_PRIMARY_DARK: Int = 189
+    const val COLOR_GREEN_PRIMARY : Int = 135
+    const val COLOR_GREEN_PRIMARY_DARK : Int = 88
+    const val COLOR_BLUE_PRIMARY : Int = 135
+    const val COLOR_BLUE_PRIMARY_DARK : Int = 90
 
     const val TAG_DEFAULT: String = "default"
     const val TAG_NOT_DEFAULT: String = "no default"

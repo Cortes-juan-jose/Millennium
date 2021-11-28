@@ -1053,7 +1053,7 @@ class EditProfileActivity : AppCompatActivity() {
             //Validando el username
             if (username.isUsername()){
                 usernameValid = true
-                tilUsername.removeError()
+                tilUsername.removeError(this@EditProfileActivity)
             } else {
                 tietUsername.setText(bundle[Constant.PROP_USERNAME_USER].toString())
                 tilUsername.applyError(getString(R.string.msg_error_username))
@@ -1064,7 +1064,7 @@ class EditProfileActivity : AppCompatActivity() {
             if (phone.isNotEmpty()){
                 if (phone.isPhone()){
                     phoneValid = true
-                    tilPhone.removeError()
+                    tilPhone.removeError(this@EditProfileActivity)
                 } else {
                     if (bundle[Constant.PROP_PHONE_USER].isNotNull()){
                         tietPhone.setText(bundle[Constant.PROP_PHONE_USER].toString())
@@ -1075,7 +1075,7 @@ class EditProfileActivity : AppCompatActivity() {
                 }
             } else{
                 phoneValid = true
-                tilPhone.removeError()
+                tilPhone.removeError(this@EditProfileActivity)
             }
         }
 

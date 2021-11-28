@@ -93,7 +93,7 @@ class RegisterActivity : AppCompatActivity() {
             //Validando el username
             if (username.isUsername()){
                 usernameValid = true
-                tilUser.removeError()
+                tilUser.removeError(this@RegisterActivity)
             } else {
                 tietUser.setText("")
                 tilUser.applyError(getString(R.string.msg_error_username))
@@ -102,7 +102,7 @@ class RegisterActivity : AppCompatActivity() {
             //Validando el email
             if (email.isEmail()){
                 emailValid = true
-                tilEmail.removeError()
+                tilEmail.removeError(this@RegisterActivity)
             } else {
                 tietEmail.setText("")
                 tilEmail.applyError(getString(R.string.msg_error_email))
@@ -113,20 +113,20 @@ class RegisterActivity : AppCompatActivity() {
             if (phone.isNotEmpty()){
                 if (phone.isPhone()){
                     phoneValid = true
-                    tilPhone.removeError()
+                    tilPhone.removeError(this@RegisterActivity)
                 } else {
                     tietPhone.setText("")
                     tilPhone.applyError(getString(R.string.msg_error_phone))
                 }
             } else{
                 phoneValid = true
-                tilPhone.removeError()
+                tilPhone.removeError(this@RegisterActivity)
             }
 
             //Validando la contraseña
             if (password.isPassword()){
                 passwordValid = true
-                tilPassword.removeError()
+                tilPassword.removeError(this@RegisterActivity)
             } else {
                 tietPassword.setText("")
                 tilPassword.applyError(getString(R.string.msg_error_password))
@@ -137,7 +137,7 @@ class RegisterActivity : AppCompatActivity() {
                 confirmPassword == password
             ){
                 passwordConfirmValid = true
-                tilConfirmarPassword.removeError()
+                tilConfirmarPassword.removeError(this@RegisterActivity)
             } else {
                 tietConfirmarPassword.setText("")
                 tilConfirmarPassword.applyError(getString(R.string.msg_error_password_confirm))

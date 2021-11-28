@@ -141,6 +141,7 @@
     <string name="mtv_descripcion">Descripción</string>
     <string name="mtv_estado_del_producto">Estado del producto</string>
     <string name="mtv_negociable">Negociable</string>
+    <string name="mtv_cargando_usuario">Cargando usuario</string>
 
 
 </resources>

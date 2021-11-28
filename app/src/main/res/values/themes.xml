@@ -56,6 +56,10 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
+    <style name="ViewBackgroundTint">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+    </style>
+
     <style name="ImageViewIconEmailColor">
         <item name="android:src">@drawable/ic_email</item>
     </style>

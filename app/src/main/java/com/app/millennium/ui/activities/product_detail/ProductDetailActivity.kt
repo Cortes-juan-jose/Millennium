@@ -3,6 +3,8 @@ package com.app.millennium.ui.activities.product_detail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.app.millennium.R
 import com.app.millennium.core.common.Constant
@@ -10,14 +12,18 @@ import com.app.millennium.core.common.formatAsPrice
 import com.app.millennium.core.common.toast
 import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.core.utils.RelativeTime
+import com.app.millennium.data.model.User
 import com.app.millennium.databinding.ActivityProductDetailBinding
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 class ProductDetailActivity : AppCompatActivity() {
     
     private lateinit var binding: ActivityProductDetailBinding
+    private val viewModel: ProductDetailViewModel by viewModels()
 
     private lateinit var bundle: Bundle
+
+    private var user = User()
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +33,9 @@ class ProductDetailActivity : AppCompatActivity() {
         bundle = intent.getBundleExtra(Constant.BUNDLE_PRODUCT)!!
     
         initUI()
+        initObservables()
     }
-    
+
     private fun initUI(){
         Log.d("BUNDLE", "${Constant.PROP_ID_PRODUCT} -> " + bundle[Constant.PROP_ID_PRODUCT].toString())
         Log.d("BUNDLE", "${Constant.PROP_ID_USER_PRODUCT} -> " + bundle[Constant.PROP_ID_USER_PRODUCT].toString())
@@ -49,6 +56,21 @@ class ProductDetailActivity : AppCompatActivity() {
         configEventsClickButtons()
     }
 
+    private fun initObservables() {
+        viewModel.getUser.observe(
+            this,
+            {
+                it?.let {
+                    it.addOnSuccessListener { snapshot ->
+                        user = snapshot?.toObject(User::class.java)!!
+                        binding.llUserData.visibility = View.VISIBLE
+                        binding.llLoadDataUser.visibility = View.GONE
+                    }
+                }
+            }
+        )
+    }
+
     private fun configEventsClickButtons() {
         binding.apply {
             ivBack.setOnClickListener { finish() }
@@ -66,7 +88,7 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun configDataUser() {
-
+        viewModel.getUser(bundle[Constant.PROP_ID_USER_PRODUCT].toString())
     }
 
     private fun configDataProduct() {
@@ -83,6 +105,10 @@ class ProductDetailActivity : AppCompatActivity() {
 
             bundle[Constant.PROP_NEGOTIABLE_PRODUCT]?.let {
                 mtvNegotiable.text = (it as String)
+            }
+
+            bundle[Constant.PROP_PRODUCT_STATUS_PRODUCT]?.let {
+                mtvStatusProduct.text = (it as String)
             }
         }
     }

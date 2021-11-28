@@ -8,8 +8,7 @@ import com.app.millennium.R
 import com.app.millennium.data.model.Product
 
 class ProductProfileAdapter(
-    private val products : List<Product>,
-    private val context: Context
+    private val products : List<Product>
 ) : RecyclerView.Adapter<ProductProfileViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductProfileViewHolder {
@@ -19,7 +18,7 @@ class ProductProfileAdapter(
             parent,
             false
         )
-        return ProductProfileViewHolder(view, context)
+        return ProductProfileViewHolder(view, parent.context)
     }
 
     override fun onBindViewHolder(holderProfile: ProductProfileViewHolder, position: Int) {

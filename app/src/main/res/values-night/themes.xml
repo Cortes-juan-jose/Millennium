@@ -54,6 +54,10 @@
         <item name="android:background">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="ViewBackgroundTint">
+        <item name="android:backgroundTint">@color/colorPrimaryDark</item>
+    </style>
+
     <style name="ImageViewIconEmailColor">
         <item name="android:src">@drawable/ic_email_dark</item>
     </style>

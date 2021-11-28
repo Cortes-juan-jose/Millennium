@@ -79,7 +79,7 @@ class ProductsUserFragment : Fragment() {
 
                             //Una vez tengamos todos los productos creamos el adapter
                             //con la lista de los producots
-                            productProfileAdapter = ProductProfileAdapter(products, requireContext())
+                            productProfileAdapter = ProductProfileAdapter(products)
                             //Configuramos la disposicion del recycler view
                             binding.rvProducts.layoutManager = LinearLayoutManager(
                                 requireContext(),

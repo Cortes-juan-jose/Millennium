@@ -11,6 +11,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.core.utils.FileUtil
 import com.app.millennium.data.model.Product
 import com.app.millennium.data.model.User
@@ -157,32 +158,59 @@ fun TextInputLayout.applyError(msg: String){
 }
 
 //Extension para aplicar propiedades de error a un text input layout
-fun TextInputLayout.removeError(){
+fun TextInputLayout.removeError(context: Context){
 
     this.let {
         isHelperTextEnabled = false
-        boxStrokeColor = Color.rgb(
-            Constant.PRIMARY_COLOR_RED,
-            Constant.PRIMARY_COLOR_GREEN,
-            Constant.PRIMARY_COLOR_BLUE
-        )
-        hintTextColor =
-            ColorStateList.valueOf(
-                Color.rgb(
-                    Constant.PRIMARY_COLOR_RED,
-                    Constant.PRIMARY_COLOR_GREEN,
-                    Constant.PRIMARY_COLOR_BLUE
+        if (ConfigThemeApp.isThemeLight(context)){
+
+            boxStrokeColor = Color.rgb(
+                Constant.COLOR_RED_PRIMARY,
+                Constant.COLOR_GREEN_PRIMARY,
+                Constant.COLOR_BLUE_PRIMARY
+            )
+            hintTextColor =
+                ColorStateList.valueOf(
+                    Color.rgb(
+                        Constant.COLOR_RED_PRIMARY,
+                        Constant.COLOR_GREEN_PRIMARY,
+                        Constant.COLOR_BLUE_PRIMARY
+                    )
+                )
+            setHelperTextColor(
+                ColorStateList.valueOf(
+                    Color.rgb(
+                        Constant.COLOR_RED_PRIMARY,
+                        Constant.COLOR_GREEN_PRIMARY,
+                        Constant.COLOR_BLUE_PRIMARY
+                    )
                 )
             )
-        setHelperTextColor(
-            ColorStateList.valueOf(
-                Color.rgb(
-                    Constant.PRIMARY_COLOR_RED,
-                    Constant.PRIMARY_COLOR_GREEN,
-                    Constant.PRIMARY_COLOR_BLUE
+        } else {
+
+            boxStrokeColor = Color.rgb(
+                Constant.COLOR_RED_PRIMARY_DARK,
+                Constant.COLOR_GREEN_PRIMARY_DARK,
+                Constant.COLOR_BLUE_PRIMARY_DARK
+            )
+            hintTextColor =
+                ColorStateList.valueOf(
+                    Color.rgb(
+                        Constant.COLOR_RED_PRIMARY_DARK,
+                        Constant.COLOR_GREEN_PRIMARY_DARK,
+                        Constant.COLOR_BLUE_PRIMARY_DARK
+                    )
+                )
+            setHelperTextColor(
+                ColorStateList.valueOf(
+                    Color.rgb(
+                        Constant.COLOR_RED_PRIMARY_DARK,
+                        Constant.COLOR_GREEN_PRIMARY_DARK,
+                        Constant.COLOR_BLUE_PRIMARY_DARK
+                    )
                 )
             )
-        )
+        }
     }
 }
 

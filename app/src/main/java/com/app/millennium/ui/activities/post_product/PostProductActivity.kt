@@ -1425,7 +1425,7 @@ class PostProductActivity : AppCompatActivity() {
 
             //Validar el titulo
             if (tietTitle.text.toString().trim().isTitleOrDescription()){
-                tilTitle.removeError()
+                tilTitle.removeError(this@PostProductActivity)
                 titleValid = true
             } else {
                 tietTitle.setText("")
@@ -1434,7 +1434,7 @@ class PostProductActivity : AppCompatActivity() {
             //Validar la descripción
             if (tietDescription.text.toString().trim().isTitleOrDescription()){
                 descriptionValid = true
-                tilDescription.removeError()
+                tilDescription.removeError(this@PostProductActivity)
             } else {
                 tietDescription.setText("")
                 tilDescription.applyError(getString(R.string.msg_error_description_producto))
@@ -1442,7 +1442,7 @@ class PostProductActivity : AppCompatActivity() {
             //Validar la categoría
             if (tietCategory.text.toString().trim().isNotEmpty()){
                 categoryValid = true
-                tilCategory.removeError()
+                tilCategory.removeError(this@PostProductActivity)
             } else {
                 tietCategory.setText("")
                 tilCategory.applyError(getString(R.string.msg_error_category_producto))
@@ -1452,7 +1452,7 @@ class PostProductActivity : AppCompatActivity() {
                 && tietPrice.text.toString()[tietPrice.text.toString().length-1]!='.'
             ){
                 priceValid = true
-                tilPrice.removeError()
+                tilPrice.removeError(this@PostProductActivity)
             } else {
                 tietPrice.setText("")
                 tilPrice.applyError(getString(R.string.msg_error_price_producto))

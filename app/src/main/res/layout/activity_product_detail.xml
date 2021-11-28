@@ -132,9 +132,32 @@
                 android:elevation="4dp">
 
                 <LinearLayout
+                    android:id="@+id/ll_load_data_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    android:gravity="center">
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/balsami_italic"
+                        android:text="@string/mtv_cargando_usuario"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_user_data"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:gravity="center">
 
                     <!--IMG PERFIL-->
@@ -222,12 +245,10 @@
                 android:layout_marginBottom="@dimen/max_padding_view"
                 android:layout_gravity="end">
                 <androidx.cardview.widget.CardView
+                    style="@style/ViewBackgroundTint"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:elevation="1dp"
-                    android:layout_marginBottom="2dp"
-                    app:cardCornerRadius="10dp"
-                    android:backgroundTint="@color/grey_light">
+                    app:cardCornerRadius="10dp">
                     <com.google.android.material.textview.MaterialTextView
                         style="@style/TextColor"
                         android:id="@+id/mtv_category"
