@@ -227,43 +227,66 @@ class ProductProfileViewHolder(
      * Metodo que elimina un producto de la lista y cambia el valor uploadedProducts del usuario
      */
     private fun deleteProduct() {
+        //Creamos un like con los datos
+        val like = Like(
+            idUserToSession = product.idUser,
+            idUserToPostProduct = product.idUser,
+            idProduct = product.id,
+            timestamp = Date().time
+        )
+
         CoroutineScope(Dispatchers.IO).launch {
-            //Eliminamos el producto
-            deleteProductUseCase.invoke(product.id)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful){
-                        //Si la tarea fue exitosa entonces modificamos el campo de uploadedProducts
-                        //del usuario
+            getLikeByProductByUserProductByUserSessionUseCase.invoke(like)
+                .addOnSuccessListener { snapshot ->
+                    snapshot?.let { _snapshot ->
+                        if (!_snapshot.isEmpty){
+                            //Si no es vacia esta lista de likes significa que ya estaba asignada como me gusta
+                            //quitamos el megusta y lo borramos en la base de datos
+                            CoroutineScope(Dispatchers.IO).launch {
+                                deleteLikeUseCase.invoke(_snapshot.documents[0].id)
+                            }
+                        }
+
+                        //Y ahora eliminamos el producto
                         CoroutineScope(Dispatchers.IO).launch {
-                            product.idUser?.let { idUser ->
-                                getUserUseCase.invoke(idUser)
-                                    .addOnSuccessListener { _user ->
-                                        val user = _user.data.convertUser()
-                                        user.uploadedProducts -= 1
-                                        //Y ahora actualizamos este campo
+
+                            deleteProductUseCase.invoke(product.id)
+                                .addOnCompleteListener { task ->
+                                    if (task.isSuccessful){
+                                        //Si la tarea fue exitosa entonces modificamos el campo de uploadedProducts
+                                        //del usuario
                                         CoroutineScope(Dispatchers.IO).launch {
-                                            updateUploadedProductsUserUseCase.invoke(user)
-                                                .addOnCompleteListener { task2 ->
-                                                    if (task2.isSuccessful){
-                                                        Toast.makeText(context, "Eliminado", Toast.LENGTH_SHORT).show()
+                                            product.idUser?.let { idUser ->
+                                                getUserUseCase.invoke(idUser)
+                                                    .addOnSuccessListener { _user ->
+                                                        val user = _user.data.convertUser()
+                                                        user.uploadedProducts -= 1
+                                                        //Y ahora actualizamos este campo
+                                                        CoroutineScope(Dispatchers.IO).launch {
+                                                            updateUploadedProductsUserUseCase.invoke(user)
+                                                                .addOnCompleteListener { task2 ->
+                                                                    if (task2.isSuccessful){
+                                                                        Toast.makeText(context, "Eliminado", Toast.LENGTH_SHORT).show()
+                                                                    }
+                                                                }
+                                                                .addOnFailureListener { exc ->
+                                                                    Toast.makeText(context, "${exc.message}", Toast.LENGTH_LONG).show()
+                                                                }
+                                                        }
                                                     }
-                                                }
-                                                .addOnFailureListener { exc ->
-                                                    Toast.makeText(context, "${exc.message}", Toast.LENGTH_LONG).show()
-                                                }
+                                                    .addOnFailureListener { exc ->
+                                                        Toast.makeText(context, "${exc.message}", Toast.LENGTH_LONG).show()
+                                                    }
+                                            }
                                         }
                                     }
-                                    .addOnFailureListener { exc ->
-                                        Toast.makeText(context, "${exc.message}", Toast.LENGTH_LONG).show()
-                                    }
-                            }
+                                }
+                                .addOnFailureListener { exc ->
+                                    Toast.makeText(context, "${exc.message}", Toast.LENGTH_LONG).show()
+                                }
                         }
                     }
                 }
-                .addOnFailureListener { exc ->
-                    Toast.makeText(context, "${exc.message}", Toast.LENGTH_LONG).show()
-                }
-
         }
     }
 
