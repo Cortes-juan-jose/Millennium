@@ -4,10 +4,7 @@ import com.app.millennium.core.common.Constant
 import com.app.millennium.core.firebase.FirebaseProvider
 import com.app.millennium.data.model.Product
 import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 
 class ProductsImpl : Products {
 
@@ -18,6 +15,9 @@ class ProductsImpl : Products {
      */
     override suspend fun save(product: Product): Task<Void> =
         db.document(product.id).set(product)
+
+    override suspend fun get(id: String): Task<DocumentSnapshot> =
+        db.document(id).get()
 
     /**
      * Metodo para obtener todos los productos

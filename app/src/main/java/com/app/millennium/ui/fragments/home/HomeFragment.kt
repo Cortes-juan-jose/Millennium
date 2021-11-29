@@ -23,7 +23,7 @@ class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModels()
 
-    private lateinit var products: MutableList<Product>
+    private var products = mutableListOf<Product>()
     private lateinit var productHomeAdapter: ProductHomeAdapter
 
     override fun onCreateView(
@@ -46,8 +46,6 @@ class HomeFragment : Fragment() {
     //Init ui
     private fun initUI() {
         buildLottieAnimation()
-
-        products = mutableListOf()
         viewModel.init()
     }
 
