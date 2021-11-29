@@ -11,7 +11,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.app.millennium.R
 import com.app.millennium.core.common.Constant
-import com.app.millennium.core.common.isNull
 
 class NotificationHelper(context: Context) : ContextWrapper(context) {
 
@@ -68,8 +67,8 @@ class NotificationHelper(context: Context) : ContextWrapper(context) {
             .setStyle(
                 NotificationCompat
                     .BigTextStyle()
-                    .bigText(title)
-                    .setBigContentTitle(body)
+                    .bigText(body)
+                    .setBigContentTitle(title)
             )
     }
 }
