@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.core.utils.FileUtil
+import com.app.millennium.data.model.Chat
 import com.app.millennium.data.model.Product
 import com.app.millennium.data.model.User
 import com.google.android.material.textfield.TextInputEditText
@@ -336,6 +337,22 @@ fun User?.loadBundle(): Bundle{
         bundle.putInt(Constant.PROP_UPLOADED_PRODUCTS_USER, it.uploadedProducts)
         bundle.putInt(Constant.PROP_OPINIONS_USER, it.opinions)
         bundle.putLong(Constant.PROP_TIMESTAMP_USER, it.timestamp)
+    }
+
+    return bundle
+}
+
+/**
+ * Extension para guardar un chat en un bundle
+ */
+fun Chat?.loadBundle(): Bundle{
+    val bundle = Bundle()
+
+    this?.let {
+        bundle.putString(Constant.PROP_ID_USER_TO_SESSION_CHAT, it.idUserToSession)
+        bundle.putString(Constant.PROP_ID_USER_TO_CHAT_CHAT, it.idUserToChat)
+        bundle.putBoolean(Constant.PROP_IS_WRITING_CHAT, it.isWriting)
+        bundle.putLong(Constant.PROP_TIMESTAMP_CHAT, it.timestamp)
     }
 
     return bundle

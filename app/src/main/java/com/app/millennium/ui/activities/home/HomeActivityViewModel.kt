@@ -19,12 +19,6 @@ class HomeActivityViewModel : ViewModel(){
     private val getTokenToDeviceUseCase = GetTokenToDeviceUseCase()
     private val createTokenUseCase = CreateTokenUseCase()
     private val getIdUseCase = GetIdUseCase()
-
-    //ESTO ES UNA PRUEBA BORRAR
-    private val sendNotificationUseCase = SendNotificationUseCase()
-
-    private val _sendNotification = MutableLiveData<FCMResponse>()
-    val sendNotification: LiveData<FCMResponse> get() = _sendNotification
     
     private val _getTokenToDevice = MutableLiveData<Task<String>>()
     val getTokenToDevice: LiveData<Task<String>> get() = _getTokenToDevice
@@ -55,14 +49,6 @@ class HomeActivityViewModel : ViewModel(){
         viewModelScope.launch {
             _getIdUserSession.postValue(
                 getIdUseCase.invoke()
-            )
-        }
-    }
-
-    fun sendNotification(@Body body: FCMBody){
-        viewModelScope.launch {
-            _sendNotification.postValue(
-                sendNotificationUseCase.invoke(body)
             )
         }
     }

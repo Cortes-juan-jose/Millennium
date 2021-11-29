@@ -1,5 +1,6 @@
 package com.app.millennium.data.repository.remote.firebase.firestore_provider
 
+import com.app.millennium.data.repository.remote.firebase.firestore_provider.entities.chats.ChatsImpl
 import com.app.millennium.data.repository.remote.firebase.firestore_provider.entities.likes.LikesImpl
 import com.app.millennium.data.repository.remote.firebase.firestore_provider.entities.opinions.OpinionsImpl
 import com.app.millennium.data.repository.remote.firebase.firestore_provider.entities.products.ProductsImpl
@@ -15,4 +16,5 @@ object FirestoreDataSource {
     val likes = LikesImpl()
     val opinions = OpinionsImpl()
     val tokens = TokensImpl()
+    val chats = ChatsImpl()
 }

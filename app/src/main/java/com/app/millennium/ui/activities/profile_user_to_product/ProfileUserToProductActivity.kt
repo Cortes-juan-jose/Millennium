@@ -3,24 +3,30 @@ package com.app.millennium.ui.activities.profile_user_to_product
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.app.millennium.R
-import com.app.millennium.core.common.Constant
-import com.app.millennium.core.common.isNotNull
-import com.app.millennium.core.common.toast
+import com.app.millennium.core.common.*
 import com.app.millennium.core.utils.ConfigThemeApp
+import com.app.millennium.data.model.Chat
 import com.app.millennium.databinding.ActivityProfileUserToProductBinding
+import com.app.millennium.ui.activities.chat.ChatActivity
 import com.app.millennium.ui.adapters.view_pager_profile.ViewPagerProfileAdapter
 import com.app.millennium.ui.adapters.view_pager_profile_user_to_product_selected.ViewPagerProfileUserToProductSelectedAdapter
 import com.google.android.material.tabs.TabLayout
 import com.squareup.picasso.Picasso
+import java.util.*
 
 class ProfileUserToProductActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileUserToProductBinding
+    private val viewModel: ProfileUserToProductViewModel by viewModels()
 
     private lateinit var bundle: Bundle
+
+    private lateinit var idUserToSession: String
+    private lateinit var chat: Chat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +47,24 @@ class ProfileUserToProductActivity : AppCompatActivity() {
     }
 
     private fun initObservables() {
-
+        viewModel.getIdUserToSession.observe(
+            this,
+            {
+                it?.let { id -> idUserToSession = id }
+                //Creamos un chat
+                chat = Chat(
+                    idUserToSession = idUserToSession,
+                    idUserToChat = bundle[Constant.PROP_ID_USER].toString(),
+                    timestamp = Date().time
+                )
+                //Lo guardamos en un bundle
+                val bundleChat = chat.loadBundle()
+                //Y se lo pasamos al activity
+                openActivity<ChatActivity> {
+                    putExtra(Constant.BUNDLE_CHAT, bundleChat)
+                }
+            }
+        )
     }
 
     /**
@@ -143,7 +166,7 @@ class ProfileUserToProductActivity : AppCompatActivity() {
         binding.ivBack.setOnClickListener { finish() }
 
         binding.mbtnChat.setOnClickListener {
-            toast("Chatear")
+            viewModel.getIdUserToSession()
         }
     }
 }

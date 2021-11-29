@@ -40,6 +40,7 @@ object Constant {
     const val COLLECTION_PRODUCTS: String = "Products"
     const val COLLECTION_OPINIONS: String = "Opinions"
     const val COLLECTION_TOKENS: String = "Tokens"
+    const val COLLECTION_CHATS: String = "Chats"
 
     const val STORAGE_IMAGES : String = "images"
 
@@ -90,4 +91,10 @@ object Constant {
     const val CONTENT_TYPE_API_NOTIFICATION: String = "Content-Type:application/json"
     const val AUTHORIZATION_KEY_API_NOTIFICATION: String = "Authorization:key=AAAAVcKXk0c:APA91bE7B8iTblTgAL2Ne8v6QHpd7SkL2PnyZmwZdJWJ5H9kEzAHXfMv2iTGd1SntsYsIAJ6KTUmgZTCw7KILQItuKYmjc4zG3298gxc-FsnnDPTeBG3L-3po4w--ppTpYAIWBmCpMFq"
     const val URL_API_NOTIFICATION: String = "https://fcm.googleapis.com/"
+
+    const val BUNDLE_CHAT: String = "chat"
+    const val PROP_ID_USER_TO_SESSION_CHAT: String = "idUserToSession"
+    const val PROP_ID_USER_TO_CHAT_CHAT: String = "idUserToChat"
+    const val PROP_IS_WRITING_CHAT: String = "isWriting"
+    const val PROP_TIMESTAMP_CHAT: String = "timestamp"
 }

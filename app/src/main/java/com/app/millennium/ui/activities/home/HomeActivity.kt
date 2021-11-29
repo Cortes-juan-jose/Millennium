@@ -48,29 +48,9 @@ class HomeActivity : AppCompatActivity() {
                         token?.let { _token ->
                             tokenToDevice = _token
                             //Ahora creamos el token
-                            //viewModel.createToken(idUser, tokenToDevice)
-
-                            //ESTO ES UNA PRUEBA BORRAR
-                            val data = mapOf(
-                                "title" to "Funciona",
-                                "body" to "Perfecto"
-                            )
-                            val fcmBody = FCMBody(
-                                tokenToDevice, "high", "4500s", data
-                            )
-                            viewModel.sendNotification(fcmBody)
+                            viewModel.createToken(idUser, tokenToDevice)
                         }
                     }
-                }
-            }
-        )
-
-        //BORRAR LUEGO
-        viewModel.sendNotification.observe(
-            this,
-            {
-                if (it.success == 1){
-                    toast("Se ha enviado correctamente")
                 }
             }
         )
