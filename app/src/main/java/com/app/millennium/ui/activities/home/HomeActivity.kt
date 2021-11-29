@@ -1,12 +1,13 @@
 package com.app.millennium.ui.activities.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.app.millennium.R
 import com.app.millennium.core.common.toast
+import com.app.millennium.data.model.FCMBody
 import com.app.millennium.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -46,29 +47,30 @@ class HomeActivity : AppCompatActivity() {
                     it.addOnSuccessListener { token ->
                         token?.let { _token ->
                             tokenToDevice = _token
-                            //Ahora creamos el token pero primero miramos si este token
-                            //ya existe para ello consultamos el token
-                            //viewModel.getToken(idUser)
-                            viewModel.createToken(idUser, tokenToDevice)
+                            //Ahora creamos el token
+                            //viewModel.createToken(idUser, tokenToDevice)
+
+                            //ESTO ES UNA PRUEBA BORRAR
+                            val data = mapOf(
+                                "title" to "Funciona",
+                                "body" to "Perfecto"
+                            )
+                            val fcmBody = FCMBody(
+                                tokenToDevice, "high", "4500s", data
+                            )
+                            viewModel.sendNotification(fcmBody)
                         }
                     }
                 }
             }
         )
 
-        //Obtener el token del usuario de la sesion
-        viewModel.getToken.observe(
+        //BORRAR LUEGO
+        viewModel.sendNotification.observe(
             this,
             {
-                it?.let {
-                    it.addOnSuccessListener { token ->
-                        token?.let { _token ->
-                            if (!_token.exists()){
-                                //Si no existe lo creamos
-                                viewModel.createToken(idUser, tokenToDevice)
-                            }
-                        }
-                    }
+                if (it.success == 1){
+                    toast("Se ha enviado correctamente")
                 }
             }
         )

@@ -87,4 +87,7 @@ object Constant {
 
     const val TITLE_NOTIFICATION: String = "title"
     const val BODY_NOTIFICATION: String = "body"
+    const val CONTENT_TYPE_API_NOTIFICATION: String = "Content-Type:application/json"
+    const val AUTHORIZATION_KEY_API_NOTIFICATION: String = "Authorization:key=AAAAVcKXk0c:APA91bE7B8iTblTgAL2Ne8v6QHpd7SkL2PnyZmwZdJWJ5H9kEzAHXfMv2iTGd1SntsYsIAJ6KTUmgZTCw7KILQItuKYmjc4zG3298gxc-FsnnDPTeBG3L-3po4w--ppTpYAIWBmCpMFq"
+    const val URL_API_NOTIFICATION: String = "https://fcm.googleapis.com/"
 }

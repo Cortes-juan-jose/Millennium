@@ -12,6 +12,9 @@ import androidx.core.app.NotificationCompat
 import com.app.millennium.R
 import com.app.millennium.core.common.Constant
 
+/**
+ * clase que configura toda la notificacion push
+ */
 class NotificationHelper(context: Context) : ContextWrapper(context) {
 
     private val channelId = Constant.PACKAGE_PROJECT
