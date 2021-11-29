@@ -142,12 +142,11 @@
     <string name="mtv_estado_del_producto">Estado del producto</string>
     <string name="mtv_negociable">Negociable</string>
     <string name="mtv_cargando_usuario">Cargando usuario</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btn_chatear">Chatear</string>
     <string name="mtv_me_gusta">Me gusta</string>
     <string name="mtv_info_sin_productos_favoritos">Guarde los productos que quiera pulsando en el icono del producto favorito (❤️)</string>
     <string name="hola_mundo">hola mundo</string>
 
-
+    <!--ID DEL CANAL POR DEFECTO DE NOTIFICACIONES OBLIGATORIO-->
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 </resources>

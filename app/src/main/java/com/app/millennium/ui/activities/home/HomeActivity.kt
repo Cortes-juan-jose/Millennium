@@ -48,7 +48,8 @@ class HomeActivity : AppCompatActivity() {
                             tokenToDevice = _token
                             //Ahora creamos el token pero primero miramos si este token
                             //ya existe para ello consultamos el token
-                            viewModel.getToken(idUser)
+                            //viewModel.getToken(idUser)
+                            viewModel.createToken(idUser, tokenToDevice)
                         }
                     }
                 }

@@ -29,6 +29,7 @@ object Constant {
     const val PERMISSION_GALLERY: Int  = 222
 
     const val PACKAGE_PROJECT: String = "com.app.millennium"
+    const val NAME_APP: String = "Millennium"
 
     const val FORMAT_JPG: String = ".jpg"
     const val FORMAT_JPEG: String = ".jpeg"
@@ -83,4 +84,7 @@ object Constant {
     const val PROP_MSG_OPINION: String = "msg"
     const val PROP_ASSESSMENT_OPINION: String = "assessment"
     const val PROP_TIMESTAMP_OPINION: String = "timestamp"
+
+    const val TITLE_NOTIFICATION: String = "title"
+    const val BODY_NOTIFICATION: String = "body"
 }
