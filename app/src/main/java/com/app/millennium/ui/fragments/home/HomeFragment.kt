@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val fragmentViewModel: HomeFragmentViewModel by viewModels()
 
     private var products = mutableListOf<Product>()
     private lateinit var productHomeAdapter: ProductHomeAdapter
@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
     //Init ui
     private fun initUI() {
         buildLottieAnimation()
-        viewModel.init()
+        fragmentViewModel.init()
     }
 
     /**
@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initObservables() {
-        viewModel.apply {
+        fragmentViewModel.apply {
 
             /**
              * Observer para obtener los productos

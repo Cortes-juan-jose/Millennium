@@ -147,6 +147,7 @@
     <string name="btn_chatear">Chatear</string>
     <string name="mtv_me_gusta">Me gusta</string>
     <string name="mtv_info_sin_productos_favoritos">Guarde los productos que quiera pulsando en el icono del producto favorito (❤️)</string>
+    <string name="hola_mundo">hola mundo</string>
 
 
 </resources>

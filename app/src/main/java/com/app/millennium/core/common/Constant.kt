@@ -38,6 +38,7 @@ object Constant {
     const val COLLECTION_LIKES: String = "Likes"
     const val COLLECTION_PRODUCTS: String = "Products"
     const val COLLECTION_OPINIONS: String = "Opinions"
+    const val COLLECTION_TOKENS: String = "Tokens"
 
     const val STORAGE_IMAGES : String = "images"
 

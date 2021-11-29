@@ -14,6 +14,7 @@ object FirebaseProvider {
     val productsCollection = FirestoreProvider.products
     val likesCollection = FirestoreProvider.likes
     val opinionsCollection = FirestoreProvider.opinions
+    val tokensCollection = FirestoreProvider.tokens
 
     val storage_images = StorageProvider.storage_images
 }

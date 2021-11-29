@@ -9,7 +9,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.launch
 
-class HomeViewModel: ViewModel() {
+class HomeFragmentViewModel: ViewModel() {
 
     //Caso de uso para obtener todos los productos
     private val getAllProductsUseCase = GetAllProductsUseCase()
