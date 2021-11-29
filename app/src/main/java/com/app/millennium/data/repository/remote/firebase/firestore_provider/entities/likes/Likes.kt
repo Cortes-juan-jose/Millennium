@@ -11,5 +11,6 @@ interface Likes {
     suspend fun save(like: Like) : Task<Void>
     suspend fun getLikeByProductByUserProductByUserSession(like: Like): Task<QuerySnapshot>
     suspend fun getAllByUser(idUser: String): Task<QuerySnapshot>
+    suspend fun getAllByProduct(idProduct: String): Task<QuerySnapshot>
     suspend fun delete(id: String): Task<Void>
 }

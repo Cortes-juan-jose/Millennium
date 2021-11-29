@@ -15,10 +15,7 @@ import com.app.millennium.data.model.Like
 import com.app.millennium.data.model.Product
 import com.app.millennium.databinding.ItemListProductProfileBinding
 import com.app.millennium.databinding.ViewBottomSheetConfirmDeleteProductBinding
-import com.app.millennium.domain.use_case.likes_db.DeleteLikeUseCase
-import com.app.millennium.domain.use_case.likes_db.GetAllLikeByUserUseCase
-import com.app.millennium.domain.use_case.likes_db.GetLikeByProductByUserProductByUserSessionUseCase
-import com.app.millennium.domain.use_case.likes_db.SaveLikeUseCase
+import com.app.millennium.domain.use_case.likes_db.*
 import com.app.millennium.domain.use_case.product_db.DeleteProductUseCase
 import com.app.millennium.domain.use_case.user_auth.GetIdUseCase
 import com.app.millennium.domain.use_case.user_db.GetUserUseCase
@@ -56,6 +53,8 @@ class ProductProfileViewHolder(
         get() = GetIdUseCase()
     override val deleteLikeUseCase: DeleteLikeUseCase
         get() = DeleteLikeUseCase()
+    override val getAllLikeByProductUseCase: GetAllLikeByProductUseCase
+        get() = GetAllLikeByProductUseCase()
 
     //Producto
     private lateinit var product: Product
@@ -227,65 +226,66 @@ class ProductProfileViewHolder(
      * Metodo que elimina un producto de la lista y cambia el valor uploadedProducts del usuario
      */
     private fun deleteProduct() {
-        //Creamos un like con los datos
-        val like = Like(
-            idUserToSession = product.idUser,
-            idUserToPostProduct = product.idUser,
-            idProduct = product.id,
-            timestamp = Date().time
-        )
 
+        //Primero se elimina el producto y luego todos los likes
         CoroutineScope(Dispatchers.IO).launch {
-            getLikeByProductByUserProductByUserSessionUseCase.invoke(like)
-                .addOnSuccessListener { snapshot ->
-                    snapshot?.let { _snapshot ->
-                        if (!_snapshot.isEmpty){
-                            //Si no es vacia esta lista de likes significa que ya estaba asignada como me gusta
-                            //quitamos el megusta y lo borramos en la base de datos
-                            CoroutineScope(Dispatchers.IO).launch {
-                                deleteLikeUseCase.invoke(_snapshot.documents[0].id)
-                            }
-                        }
 
-                        //Y ahora eliminamos el producto
+            deleteProductUseCase.invoke(product.id)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful){
+                        //Si la tarea fue exitosa entonces modificamos el campo de uploadedProducts
+                        //del usuario
                         CoroutineScope(Dispatchers.IO).launch {
-
-                            deleteProductUseCase.invoke(product.id)
-                                .addOnCompleteListener { task ->
-                                    if (task.isSuccessful){
-                                        //Si la tarea fue exitosa entonces modificamos el campo de uploadedProducts
-                                        //del usuario
+                            product.idUser?.let { idUser ->
+                                getUserUseCase.invoke(idUser)
+                                    .addOnSuccessListener { _user ->
+                                        val user = _user.data.convertUser()
+                                        user.uploadedProducts -= 1
+                                        //Y ahora actualizamos este campo
                                         CoroutineScope(Dispatchers.IO).launch {
-                                            product.idUser?.let { idUser ->
-                                                getUserUseCase.invoke(idUser)
-                                                    .addOnSuccessListener { _user ->
-                                                        val user = _user.data.convertUser()
-                                                        user.uploadedProducts -= 1
-                                                        //Y ahora actualizamos este campo
+                                            updateUploadedProductsUserUseCase.invoke(user)
+                                                .addOnCompleteListener { task2 ->
+                                                    if (task2.isSuccessful){
+                                                        Toast.makeText(context, "Eliminado", Toast.LENGTH_SHORT).show()
+                                                        //Cuando se elimine el producto eliminamos todos los likes a este producto
                                                         CoroutineScope(Dispatchers.IO).launch {
-                                                            updateUploadedProductsUserUseCase.invoke(user)
-                                                                .addOnCompleteListener { task2 ->
-                                                                    if (task2.isSuccessful){
-                                                                        Toast.makeText(context, "Eliminado", Toast.LENGTH_SHORT).show()
-                                                                    }
-                                                                }
+
+                                                            getAllLikeByProductUseCase.invoke(product.id)
                                                                 .addOnFailureListener { exc ->
-                                                                    Toast.makeText(context, "${exc.message}", Toast.LENGTH_LONG).show()
+                                                                    Toast.makeText(context, "${exc.message}", Toast.LENGTH_SHORT).show() }
+
+                                                                .addOnCompleteListener {
+                                                                    if (it.isSuccessful){
+
+                                                                        it.addOnSuccessListener { documents ->
+                                                                            if (documents.isNotNull() && !documents.isEmpty){
+                                                                                for (document in documents){
+                                                                                    CoroutineScope(Dispatchers.IO).launch {
+                                                                                        deleteLikeUseCase.invoke(document.id)
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+
+                                                                    }
                                                                 }
                                                         }
                                                     }
-                                                    .addOnFailureListener { exc ->
-                                                        Toast.makeText(context, "${exc.message}", Toast.LENGTH_LONG).show()
-                                                    }
-                                            }
+                                                }
+                                                .addOnFailureListener { exc ->
+                                                    Toast.makeText(context, "${exc.message}", Toast.LENGTH_LONG).show()
+                                                }
                                         }
                                     }
-                                }
-                                .addOnFailureListener { exc ->
-                                    Toast.makeText(context, "${exc.message}", Toast.LENGTH_LONG).show()
-                                }
+                                    .addOnFailureListener { exc ->
+                                        Toast.makeText(context, "${exc.message}", Toast.LENGTH_LONG).show()
+                                    }
+                            }
                         }
                     }
+                }
+                .addOnFailureListener { exc ->
+                    Toast.makeText(context, "${exc.message}", Toast.LENGTH_LONG).show()
                 }
         }
     }

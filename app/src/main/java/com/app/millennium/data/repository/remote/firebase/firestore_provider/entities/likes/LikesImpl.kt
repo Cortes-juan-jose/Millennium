@@ -25,4 +25,7 @@ class LikesImpl : Likes {
 
     override suspend fun delete(id: String): Task<Void> =
         db.document(id).delete()
+
+    override suspend fun getAllByProduct(idProduct: String): Task<QuerySnapshot> =
+        db.whereEqualTo(Constant.PROP_ID_PRODUCT_LIKE, idProduct).get()
 }
