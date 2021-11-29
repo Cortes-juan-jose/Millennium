@@ -9,11 +9,18 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.app.millennium.R
 import com.app.millennium.core.common.*
+import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.core.utils.RelativeTime
+import com.app.millennium.data.model.Like
 import com.app.millennium.data.model.Product
 import com.app.millennium.databinding.ItemListProductProfileBinding
 import com.app.millennium.databinding.ViewBottomSheetConfirmDeleteProductBinding
+import com.app.millennium.domain.use_case.likes_db.DeleteLikeUseCase
+import com.app.millennium.domain.use_case.likes_db.GetAllLikeByUserUseCase
+import com.app.millennium.domain.use_case.likes_db.GetLikeByProductByUserProductByUserSessionUseCase
+import com.app.millennium.domain.use_case.likes_db.SaveLikeUseCase
 import com.app.millennium.domain.use_case.product_db.DeleteProductUseCase
+import com.app.millennium.domain.use_case.user_auth.GetIdUseCase
 import com.app.millennium.domain.use_case.user_db.GetUserUseCase
 import com.app.millennium.domain.use_case.user_db.UpdateUploadedProductsUserUseCase
 import com.app.millennium.ui.activities.product_detail.ProductDetailActivity
@@ -22,6 +29,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class ProductProfileViewHolder(
     private val view : View,
@@ -38,6 +46,16 @@ class ProductProfileViewHolder(
         get() = GetUserUseCase()
     override val updateUploadedProductsUserUseCase: UpdateUploadedProductsUserUseCase
         get() = UpdateUploadedProductsUserUseCase()
+    override val saveLikeUseCase: SaveLikeUseCase
+        get() = SaveLikeUseCase()
+    override val getAllLikeByUserUseCase: GetAllLikeByUserUseCase
+        get() = GetAllLikeByUserUseCase()
+    override val getLikeByProductByUserProductByUserSessionUseCase: GetLikeByProductByUserProductByUserSessionUseCase
+        get() = GetLikeByProductByUserProductByUserSessionUseCase()
+    override val getIdUseCase: GetIdUseCase
+        get() = GetIdUseCase()
+    override val deleteLikeUseCase: DeleteLikeUseCase
+        get() = DeleteLikeUseCase()
 
     //Producto
     private lateinit var product: Product
@@ -52,6 +70,7 @@ class ProductProfileViewHolder(
     private fun initUI() {
         configDataProduct()
         configEventsOnClick()
+        configDrawableLike()
     }
 
     /**
@@ -70,21 +89,95 @@ class ProductProfileViewHolder(
      */
     private fun configEventsOnClick() {
 
+        //Seleccionar producto
         binding.root.setOnClickListener {
             val bundle = product.loadBundle()
-
             context.openActivity<ProductDetailActivity> {
                 putExtra(Constant.BUNDLE_PRODUCT, bundle)
             }
         }
 
+        //Funcionalidad del Like
         binding.ivLikeProduct.setOnClickListener {
-            Toast.makeText(context, "Like", Toast.LENGTH_SHORT).show()
+            //Creamos un like y consultamos en la base de dato si ese like existe
+
+            val like = Like(
+                idUserToSession = product.idUser,
+                idUserToPostProduct = product.idUser,
+                idProduct = product.id,
+                timestamp = Date().time
+            )
+
+            configLike(like)
         }
 
+        //Eliminar un producto
         binding.ivDeleteProduct.setOnClickListener {
-
             openBottomSheetConfirmDeleteProduct()
+        }
+    }
+
+    /**
+     * Metodo que configura el drawable del like
+     */
+    private fun configDrawableLike() {
+        CoroutineScope(Dispatchers.IO).launch {
+            product.idUser?.let {
+                getAllLikeByUserUseCase.invoke(it)
+                    .addOnFailureListener { exc -> Toast.makeText(context, "${exc.message}", Toast.LENGTH_SHORT).show() }
+
+                    .addOnSuccessListener { snapshot ->
+
+                        snapshot?.let { _snapshot ->
+                            if (!_snapshot.isEmpty){
+                                for (document in _snapshot){
+                                    if (document.exists()){
+                                        if (document.getString(Constant.PROP_ID_PRODUCT_LIKE) == product.id){
+                                            binding.ivLikeProduct.setImageResource(R.drawable.ic_like_red)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+            }
+        }
+    }
+
+    /**
+     * Metodo que desarrolla la lógica del like
+     * Si el like ya existe significa que el usuario lo quiere quitar de megusta
+     * de lo contrario, si el like no existe el usuario quiere dar like al producto
+     */
+    private fun configLike(like: Like) {
+        CoroutineScope(Dispatchers.IO).launch {
+
+            getLikeByProductByUserProductByUserSessionUseCase.invoke(like)
+                .addOnFailureListener { exc -> Toast.makeText(context, "${exc.message}", Toast.LENGTH_SHORT).show() }
+
+                .addOnSuccessListener { snapshot ->
+                    snapshot?.let { _snapshot ->
+                        if (!_snapshot.isEmpty){
+                            //Si no es vacia esta lista de likes significa que ya estaba asignada como me gusta
+                            //quitamos el megusta y lo borramos en la base de datos
+                            CoroutineScope(Dispatchers.IO).launch {
+                                deleteLikeUseCase.invoke(_snapshot.documents[0].id)
+                            }
+                            if (ConfigThemeApp.isThemeLight(context))
+                                binding.ivLikeProduct.setImageResource(R.drawable.ic_like_dark)
+                            else
+                                binding.ivLikeProduct.setImageResource(R.drawable.ic_like)
+                        } else {
+                            //de lo contrario significa que se va a dar me gusta por lo tanto
+                            //se guarda en la base de datos y se pone en rojo
+                            CoroutineScope(Dispatchers.IO).launch {
+                                saveLikeUseCase.invoke(like)
+                            }
+                            binding.ivLikeProduct.setImageResource(R.drawable.ic_like_red)
+                        }
+                    }
+
+                }
         }
     }
 

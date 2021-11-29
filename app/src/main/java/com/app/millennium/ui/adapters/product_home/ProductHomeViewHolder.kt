@@ -68,6 +68,48 @@ class ProductHomeViewHolder(
         configEventsOnClick()
     }
 
+    /**
+     * Metodo que setea todos los datos del producto en la vista
+     */
+    private fun configDataProduct() {
+        //Seteamos todos los campos en la vista
+        Picasso.get().load(getFirtsImageProductNotNull(product)).into(binding.ivProduct)
+        binding.mtvTitle.text = product.title
+        binding.mtvPrice.text = product.price.formatAsPrice()
+        binding.mtvTimestamp.text = RelativeTime.getTimeAgo(product.timestamp, view.context)
+    }
+
+    /**
+     * Metodo que registra todos los eventos de la vista
+     */
+    private fun configEventsOnClick() {
+
+        //Evento seleccionar un producto
+        binding.root.setOnClickListener {
+            val bundle = product.loadBundle()
+
+            context.openActivity<ProductDetailActivity> {
+                putExtra(Constant.BUNDLE_PRODUCT, bundle)
+            }
+
+        }
+
+        //Evento del like
+        binding.ivLike.setOnClickListener {
+            //Creamos un like y consultamos en la base de dato si ese like existe
+            val like = Like(
+                idUserToSession = idUser,
+                idUserToPostProduct = product.idUser,
+                idProduct = product.id,
+                timestamp = Date().time
+            )
+            configLike(like)
+        }
+    }
+
+    /**
+     * Metodo que configura el drawable del like
+     */
     private fun configDrawableLike() {
         CoroutineScope(Dispatchers.IO).launch {
             idUser = getIdUseCase.invoke()
@@ -94,42 +136,10 @@ class ProductHomeViewHolder(
     }
 
     /**
-     * Metodo que setea todos los datos del producto en la vista
+     * Metodo que desarrolla la lógica del like
+     * Si el like ya existe significa que el usuario lo quiere quitar de megusta
+     * de lo contrario, si el like no existe el usuario quiere dar like al producto
      */
-    private fun configDataProduct() {
-        //Seteamos todos los campos en la vista
-        Picasso.get().load(getFirtsImageProductNotNull(product)).into(binding.ivProduct)
-        binding.mtvTitle.text = product.title
-        binding.mtvPrice.text = product.price.formatAsPrice()
-        binding.mtvTimestamp.text = RelativeTime.getTimeAgo(product.timestamp, view.context)
-    }
-
-    private fun configEventsOnClick() {
-
-        binding.root.setOnClickListener {
-            val bundle = product.loadBundle()
-
-            context.openActivity<ProductDetailActivity> {
-                putExtra(Constant.BUNDLE_PRODUCT, bundle)
-            }
-
-        }
-
-        binding.ivLike.setOnClickListener {
-
-            //Creamos un like y consultamos en la base de dato si ese like existe
-
-            val like = Like(
-                idUserToSession = idUser,
-                idUserToPostProduct = product.idUser,
-                idProduct = product.id,
-                timestamp = Date().time
-            )
-
-            configLike(like)
-        }
-    }
-
     private fun configLike(like: Like) {
         CoroutineScope(Dispatchers.IO).launch {
 
