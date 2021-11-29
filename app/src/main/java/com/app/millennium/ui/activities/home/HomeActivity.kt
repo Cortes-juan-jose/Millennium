@@ -79,9 +79,6 @@ class HomeActivity : AppCompatActivity() {
             {
                 it?.let {
                     it.addOnFailureListener { exc -> toast("${exc.message}") }
-                    it.addOnCompleteListener {
-                        toast("Completado")
-                    }
                 }
             }
         )
@@ -99,9 +96,5 @@ class HomeActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bnvMenu.setupWithNavController(navController)
-    }
-
-    private fun configTokenToDevice() {
-
     }
 }
