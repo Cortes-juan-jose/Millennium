@@ -10,6 +10,7 @@ import com.app.millennium.R
 import com.app.millennium.core.common.*
 import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.core.utils.RelativeTime
+import com.app.millennium.data.model.Like
 import com.app.millennium.data.model.User
 import com.app.millennium.databinding.ActivityProductDetailBinding
 import com.app.millennium.ui.activities.profile_user_to_product.ProfileUserToProductActivity
@@ -18,13 +19,22 @@ import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import java.util.*
 
 class ProductDetailActivity : AppCompatActivity() {
-    
+
+    //Binding
     private lateinit var binding: ActivityProductDetailBinding
     private val viewModel: ProductDetailViewModel by viewModels()
 
+    //Producto
     private lateinit var bundleProduct: Bundle
 
+    //Usuario del producto
     private var user = User()
+
+    //Id del usuario de la sesion
+    private lateinit var idUserSession: String
+
+    //Like
+    private lateinit var like: Like
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +47,18 @@ class ProductDetailActivity : AppCompatActivity() {
         initObservables()
     }
 
+    /**
+     * Inicializar la vista al completo
+     */
     private fun initUI(){
         configToolbar()
         configComponents()
         configEventsClickButtons()
     }
 
+    /**
+     * Inicializar los observables
+     */
     private fun initObservables() {
         viewModel.getUser.observe(
             this,
@@ -60,12 +76,14 @@ class ProductDetailActivity : AppCompatActivity() {
             this,
             {
                 it?.let {
+                    idUserSession = it
                     binding.llUserData.visibility = View.VISIBLE
                     binding.llLoadDataUser.visibility = View.GONE
                     if (it != user.id){
                         binding.mbtnViewProfile.visibility = View.VISIBLE
                     }
                     configDataUser()
+                    configDrawableLike()
                 }
             }
         )
@@ -81,10 +99,30 @@ class ProductDetailActivity : AppCompatActivity() {
                             if (!_snapshot.isEmpty){
                                 binding.ivLike.setImageResource(R.drawable.ic_like_red)
                             } else {
-                                if (ConfigThemeApp.isThemeLight(this))
-                                    binding.ivLike.setImageResource(R.drawable.ic_like_dark)
-                                else
-                                    binding.ivLike.setImageResource(R.drawable.ic_like)
+                                binding.ivLike.setImageResource(R.drawable.ic_like)
+                            }
+                        }
+
+                    }
+                }
+            }
+        )
+
+        viewModel.getLikeByProductByUserProductByUserSessionConfig.observe(
+            this,
+            {
+                it?.let {
+                    it.addOnFailureListener { exc -> Toast.makeText(this@ProductDetailActivity, "${exc.message}", Toast.LENGTH_SHORT).show() }
+
+                    it.addOnSuccessListener { snapshot ->
+                        snapshot?.let { _snapshot ->
+                            if (!_snapshot.isEmpty){
+                                //Si no es vacia significa que ya fue like entonces quitamos el like
+                                viewModel.deleteLike(_snapshot.documents[0].id)
+                                binding.ivLike.setImageResource(R.drawable.ic_like)
+                            } else {
+                                viewModel.saveLike(like)
+                                binding.ivLike.setImageResource(R.drawable.ic_like_red)
                             }
                         }
 
@@ -105,14 +143,8 @@ class ProductDetailActivity : AppCompatActivity() {
             ivBack.setOnClickListener { finish() }
 
             ivLike.setOnClickListener {
-                //Creamos un like y consultamos en la base de dato si ese like existe
-                /*val like = Like(
-                    idUserToSession = idUser,
-                    idUserToPostProduct = bundleProduct[Constant.PROP_ID_USER_PRODUCT].toString(),
-                    idProduct = bundleProduct[Constant.PROP_ID_PRODUCT].toString(),
-                    timestamp = Date().time
-                )
-                configLike(like)*/
+                //Configuramos la funcionalidad del like
+                viewModel.getLikeByProductByUserProductByUserSessionConfig(like)
             }
 
             mbtnViewProfile.setOnClickListener {
@@ -137,6 +169,18 @@ class ProductDetailActivity : AppCompatActivity() {
         configDataProduct()
         //Obtenemos el usuario de la publicacion
         viewModel.getUser(bundleProduct[Constant.PROP_ID_USER_PRODUCT].toString())
+    }
+
+    private fun configDrawableLike() {
+        //Creamos un like con los datos
+        like = Like(
+            idUserToSession = idUserSession,
+            idUserToPostProduct = user.id,
+            idProduct = bundleProduct[Constant.PROP_ID_PRODUCT].toString(),
+            timestamp = Date().time
+        )
+
+        viewModel.getLikeByProductByUserProductByUserSession(like)
     }
 
     /**

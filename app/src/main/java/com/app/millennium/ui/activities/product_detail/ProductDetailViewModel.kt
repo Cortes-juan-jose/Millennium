@@ -29,6 +29,9 @@ class ProductDetailViewModel : ViewModel() {
     //Caso de uso para obtener un like en concreto
     private val getLikeByProductByUserProductByUserSessionUseCase = GetLikeByProductByUserProductByUserSessionUseCase()
 
+    //Caso de uso para obtener un like en concreto
+    private val getLikeByProductByUserProductByUserSessionConfigUseCase = GetLikeByProductByUserProductByUserSessionUseCase()
+
     //Caso de uso para eliminar un like
     private val deleteLikeUseCase = DeleteLikeUseCase()
 
@@ -47,6 +50,10 @@ class ProductDetailViewModel : ViewModel() {
     //Live data obtener un like en concreto
     private val _getLikeByProductByUserProductByUserSession = MutableLiveData<Task<QuerySnapshot>>()
     val getLikeByProductByUserProductByUserSession: LiveData<Task<QuerySnapshot>> get() = _getLikeByProductByUserProductByUserSession
+
+    //Live data obtener un like en concreto
+    private val _getLikeByProductByUserProductByUserSessionConfig = MutableLiveData<Task<QuerySnapshot>>()
+    val getLikeByProductByUserProductByUserSessionConfig: LiveData<Task<QuerySnapshot>> get() = _getLikeByProductByUserProductByUserSessionConfig
 
     //Live data eliminar un like
     private val _deteleLike = MutableLiveData<Task<Void>>()
@@ -92,6 +99,17 @@ class ProductDetailViewModel : ViewModel() {
         viewModelScope.launch {
             _getLikeByProductByUserProductByUserSession.postValue(
                 getLikeByProductByUserProductByUserSessionUseCase.invoke(like)
+            )
+        }
+    }
+
+    /**
+     * Metodo que obtiene un like en concreto para configurar el boton del like
+     */
+    fun getLikeByProductByUserProductByUserSessionConfig(like: Like){
+        viewModelScope.launch {
+            _getLikeByProductByUserProductByUserSessionConfig.postValue(
+                getLikeByProductByUserProductByUserSessionConfigUseCase.invoke(like)
             )
         }
     }
