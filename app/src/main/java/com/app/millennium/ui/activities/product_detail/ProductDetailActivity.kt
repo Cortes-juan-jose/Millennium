@@ -1,10 +1,10 @@
 package com.app.millennium.ui.activities.product_detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.app.millennium.R
 import com.app.millennium.core.common.*
@@ -12,17 +12,17 @@ import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.core.utils.RelativeTime
 import com.app.millennium.data.model.User
 import com.app.millennium.databinding.ActivityProductDetailBinding
-import com.app.millennium.ui.activities.edit_profile.EditProfileActivity
 import com.app.millennium.ui.activities.profile_user_to_product.ProfileUserToProductActivity
 import com.squareup.picasso.Picasso
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
+import java.util.*
 
 class ProductDetailActivity : AppCompatActivity() {
     
     private lateinit var binding: ActivityProductDetailBinding
     private val viewModel: ProductDetailViewModel by viewModels()
 
-    private lateinit var bundle: Bundle
+    private lateinit var bundleProduct: Bundle
 
     private var user = User()
     
@@ -31,7 +31,7 @@ class ProductDetailActivity : AppCompatActivity() {
         binding = ActivityProductDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        bundle = intent.getBundleExtra(Constant.BUNDLE_PRODUCT)!!
+        bundleProduct = intent.getBundleExtra(Constant.BUNDLE_PRODUCT)!!
     
         initUI()
         initObservables()
@@ -69,6 +69,29 @@ class ProductDetailActivity : AppCompatActivity() {
                 }
             }
         )
+
+        viewModel.getLikeByProductByUserProductByUserSession.observe(
+            this,
+            {
+                it?.let {
+                    it.addOnFailureListener { exc -> Toast.makeText(this@ProductDetailActivity, "${exc.message}", Toast.LENGTH_SHORT).show() }
+
+                    it.addOnSuccessListener { snapshot ->
+                        snapshot?.let { _snapshot ->
+                            if (!_snapshot.isEmpty){
+                                binding.ivLike.setImageResource(R.drawable.ic_like_red)
+                            } else {
+                                if (ConfigThemeApp.isThemeLight(this))
+                                    binding.ivLike.setImageResource(R.drawable.ic_like_dark)
+                                else
+                                    binding.ivLike.setImageResource(R.drawable.ic_like)
+                            }
+                        }
+
+                    }
+                }
+            }
+        )
     }
 
     /**
@@ -81,7 +104,16 @@ class ProductDetailActivity : AppCompatActivity() {
         binding.apply {
             ivBack.setOnClickListener { finish() }
 
-            ivLike.setOnClickListener { toast("Like") }
+            ivLike.setOnClickListener {
+                //Creamos un like y consultamos en la base de dato si ese like existe
+                /*val like = Like(
+                    idUserToSession = idUser,
+                    idUserToPostProduct = bundleProduct[Constant.PROP_ID_USER_PRODUCT].toString(),
+                    idProduct = bundleProduct[Constant.PROP_ID_PRODUCT].toString(),
+                    timestamp = Date().time
+                )
+                configLike(like)*/
+            }
 
             mbtnViewProfile.setOnClickListener {
                 if (user.isNotNull()){
@@ -104,7 +136,7 @@ class ProductDetailActivity : AppCompatActivity() {
         configSlider()
         configDataProduct()
         //Obtenemos el usuario de la publicacion
-        viewModel.getUser(bundle[Constant.PROP_ID_USER_PRODUCT].toString())
+        viewModel.getUser(bundleProduct[Constant.PROP_ID_USER_PRODUCT].toString())
     }
 
     /**
@@ -121,21 +153,21 @@ class ProductDetailActivity : AppCompatActivity() {
      */
     private fun configDataProduct() {
         binding.apply {
-            mtvPrice.text = bundle[Constant.PROP_PRICE_PRODUCT].toString().toDouble().formatAsPrice()
-            mtvTimestamp.text = RelativeTime.getTimeAgo(bundle[Constant.PROP_TIMESTAMP_PRODUCT].toString().toLong(), this@ProductDetailActivity)
-            mtvTitle.text = bundle[Constant.PROP_TITLE_PRODUCT].toString()
-            mtvCategory.text = bundle[Constant.PROP_CATEGORY_PRODUCT].toString()
-            mtvDescription.text = bundle[Constant.PROP_DESCRIPTION_PRODUCT].toString()
+            mtvPrice.text = bundleProduct[Constant.PROP_PRICE_PRODUCT].toString().toDouble().formatAsPrice()
+            mtvTimestamp.text = RelativeTime.getTimeAgo(bundleProduct[Constant.PROP_TIMESTAMP_PRODUCT].toString().toLong(), this@ProductDetailActivity)
+            mtvTitle.text = bundleProduct[Constant.PROP_TITLE_PRODUCT].toString()
+            mtvCategory.text = bundleProduct[Constant.PROP_CATEGORY_PRODUCT].toString()
+            mtvDescription.text = bundleProduct[Constant.PROP_DESCRIPTION_PRODUCT].toString()
 
-            bundle[Constant.PROP_DESCRIPTION_PRODUCT]?.let {
+            bundleProduct[Constant.PROP_DESCRIPTION_PRODUCT]?.let {
                 mtvDescription.text = (it as String)
             }
 
-            bundle[Constant.PROP_NEGOTIABLE_PRODUCT]?.let {
+            bundleProduct[Constant.PROP_NEGOTIABLE_PRODUCT]?.let {
                 mtvNegotiable.text = (it as String)
             }
 
-            bundle[Constant.PROP_PRODUCT_STATUS_PRODUCT]?.let {
+            bundleProduct[Constant.PROP_PRODUCT_STATUS_PRODUCT]?.let {
                 mtvStatusProduct.text = (it as String)
             }
         }
@@ -146,16 +178,16 @@ class ProductDetailActivity : AppCompatActivity() {
      */
     private fun configSlider() {
         val images = mutableListOf<CarouselItem>()
-        bundle[Constant.PROP_IMAGE1_PRODUCT]?.let {
+        bundleProduct[Constant.PROP_IMAGE1_PRODUCT]?.let {
             images.add(CarouselItem((it as String)))
         }
-        bundle[Constant.PROP_IMAGE2_PRODUCT]?.let {
+        bundleProduct[Constant.PROP_IMAGE2_PRODUCT]?.let {
             images.add(CarouselItem((it as String)))
         }
-        bundle[Constant.PROP_IMAGE3_PRODUCT]?.let {
+        bundleProduct[Constant.PROP_IMAGE3_PRODUCT]?.let {
             images.add(CarouselItem((it as String)))
         }
-        bundle[Constant.PROP_IMAGE4_PRODUCT]?.let {
+        bundleProduct[Constant.PROP_IMAGE4_PRODUCT]?.let {
             images.add(CarouselItem((it as String)))
         }
 
