@@ -4,22 +4,18 @@ import com.app.millennium.core.common.Constant
 import com.app.millennium.core.firebase.FirebaseProvider
 import com.app.millennium.data.model.Chat
 import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.Query
 
 class ChatsImpl: Chats {
 
     private val db = FirebaseProvider.chatsCollection
 
     //Crear chat para el usuario de la sesion
-    override suspend fun createChatUserToSession(chat: Chat): Task<Void> =
-        db.document(chat.idUserToSession!!)
-            .collection(Constant.COLLECTION_USERS)
-            .document(chat.idUserToChat!!)
-            .set(chat)
+    override suspend fun create(chat: Chat): Task<Void> =
+        db.document(
+            chat.idUserToSession.toString()+chat.idUserToChat.toString()
+        ).set(chat)
 
-    //Crear chat para el usuario del chat
-    override suspend fun createChatUserToChat(chat: Chat): Task<Void> =
-        db.document(chat.idUserToChat!!)
-            .collection(Constant.COLLECTION_USERS)
-            .document(chat.idUserToSession!!)
-            .set(chat)
+    override suspend fun getAllByUser(idUserToSession: String): Query =
+        db.document(idUserToSession).collection(Constant.COLLECTION_USERS)
 }

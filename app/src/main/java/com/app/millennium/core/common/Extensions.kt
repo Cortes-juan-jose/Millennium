@@ -19,6 +19,7 @@ import com.app.millennium.data.model.User
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.io.File
+import java.util.ArrayList
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -297,6 +298,23 @@ fun Map<String, Any>?.converProduct(): Product {
 }
 
 /**
+ * Extension para construir un objeto chat a partir de un map de propiedades
+ */
+fun Map<String, Any>?.converChat(): Chat {
+
+    val chat = Chat()
+
+    this?.get(Constant.PROP_ID_CHAT)?.let { chat.id = it.toString() }
+    this?.get(Constant.PROP_ID_USER_TO_SESSION_CHAT)?.let { chat.idUserToSession = it.toString() }
+    this?.get(Constant.PROP_ID_USER_TO_CHAT_CHAT)?.let { chat.idUserToChat = it.toString() }
+    this?.get(Constant.PROP_IDS_USERS_CHAT)?.let { chat.idsUsers = (it as ArrayList<String>) }
+    this?.get(Constant.PROP_IS_WRITING_CHAT)?.let { chat.isWriting = it.toString().toBoolean() }
+    this?.get(Constant.PROP_TIMESTAMP_CHAT)?.let { chat.timestamp = it.toString().toLong() }
+
+    return chat
+}
+
+/**
  * Extension para guardar un producto en un bundle
  */
 fun Product?.loadBundle(): Bundle{
@@ -349,8 +367,10 @@ fun Chat?.loadBundle(): Bundle{
     val bundle = Bundle()
 
     this?.let {
+        bundle.putString(Constant.PROP_ID_CHAT, it.id)
         bundle.putString(Constant.PROP_ID_USER_TO_SESSION_CHAT, it.idUserToSession)
         bundle.putString(Constant.PROP_ID_USER_TO_CHAT_CHAT, it.idUserToChat)
+        bundle.putStringArrayList(Constant.PROP_IDS_USERS_CHAT, it.idsUsers)
         bundle.putBoolean(Constant.PROP_IS_WRITING_CHAT, it.isWriting)
         bundle.putLong(Constant.PROP_TIMESTAMP_CHAT, it.timestamp)
     }

@@ -7,6 +7,7 @@ import com.app.millennium.core.common.Constant
 import com.app.millennium.core.common.toast
 import com.app.millennium.data.model.Chat
 import com.app.millennium.databinding.ActivityChatBinding
+import java.util.ArrayList
 
 class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChatBinding
@@ -23,12 +24,6 @@ class ChatActivity : AppCompatActivity() {
         //Obtenemos el bundle con los datos del chat
         bundleChat = intent.getBundleExtra(Constant.BUNDLE_CHAT)!!
         //Creamos el chat con los datos del bundleChat
-        chat = Chat(
-            bundleChat[Constant.PROP_ID_USER_TO_SESSION_CHAT].toString(),
-            bundleChat[Constant.PROP_ID_USER_TO_CHAT_CHAT].toString(),
-            bundleChat[Constant.PROP_IS_WRITING_CHAT].toString().toBoolean(),
-            bundleChat[Constant.PROP_TIMESTAMP_CHAT].toString().toLong()
-        )
 
         initUI()
         initObservables()
@@ -36,24 +31,13 @@ class ChatActivity : AppCompatActivity() {
 
     private fun initUI(){
 
-        viewModel.createChatUserToSession(chat)
+        chat = createChat()
+
+        viewModel.createChat(chat)
     }
 
     private fun initObservables() {
-        viewModel.createChatUserToSession.observe(
-            this,
-            {
-                it?.let {
-                    it.addOnFailureListener { exc -> toast("${exc.message}") }
-
-                    it.addOnCompleteListener {
-                        viewModel.createChatUserToChat(chat)
-                    }
-                }
-            }
-        )
-
-        viewModel.createChatUserToChat.observe(
+        viewModel.createChat.observe(
             this,
             {
                 it?.let {
@@ -65,6 +49,19 @@ class ChatActivity : AppCompatActivity() {
                 }
             }
         )
+    }
+
+    private fun createChat(): Chat {
+        val chat = Chat()
+
+        chat.id = bundleChat[Constant.PROP_ID_CHAT].toString()
+        chat.idUserToSession = bundleChat[Constant.PROP_ID_USER_TO_SESSION_CHAT].toString()
+        chat.idUserToChat = bundleChat[Constant.PROP_ID_USER_TO_CHAT_CHAT].toString()
+        chat.idsUsers = bundleChat[Constant.PROP_IDS_USERS_CHAT] as ArrayList<String>?
+        chat.isWriting = bundleChat[Constant.PROP_IS_WRITING_CHAT].toString().toBoolean()
+        chat.timestamp = bundleChat[Constant.PROP_TIMESTAMP_CHAT].toString().toLong()
+
+        return chat
     }
 
     private fun showDataChat() {

@@ -53,8 +53,14 @@ class ProfileUserToProductActivity : AppCompatActivity() {
                 it?.let { id -> idUserToSession = id }
                 //Creamos un chat
                 chat = Chat(
+                    id = idUserToSession + bundle[Constant.PROP_ID_USER].toString(),
                     idUserToSession = idUserToSession,
                     idUserToChat = bundle[Constant.PROP_ID_USER].toString(),
+                    idsUsers = arrayListOf<String>(
+                        idUserToSession,
+                        bundle[Constant.PROP_ID_USER].toString()
+                    ),
+                    isWriting = false,
                     timestamp = Date().time
                 )
                 //Lo guardamos en un bundle

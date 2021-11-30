@@ -44,6 +44,15 @@
           </Key>
         </deviceKey>
       </Target>
+      <Target>
+        <type value="QUICK_BOOT_TARGET" />
+        <deviceKey>
+          <Key>
+            <type value="VIRTUAL_DEVICE_PATH" />
+            <value value="C:\Users\juany\.android\avd\Pixel_3_API_26.avd" />
+          </Key>
+        </deviceKey>
+      </Target>
     </targetsSelectedWithDialog>
   </component>
 </project>

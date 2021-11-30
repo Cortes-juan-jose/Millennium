@@ -93,8 +93,10 @@ object Constant {
     const val URL_API_NOTIFICATION: String = "https://fcm.googleapis.com/"
 
     const val BUNDLE_CHAT: String = "chat"
+    const val PROP_ID_CHAT: String = "id"
     const val PROP_ID_USER_TO_SESSION_CHAT: String = "idUserToSession"
     const val PROP_ID_USER_TO_CHAT_CHAT: String = "idUserToChat"
+    const val PROP_IDS_USERS_CHAT: String = "idsUsers"
     const val PROP_IS_WRITING_CHAT: String = "isWriting"
     const val PROP_TIMESTAMP_CHAT: String = "timestamp"
 }

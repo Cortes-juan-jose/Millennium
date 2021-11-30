@@ -149,4 +149,6 @@
 
     <!--ID DEL CANAL POR DEFECTO DE NOTIFICACIONES OBLIGATORIO-->
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="mtv_chats">Chats</string>
+    <string name="mtv_msg_info_sin_chats">Aún no tienes un chat con ningún usuario. Para crear un chat vaya al perfil de un usuario y pulse en Chatear</string>
 </resources>
