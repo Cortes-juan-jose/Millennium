@@ -41,4 +41,6 @@
     <dimen name="size_iv_cover">200dp</dimen>
     <dimen name="margin_bottom_btn_confirm">5dp</dimen>
     <dimen name="height_bottom">60dp</dimen>
+    <dimen name="height_bottom_chat">48dp</dimen>
+    <dimen name="size_ic_send_message">48dp</dimen>
 </resources>

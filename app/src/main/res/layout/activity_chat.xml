@@ -1,9 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activities.chat.ChatActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        style="@style/ViewBackground"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_toolbar"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/size_icon_back"
+            android:layout_height="@dimen/size_icon_back"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_back"
+            android:contentDescription="@string/cd_ic_back" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_profile_chat"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_user_profile"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/min_padding_view"
+            app:civ_circle_background_color="@color/grey_light"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/colorSecondaryDark"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/min_padding_view"
+            android:layout_marginEnd="@dimen/max_padding_view"
+            android:gravity="center_vertical"
+            android:layout_weight="1">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mtv_name_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mtv_sin_internet"
+                android:fontFamily="@font/balsami_bold"
+                android:textColor="@color/white"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="16sp"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mtv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mtv_sin_internet"
+                android:fontFamily="@font/balsami_italic"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:ellipsize="end"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/height_toolbar"
+        android:layout_marginBottom="80dp"
+        android:orientation="vertical"
+        tools:ignore="UselessLeaf">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_bottom_chat"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/min_padding_view"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="@dimen/min_padding_view"
+        tools:ignore="UselessLeaf">
+
+        <EditText
+            style="@style/EditTextBackground"
+            android:id="@+id/et_message"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="@string/hint_mensaje"
+            android:fontFamily="@font/balsami_regular"
+            android:inputType="textMultiLine"
+            android:paddingStart="@dimen/max_padding_view"
+            android:importantForAutofill="no"
+            tools:ignore="RtlSymmetry" />
+
+        <ImageView
+            style="@style/ImageViewIconSendMessageColor"
+            android:id="@+id/iv_send_message"
+            android:layout_marginStart="@dimen/min_padding_view"
+            android:layout_width="@dimen/size_ic_send_message"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/cd_ic_send_message" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

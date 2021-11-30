@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2675925925925926" />
         <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/drawable/bottomsheet_background.xml" value="0.844578313253012" />
+        <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/drawable/custom_edittext_chat.xml" value="0.87625" />
+        <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/drawable/custom_edittext_chat_dark.xml" value="0.87625" />
         <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/drawable/ic_camera.xml" value="0.844578313253012" />
         <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/drawable/ic_cancel.xml" value="0.28425925925925927" />
         <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/drawable/ic_email.xml" value="0.28425925925925927" />
@@ -20,6 +22,7 @@
         <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/drawable/toolbar.xml" value="0.5458333333333333" />
         <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/drawable/toolbar_dark.xml" value="0.5458333333333333" />
         <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/drawable/view_bottomsheet_line_background.xml" value="0.8604166666666667" />
+        <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/layout/activity_chat.xml" value="0.67" />
         <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
         <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/Users/juany/AndroidStudioProjects/Millennium/app/src/main/res/layout/activity_info_app.xml" value="0.1697061803444782" />

@@ -84,6 +84,10 @@
         <item name="android:src">@drawable/ic_camera</item>
     </style>
 
+    <style name="ImageViewIconSendMessageColor">
+        <item name="android:src">@mipmap/ic_send_message_light</item>
+    </style>
+
     <style name="TextInputLayoutEndIconTint" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="endIconTint">@color/colorPrimary</item>
     </style>
@@ -150,6 +154,10 @@
 
     <style name="LottieTheme">
         <item name="lottie_rawRes">"@raw/anim_arrow_down_post_product"</item>
+    </style>
+
+    <style name="EditTextBackground">
+        <item name="android:background">@drawable/custom_edittext_chat_light</item>
     </style>
 
 </resources>
