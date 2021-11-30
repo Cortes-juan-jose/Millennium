@@ -1,9 +1,9 @@
 package com.app.millennium.ui.adapters.message
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import android.widget.RelativeLayout
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.app.millennium.R
 import com.app.millennium.core.utils.ConfigThemeApp
@@ -50,6 +50,7 @@ class MessageViewHolder(
             configMessageToReceived()
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun configMessageToSender() {
         val params = RelativeLayout.LayoutParams(
             RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -64,8 +65,10 @@ class MessageViewHolder(
         else
             binding.llMsg.background = context.getDrawable(R.drawable.custom_message_sended_chat_dark)
         binding.ivCheckMessage.visibility = View.VISIBLE
+        binding.mtvDatetime.visibility = View.VISIBLE
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun configMessageToReceived() {
 
         val params = RelativeLayout.LayoutParams(
@@ -81,6 +84,7 @@ class MessageViewHolder(
         else
             binding.llMsg.background = context.getDrawable(R.drawable.custom_message_received_chat_dark)
         binding.ivCheckMessage.visibility = View.GONE
+        binding.mtvDatetime.visibility = View.VISIBLE
     }
 
 }

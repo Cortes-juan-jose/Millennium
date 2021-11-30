@@ -24,6 +24,7 @@ class ChatActivity : AppCompatActivity() {
     private var chat = Chat()
 
     private var idUserToSession = ""
+    private var idChat = ""
     private var userData = User()
 
     private var messages = mutableListOf<Message>()
@@ -59,6 +60,7 @@ class ChatActivity : AppCompatActivity() {
                             if (querySnapshot.isEmpty){
                                 viewModel.createChat(chat)
                             } else {
+                                idChat = querySnapshot.documents[0].id
                                 viewModel.getIdUserToSession()
                             }
                         }
@@ -74,7 +76,7 @@ class ChatActivity : AppCompatActivity() {
                     it.addOnFailureListener { exc -> toast("${exc.message}") }
 
                     it.addOnCompleteListener {
-                        viewModel.getIdUserToSession()
+                        viewModel.getChatByUserToSessionByUserToChat(chat.idUserToSession!!, chat.idUserToChat!!)
                     }
                 }
             }
@@ -112,7 +114,7 @@ class ChatActivity : AppCompatActivity() {
                             userData = _document.toObject(User::class.java)!!
                             setDataChat(userData)
                             //Obtenemos todos los mensajes del chat
-                            chat.id?.let { idChat -> viewModel.getAllMessagesByChat(idChat) }
+                            viewModel.getAllMessagesByChat(idChat)
                         }
                     }
                 }
@@ -125,7 +127,7 @@ class ChatActivity : AppCompatActivity() {
                 it?.let {
                     it.addSnapshotListener { value, error ->
                         //Primero vaciamos la lista si tiene mensajes para que no se dupliquen
-                        if (!messages.isEmpty())
+                        if (messages.isNotEmpty())
                             messages.clear()
 
                         //Controlamos que no tenga un error la consulta
@@ -224,7 +226,7 @@ class ChatActivity : AppCompatActivity() {
         if (binding.etMessage.text.toString().trim().isNotEmpty()){
 
             val msg = Message()
-            msg.idChat = chat.id
+            msg.idChat = idChat
             //Ahora verificar si el id del usuario de la sesion es igual al id del usuario de la sesion
             //del chat creado para setear un emisor y un receptor de mensajes
             if (idUserToSession == chat.idUserToSession){
