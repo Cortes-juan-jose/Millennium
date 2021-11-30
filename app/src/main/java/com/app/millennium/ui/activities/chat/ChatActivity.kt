@@ -23,7 +23,6 @@ class ChatActivity : AppCompatActivity() {
 
         //Obtenemos el bundle con los datos del chat
         bundleChat = intent.getBundleExtra(Constant.BUNDLE_CHAT)!!
-        //Creamos el chat con los datos del bundleChat
 
         initUI()
         initObservables()
@@ -31,12 +30,32 @@ class ChatActivity : AppCompatActivity() {
 
     private fun initUI(){
 
+        //Obtenemos el chat del bundle
         chat = createChat()
 
-        viewModel.createChat(chat)
+        //Verificamos si existe este chat creado y si es asi que no se guarde
+        viewModel.getChatByUserToSessionByUserToChat(chat.idUserToSession!!, chat.idUserToChat!!)
     }
 
     private fun initObservables() {
+
+        viewModel.getChatByUserToSessionByUserToChat.observe(
+            this,
+            { task ->
+                task?.let { _task ->
+                    _task.addOnFailureListener { exc -> toast("${exc.message}") }
+
+                    _task.addOnSuccessListener { snapshot ->
+                        snapshot?.let { querySnapshot ->
+                            if (querySnapshot.isEmpty){
+                                viewModel.createChat(chat)
+                            }
+                        }
+                    }
+                }
+            }
+        )
+
         viewModel.createChat.observe(
             this,
             {
@@ -51,6 +70,9 @@ class ChatActivity : AppCompatActivity() {
         )
     }
 
+    /**
+     * Metodo que crea un chat a partir del bundle del chat obtenido del intent
+     */
     private fun createChat(): Chat {
         val chat = Chat()
 

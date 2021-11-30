@@ -31,7 +31,7 @@ class ChatFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
+
         _binding = FragmentChatBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -55,19 +55,18 @@ class ChatFragment : Fragment() {
             {
                 it?.let { idUserToSession ->
                     this.idUserToSession = idUserToSession
-                    viewModel.getAllChatsByUser(idUserToSession)
+                    //viewModel.getAllChatsByUser(idUserToSession)
                 }
             }
         )
 
-        //Obtener los chats del usuario de la sesion
-        viewModel.getAllChatsByUser.observe(
+        /*//Obtener los chats del usuario de la sesion
+        viewModel.getChatByUserToSessionByUserToChat.observe(
             viewLifecycleOwner,
             {
                 it?.let {
                     it.addSnapshotListener { value, error ->
 
-                        //Toast.makeText(context, "${value.toString()}", Toast.LENGTH_SHORT).show()
                         if (chats.isNotEmpty())
                             chats.clear()
 
@@ -108,6 +107,6 @@ class ChatFragment : Fragment() {
                     }
                 }
             }
-        )
+        )*/
     }
 }

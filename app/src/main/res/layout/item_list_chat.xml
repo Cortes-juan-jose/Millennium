@@ -19,7 +19,8 @@
             android:id="@+id/civ_profile_chat"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            tools:src="@color/colorSecondary"
+            app:civ_circle_background_color="@color/grey_light"
+            android:src="@drawable/ic_user_profile"
             app:civ_border_width="1dp"
             app:civ_border_color="@color/colorSecondaryDark"/>
 
@@ -43,7 +44,9 @@
                 android:id="@+id/mtv_last_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Este es el último mensaje del chat"
                 android:maxLines="1"
+                android:ellipsize="end"
                 android:textSize="14sp"/>
 
         </LinearLayout>

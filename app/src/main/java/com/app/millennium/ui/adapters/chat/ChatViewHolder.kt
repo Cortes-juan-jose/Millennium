@@ -90,8 +90,6 @@ class ChatViewHolder(
     private fun configDataChat() {
         if (userToChat.imgProfile.isNotNull())
             Picasso.get().load(userToChat.imgProfile).into(binding.civProfileChat)
-        else
-            binding.civProfileChat.setImageResource(R.drawable.ic_user_profile)
         binding.mtvNameUser.text = userToChat.name
         binding.mtvLastMsg.text = ""
     }
