@@ -3,8 +3,6 @@ package com.app.millennium.core.utils
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import com.app.millennium.R
-import com.app.millennium.core.utils.RelativeTime
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -63,8 +61,33 @@ object RelativeTime : Application() {
     }
 
     @SuppressLint("SimpleDateFormat")
-    fun timeFormatAMPM(timestamp: Long): String {
+    fun timeFormatAMPM(time: Long, ctx: Context?): String? {
+
         val formatter = SimpleDateFormat("hh:mm a")
-        return formatter.format(Date(timestamp))
+
+        var time = time
+        if (time < 1000000000000L) {
+            // if timestamp given in seconds, convert to millis
+            time *= 1000
+        }
+        val now = System.currentTimeMillis()
+        if (time > now || time <= 0) {
+            return formatter.format(Date(time))
+        }
+
+        val diff = now - time
+        return when {
+            diff < 24 * HOUR_MILLIS -> {
+                formatter.format(Date(time))
+            }
+            diff < 48 * HOUR_MILLIS -> {
+                //"Ayer"
+                "Ayer"
+            }
+            else -> {
+                //"Hace " + diff / DAY_MILLIS + " dias"
+                "Hace ${diff / DAY_MILLIS} dias"
+            }
+        }
     }
 }

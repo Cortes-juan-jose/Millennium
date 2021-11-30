@@ -42,7 +42,7 @@ class MessageViewHolder(
         //Seteamos el message
         binding.mtvMessage.text = message.message
         //Seteamos el datetime
-        binding.mtvDatetime.text = RelativeTime.getTimeAgo(message.timestamp, context)
+        binding.mtvDatetime.text = RelativeTime.timeFormatAMPM(message.timestamp, context)
 
         /**
          * Ahora dependiendo de que si el usuario ha sido el que ha enviado
