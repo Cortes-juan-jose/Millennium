@@ -266,7 +266,6 @@ fun Map<String, Any>?.convertUser(): User {
     this?.get(Constant.PROP_EMAIL_USER)?.let { user.email = it.toString() }
     this?.get(Constant.PROP_PHONE_USER)?.let { user.phone = it.toString() }
     this?.get(Constant.PROP_UPLOADED_PRODUCTS_USER)?.let { user.uploadedProducts = it.toString().toInt() }
-    this?.get(Constant.PROP_OPINIONS_USER)?.let { user.opinions = it.toString().toInt() }
     this?.get(Constant.PROP_IMG_PROFILE_USER)?.let { user.imgProfile = it.toString() }
     this?.get(Constant.PROP_IMG_COVER_USER)?.let { user.imgCover = it.toString() }
     this?.get(Constant.PROP_TIMESTAMP_USER)?.let { user.timestamp = it.toString().toLong() }
@@ -353,7 +352,6 @@ fun User?.loadBundle(): Bundle{
         bundle.putString(Constant.PROP_IMG_COVER_USER, it.imgCover)
         bundle.putString(Constant.PROP_IMG_PROFILE_USER, it.imgProfile)
         bundle.putInt(Constant.PROP_UPLOADED_PRODUCTS_USER, it.uploadedProducts)
-        bundle.putInt(Constant.PROP_OPINIONS_USER, it.opinions)
         bundle.putLong(Constant.PROP_TIMESTAMP_USER, it.timestamp)
     }
 

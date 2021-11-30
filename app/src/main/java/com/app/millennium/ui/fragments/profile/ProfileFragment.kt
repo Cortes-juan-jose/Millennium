@@ -155,7 +155,8 @@ class ProfileFragment : Fragment() {
                 mtvUsername.text = user.name
                 mtvEmail.text = user.email
                 mtvUploadedProducts.text = user.uploadedProducts.toString()
-                mtvOpinions.text = user.opinions.toString()
+                if (user.phone.isNotNull() && user.phone.toString().isNotEmpty())
+                    mtvPhone.text = user.phone.toString()
 
                 if (user.imgCover.isNullOrEmpty()){
                     ivCover.scaleType = ImageView.ScaleType.CENTER_INSIDE

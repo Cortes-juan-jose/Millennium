@@ -13,7 +13,6 @@ object FirebaseProvider {
     val usersCollection = FirestoreProvider.users
     val productsCollection = FirestoreProvider.products
     val likesCollection = FirestoreProvider.likes
-    val opinionsCollection = FirestoreProvider.opinions
     val tokensCollection = FirestoreProvider.tokens
     val chatsCollection = FirestoreProvider.chats
     val messagesCollection = FirestoreProvider.messages

@@ -154,4 +154,5 @@
     <string name="mtv_msg_info_sin_chats">No tienes chats abiertos. Para crear un chat vaya al perfil de un usuario y pulse en Chatear</string>
     <string name="hint_mensaje">Mensaje...</string>
     <string name="cd_ic_send_message">ic_send_message</string>
+    <string name="mtv_telefono">Teléfono</string>
 </resources>

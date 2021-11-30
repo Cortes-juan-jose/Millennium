@@ -53,7 +53,6 @@ object Constant {
     const val PROP_USERNAME_USER: String = "name"
     const val PROP_EMAIL_USER: String = "email"
     const val PROP_UPLOADED_PRODUCTS_USER: String = "uploadedProducts"
-    const val PROP_OPINIONS_USER: String = "opinions"
     const val PROP_TIMESTAMP_USER: String = "timestamp"
     const val PROP_IMG_COVER_USER: String = "imgCover"
     const val PROP_IMG_PROFILE_USER: String = "imgProfile"

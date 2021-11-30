@@ -95,7 +95,8 @@ class ProfileUserToProductActivity : AppCompatActivity() {
         configImages()
         binding.mtvUsername.text = bundle[Constant.PROP_USERNAME_USER].toString()
         binding.mtvUploadedProducts.text = bundle[Constant.PROP_UPLOADED_PRODUCTS_USER].toString()
-        binding.mtvOpinions.text = bundle[Constant.PROP_OPINIONS_USER].toString()
+        if (bundle[Constant.PROP_PHONE_USER].isNotNull())
+            binding.mtvPhone.text = bundle[Constant.PROP_PHONE_USER].toString()
         binding.mtvEmail.text = bundle[Constant.PROP_EMAIL_USER].toString()
     }
 

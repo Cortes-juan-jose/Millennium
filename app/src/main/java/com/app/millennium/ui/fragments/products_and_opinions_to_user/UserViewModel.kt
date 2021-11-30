@@ -4,13 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.app.millennium.domain.use_case.opinion_db.GetOpinionsReceivedByUserUseCase
 import com.app.millennium.domain.use_case.product_db.GetAllProductsByUserUseCase
 import com.app.millennium.domain.use_case.user_auth.GetIdUseCase
-import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.launch
 
 class UserViewModel : ViewModel() {
@@ -20,9 +16,6 @@ class UserViewModel : ViewModel() {
 
     //Caso de uso que devuelven todos los productos
     private val getAllProductsByUserUseCase = GetAllProductsByUserUseCase()
-
-    //caso de uso que devuelven todas las opiniones que le han hecho al usuario
-    private val getOpinionsReceivedByUserUseCase = GetOpinionsReceivedByUserUseCase()
 
     private val _getIdUserToSession = MutableLiveData<String>()
     val getIdUserToSession: LiveData<String> get() = _getIdUserToSession
@@ -49,15 +42,6 @@ class UserViewModel : ViewModel() {
         viewModelScope.launch {
             _getAllProductsByUser.postValue(
                 getAllProductsByUserUseCase.invoke(idUser)
-            )
-        }
-    }
-
-    //Funcion para obtener las opiniones
-    fun getOpinions(idUser: String){
-        viewModelScope.launch {
-            _getOpinionsReceivedByUser.postValue(
-                getOpinionsReceivedByUserUseCase.invoke(idUser)
             )
         }
     }

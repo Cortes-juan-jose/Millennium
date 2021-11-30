@@ -9,7 +9,6 @@ object FirestoreProvider {
     val users = Users.db
     val products = Products.db
     val likes = Likes.db
-    val opinions = Opinions.db
     val tokens = Tokens.db
     val chats = Chats.db
     val messages = Messages.db
