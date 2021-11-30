@@ -131,11 +131,41 @@ class ChatActivity : AppCompatActivity() {
                                 userData = _document.toObject(User::class.java)!!
                                 //Y seteamos la infoamción del mismo en la vista
                                 setDataChat(userData)
-                                //Una vez se seteen los campos del usuario con el que va a chatear
-                                //entonces obtenemos todos los mensajes del chat obtenido en la consulta
-                                //anterior
-                                viewModel.getAllMessagesByChat(idChat)
+                                //Y ahora obtenemos todos los mensajes de un sender de este chat
+                                //Para setear el check del visto
+                                var idSender = ""
+                                //El id sender va a ser el usuario que haya mandado el mensaje
+                                if (idUserToSession == chat.idUserToSession){
+                                    chat.idUserToChat?.let { id -> idSender = id }
+                                } else {
+                                    chat.idUserToSession?.let { id -> idSender = id }
+                                }
+                                viewModel.getAllMessagesByChatBySender(idChat, idSender)
                             }
+                        }
+                    }
+                }
+            }
+        )
+
+        viewModel.getAllMessagesByChatBySender.observe(
+            this,
+            {
+                it?.let {
+                    it.addOnFailureListener { exc -> toast("${exc.message}") }
+
+                    it.addOnSuccessListener { snapshot ->
+                        snapshot?.let { _snapshot ->
+                            if (!_snapshot.isEmpty){
+                                for (document in _snapshot.documents){
+                                    //Actualizamos el campo del visto
+                                    if (document.exists()){
+                                        viewModel.updateMessageViewed(document.id, true)
+                                    }
+                                }
+                            }
+                            //Unva vez actualize nos traemos los mensajes
+                            viewModel.getAllMessagesByChat(idChat)
                         }
                     }
                 }

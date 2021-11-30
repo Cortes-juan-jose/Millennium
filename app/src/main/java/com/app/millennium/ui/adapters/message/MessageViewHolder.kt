@@ -43,6 +43,11 @@ class MessageViewHolder(
         binding.mtvMessage.text = message.message
         //Seteamos el datetime
         binding.mtvDatetime.text = RelativeTime.timeFormatAMPM(message.timestamp, context)
+        //Seteamos el viewed
+        if (message.viewed)
+            binding.ivCheckMessage.setImageResource(R.drawable.ic_check_send_and_received)
+        else
+            binding.ivCheckMessage.setImageResource(R.drawable.ic_check_send)
 
         /**
          * Ahora dependiendo de que si el usuario ha sido el que ha enviado
