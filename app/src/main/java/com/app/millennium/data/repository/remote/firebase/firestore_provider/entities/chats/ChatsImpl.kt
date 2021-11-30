@@ -30,5 +30,5 @@ class ChatsImpl: Chats {
     }
 
     override suspend fun getAllByUser(idUserToSession: String): Query =
-        db.whereEqualTo(Constant.PROP_ID_USER_TO_SESSION_CHAT, idUserToSession)
+        db.whereArrayContains(Constant.PROP_IDS_USERS_CHAT, idUserToSession)
 }

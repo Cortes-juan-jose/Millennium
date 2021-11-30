@@ -55,13 +55,13 @@ class ChatFragment : Fragment() {
             {
                 it?.let { idUserToSession ->
                     this.idUserToSession = idUserToSession
-                    //viewModel.getAllChatsByUser(idUserToSession)
+                    viewModel.getAllChatsByUser(idUserToSession)
                 }
             }
         )
 
-        /*//Obtener los chats del usuario de la sesion
-        viewModel.getChatByUserToSessionByUserToChat.observe(
+        //Obtener los chats del usuario de la sesion
+        viewModel.getAllChatsByUser.observe(
             viewLifecycleOwner,
             {
                 it?.let {
@@ -107,6 +107,6 @@ class ChatFragment : Fragment() {
                     }
                 }
             }
-        )*/
+        )
     }
 }

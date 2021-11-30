@@ -29,6 +29,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_marginStart="@dimen/min_padding_view"
+            android:gravity="center_vertical"
             android:layout_weight="1">
 
             <com.google.android.material.textview.MaterialTextView
@@ -37,7 +38,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mtv_sin_internet"
+                android:fontFamily="@font/balsami_bold"
                 android:maxLines="1"
+                android:ellipsize="end"
                 android:textSize="16sp"/>
 
             <com.google.android.material.textview.MaterialTextView
@@ -45,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Este es el último mensaje del chat"
+                android:fontFamily="@font/balsami_regular"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:textSize="14sp"/>

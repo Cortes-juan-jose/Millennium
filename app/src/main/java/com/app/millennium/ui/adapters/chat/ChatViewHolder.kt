@@ -9,6 +9,7 @@ import com.app.millennium.core.common.isNotNull
 import com.app.millennium.data.model.Chat
 import com.app.millennium.data.model.User
 import com.app.millennium.databinding.ItemListChatBinding
+import com.app.millennium.domain.use_case.user_auth.GetIdUseCase
 import com.app.millennium.domain.use_case.user_db.GetUserUseCase
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -26,13 +27,15 @@ class ChatViewHolder(
     //Casos de uso
     override val getUserUseCase: GetUserUseCase
         get() = GetUserUseCase()
+    override val getIdUseCase: GetIdUseCase
+        get() = GetIdUseCase()
 
     //chat
     private lateinit var chat: Chat
-    //userToSession
-    private var userToSession = User()
-    //userToChat
-    private var userToChat = User()
+    //userData
+    private lateinit var userData: User
+    //id User session
+    private lateinit var idUserToSession: String
 
     //Cargar el chat
     fun loadData(chat: Chat){
@@ -43,55 +46,52 @@ class ChatViewHolder(
     //inicializar la vista
     private fun initUI() {
         getDataUsers()
-        configDataChat()
         configEventsOnClick()
     }
 
     //Metodo que obtiene los dos usuarios del chat
     private fun getDataUsers() {
 
-        //Obtenemos el usuario de la sesion y cuando se obtenga, obtenemos el usuario del chat
+        //Primero se obtiene el id del usuario de la sesion iniciada
         CoroutineScope(Dispatchers.IO).launch {
-            chat.idUserToSession?.let { idUserToSession ->
-                getUserUseCase.invoke(idUserToSession)
-                    .addOnFailureListener { exc -> Toast.makeText(context, "${exc.message}", Toast.LENGTH_SHORT).show() }
-                    .addOnSuccessListener { document ->
-                        document?.let { _document ->
-                            if (_document.isNotNull() && _document.exists()){
-                                userToSession = _document.toObject(User::class.java)!!
-                                Toast.makeText(context, userToSession.toString(), Toast.LENGTH_SHORT).show()
-                                //Obtenemos el usuario del chat
-                                CoroutineScope(Dispatchers.IO).launch {
-                                    chat.idUserToChat?.let { iduserToChat ->
-                                        getUserUseCase.invoke(iduserToChat)
-                                            .addOnFailureListener { exc -> Toast.makeText(context, "${exc.message}", Toast.LENGTH_SHORT).show() }
-                                            .addOnSuccessListener { document ->
-                                                document?.let { _document ->
-                                                    if (_document.isNotNull() && _document.exists()){
-                                                        userToChat = _document.toObject(User::class.java)!!
-                                                        Toast.makeText(context, userToChat.toString(), Toast.LENGTH_SHORT).show()
-                                                        //Ya se han obtenido los dos usuarios ahora seteamos la vista
-                                                        configDataChat()
-                                                    }
-                                                }
-                                            }
-                                    }
-                                }
-                            }
-                        }
-                    }
+            idUserToSession = getIdUseCase.invoke().toString()
+
+            //Ahora verificar si el id del usuario de la sesion es igual al id del usuario de la sesion
+            //del chat creado para setear un usuario en la vista u otro
+            if (idUserToSession == chat.idUserToSession){
+                //si es igual entonces obtenemos la información del usuario idUserToChat
+                configDataUser(chat.idUserToChat)
+            } else {
+                //de lo contrario obtenemos la información del usuario de la sesion iniciada idUserToSession
+                configDataUser(chat.idUserToSession)
             }
+
+        }
+    }
+
+    private fun configDataUser(idUser: String?) {
+        CoroutineScope(Dispatchers.IO).launch {
+            getUserUseCase.invoke(idUser.toString())
+                .addOnFailureListener { exc ->
+                    Toast.makeText(context, "${exc.message}", Toast.LENGTH_SHORT).show() }
+
+                .addOnSuccessListener {
+                    it?.let {
+                        userData = it.toObject(User::class.java)!!
+                        configDataChat(userData)
+                    }
+                }
         }
     }
 
     /**
      * Metodo que setea los datos del chat
      */
-    private fun configDataChat() {
-        if (userToChat.imgProfile.isNotNull())
-            Picasso.get().load(userToChat.imgProfile).into(binding.civProfileChat)
-        binding.mtvNameUser.text = userToChat.name
-        binding.mtvLastMsg.text = ""
+    private fun configDataChat(userData: User) {
+        if (userData.imgProfile.isNotNull())
+            Picasso.get().load(userData.imgProfile).into(binding.civProfileChat)
+        binding.mtvNameUser.text = userData.name.toString().uppercase()
+        //binding.mtvLastMsg.text = "Ultimo mensaje"
     }
 
     /**
