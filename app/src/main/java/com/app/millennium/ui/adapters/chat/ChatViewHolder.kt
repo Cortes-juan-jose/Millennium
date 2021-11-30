@@ -95,7 +95,7 @@ class ChatViewHolder(
         if (userData.imgProfile.isNotNull())
             Picasso.get().load(userData.imgProfile).into(binding.civProfileChat)
         binding.mtvNameUser.text = userData.name.toString().uppercase()
-        //binding.mtvLastMsg.text = "Ultimo mensaje"
+        binding.mtvEmailUser.text = userData.email
     }
 
     /**

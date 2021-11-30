@@ -64,7 +64,7 @@
                 android:textSize="16sp"/>
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/mtv_status"
+                android:id="@+id/mtv_email_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mtv_sin_internet"

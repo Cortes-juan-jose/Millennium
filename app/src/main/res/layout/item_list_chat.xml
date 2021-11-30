@@ -44,10 +44,10 @@
                 android:textSize="16sp"/>
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/mtv_last_msg"
+                android:id="@+id/mtv_email_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Este es el último mensaje del chat"
+                android:text="@string/mtv_sin_internet"
                 android:fontFamily="@font/balsami_regular"
                 android:maxLines="1"
                 android:ellipsize="end"

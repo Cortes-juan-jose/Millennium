@@ -238,6 +238,7 @@ class ChatActivity : AppCompatActivity() {
         if (userData.imgProfile.isNotNull())
             Picasso.get().load(userData.imgProfile).into(binding.civProfileChat)
         binding.mtvNameUser.text = userData.name?.uppercase()
+        binding.mtvEmailUser.text = userData.email
     }
 
     /**
