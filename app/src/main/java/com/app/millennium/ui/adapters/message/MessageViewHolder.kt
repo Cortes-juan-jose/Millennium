@@ -23,7 +23,6 @@ class MessageViewHolder(
     //mensaje
     private var message = Message()
 
-
     //Cargar el chat
     fun loadData(message: Message){
         this.message = message
@@ -35,9 +34,14 @@ class MessageViewHolder(
         setDataMessage()
     }
 
+    /**
+     * Metodo que setea los mensajes
+     */
     private fun setDataMessage() {
 
+        //Seteamos el message
         binding.mtvMessage.text = message.message
+        //Seteamos el datetime
         binding.mtvDatetime.text = RelativeTime.getTimeAgo(message.timestamp, context)
 
         /**
@@ -50,6 +54,9 @@ class MessageViewHolder(
             configMessageToReceived()
     }
 
+    /**
+     * Metodo que configura si el mensaje fue enviado por el usuario de la sesion
+     */
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun configMessageToSender() {
         val params = RelativeLayout.LayoutParams(
@@ -68,6 +75,9 @@ class MessageViewHolder(
         binding.mtvDatetime.visibility = View.VISIBLE
     }
 
+    /**
+     * Metodo que configura si el mensaje fue enviado por el usuario del chat
+     */
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun configMessageToReceived() {
 
