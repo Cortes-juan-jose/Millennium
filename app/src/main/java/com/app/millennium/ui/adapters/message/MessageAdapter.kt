@@ -7,7 +7,8 @@ import com.app.millennium.R
 import com.app.millennium.data.model.Message
 
 class MessageAdapter(
-    private val messages : List<Message>
+    private val messages : List<Message>,
+    private val idUserToSession: String
 ) : RecyclerView.Adapter<MessageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
@@ -17,7 +18,7 @@ class MessageAdapter(
             parent,
             false
         )
-        return MessageViewHolder(view, parent.context)
+        return MessageViewHolder(view, parent.context, idUserToSession)
     }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {

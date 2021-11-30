@@ -2,30 +2,19 @@ package com.app.millennium.ui.adapters.message
 
 import android.content.Context
 import android.view.View
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.app.millennium.core.common.Constant
-import com.app.millennium.core.common.isNotNull
-import com.app.millennium.core.common.loadBundle
-import com.app.millennium.core.common.openActivity
+import com.app.millennium.R
+import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.core.utils.RelativeTime
-import com.app.millennium.data.model.Chat
 import com.app.millennium.data.model.Message
-import com.app.millennium.data.model.User
-import com.app.millennium.databinding.ItemListChatBinding
 import com.app.millennium.databinding.ItemListMessageChatBinding
-import com.app.millennium.domain.use_case.user_auth.GetIdUseCase
-import com.app.millennium.domain.use_case.user_db.GetUserUseCase
-import com.app.millennium.ui.activities.chat.ChatActivity
-import com.squareup.picasso.Picasso
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.util.*
 
 class MessageViewHolder(
     private val view : View,
-    private val context: Context
+    private val context: Context,
+    private val idUserToSession: String
 ) : RecyclerView.ViewHolder(view){
 
     //Binding
@@ -33,8 +22,7 @@ class MessageViewHolder(
 
     //mensaje
     private var message = Message()
-    //id User session
-    private var idUserToSession = ""
+
 
     //Cargar el chat
     fun loadData(message: Message){
@@ -48,8 +36,51 @@ class MessageViewHolder(
     }
 
     private fun setDataMessage() {
+
         binding.mtvMessage.text = message.message
         binding.mtvDatetime.text = RelativeTime.getTimeAgo(message.timestamp, context)
+
+        /**
+         * Ahora dependiendo de que si el usuario ha sido el que ha enviado
+         * el mensaje se configuraŕa de una manera u otra
+         */
+        if (idUserToSession == message.idSender)
+            configMessageToSender()
+        else
+            configMessageToReceived()
+    }
+
+    private fun configMessageToSender() {
+        val params = RelativeLayout.LayoutParams(
+            RelativeLayout.LayoutParams.WRAP_CONTENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT
+        )
+        params.addRule(RelativeLayout.ALIGN_PARENT_END)
+        params.setMargins(150, 0,0,0)
+        binding.llMsg.layoutParams = params
+        binding.llMsg.setPadding(30,20,25,20)
+        if (ConfigThemeApp.isThemeLight(context))
+            binding.llMsg.background = context.getDrawable(R.drawable.custom_message_sended_chat_light)
+        else
+            binding.llMsg.background = context.getDrawable(R.drawable.custom_message_sended_chat_dark)
+        binding.ivCheckMessage.visibility = View.VISIBLE
+    }
+
+    private fun configMessageToReceived() {
+
+        val params = RelativeLayout.LayoutParams(
+            RelativeLayout.LayoutParams.WRAP_CONTENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT
+        )
+        params.addRule(RelativeLayout.ALIGN_PARENT_START)
+        params.setMargins(0, 0,150,0)
+        binding.llMsg.layoutParams = params
+        binding.llMsg.setPadding(30,20,20,20)
+        if (ConfigThemeApp.isThemeLight(context))
+            binding.llMsg.background = context.getDrawable(R.drawable.custom_message_received_chat_light)
+        else
+            binding.llMsg.background = context.getDrawable(R.drawable.custom_message_received_chat_dark)
+        binding.ivCheckMessage.visibility = View.GONE
     }
 
 }

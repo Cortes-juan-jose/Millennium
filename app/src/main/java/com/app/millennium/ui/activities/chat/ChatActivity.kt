@@ -142,7 +142,7 @@ class ChatActivity : AppCompatActivity() {
 
                             //Una vez tengamos todos los mensajes creamos el adapter
                             //con la lista de los mensjaes
-                            messageAdapter = MessageAdapter(messages)
+                            messageAdapter = MessageAdapter(messages, idUserToSession)
                             //Configuramos la disposicion de recycler view
                             binding.rvMessages.layoutManager = LinearLayoutManager(
                                 this,
