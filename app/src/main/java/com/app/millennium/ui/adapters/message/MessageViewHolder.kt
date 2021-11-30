@@ -78,7 +78,7 @@ class MessageViewHolder(
         params.addRule(RelativeLayout.ALIGN_PARENT_START)
         params.setMargins(0, 0,150,0)
         binding.llMsg.layoutParams = params
-        binding.llMsg.setPadding(30,20,20,20)
+        binding.llMsg.setPadding(30,20,50,20)
         if (ConfigThemeApp.isThemeLight(context))
             binding.llMsg.background = context.getDrawable(R.drawable.custom_message_received_chat_light)
         else

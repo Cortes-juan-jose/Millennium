@@ -43,6 +43,9 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun initUI(){
+        val llManager = LinearLayoutManager(this)
+        llManager.stackFromEnd = true
+        binding.rvMessages.layoutManager = llManager
         configDataChat()
         configEventsClick()
     }
@@ -145,12 +148,6 @@ class ChatActivity : AppCompatActivity() {
                             //Una vez tengamos todos los mensajes creamos el adapter
                             //con la lista de los mensjaes
                             messageAdapter = MessageAdapter(messages, idUserToSession)
-                            //Configuramos la disposicion de recycler view
-                            binding.rvMessages.layoutManager = LinearLayoutManager(
-                                this,
-                                LinearLayoutManager.VERTICAL,
-                                false
-                            )
                             //y le seteamos el adapter al recycler view
                             binding.rvMessages.adapter = messageAdapter
                         }
