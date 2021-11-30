@@ -155,4 +155,8 @@
         <item name="android:background">@drawable/custom_edittext_chat_dark</item>
     </style>
 
+    <style name="MessageChatBackground">
+        <item name="android:background">@drawable/custom_message_chat_dark</item>
+    </style>
+
 </resources>

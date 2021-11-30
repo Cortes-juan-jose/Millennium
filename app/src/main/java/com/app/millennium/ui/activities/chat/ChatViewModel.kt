@@ -9,10 +9,12 @@ import com.app.millennium.data.model.Message
 import com.app.millennium.domain.use_case.chat_db.CreateChatUseCase
 import com.app.millennium.domain.use_case.chat_db.GetChatByUserToSessionByUserToChatUseCase
 import com.app.millennium.domain.use_case.messages_db.CreateMessageUseCase
+import com.app.millennium.domain.use_case.messages_db.GetAllMessagesByChatUseCase
 import com.app.millennium.domain.use_case.user_auth.GetIdUseCase
 import com.app.millennium.domain.use_case.user_db.GetUserUseCase
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.launch
 
@@ -33,6 +35,9 @@ class ChatViewModel : ViewModel(){
     //Caso de uso para obtener un usuario
     private val getUserUseCase = GetUserUseCase()
 
+    //Caso de uso para obtener todos los mensajes de un chat
+    private val getAllMessagesByChatUseCase = GetAllMessagesByChatUseCase()
+
     //live data crear chat usuario sesion
     private val _createChat = MutableLiveData<Task<Void>>()
     val createChat: LiveData<Task<Void>> get() = _createChat
@@ -52,6 +57,10 @@ class ChatViewModel : ViewModel(){
     //Live data para obtener el usuario por id
     private val _getUserById = MutableLiveData<Task<DocumentSnapshot>>()
     val getUserById: LiveData<Task<DocumentSnapshot>> get() = _getUserById
+
+    //Live data para obtener todos los mensajes de un chat
+    private val _getAllMessagesByChat = MutableLiveData<Query>()
+    val getAllMessagesByChat: LiveData<Query> get() = _getAllMessagesByChat
 
     //Metodo crear chat usuario sesion
     fun createChat(chat: Chat){
@@ -94,6 +103,15 @@ class ChatViewModel : ViewModel(){
         viewModelScope.launch {
             _getUserById.postValue(
                 getUserUseCase.invoke(id)
+            )
+        }
+    }
+
+    //Metodo para obtener todos los mensajes de un chat
+    fun getAllMessagesByChat(idChat: String){
+        viewModelScope.launch {
+            _getAllMessagesByChat.postValue(
+                getAllMessagesByChatUseCase.invoke(idChat)
             )
         }
     }

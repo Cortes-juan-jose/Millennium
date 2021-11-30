@@ -89,9 +89,11 @@
         app:layout_constraintBottom_toTopOf="@id/ll_send_msg">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/messages"
+            android:id="@+id/rv_messages"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/min_padding_view"
+            tools:listitem="@layout/item_list_message_chat"/>
 
     </LinearLayout>
 

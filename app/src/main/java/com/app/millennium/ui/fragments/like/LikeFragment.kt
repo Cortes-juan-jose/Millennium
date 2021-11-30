@@ -89,7 +89,7 @@ class LikeFragment : Fragment() {
                                                     }
 
                                                     if (products.size == _snapshot.size()){
-                                                        productHomeAdapter = ProductHomeAdapter(products, requireContext())
+                                                        productHomeAdapter = ProductHomeAdapter(products)
                                                         //Configuramos la disposicion del recycler view
                                                         binding.rvProductsFavorites.layoutManager = LinearLayoutManager(
                                                             requireContext(),

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MessageChatBackground"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/max_padding_view"
+    android:paddingVertical="@dimen/min_padding_view"
+    android:layout_gravity="end"
+    android:layout_marginVertical="@dimen/min_padding_view"
+    android:layout_marginStart="@dimen/min_padding_view"
+    android:layout_marginEnd="100dp">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/balsami_regular"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:text="Esta noche es noche buena y mañana navidad saca la bota maria"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_datetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="@dimen/min_padding_view"
+        android:fontFamily="@font/balsami_regular"
+        android:textSize="12sp"
+        android:textColor="@color/grey_light"
+        android:text="@string/mtv_sin_internet"/>
+
+    <ImageView
+        android:id="@+id/iv_check_message"
+        android:layout_width="@dimen/size_ic_send_message"
+        android:layout_height="@dimen/max_padding_view"
+        android:src="@drawable/ic_check_send"
+        android:layout_gravity="bottom"
+        android:contentDescription="@string/cd_ic_send_message" />
+
+</LinearLayout>

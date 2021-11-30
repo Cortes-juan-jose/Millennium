@@ -3,6 +3,7 @@ package com.app.millennium.ui.activities.chat
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.millennium.core.common.Constant
 import com.app.millennium.core.common.isNotNull
 import com.app.millennium.core.common.toast
@@ -10,6 +11,8 @@ import com.app.millennium.data.model.Chat
 import com.app.millennium.data.model.Message
 import com.app.millennium.data.model.User
 import com.app.millennium.databinding.ActivityChatBinding
+import com.app.millennium.ui.adapters.message.MessageAdapter
+import com.app.millennium.ui.adapters.product_home.ProductHomeAdapter
 import com.squareup.picasso.Picasso
 import java.util.*
 
@@ -22,6 +25,9 @@ class ChatActivity : AppCompatActivity() {
 
     private var idUserToSession = ""
     private var userData = User()
+
+    private var messages = mutableListOf<Message>()
+    private lateinit var messageAdapter: MessageAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,7 +111,48 @@ class ChatActivity : AppCompatActivity() {
                         document?.let { _document ->
                             userData = _document.toObject(User::class.java)!!
                             setDataChat(userData)
+                            //Obtenemos todos los mensajes del chat
+                            chat.id?.let { idChat -> viewModel.getAllMessagesByChat(idChat) }
                         }
+                    }
+                }
+            }
+        )
+
+        viewModel.getAllMessagesByChat.observe(
+            this,
+            {
+                it?.let {
+                    it.addSnapshotListener { value, error ->
+                        //Primero vaciamos la lista si tiene mensajes para que no se dupliquen
+                        if (!messages.isEmpty())
+                            messages.clear()
+
+                        //Controlamos que no tenga un error la consulta
+                        if (error.isNotNull())
+                            return@addSnapshotListener
+
+                        //Ahora obtenemos la lista de mensajes
+                        if (value.isNotNull() && !(value?.isEmpty!!)){
+                            for (message in value.documents){
+                                if (message.exists()){
+                                    messages.add(message.toObject(Message::class.java)!!)
+                                }
+                            }
+
+                            //Una vez tengamos todos los mensajes creamos el adapter
+                            //con la lista de los mensjaes
+                            messageAdapter = MessageAdapter(messages)
+                            //Configuramos la disposicion de recycler view
+                            binding.rvMessages.layoutManager = LinearLayoutManager(
+                                this,
+                                LinearLayoutManager.VERTICAL,
+                                false
+                            )
+                            //y le seteamos el adapter al recycler view
+                            binding.rvMessages.adapter = messageAdapter
+                        }
+
                     }
                 }
             }
@@ -189,7 +236,7 @@ class ChatActivity : AppCompatActivity() {
                 chat.idUserToSession?.let { id -> msg.idReceiver = id }
                 chat.idUserToChat?.let { id -> msg.idSender = id }
             }
-            msg.message = binding.etMessage.text.toString()
+            msg.message = binding.etMessage.text.toString().trim()
             msg.timestamp = Date().time
             msg.viewed = false
 
