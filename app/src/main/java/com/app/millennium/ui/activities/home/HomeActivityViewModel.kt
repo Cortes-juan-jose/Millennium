@@ -4,15 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.app.millennium.data.model.FCMBody
-import com.app.millennium.data.model.FCMResponse
-import com.app.millennium.domain.use_case.notifications_api.SendNotificationUseCase
 import com.app.millennium.domain.use_case.token_db.CreateTokenUseCase
 import com.app.millennium.domain.use_case.token_db.GetTokenToDeviceUseCase
 import com.app.millennium.domain.use_case.user_auth.GetIdUseCase
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.launch
-import retrofit2.http.Body
 
 class HomeActivityViewModel : ViewModel(){
 
