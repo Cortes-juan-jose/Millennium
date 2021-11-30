@@ -11,8 +11,6 @@ import kotlinx.coroutines.launch
 
 class ChatViewModel : ViewModel() {
 
-    //Caso de uso para obtener todos los chats del usuario de la sesion
-
     //Caso de uso para obtener el id del usuario de la sesion
     private val getIdUseCase = GetIdUseCase()
     

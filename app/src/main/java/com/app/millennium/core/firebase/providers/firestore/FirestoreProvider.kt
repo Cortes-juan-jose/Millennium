@@ -12,4 +12,5 @@ object FirestoreProvider {
     val opinions = Opinions.db
     val tokens = Tokens.db
     val chats = Chats.db
+    val messages = Messages.db
 }

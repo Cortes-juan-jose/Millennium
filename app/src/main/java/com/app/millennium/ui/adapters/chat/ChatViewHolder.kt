@@ -4,17 +4,21 @@ import android.content.Context
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.app.millennium.R
+import com.app.millennium.core.common.Constant
 import com.app.millennium.core.common.isNotNull
+import com.app.millennium.core.common.loadBundle
+import com.app.millennium.core.common.openActivity
 import com.app.millennium.data.model.Chat
 import com.app.millennium.data.model.User
 import com.app.millennium.databinding.ItemListChatBinding
 import com.app.millennium.domain.use_case.user_auth.GetIdUseCase
 import com.app.millennium.domain.use_case.user_db.GetUserUseCase
+import com.app.millennium.ui.activities.chat.ChatActivity
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class ChatViewHolder(
     private val view : View,
@@ -31,11 +35,11 @@ class ChatViewHolder(
         get() = GetIdUseCase()
 
     //chat
-    private lateinit var chat: Chat
+    private var chat = Chat()
     //userData
-    private lateinit var userData: User
+    private var userData = User()
     //id User session
-    private lateinit var idUserToSession: String
+    private var idUserToSession = ""
 
     //Cargar el chat
     fun loadData(chat: Chat){
@@ -101,7 +105,25 @@ class ChatViewHolder(
 
         //Abrir chat
         binding.root.setOnClickListener {
-            Toast.makeText(context, "Abrir chat", Toast.LENGTH_SHORT).show()
+
+            //Creamos un chat
+            chat = Chat(
+                id = idUserToSession + userData.id,
+                idUserToSession = idUserToSession,
+                idUserToChat = userData.id,
+                idsUsers = arrayListOf(
+                    idUserToSession,
+                    userData.id!!
+                ),
+                isWriting = false,
+                timestamp = Date().time
+            )
+            //Lo guardamos en un bundle
+            val bundleChat = chat.loadBundle()
+            //Y se lo pasamos al activity
+            context.openActivity<ChatActivity> {
+                putExtra(Constant.BUNDLE_CHAT, bundleChat)
+            }
         }
     }
 

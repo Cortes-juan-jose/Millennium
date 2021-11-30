@@ -41,6 +41,7 @@ object Constant {
     const val COLLECTION_OPINIONS: String = "Opinions"
     const val COLLECTION_TOKENS: String = "Tokens"
     const val COLLECTION_CHATS: String = "Chats"
+    const val COLLECTION_MESSAGES: String = "Messages"
 
     const val STORAGE_IMAGES : String = "images"
 
@@ -99,4 +100,12 @@ object Constant {
     const val PROP_IDS_USERS_CHAT: String = "idsUsers"
     const val PROP_IS_WRITING_CHAT: String = "isWriting"
     const val PROP_TIMESTAMP_CHAT: String = "timestamp"
+
+    const val PROP_ID_MESSAGE: String = "id"
+    const val PROP_ID_SENDER_MESSAGE: String = "idSender"
+    const val PROP_ID_RECEIVER_MESSAGE: String = "idReceiver"
+    const val PROP_ID_CHAT_MESSAGE: String = "idChat"
+    const val PROP_MESSAGE_MESSAGE: String = "message"
+    const val PROP_TIMESTAMP_MESSAGE: String = "timestamp"
+    const val PROP_VIEWED_MESSAGE: String = "viewed"
 }
