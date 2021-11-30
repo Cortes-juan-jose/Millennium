@@ -43,15 +43,17 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun initUI(){
-        val llManager = LinearLayoutManager(this)
-        llManager.stackFromEnd = true
-        binding.rvMessages.layoutManager = llManager
-        configDataChat()
-        configEventsClick()
+        configListMessages() //Configurar la vista de la lista de los mensajes
+        configDataChat() //Configrar los datos del chat
+        configEventsClick() //Configurar los eventos de la vista
     }
 
+    /**
+     * Inicializar los obsevables del viewmodel
+     */
     private fun initObservables() {
 
+        //Obtenemos el chat por usuario de la sesion y el usuairo con el que va a chatear
         viewModel.getChatByUserToSessionByUserToChat.observe(
             this,
             { task ->
@@ -61,9 +63,12 @@ class ChatActivity : AppCompatActivity() {
                     _task.addOnSuccessListener { snapshot ->
                         snapshot?.let { querySnapshot ->
                             if (querySnapshot.isEmpty){
+                                //Si no existe se crea
                                 viewModel.createChat(chat)
                             } else {
+                                //Si existe obtenemos el id
                                 idChat = querySnapshot.documents[0].id
+                                //Y a continuacion obtenemos el id del usuario de la sesion
                                 viewModel.getIdUserToSession()
                             }
                         }
@@ -72,6 +77,7 @@ class ChatActivity : AppCompatActivity() {
             }
         )
 
+        //Crear chat
         viewModel.createChat.observe(
             this,
             {
@@ -79,12 +85,17 @@ class ChatActivity : AppCompatActivity() {
                     it.addOnFailureListener { exc -> toast("${exc.message}") }
 
                     it.addOnCompleteListener {
+                        //Cuando se cree el chat realizamos una consulta para ver si existe
+                        //porque la consulta devuelve un valor si el id es idUserToSession+idUserToChat o
+                        //viceversa pero el id del chat del mensaje no debe ser ese ya que se crearían
+                        //mensajes en distintos chats aunque estos usuarios pertenezcan al mismo chat
                         viewModel.getChatByUserToSessionByUserToChat(chat.idUserToSession!!, chat.idUserToChat!!)
                     }
                 }
             }
         )
 
+        //Obtener id del usuario de la sesion
         viewModel.getIdUserToSession.observe(
             this,
             {
@@ -103,6 +114,7 @@ class ChatActivity : AppCompatActivity() {
             }
         )
 
+        //Obtener usuario por id, se obtendra el usuario con el que va a chatear
         viewModel.getUserById.observe(
             this,
             {
@@ -114,16 +126,23 @@ class ChatActivity : AppCompatActivity() {
 
                     task.addOnSuccessListener { document ->
                         document?.let { _document ->
-                            userData = _document.toObject(User::class.java)!!
-                            setDataChat(userData)
-                            //Obtenemos todos los mensajes del chat
-                            viewModel.getAllMessagesByChat(idChat)
+                            if (_document.exists()){
+                                //Si el usuario existe lo guardamos
+                                userData = _document.toObject(User::class.java)!!
+                                //Y seteamos la infoamción del mismo en la vista
+                                setDataChat(userData)
+                                //Una vez se seteen los campos del usuario con el que va a chatear
+                                //entonces obtenemos todos los mensajes del chat obtenido en la consulta
+                                //anterior
+                                viewModel.getAllMessagesByChat(idChat)
+                            }
                         }
                     }
                 }
             }
         )
 
+        //Obtener todos los mensajes por chat
         viewModel.getAllMessagesByChat.observe(
             this,
             {
@@ -157,6 +176,7 @@ class ChatActivity : AppCompatActivity() {
             }
         )
 
+        //Crear mensaje
         viewModel.createMessage.observe(
             this,
             {
@@ -170,6 +190,15 @@ class ChatActivity : AppCompatActivity() {
                 }
             }
         )
+    }
+
+    /**
+     * Metodo que configura la ista de la lista de los mensajes
+     */
+    private fun configListMessages() {
+        val llManager = LinearLayoutManager(this)
+        llManager.stackFromEnd = true
+        binding.rvMessages.layoutManager = llManager
     }
 
     /**
@@ -208,6 +237,9 @@ class ChatActivity : AppCompatActivity() {
         return chat
     }
 
+    /**
+     * Metodo que configura todos los eventos de la vista
+     */
     private fun configEventsClick() {
         binding.ivBack.setOnClickListener {
             finishAndRemoveTask()
@@ -218,11 +250,20 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Metodo que crea un mensaje
+     */
     private fun createMessage() {
 
+        //Primero obtenemos el texto del campo y verificamos que no sea vacio
         if (binding.etMessage.text.toString().trim().isNotEmpty()){
 
+            //Si no es vacio creamo un msg vacio para ir seteando los valores dependiendo de la configuracion
             val msg = Message()
+            /**
+             * Se le setea el id del chat obtenido en la consulta para guardar los mensajes que tiene que
+             * tiene que ir en un mismo chat
+             */
             msg.idChat = idChat
             //Ahora verificar si el id del usuario de la sesion es igual al id del usuario de la sesion
             //del chat creado para setear un emisor y un receptor de mensajes
