@@ -118,7 +118,7 @@ class ChatActivity : AppCompatActivity() {
                     task.addOnFailureListener { exc -> toast("${exc.message}") }
                     task.addOnCompleteListener { _task ->
                         if (_task.isSuccessful){
-                            toast("Mensaje enviado")
+                            //Mensaje enviado
                         }
                     }
                 }
