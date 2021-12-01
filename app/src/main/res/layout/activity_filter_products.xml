@@ -28,6 +28,17 @@
         android:layout_marginEnd="@dimen/max_padding_view"/>
 
     <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/balsami_bold"
+        android:gravity="center"
+        android:text="@string/mtv_filtrado"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_mtv_info_producto"
+        app:layout_constraintTop_toTopOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"/>
+
+    <com.google.android.material.textview.MaterialTextView
         style="@style/TextColor"
         android:id="@+id/mtv_category"
         android:layout_width="match_parent"
@@ -47,8 +58,7 @@
         android:visibility="gone"
         android:layout_marginTop="@dimen/min_padding_view"
         app:layout_constraintTop_toBottomOf="@id/mtv_category"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:visibility="visible">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_products"
@@ -65,7 +75,6 @@
         android:layout_height="wrap_content"
         android:visibility="visible"
         android:elevation="10dp"
-        tools:visibility="visible"
         app:layout_constraintTop_toBottomOf="@id/mtv_category"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -76,7 +85,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/mathParent"
         android:visibility="gone"
-        tools:visibility="visible"
         app:layout_constraintTop_toBottomOf="@id/mtv_category"
         app:layout_constraintBottom_toBottomOf="parent">
 
