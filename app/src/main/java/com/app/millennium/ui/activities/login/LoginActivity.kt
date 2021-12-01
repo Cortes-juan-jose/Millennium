@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
     private var user: User = User()
     private lateinit var dialogLoading: AlertDialog
 
-    private lateinit var googleSignInClient: GoogleSignInClient
+    private var googleSignInClient: GoogleSignInClient? = null
 
     /**
      * Launcher SignIn Google
@@ -121,9 +121,10 @@ class LoginActivity : AppCompatActivity() {
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
-        googleSignInClient.signOut()
+        googleSignInClient?.signOut()
 
-        launcherGoogleSignIn.launch(googleSignInClient.signInIntent)
+        launcherGoogleSignIn.launch(googleSignInClient?.signInIntent)
+        googleSignInClient = null
     }
 
     /**
@@ -213,7 +214,10 @@ class LoginActivity : AppCompatActivity() {
                          * Si la tarea fue exitosa entonces obtenemos el email, displayname y
                          * el id del usuario de google
                          */
+                        toast("Iniciando sesion")
                         viewModel.getId()
+                    } else {
+                        toast("No se puede iniciar sesion")
                     }
                 }
                 task.addOnFailureListener { exc ->
