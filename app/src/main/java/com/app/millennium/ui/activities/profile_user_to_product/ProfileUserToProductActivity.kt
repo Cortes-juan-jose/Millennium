@@ -134,19 +134,16 @@ class ProfileUserToProductActivity : AppCompatActivity() {
             bundle[Constant.PROP_ID_USER].toString()
         )
 
-        binding.vp2ProductsOpinions.adapter = adapterViewPagerProfile
+        binding.vp2Products.adapter = adapterViewPagerProfile
 
-        binding.tlProductsOpinions.addTab(
-            binding.tlProductsOpinions.newTab().setText(getString(R.string.tab_productos))
-        )
-        binding.tlProductsOpinions.addTab(
-            binding.tlProductsOpinions.newTab().setText(getString(R.string.tab_opiniones))
+        binding.tlProducts.addTab(
+            binding.tlProducts.newTab().setText(getString(R.string.tab_productos))
         )
 
-        binding.tlProductsOpinions.addOnTabSelectedListener(
+        binding.tlProducts.addOnTabSelectedListener(
             object : TabLayout.OnTabSelectedListener{
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-                    binding.vp2ProductsOpinions.currentItem = tab?.position!!
+                    binding.vp2Products.currentItem = tab?.position!!
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -155,13 +152,6 @@ class ProfileUserToProductActivity : AppCompatActivity() {
                 override fun onTabReselected(tab: TabLayout.Tab?) {
                 }
 
-            }
-        )
-        binding.vp2ProductsOpinions.registerOnPageChangeCallback(
-            object : ViewPager2.OnPageChangeCallback(){
-                override fun onPageSelected(position: Int) {
-                    binding.tlProductsOpinions.selectTab(binding.tlProductsOpinions.getTabAt(position))
-                }
             }
         )
     }

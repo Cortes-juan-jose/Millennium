@@ -155,6 +155,6 @@
     <string name="hint_mensaje">Mensaje...</string>
     <string name="cd_ic_send_message">ic_send_message</string>
     <string name="mtv_telefono">Teléfono</string>
-    <string name="mtv_sin_me_gustas">Sin me gustas</string>
+    <string name="mtv_sin_me_gustas">Sin me gustas…</string>
     <string name="tab_likes">Me gustas</string>
 </resources>

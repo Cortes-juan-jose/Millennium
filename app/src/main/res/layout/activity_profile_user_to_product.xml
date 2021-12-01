@@ -179,7 +179,7 @@
 
         <com.google.android.material.tabs.TabLayout
             android:theme="@style/TabLayoutTheme"
-            android:id="@+id/tl_products_opinions"
+            android:id="@+id/tl_products"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:layout_gravity="bottom"
@@ -190,7 +190,7 @@
     <!--SCROLL PARA QUE EL APBARLAYOUT SE ESCONDA-->
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vp2_products_opinions"
+        android:id="@+id/vp2_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:isScrollContainer="true"

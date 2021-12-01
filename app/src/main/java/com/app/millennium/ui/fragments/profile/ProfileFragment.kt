@@ -212,19 +212,19 @@ class ProfileFragment : Fragment() {
                     it.lifecycle
                 )
             }
-        binding.vp2ProductsOpinions.adapter = adapterViewPagerProfile
+        binding.vp2ProductsLikes.adapter = adapterViewPagerProfile
 
-        binding.tlProductsOpinions.addTab(
-            binding.tlProductsOpinions.newTab().setText(getString(R.string.tab_productos))
+        binding.tlProductsLikes.addTab(
+            binding.tlProductsLikes.newTab().setText(getString(R.string.tab_productos))
         )
-        binding.tlProductsOpinions.addTab(
-            binding.tlProductsOpinions.newTab().setText(getString(R.string.tab_likes))
+        binding.tlProductsLikes.addTab(
+            binding.tlProductsLikes.newTab().setText(getString(R.string.tab_likes))
         )
 
-        binding.tlProductsOpinions.addOnTabSelectedListener(
+        binding.tlProductsLikes.addOnTabSelectedListener(
             object : TabLayout.OnTabSelectedListener{
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-                    binding.vp2ProductsOpinions.currentItem = tab?.position!!
+                    binding.vp2ProductsLikes.currentItem = tab?.position!!
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -235,10 +235,10 @@ class ProfileFragment : Fragment() {
 
             }
         )
-        binding.vp2ProductsOpinions.registerOnPageChangeCallback(
+        binding.vp2ProductsLikes.registerOnPageChangeCallback(
             object : ViewPager2.OnPageChangeCallback(){
                 override fun onPageSelected(position: Int) {
-                    binding.tlProductsOpinions.selectTab(binding.tlProductsOpinions.getTabAt(position))
+                    binding.tlProductsLikes.selectTab(binding.tlProductsLikes.getTabAt(position))
                 }
             }
         )
