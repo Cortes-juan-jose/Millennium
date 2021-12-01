@@ -9,5 +9,6 @@ interface Products {
     suspend fun get(id: String) : Task<DocumentSnapshot>
     suspend fun getAll(): Task<QuerySnapshot>
     suspend fun getAllByUser(idUser: String): Query
+    suspend fun getAllByCategory(category: String): Query
     suspend fun delete(id: String): Task<Void>
 }

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.filter_products.FilterProductsActivity">
+
+    <View
+        style="@style/ViewBackground"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_toolbar"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/size_icon_back"
+        android:layout_height="@dimen/size_icon_back"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="5dp"
+        android:src="@drawable/ic_back"
+        android:contentDescription="@string/cd_ic_back"
+        app:layout_constraintTop_toTopOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        android:layout_marginEnd="@dimen/max_padding_view"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/TextColor"
+        android:id="@+id/mtv_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/balsami_bold_italic"
+        android:layout_marginTop="@dimen/max_padding_view"
+        android:layout_marginHorizontal="@dimen/min_padding_view"
+        android:textSize="26sp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:text="@string/cat_informatica_electronica"/>
+
+    <LinearLayout
+        android:id="@+id/ll_list_products"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mathParent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/min_padding_view"
+        app:layout_constraintTop_toBottomOf="@id/mtv_category"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:visibility="visible">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_products"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="5dp"
+            tools:listitem="@layout/item_list_product_home"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:elevation="10dp"
+        tools:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/mtv_category"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_sin_products"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mathParent"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/mtv_category"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtv_info_sin_products"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:layout_gravity="center_vertical"
+            android:textAlignment="center"
+            android:padding="@dimen/min_padding_view"
+            android:fontFamily="@font/balsami_bold_italic"
+            android:text="@string/mtv_msg_info_sin_prodcutos_filtrados"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="RtlCompat" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

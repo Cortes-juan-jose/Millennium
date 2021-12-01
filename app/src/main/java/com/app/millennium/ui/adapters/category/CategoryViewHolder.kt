@@ -15,6 +15,7 @@ import com.app.millennium.databinding.ItemListChatBinding
 import com.app.millennium.domain.use_case.user_auth.GetIdUseCase
 import com.app.millennium.domain.use_case.user_db.GetUserUseCase
 import com.app.millennium.ui.activities.chat.ChatActivity
+import com.app.millennium.ui.activities.filter_products.FilterProductsActivity
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -43,7 +44,9 @@ class CategoryViewHolder(
         binding.mtvCategory.text = category
 
         binding.root.setOnClickListener {
-            Toast.makeText(context, category, Toast.LENGTH_SHORT).show()
+            context.openActivity<FilterProductsActivity> {
+                putExtra(Constant.PROP_CATEGORY_PRODUCT, category)
+            }
         }
     }
 

@@ -37,4 +37,7 @@ class ProductsImpl : Products {
      */
     override suspend fun delete(id: String): Task<Void> =
         db.document(id).delete()
+
+    override suspend fun getAllByCategory(category: String): Query =
+        db.whereEqualTo(Constant.PROP_CATEGORY_PRODUCT, category)
 }
