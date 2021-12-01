@@ -12,6 +12,7 @@
     <string name="cd_ic_delete">ic_delete</string>
     <string name="cd_imagen_producto">imagen producto</string>
     <string name="cd_imagen_like">imagen like</string>
+    <string name="cd_ic_logo">ic_logo</string>
 
     <string name="hint_correo_electronico_register">Correo electrónico (Requerido)</string>
     <string name="hint_correo_electronico">Correo electrónico</string>
@@ -37,6 +38,7 @@
     <string name="btn_ver_perfil">Ver perfil</string>
 
     <string name="mtv_bienvenido_a">Bienvenido a</string>
+    <string name="mtv_millennium">MILLENNIUM</string>
     <string name="mtv_no_tienes_cuenta">¿No tienes cuenta? Regístrate</string>
     <string name="mtv_o">O</string>
     <string name="mtv_registrate_ahora">Regístrate ahora</string>
@@ -150,6 +152,4 @@
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <!--Transicion picture-->
     <string name="transitionname_picture">transitionnamepicture</string>
-    <string name="cd_ic_logo">ic_logo</string>
-    <string name="mtv_millennium">MILLENNIUM</string>
 </resources>
