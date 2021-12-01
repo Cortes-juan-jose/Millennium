@@ -1448,11 +1448,27 @@ class PostProductActivity : AppCompatActivity() {
                 tilCategory.applyError(getString(R.string.msg_error_category_producto))
             }
             //Validar el precio
-            if (tietPrice.text.toString().isNotEmpty()
-                && tietPrice.text.toString()[tietPrice.text.toString().length-1]!='.'
-            ){
-                priceValid = true
-                tilPrice.removeError(this@PostProductActivity)
+            if (tietPrice.text.toString().isNotEmpty()){
+                //Comprobamos que no termine en punto
+                if (tietPrice.text.toString()[tietPrice.text.toString().length-1]!='.'){
+                    priceValid = true
+                    tilPrice.removeError(this@PostProductActivity)
+                } else {
+                    tietPrice.setText("")
+                    tilPrice.applyError(getString(R.string.msg_error_price_producto))
+                }
+
+                //Ahora convertimos este valor en un double y ver si salta la exception
+                //porque si salta la excepcion significa que tiene caracteres no numericos
+                try {
+                    tietPrice.text.toString().toDouble()
+                    priceValid = true
+                    tilPrice.removeError(this@PostProductActivity)
+                } catch (exc: Exception){
+                    tietPrice.setText("")
+                    tilPrice.applyError(getString(R.string.msg_error_price_producto))
+                }
+
             } else {
                 tietPrice.setText("")
                 tilPrice.applyError(getString(R.string.msg_error_price_producto))
