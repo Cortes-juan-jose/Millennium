@@ -12,10 +12,10 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/likeFragment"
-        android:name="com.app.millennium.ui.fragments.like.LikeFragment"
-        android:label="fragment_like"
-        tools:layout="@layout/fragment_like" />
+        android:id="@+id/searchFragment"
+        android:name="com.app.millennium.ui.fragments.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/postFragment"
         android:name="com.app.millennium.ui.fragments.post.PostFragment"
