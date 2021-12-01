@@ -7,6 +7,11 @@
     <string name="cd_ic_password">ic_password</string>
     <string name="cd_ic_phone">ic_phone</string>
     <string name="cd_ic_camera">ic_camera</string>
+    <string name="cd_ic_like">ic_like</string>
+    <string name="cd_ic_send_message">ic_send_message</string>
+    <string name="cd_ic_delete">ic_delete</string>
+    <string name="cd_imagen_producto">imagen producto</string>
+    <string name="cd_imagen_like">imagen like</string>
 
     <string name="hint_correo_electronico_register">Correo electrónico (Requerido)</string>
     <string name="hint_correo_electronico">Correo electrónico</string>
@@ -21,10 +26,15 @@
     <string name="hint_precio_requerido">Precio (Requerido)</string>
     <string name="hint_negociable">Negociable</string>
     <string name="hint_estado_del_producto">Estado del producto</string>
+    <string name="hint_mensaje">Mensaje...</string>
 
     <string name="btn_entrar">Entrar</string>
     <string name="btn_registrarse">¡Registrarse!</string>
     <string name="btn_publicar">Publicar</string>
+    <string name="btn_editar_perfil">Editar perfil</string>
+    <string name="btn_confirm">Confirmar</string>
+    <string name="btn_chatear">Chatear</string>
+    <string name="btn_ver_perfil">Ver perfil</string>
 
     <string name="mtv_no_tienes_cuenta">¿No tienes cuenta? Regístrate</string>
     <string name="mtv_o">O</string>
@@ -38,6 +48,29 @@
     <string name="mtv_tomar_una_foto">Tomar una foto</string>
     <string name="mtv_abrir_la_galeria">Abrir la galería</string>
     <string name="mtv_productos">Productos</string>
+    <string name="mtv_msg_info_sin_chats">No tienes chats abiertos. Para crear un chat vaya al perfil de un usuario y pulse en Chatear</string>
+    <string name="mtv_sin_internet">-</string>
+    <string name="mtv_opiniones">Opiniones</string>
+    <string name="mtv_chats">Chats</string>
+    <string name="mtv_telefono">Teléfono</string>
+    <string name="mtv_sin_me_gustas">Sin me gustas…</string>
+    <string name="mtv_msg_info_busqueda_sin_productos">Su búsqueda no corresponde con ningún producto</string>
+    <string name="mtv_filtrar">Filtrar</string>
+    <string name="mtv_msg_info_sin_prodcutos_filtrados">No se han encontrado productos por la categoria</string>
+    <string name="mtv_filtrado">Filtrado</string>
+    <string name="mtv_eliminar_producto">Eliminar producto</string>
+    <string name="mtv_modificar_datos_usuario_perfil">Modifica su foto de portada, su foto de perfil y/o sus datos personales</string>
+    <string name="mtv_sin_opiniones">Sin opiniones…</string>
+    <string name="mtv_sin_productos">Sin productos…</string>
+    <string name="mtv_seguro_que_desea_eliminar_la_publicacion">¿Seguro que desea eliminar la publicación?</string>
+    <string name="mtv_cancelar">Cancelar</string>
+    <string name="mtv_descripcion">Descripción</string>
+    <string name="mtv_estado_del_producto">Estado del producto</string>
+    <string name="mtv_negociable">Negociable</string>
+    <string name="mtv_cargando_usuario">Cargando usuario</string>
+    <string name="mtv_me_gusta">Me gusta</string>
+    <string name="mtv_info_sin_productos_favoritos">Guarde los productos que quiera pulsando en el icono del producto favorito (❤️)</string>
+    <string name="mtv_editar_perfil">Editar perfil</string>
 
     <string name="msg_error_username">Nombre requerido - mínimo 4 caracteres</string>
     <string name="msg_error_email">Email requerido - introduzca un email válido</string>
@@ -57,15 +90,7 @@
     <string name="msg_alert_iniciando_sesion">Iniciando sesión…</string>
     <string name="msg_alert_creando_cuenta">Creando cuenta…</string>
     <string name="msg_alert_creando_producto">Publicando producto…</string>
-
-    <string name="msg_timestamp_hace">Hace</string>
-    <string name="msg_timestamp_un_momento">un momento</string>
-    <string name="msg_timestamp_un_minuto">un minuto</string>
-    <string name="msg_timestamp_una_hora">una hora</string>
-    <string name="msg_timestamp_minutos">minutos</string>
-    <string name="msg_timestamp_horas">horas</string>
-    <string name="msg_timestamp_ayer">ayer</string>
-    <string name="msg_timestamp_dias">dias</string>
+    <string name="msg_alert_aplicando_cambios">Aplicando cambios</string>
 
     <string name="msg_info_activar_permisos_camara">Tienes el permiso de la cámara denegado. Vaya a ajustes / Aplicaciones / Administrar aplicaciones / Millennium / Permisos de la aplicación</string>
     <string name="msg_info_activar_permisos_galeria">Tienes el permiso de write_external_storage denegado. Vaya a ajustes / Aplicaciones / Administrar aplicaciones / Millennium / Permisos de la aplicación</string>
@@ -73,6 +98,9 @@
     <string name="msg_info_imagen_eliminada">Imagen eliminada</string>
     <string name="msg_info_producto_publicado">Producto publicado</string>
     <string name="msg_info_tiempo_espera">Espere a que se establezca la información del usuario</string>
+    <string name="msg_info_sesion_cerrada">Sesión cerrada</string>
+    <string name="msg_info_cambios_aplicados">Cambios aplicados</string>
+    <string name="msg_info_sin_productos">Aún no se han publicado productos. Estás de suerte! Prueba en ser el primero</string>
 
     <string name="bnv_title_inicio">Inicio</string>
     <string name="bnv_title_filtrar">Filtrar</string>
@@ -111,54 +139,15 @@
     <!--String sin especificar-->
     <string name="sel_sin_especificar">---</string>
 
-    <!--Transicion picture-->
-    <string name="transitionname_picture">transitionnamepicture</string>
-    <string name="mtv_sin_internet">-</string>
-    <string name="mtv_opiniones">Opiniones</string>
-    <string name="btn_editar_perfil">Editar perfil</string>
     <string name="item_menu_profile_cerrar_sesion">Cerrar sesión</string>
     <string name="item_menu_profile_informacion_de_la_app">Información de la app</string>
-    <string name="msg_info_sesion_cerrada">Sesión cerrada</string>
-    <string name="mtv_modificar_datos_usuario_perfil">Modifica su foto de portada, su foto de perfil y/o sus datos personales</string>
-    <string name="btn_confirm">Confirmar</string>
-    <string name="mtv_editar_perfil">Editar perfil</string>
-    <string name="msg_info_cambios_aplicados">Cambios aplicados</string>
-    <string name="msg_alert_aplicando_cambios">Aplicando cambios</string>
-    <string name="cd_imagen_producto">imagen producto</string>
-    <string name="cd_imagen_like">imagen like</string>
-    <string name="msg_info_sin_productos">Aún no se han publicado productos. Estás de suerte! Prueba en ser el primero</string>
-    <string name="tab_productos">Productos</string>
-    <string name="tab_opiniones">Opiniones</string>
-    <string name="mtv_sin_opiniones">Sin opiniones…</string>
-    <string name="mtv_sin_productos">Sin productos…</string>
-    <string name="cd_ic_delete">ic_delete</string>
-    <string name="mtv_eliminar_producto">Eliminar producto</string>
-    <string name="mtv_seguro_que_desea_eliminar_la_publicacion">¿Seguro que desea eliminar la publicación?</string>
-    <string name="mtv_cancelar">Cancelar</string>
     <string name="item_menu_detail_product_likes">likes</string>
-    <string name="cd_ic_like">ic_like</string>
-    <string name="btn_ver_perfil">Ver perfil</string>
-    <string name="mtv_descripcion">Descripción</string>
-    <string name="mtv_estado_del_producto">Estado del producto</string>
-    <string name="mtv_negociable">Negociable</string>
-    <string name="mtv_cargando_usuario">Cargando usuario</string>
-    <string name="btn_chatear">Chatear</string>
-    <string name="mtv_me_gusta">Me gusta</string>
-    <string name="mtv_info_sin_productos_favoritos">Guarde los productos que quiera pulsando en el icono del producto favorito (❤️)</string>
-    <string name="hola_mundo">hola mundo</string>
+
+    <string name="tab_productos">Productos</string>
+    <string name="tab_likes">Me gustas</string>
 
     <!--ID DEL CANAL POR DEFECTO DE NOTIFICACIONES OBLIGATORIO-->
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-
-    <string name="mtv_chats">Chats</string>
-    <string name="mtv_msg_info_sin_chats">No tienes chats abiertos. Para crear un chat vaya al perfil de un usuario y pulse en Chatear</string>
-    <string name="hint_mensaje">Mensaje...</string>
-    <string name="cd_ic_send_message">ic_send_message</string>
-    <string name="mtv_telefono">Teléfono</string>
-    <string name="mtv_sin_me_gustas">Sin me gustas…</string>
-    <string name="tab_likes">Me gustas</string>
-    <string name="mtv_msg_info_busqueda_sin_productos">Su búsqueda no corresponde con ningún producto</string>
-    <string name="mtv_filtrar">Filtrar</string>
-    <string name="mtv_msg_info_sin_prodcutos_filtrados">No se han encontrado productos por la categoria</string>
-    <string name="mtv_filtrado">Filtrado</string>
+    <!--Transicion picture-->
+    <string name="transitionname_picture">transitionnamepicture</string>
 </resources>
