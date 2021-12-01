@@ -5,25 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".ui.fragments.products_and_opinions_to_user.OpinionsUserFragment">
+    tools:context=".ui.fragments.products_and_likes_to_user.LikesUserFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/sin_likes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="18sp"
             android:visibility="gone"
             android:fontFamily="@font/balsami_italic"
             android:padding="@dimen/max_padding_view"
-            android:text="@string/mtv_sin_opiniones" />
+            android:text="@string/mtv_sin_me_gustas" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_likes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
+            android:layout_margin="@dimen/max_padding_view"
             tools:itemCount="2"
             tools:listitem="@layout/item_list_product_home"/>
 

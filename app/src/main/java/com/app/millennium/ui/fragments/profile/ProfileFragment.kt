@@ -218,7 +218,7 @@ class ProfileFragment : Fragment() {
             binding.tlProductsOpinions.newTab().setText(getString(R.string.tab_productos))
         )
         binding.tlProductsOpinions.addTab(
-            binding.tlProductsOpinions.newTab().setText(getString(R.string.tab_opiniones))
+            binding.tlProductsOpinions.newTab().setText(getString(R.string.tab_likes))
         )
 
         binding.tlProductsOpinions.addOnTabSelectedListener(

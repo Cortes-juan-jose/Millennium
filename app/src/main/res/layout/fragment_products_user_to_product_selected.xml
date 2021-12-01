@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".ui.fragments.products_and_opinions_to_user_product_selected.ProductsUserToProductSelectedFragment">
+    tools:context=".ui.fragments.products_and_likes_to_user_product_selected.ProductsUserToProductSelectedFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

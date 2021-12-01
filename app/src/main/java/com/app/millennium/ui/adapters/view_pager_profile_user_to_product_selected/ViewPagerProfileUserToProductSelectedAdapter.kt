@@ -4,10 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.app.millennium.ui.fragments.products_and_opinions_to_user.OpinionsUserFragment
-import com.app.millennium.ui.fragments.products_and_opinions_to_user.ProductsUserFragment
-import com.app.millennium.ui.fragments.products_and_opinions_to_user_product_selected.OpinionsUserToProductSelectedFragment
-import com.app.millennium.ui.fragments.products_and_opinions_to_user_product_selected.ProductsUserToProductSelectedFragment
+import com.app.millennium.ui.fragments.products_and_likes_to_user_product_selected.LikesUserToProductSelectedFragment
+import com.app.millennium.ui.fragments.products_and_likes_to_user_product_selected.ProductsUserToProductSelectedFragment
 
 class ViewPagerProfileUserToProductSelectedAdapter(
     fragmentManager: FragmentManager,
@@ -20,7 +18,7 @@ class ViewPagerProfileUserToProductSelectedAdapter(
     override fun createFragment(position: Int): Fragment {
         return when(position){
             0 -> { ProductsUserToProductSelectedFragment(idUser) }
-            1 -> { OpinionsUserToProductSelectedFragment(idUser) }
+            1 -> { LikesUserToProductSelectedFragment(idUser) }
             else -> { Fragment() }
         }
     }
