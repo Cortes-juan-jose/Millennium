@@ -7,9 +7,9 @@
         android:title="@string/bnv_title_inicio" />
 
     <item
-        android:id="@+id/searchFragment"
+        android:id="@+id/filterFragment"
         android:icon="@drawable/ic_search"
-        android:title="@string/bnv_title_buscar" />
+        android:title="@string/bnv_title_filtrar" />
 
     <item
         android:id="@+id/postFragment"

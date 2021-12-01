@@ -1,4 +1,4 @@
-package com.app.millennium.ui.fragments.search
+package com.app.millennium.ui.fragments.filter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.millennium.R
-import com.app.millennium.databinding.FragmentSearchBinding
+import com.app.millennium.databinding.FragmentFilterBinding
 import com.app.millennium.ui.adapters.category.CategoryAdapter
 
-class SearchFragment : Fragment() {
+class FilterFragment : Fragment() {
 
     //Binding
-    private var _binding : FragmentSearchBinding? = null
+    private var _binding : FragmentFilterBinding? = null
     private val binding get() = _binding!!
 
     private val categories = mutableListOf<String>()
@@ -23,7 +23,7 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        _binding = FragmentFilterBinding.inflate(inflater, container, false)
         return binding.root
     }
 

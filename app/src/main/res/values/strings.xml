@@ -75,7 +75,7 @@
     <string name="msg_info_tiempo_espera">Espere a que se establezca la información del usuario</string>
 
     <string name="bnv_title_inicio">Inicio</string>
-    <string name="bnv_title_buscar">Buscar</string>
+    <string name="bnv_title_filtrar">Filtrar</string>
     <string name="bnv_title_publicar">Publicar</string>
     <string name="bnv_title_chat">Chat</string>
     <string name="bnv_title_perfil">Perfil</string>
