@@ -15,11 +15,9 @@ import com.app.millennium.core.utils.ConfigThemeApp
 import com.app.millennium.data.model.User
 import com.app.millennium.databinding.FragmentProfileBinding
 import com.app.millennium.ui.activities.edit_profile.EditProfileActivity
-import com.app.millennium.ui.activities.info_app.InfoAppActivity
 import com.app.millennium.ui.activities.login.LoginActivity
 import com.app.millennium.ui.adapters.view_pager_profile.ViewPagerProfileAdapter
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment() {
@@ -123,7 +121,6 @@ class ProfileFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId){
-            R.id.info_app -> { activity?.openActivity<InfoAppActivity> {  } }
             R.id.sign_out -> { signOut() }
         }
 

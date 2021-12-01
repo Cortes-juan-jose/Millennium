@@ -18,28 +18,44 @@
             android:orientation="vertical">
 
             <!--PARTE SUPERIOR-->
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                style="@style/ViewBackground"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/logo_register_now"
                 android:orientation="vertical">
 
-                <FrameLayout
-                    style="@style/ViewBackground"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mtv_welcome"
+                    style="@style/MaterialTextViewRegisterNow"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:text="@string/mtv_bienvenido_a"
+                    android:layout_marginTop="@dimen/max_padding_view"
+                    android:textAlignment="center"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/mtv_register_now"
-                        style="@style/MaterialTextViewRegisterNow"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center"
-                        android:text="Bienvenido a MILLENNIUM"
-                        android:textAlignment="center" />
+                <ImageView
+                    android:id="@+id/iv_logo"
+                    android:layout_width="@dimen/mathParent"
+                    android:layout_height="@dimen/mathParent"
+                    app:layout_constraintTop_toBottomOf="@id/mtv_welcome"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/mtv_millennium"
+                    android:src="@drawable/logo"
+                    android:contentDescription="@string/cd_ic_logo" />
 
-                </FrameLayout>
-            </LinearLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mtv_millennium"
+                    style="@style/MaterialTextViewRegisterNow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mtv_millennium"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="@dimen/max_padding_view"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <!--CAMPOS LOGIN-->

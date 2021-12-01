@@ -2,10 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/info_app"
-        android:title="@string/item_menu_profile_informacion_de_la_app" />
-
-    <item
         android:id="@+id/sign_out"
         android:title="@string/item_menu_profile_cerrar_sesion" />
 
