@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.app.millennium.ui.fragments.products_and_likes_to_user_product_selected.ProductsUserToProductSelectedFragment
+import com.app.millennium.ui.fragments.products_to_user_product_selected.ProductsUserToProductSelectedFragment
 
 class ViewPagerProfileUserToProductSelectedAdapter(
     fragmentManager: FragmentManager,

@@ -1,4 +1,4 @@
-package com.app.millennium.ui.fragments.products_and_likes_to_user_product_selected
+package com.app.millennium.ui.fragments.products_to_user_product_selected
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

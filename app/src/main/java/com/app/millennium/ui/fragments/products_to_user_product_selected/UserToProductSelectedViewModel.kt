@@ -1,4 +1,4 @@
-package com.app.millennium.ui.fragments.products_and_likes_to_user_product_selected
+package com.app.millennium.ui.fragments.products_to_user_product_selected
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
