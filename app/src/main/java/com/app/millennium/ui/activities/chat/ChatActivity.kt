@@ -12,7 +12,6 @@ import com.app.millennium.data.model.Message
 import com.app.millennium.data.model.User
 import com.app.millennium.databinding.ActivityChatBinding
 import com.app.millennium.ui.adapters.message.MessageAdapter
-import com.app.millennium.ui.adapters.product_home.ProductHomeAdapter
 import com.squareup.picasso.Picasso
 import java.util.*
 
@@ -25,6 +24,7 @@ class ChatActivity : AppCompatActivity() {
 
     private var idUserToSession = ""
     private var idChat = ""
+    private var idSender = ""
     private var userData = User()
 
     private var messages = mutableListOf<Message>()
@@ -133,7 +133,6 @@ class ChatActivity : AppCompatActivity() {
                                 setDataChat(userData)
                                 //Y ahora obtenemos todos los mensajes de un sender de este chat
                                 //Para setear el check del visto
-                                var idSender = ""
                                 //El id sender va a ser el usuario que haya mandado el mensaje
                                 if (idUserToSession == chat.idUserToSession){
                                     chat.idUserToChat?.let { id -> idSender = id }

@@ -214,10 +214,7 @@ class LoginActivity : AppCompatActivity() {
                          * Si la tarea fue exitosa entonces obtenemos el email, displayname y
                          * el id del usuario de google
                          */
-                        toast("Iniciando sesion")
                         viewModel.getId()
-                    } else {
-                        toast("No se puede iniciar sesion")
                     }
                 }
                 task.addOnFailureListener { exc ->
