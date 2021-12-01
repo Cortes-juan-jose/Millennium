@@ -157,4 +157,6 @@
     <string name="mtv_telefono">Teléfono</string>
     <string name="mtv_sin_me_gustas">Sin me gustas…</string>
     <string name="tab_likes">Me gustas</string>
+    <string name="mtv_msg_info_busqueda_sin_productos">Su búsqueda no corresponde con ningún producto</string>
+    <string name="mtv_filtrar">Filtrar</string>
 </resources>

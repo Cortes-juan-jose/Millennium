@@ -56,6 +56,10 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
+    <style name="ViewBackgroundCategory">
+        <item name="android:backgroundTint">@color/colorSecondaryDark</item>
+    </style>
+
     <style name="ViewBackgroundTint">
         <item name="android:backgroundTint">@color/colorPrimary</item>
     </style>

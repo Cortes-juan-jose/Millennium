@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ViewBackgroundCategory"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginVertical="@dimen/min_padding_view"
+    android:layout_marginHorizontal="@dimen/max_padding_view"
+    android:elevation="30dp"
+    app:cardCornerRadius="50dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtv_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="26sp"
+            android:fontFamily="@font/balsami_bold"
+            android:textColor="@color/white"
+            android:layout_marginHorizontal="@dimen/max_padding_view"
+            tools:text="Texto de prueba más largo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
