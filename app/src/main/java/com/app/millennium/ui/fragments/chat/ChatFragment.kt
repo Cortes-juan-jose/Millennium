@@ -71,7 +71,6 @@ class ChatFragment : Fragment() {
                             chats.clear()
 
                         if (error.isNotNull()){
-                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                             return@addSnapshotListener
                         }
 
