@@ -246,7 +246,6 @@ class ProfileFragment : Fragment() {
      */
     private fun signOut() {
         viewModel.signOut()
-        activity?.toast(getString(R.string.msg_info_sesion_cerrada))
         activity?.openActivity<LoginActivity> {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         }
