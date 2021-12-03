@@ -453,8 +453,6 @@ class PostProductActivity : AppCompatActivity() {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ){
                     openCamera()
-                } else {
-                    toast(getString(R.string.msg_info_permisos_denegados))
                 }
             }
             //Si el permiso es de la galeria
@@ -463,8 +461,6 @@ class PostProductActivity : AppCompatActivity() {
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 ){
                     openGallery()
-                } else {
-                    toast(getString(R.string.msg_info_permisos_denegados))
                 }
             }
         }
