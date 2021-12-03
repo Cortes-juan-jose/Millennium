@@ -1,6 +1,7 @@
 package com.app.millennium.ui.activities.post_product
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -36,6 +37,12 @@ import com.squareup.picasso.Picasso
 import dmax.dialog.SpotsDialog
 import java.io.File
 import java.util.*
+import android.net.NetworkInfo
+
+import android.net.ConnectivityManager
+
+
+
 
 class PostProductActivity : AppCompatActivity() {
 
@@ -504,6 +511,7 @@ class PostProductActivity : AppCompatActivity() {
                     }
                 }
                 it.addOnFailureListener{ exc ->
+                    dialogLoading.dismiss()
                     toast("${exc.message}")
                 }
             }
@@ -522,6 +530,7 @@ class PostProductActivity : AppCompatActivity() {
                     }
                 }
                 it.addOnFailureListener{ exc ->
+                    dialogLoading.dismiss()
                     toast("${exc.message}")
                 }
             }
@@ -540,6 +549,7 @@ class PostProductActivity : AppCompatActivity() {
                     }
                 }
                 it.addOnFailureListener{ exc ->
+                    dialogLoading.dismiss()
                     toast("${exc.message}")
                 }
             }
@@ -559,6 +569,7 @@ class PostProductActivity : AppCompatActivity() {
                     }
                 }
                 it.addOnFailureListener{ exc ->
+                    dialogLoading.dismiss()
                     toast("${exc.message}")
                 }
             }
@@ -611,6 +622,7 @@ class PostProductActivity : AppCompatActivity() {
                         }
                     }
                     task.addOnFailureListener { exc ->
+                        dialogLoading.dismiss()
                         toast("${exc.message}")
                     }
                 }
@@ -652,6 +664,7 @@ class PostProductActivity : AppCompatActivity() {
                         }
                     }
                     task.addOnFailureListener { exc ->
+                        dialogLoading.dismiss()
                         toast("${exc.message}")
                     }
                 }
@@ -683,6 +696,7 @@ class PostProductActivity : AppCompatActivity() {
                         }
                     }
                     task.addOnFailureListener { exc ->
+                        dialogLoading.dismiss()
                         toast("${exc.message}")
                     }
                 }
@@ -723,8 +737,8 @@ class PostProductActivity : AppCompatActivity() {
                         }
                     }
                     it.addOnFailureListener { e ->
-                        toast(e.message!!)
                         dialogLoading.dismiss()
+                        toast(e.message!!)
                     }
                 }
             }
@@ -760,6 +774,10 @@ class PostProductActivity : AppCompatActivity() {
                                 toast(getString(R.string.msg_error_usuario_no_existe))
                             }
                         }
+                    }
+                    _task.addOnFailureListener { exc ->
+                        dialogLoading.dismiss()
+                        toast("${exc.message}")
                     }
                 }
             }
@@ -886,9 +904,19 @@ class PostProductActivity : AppCompatActivity() {
                 if (validateFields()){
                     //Mostrar una alerta de carga
                     dialogLoading.setMessage(getString(R.string.msg_alert_creando_producto))
-                    dialogLoading.show()
-                    //Guardamos el producto
-                    saveProduct()
+                    //Ahora solamente guardamo el producto si tenemos inetrnet
+                    val connectivityManager =
+                        getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                    val networkInfo = connectivityManager.activeNetworkInfo
+
+                    if (networkInfo.isNotNull() && networkInfo!!.isConnected) {
+                        // Si hay conexión a Internet en este momento
+                        dialogLoading.show()
+                        saveProduct()
+                    } else {
+                        // No hay conexión a Internet en este momento
+                        toast(getString(R.string.sin_conexion))
+                    }
                 }
             }
         }
