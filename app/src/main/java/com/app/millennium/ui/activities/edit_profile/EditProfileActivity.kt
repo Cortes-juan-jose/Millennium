@@ -1,9 +1,11 @@
 package com.app.millennium.ui.activities.edit_profile
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
@@ -554,8 +556,19 @@ class EditProfileActivity : AppCompatActivity() {
                         tietUsername.text.toString().trim(),
                         tietPhone.text.toString().trim()
                 )){
-                    dialogLoading.show()
-                    saveChanges()
+                    //Ahora solamente guardamo el producto si tenemos inetrnet
+                    val connectivityManager =
+                        getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                    val networkInfo = connectivityManager.activeNetworkInfo
+
+                    if (networkInfo.isNotNull() && networkInfo!!.isConnected) {
+                        // Si hay conexión a Internet en este momento
+                        dialogLoading.show()
+                        saveChanges()
+                    } else {
+                        // No hay conexión a Internet en este momento
+                        toast(getString(R.string.sin_conexion))
+                    }
                 }
             }
         }
