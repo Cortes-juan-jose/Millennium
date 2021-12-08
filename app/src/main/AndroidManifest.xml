@@ -35,11 +35,6 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.activities.info_app.InfoAppActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
             android:name=".ui.activities.edit_profile.EditProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait"

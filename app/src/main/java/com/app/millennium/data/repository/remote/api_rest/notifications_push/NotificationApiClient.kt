@@ -11,7 +11,7 @@ interface NotificationApiClient {
 
     /*
      * Metodo post para enviar una notificacion
-     * Y devuelve un callback con el response
+     * Y devuelve un response
      */
     @Headers(
         Constant.CONTENT_TYPE_API_NOTIFICATION,
